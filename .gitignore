@@ -5,6 +5,13 @@ node_modules
 .env
 .next
 .vercel
+node_modules/
+.next/
+.env*
+.DS_Store
+*.log
+dist/
+out/
 
 # Payload default media upload directory
 public/media/
