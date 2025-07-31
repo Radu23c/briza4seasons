@@ -103,10 +103,20 @@ export interface Config {
   globals: {
     header: Header;
     footer: Footer;
+    homepage: Homepage;
+    'about-us-page': AboutUsPage;
+    'villa-complex-page': VillaComplexPage;
+    locationPage: LocationPage;
+    'gallery-page': GalleryPage;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
+    homepage: HomepageSelect<false> | HomepageSelect<true>;
+    'about-us-page': AboutUsPageSelect<false> | AboutUsPageSelect<true>;
+    'villa-complex-page': VillaComplexPageSelect<false> | VillaComplexPageSelect<true>;
+    locationPage: LocationPageSelect<false> | LocationPageSelect<true>;
+    'gallery-page': GalleryPageSelect<false> | GalleryPageSelect<true>;
   };
   locale: null;
   user: User & {
@@ -1606,6 +1616,859 @@ export interface Footer {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "homepage".
+ */
+export interface Homepage {
+  id: string;
+  heroSection: {
+    /**
+     * Show/hide hero section
+     */
+    isActive?: boolean | null;
+    /**
+     * Main heading text in Romanian
+     */
+    mainHeadingRo: string;
+    /**
+     * Main heading text in English
+     */
+    mainHeadingEn: string;
+    /**
+     * Main heading text in Hebrew
+     */
+    mainHeadingHe: string;
+    ctaButton: {
+      textRo: string;
+      textEn: string;
+      textHe: string;
+      link: string;
+    };
+    projectNameRo: string;
+    projectNameEn: string;
+    projectNameHe: string;
+    projectSubtitleRo: string;
+    projectSubtitleEn: string;
+    projectSubtitleHe: string;
+    backgroundImage?: (string | null) | Media;
+  };
+  featuresSection: {
+    /**
+     * Show/hide features section
+     */
+    isActive?: boolean | null;
+    projectNameRo: string;
+    projectNameEn: string;
+    projectNameHe: string;
+    villaCount: number;
+    villaCountTextRo: string;
+    villaCountTextEn: string;
+    villaCountTextHe: string;
+    mainHeadingRo: string;
+    mainHeadingEn: string;
+    mainHeadingHe: string;
+    accentTextRo: string;
+    accentTextEn: string;
+    accentTextHe: string;
+    subHeadingRo: string;
+    subHeadingEn: string;
+    subHeadingHe: string;
+    detailsTextRo: string;
+    detailsTextEn: string;
+    detailsTextHe: string;
+    exteriorImage: string | Media;
+    interiorImage: string | Media;
+    detailsLink?: string | null;
+  };
+  featuresOverviewSection: {
+    /**
+     * Show/hide features overview section
+     */
+    isActive?: boolean | null;
+    titleRo?: string | null;
+    titleEn?: string | null;
+    titleHe?: string | null;
+    featureItems: {
+      order: number;
+      icon: 'sofa' | 'house' | 'car' | 'tree' | 'shield' | 'wifi' | 'heart' | 'star';
+      titleRo: string;
+      titleEn: string;
+      titleHe: string;
+      descriptionRo: string;
+      descriptionEn: string;
+      descriptionHe: string;
+      id?: string | null;
+    }[];
+    backgroundImage: string | Media;
+    backgroundImageAltRo?: string | null;
+    backgroundImageAltEn?: string | null;
+    backgroundImageAltHe?: string | null;
+  };
+  benefitsSection: {
+    /**
+     * Show/hide benefits section
+     */
+    isActive?: boolean | null;
+    sectionTitleRo: string;
+    sectionTitleEn: string;
+    sectionTitleHe: string;
+    benefits: {
+      benefitRo: string;
+      benefitEn: string;
+      benefitHe: string;
+      id?: string | null;
+    }[];
+    mainImage: string | Media;
+    /**
+     * Background color (hex code)
+     */
+    backgroundColor?: string | null;
+    /**
+     * Text color (hex code)
+     */
+    textColor?: string | null;
+  };
+  faqSection: {
+    /**
+     * Show/hide FAQ section
+     */
+    isActive?: boolean | null;
+    sectionTitleRo: string;
+    sectionTitleEn: string;
+    sectionTitleHe: string;
+    mainHeadingRo: string;
+    mainHeadingEn: string;
+    mainHeadingHe: string;
+    faqItems: {
+      questionRo: string;
+      questionEn: string;
+      questionHe: string;
+      answerRo: string;
+      answerEn: string;
+      answerHe: string;
+      id?: string | null;
+    }[];
+    backgroundImage: string | Media;
+  };
+  contactSection: {
+    /**
+     * Show/hide contact section
+     */
+    isActive?: boolean | null;
+    formTitleRo: string;
+    formTitleEn: string;
+    formTitleHe: string;
+    nameFieldRo: string;
+    nameFieldEn: string;
+    nameFieldHe: string;
+    emailFieldRo: string;
+    emailFieldEn: string;
+    emailFieldHe: string;
+    phoneFieldRo: string;
+    phoneFieldEn: string;
+    phoneFieldHe: string;
+    messageFieldRo: string;
+    messageFieldEn: string;
+    messageFieldHe: string;
+    submitButtonRo: string;
+    submitButtonEn: string;
+    submitButtonHe: string;
+    backgroundImage: string | Media;
+  };
+  gallerySection: {
+    /**
+     * Show/hide gallery section
+     */
+    isActive?: boolean | null;
+    sectionTitleRo: string;
+    sectionTitleEn: string;
+    sectionTitleHe: string;
+    sectionSubtitleRo: string;
+    sectionSubtitleEn: string;
+    sectionSubtitleHe: string;
+    /**
+     * Add as many images as you want to showcase your complex
+     */
+    galleryImages: {
+      /**
+       * Upload an image of your complex
+       */
+      image: string | Media;
+      caption?: {
+        /**
+         * Optional caption in Romanian
+         */
+        captionRo?: string | null;
+        /**
+         * Optional caption in English
+         */
+        captionEn?: string | null;
+        /**
+         * Optional caption in Hebrew
+         */
+        captionHe?: string | null;
+      };
+      /**
+       * Order of appearance (optional, defaults to upload order)
+       */
+      order?: number | null;
+      id?: string | null;
+    }[];
+    /**
+     * Enable lightbox/modal view when clicking images
+     */
+    enableLightbox?: boolean | null;
+  };
+  imageGallerySection: {
+    /**
+     * Show/hide image gallery section
+     */
+    isActive?: boolean | null;
+    /**
+     * Main title (first part) in Romanian
+     */
+    mainTitleRo: string;
+    /**
+     * Main title (first part) in English
+     */
+    mainTitleEn: string;
+    /**
+     * Main title (first part) in Hebrew
+     */
+    mainTitleHe: string;
+    /**
+     * Subtitle (colored part) in Romanian
+     */
+    subtitleRo: string;
+    /**
+     * Subtitle (colored part) in English
+     */
+    subtitleEn: string;
+    /**
+     * Subtitle (colored part) in Hebrew
+     */
+    subtitleHe: string;
+    /**
+     * Description text in Romanian
+     */
+    descriptionRo: string;
+    /**
+     * Description text in English
+     */
+    descriptionEn: string;
+    /**
+     * Description text in Hebrew
+     */
+    descriptionHe: string;
+    /**
+     * Add as many images as you want - they will display in a 4-column grid
+     */
+    images: {
+      /**
+       * Upload an image for the gallery
+       */
+      image: string | Media;
+      caption?: {
+        /**
+         * Optional caption in Romanian
+         */
+        captionRo?: string | null;
+        /**
+         * Optional caption in English
+         */
+        captionEn?: string | null;
+        /**
+         * Optional caption in Hebrew
+         */
+        captionHe?: string | null;
+      };
+      /**
+       * Order of appearance (optional, defaults to upload order)
+       */
+      order?: number | null;
+      id?: string | null;
+    }[];
+    /**
+     * Enable lightbox/modal view when clicking images
+     */
+    enableLightbox?: boolean | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "about-us-page".
+ */
+export interface AboutUsPage {
+  id: string;
+  heroSection: {
+    /**
+     * Show/hide hero section
+     */
+    isActive?: boolean | null;
+    /**
+     * Main hero title in Romanian
+     */
+    mainTitleRo: string;
+    /**
+     * Main hero title in English
+     */
+    mainTitleEn: string;
+    /**
+     * Main hero title in Hebrew
+     */
+    mainTitleHe: string;
+    /**
+     * Hero subtitle in Romanian
+     */
+    subtitleRo: string;
+    /**
+     * Hero subtitle in English
+     */
+    subtitleEn: string;
+    /**
+     * Hero subtitle in Hebrew
+     */
+    subtitleHe: string;
+    /**
+     * Hero background image
+     */
+    backgroundImage: string | Media;
+    breadcrumbs: {
+      labelRo: string;
+      labelEn: string;
+      labelHe: string;
+      href: string;
+      /**
+       * Is this the current page?
+       */
+      isActive?: boolean | null;
+      id?: string | null;
+    }[];
+  };
+  aboutContentSection: {
+    /**
+     * Show/hide about content section
+     */
+    isActive?: boolean | null;
+    /**
+     * Section title in Romanian
+     */
+    sectionTitleRo: string;
+    /**
+     * Section title in English
+     */
+    sectionTitleEn: string;
+    /**
+     * Section title in Hebrew
+     */
+    sectionTitleHe: string;
+    /**
+     * Main heading in Romanian
+     */
+    mainHeadingRo: string;
+    /**
+     * Main heading in English
+     */
+    mainHeadingEn: string;
+    /**
+     * Main heading in Hebrew
+     */
+    mainHeadingHe: string;
+    contentParagraphs: {
+      /**
+       * Paragraph content in Romanian
+       */
+      paragraphRo: string;
+      /**
+       * Paragraph content in English
+       */
+      paragraphEn: string;
+      /**
+       * Paragraph content in Hebrew
+       */
+      paragraphHe: string;
+      id?: string | null;
+    }[];
+    /**
+     * Images for the overlapping layout (2-4 images recommended)
+     */
+    images: {
+      image: string | Media;
+      /**
+       * Alt text in Romanian
+       */
+      altTextRo?: string | null;
+      /**
+       * Alt text in English
+       */
+      altTextEn?: string | null;
+      /**
+       * Alt text in Hebrew
+       */
+      altTextHe?: string | null;
+      /**
+       * Display order (1 = front, higher numbers = behind)
+       */
+      order: number;
+      id?: string | null;
+    }[];
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "villa-complex-page".
+ */
+export interface VillaComplexPage {
+  id: string;
+  heroSection: {
+    /**
+     * Show/hide hero section
+     */
+    isActive?: boolean | null;
+    /**
+     * Main hero title in Romanian
+     */
+    mainTitleRo: string;
+    /**
+     * Main hero title in English
+     */
+    mainTitleEn: string;
+    /**
+     * Main hero title in Hebrew
+     */
+    mainTitleHe: string;
+    /**
+     * Hero subtitle in Romanian
+     */
+    subtitleRo: string;
+    /**
+     * Hero subtitle in English
+     */
+    subtitleEn: string;
+    /**
+     * Hero subtitle in Hebrew
+     */
+    subtitleHe: string;
+    /**
+     * Hero background image
+     */
+    backgroundImage: string | Media;
+    breadcrumbs: {
+      labelRo: string;
+      labelEn: string;
+      labelHe: string;
+      href: string;
+      /**
+       * Is this the current page?
+       */
+      isActive?: boolean | null;
+      id?: string | null;
+    }[];
+  };
+  villaComplexContentSection: {
+    /**
+     * Show/hide villa complex content section
+     */
+    isActive?: boolean | null;
+    /**
+     * Section title in Romanian
+     */
+    sectionTitleRo: string;
+    /**
+     * Section title in English
+     */
+    sectionTitleEn: string;
+    /**
+     * Section title in Hebrew
+     */
+    sectionTitleHe: string;
+    /**
+     * Main heading in Romanian
+     */
+    mainHeadingRo: string;
+    /**
+     * Main heading in English
+     */
+    mainHeadingEn: string;
+    /**
+     * Main heading in Hebrew
+     */
+    mainHeadingHe: string;
+    contentParagraphs: {
+      /**
+       * Paragraph content in Romanian
+       */
+      paragraphRo: string;
+      /**
+       * Paragraph content in English
+       */
+      paragraphEn: string;
+      /**
+       * Paragraph content in Hebrew
+       */
+      paragraphHe: string;
+      id?: string | null;
+    }[];
+    /**
+     * Images for the overlapping layout (2-4 images recommended)
+     */
+    images: {
+      image: string | Media;
+      /**
+       * Alt text in Romanian
+       */
+      altTextRo?: string | null;
+      /**
+       * Alt text in English
+       */
+      altTextEn?: string | null;
+      /**
+       * Alt text in Hebrew
+       */
+      altTextHe?: string | null;
+      /**
+       * Display order (1 = front, higher numbers = behind)
+       */
+      order: number;
+      id?: string | null;
+    }[];
+  };
+  floorPlansSection: {
+    /**
+     * Show/hide floor plans section
+     */
+    isActive?: boolean | null;
+    /**
+     * Section title (first part) in Romanian
+     */
+    sectionTitleRo: string;
+    /**
+     * Section title (first part) in English
+     */
+    sectionTitleEn: string;
+    /**
+     * Section title (first part) in Hebrew
+     */
+    sectionTitleHe: string;
+    /**
+     * Section subtitle (colored part) in Romanian
+     */
+    sectionSubtitleRo: string;
+    /**
+     * Section subtitle (colored part) in English
+     */
+    sectionSubtitleEn: string;
+    /**
+     * Section subtitle (colored part) in Hebrew
+     */
+    sectionSubtitleHe: string;
+    /**
+     * Section description in Romanian
+     */
+    sectionDescriptionRo: string;
+    /**
+     * Section description in English
+     */
+    sectionDescriptionEn: string;
+    /**
+     * Section description in Hebrew
+     */
+    sectionDescriptionHe: string;
+    /**
+     * Add as many floors as you want (Parter, Etaj1, Etaj2, etc.)
+     */
+    floorPlans: {
+      /**
+       * Display order (1 = first tab, 2 = second tab, etc.)
+       */
+      order: number;
+      /**
+       * Floor name in Romanian (e.g., PARTER, ETAJ)
+       */
+      floorNameRo: string;
+      /**
+       * Floor name in English (e.g., GROUND FLOOR, FLOOR)
+       */
+      floorNameEn: string;
+      /**
+       * Floor name in Hebrew
+       */
+      floorNameHe: string;
+      /**
+       * Floor plan image
+       */
+      floorPlanImage: string | Media;
+      /**
+       * Floor plan image alt text in Romanian
+       */
+      floorPlanImageAltRo?: string | null;
+      /**
+       * Floor plan image alt text in English
+       */
+      floorPlanImageAltEn?: string | null;
+      /**
+       * Floor plan image alt text in Hebrew
+       */
+      floorPlanImageAltHe?: string | null;
+      /**
+       * Built area in square meters
+       */
+      builtArea: number;
+      /**
+       * Usable area in square meters
+       */
+      usableArea: number;
+      /**
+       * Built area label in Romanian
+       */
+      builtAreaLabelRo: string;
+      /**
+       * Built area label in English
+       */
+      builtAreaLabelEn: string;
+      /**
+       * Built area label in Hebrew
+       */
+      builtAreaLabelHe: string;
+      /**
+       * Usable area label in Romanian
+       */
+      usableAreaLabelRo: string;
+      /**
+       * Usable area label in English
+       */
+      usableAreaLabelEn: string;
+      /**
+       * Usable area label in Hebrew
+       */
+      usableAreaLabelHe: string;
+      /**
+       * Add room details with areas
+       */
+      roomDetails: {
+        /**
+         * Room name in Romanian
+         */
+        roomNameRo: string;
+        /**
+         * Room name in English
+         */
+        roomNameEn: string;
+        /**
+         * Room name in Hebrew
+         */
+        roomNameHe: string;
+        /**
+         * Room area in square meters
+         */
+        roomArea: number;
+        id?: string | null;
+      }[];
+      pdfDownload: {
+        /**
+         * PDF button text in Romanian
+         */
+        buttonTextRo: string;
+        /**
+         * PDF button text in English
+         */
+        buttonTextEn: string;
+        /**
+         * PDF button text in Hebrew
+         */
+        buttonTextHe: string;
+        /**
+         * PDF file for download
+         */
+        pdfFile: string | Media;
+      };
+      id?: string | null;
+    }[];
+  };
+  facilitiesSection: {
+    /**
+     * Show/hide facilities section
+     */
+    isActive?: boolean | null;
+    /**
+     * Section title in Romanian
+     */
+    sectionTitleRo: string;
+    /**
+     * Section title in English
+     */
+    sectionTitleEn: string;
+    /**
+     * Section title in Hebrew
+     */
+    sectionTitleHe: string;
+    /**
+     * Background image for the facilities section
+     */
+    backgroundImage: string | Media;
+    /**
+     * Background image alt text in Romanian
+     */
+    backgroundImageAltRo?: string | null;
+    /**
+     * Background image alt text in English
+     */
+    backgroundImageAltEn?: string | null;
+    /**
+     * Background image alt text in Hebrew
+     */
+    backgroundImageAltHe?: string | null;
+    /**
+     * Add as many facilities as you want
+     */
+    facilities: {
+      /**
+       * Display order (01, 02, 03, etc.)
+       */
+      order: number;
+      /**
+       * Facility title in Romanian
+       */
+      titleRo: string;
+      /**
+       * Facility title in English
+       */
+      titleEn: string;
+      /**
+       * Facility title in Hebrew
+       */
+      titleHe: string;
+      /**
+       * Optional description in Romanian
+       */
+      descriptionRo?: string | null;
+      /**
+       * Optional description in English
+       */
+      descriptionEn?: string | null;
+      /**
+       * Optional description in Hebrew
+       */
+      descriptionHe?: string | null;
+      id?: string | null;
+    }[];
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "locationPage".
+ */
+export interface LocationPage {
+  id: string;
+  heroSection?: {
+    backgroundImage?: (string | null) | Media;
+    breadcrumbs?: {
+      homeTextRo?: string | null;
+      homeTextEn?: string | null;
+      homeTextHe?: string | null;
+      currentPageTextRo?: string | null;
+      currentPageTextEn?: string | null;
+      currentPageTextHe?: string | null;
+      href?: string | null;
+    };
+    titleRo?: string | null;
+    titleEn?: string | null;
+    titleHe?: string | null;
+    subtitleRo?: string | null;
+    subtitleEn?: string | null;
+    subtitleHe?: string | null;
+  };
+  locationSection?: {
+    address?: string | null;
+    decorativeTextRo?: string | null;
+    decorativeTextEn?: string | null;
+    decorativeTextHe?: string | null;
+    headingRo?: string | null;
+    headingEn?: string | null;
+    headingHe?: string | null;
+    descriptionRo?: string | null;
+    descriptionEn?: string | null;
+    descriptionHe?: string | null;
+    nearbyPlaces?:
+      | {
+          nameRo?: string | null;
+          nameEn?: string | null;
+          nameHe?: string | null;
+          distance?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    ctaButton?: {
+      textRo?: string | null;
+      textEn?: string | null;
+      textHe?: string | null;
+      link?: string | null;
+    };
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gallery-page".
+ */
+export interface GalleryPage {
+  id: string;
+  heroSection: {
+    /**
+     * Show/hide hero section
+     */
+    isActive?: boolean | null;
+    /**
+     * Main hero title in Romanian
+     */
+    mainTitleRo: string;
+    /**
+     * Main hero title in English
+     */
+    mainTitleEn: string;
+    /**
+     * Main hero title in Hebrew
+     */
+    mainTitleHe: string;
+    /**
+     * Hero subtitle in Romanian
+     */
+    subtitleRo: string;
+    /**
+     * Hero subtitle in English
+     */
+    subtitleEn: string;
+    /**
+     * Hero subtitle in Hebrew
+     */
+    subtitleHe: string;
+    /**
+     * Hero background image
+     */
+    backgroundImage: string | Media;
+    breadcrumbs: {
+      labelRo: string;
+      labelEn: string;
+      labelHe: string;
+      href: string;
+      /**
+       * Is this the current page?
+       */
+      isActive?: boolean | null;
+      id?: string | null;
+    }[];
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
@@ -1645,6 +2508,500 @@ export interface FooterSelect<T extends boolean = true> {
               label?: T;
             };
         id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "homepage_select".
+ */
+export interface HomepageSelect<T extends boolean = true> {
+  heroSection?:
+    | T
+    | {
+        isActive?: T;
+        mainHeadingRo?: T;
+        mainHeadingEn?: T;
+        mainHeadingHe?: T;
+        ctaButton?:
+          | T
+          | {
+              textRo?: T;
+              textEn?: T;
+              textHe?: T;
+              link?: T;
+            };
+        projectNameRo?: T;
+        projectNameEn?: T;
+        projectNameHe?: T;
+        projectSubtitleRo?: T;
+        projectSubtitleEn?: T;
+        projectSubtitleHe?: T;
+        backgroundImage?: T;
+      };
+  featuresSection?:
+    | T
+    | {
+        isActive?: T;
+        projectNameRo?: T;
+        projectNameEn?: T;
+        projectNameHe?: T;
+        villaCount?: T;
+        villaCountTextRo?: T;
+        villaCountTextEn?: T;
+        villaCountTextHe?: T;
+        mainHeadingRo?: T;
+        mainHeadingEn?: T;
+        mainHeadingHe?: T;
+        accentTextRo?: T;
+        accentTextEn?: T;
+        accentTextHe?: T;
+        subHeadingRo?: T;
+        subHeadingEn?: T;
+        subHeadingHe?: T;
+        detailsTextRo?: T;
+        detailsTextEn?: T;
+        detailsTextHe?: T;
+        exteriorImage?: T;
+        interiorImage?: T;
+        detailsLink?: T;
+      };
+  featuresOverviewSection?:
+    | T
+    | {
+        isActive?: T;
+        titleRo?: T;
+        titleEn?: T;
+        titleHe?: T;
+        featureItems?:
+          | T
+          | {
+              order?: T;
+              icon?: T;
+              titleRo?: T;
+              titleEn?: T;
+              titleHe?: T;
+              descriptionRo?: T;
+              descriptionEn?: T;
+              descriptionHe?: T;
+              id?: T;
+            };
+        backgroundImage?: T;
+        backgroundImageAltRo?: T;
+        backgroundImageAltEn?: T;
+        backgroundImageAltHe?: T;
+      };
+  benefitsSection?:
+    | T
+    | {
+        isActive?: T;
+        sectionTitleRo?: T;
+        sectionTitleEn?: T;
+        sectionTitleHe?: T;
+        benefits?:
+          | T
+          | {
+              benefitRo?: T;
+              benefitEn?: T;
+              benefitHe?: T;
+              id?: T;
+            };
+        mainImage?: T;
+        backgroundColor?: T;
+        textColor?: T;
+      };
+  faqSection?:
+    | T
+    | {
+        isActive?: T;
+        sectionTitleRo?: T;
+        sectionTitleEn?: T;
+        sectionTitleHe?: T;
+        mainHeadingRo?: T;
+        mainHeadingEn?: T;
+        mainHeadingHe?: T;
+        faqItems?:
+          | T
+          | {
+              questionRo?: T;
+              questionEn?: T;
+              questionHe?: T;
+              answerRo?: T;
+              answerEn?: T;
+              answerHe?: T;
+              id?: T;
+            };
+        backgroundImage?: T;
+      };
+  contactSection?:
+    | T
+    | {
+        isActive?: T;
+        formTitleRo?: T;
+        formTitleEn?: T;
+        formTitleHe?: T;
+        nameFieldRo?: T;
+        nameFieldEn?: T;
+        nameFieldHe?: T;
+        emailFieldRo?: T;
+        emailFieldEn?: T;
+        emailFieldHe?: T;
+        phoneFieldRo?: T;
+        phoneFieldEn?: T;
+        phoneFieldHe?: T;
+        messageFieldRo?: T;
+        messageFieldEn?: T;
+        messageFieldHe?: T;
+        submitButtonRo?: T;
+        submitButtonEn?: T;
+        submitButtonHe?: T;
+        backgroundImage?: T;
+      };
+  gallerySection?:
+    | T
+    | {
+        isActive?: T;
+        sectionTitleRo?: T;
+        sectionTitleEn?: T;
+        sectionTitleHe?: T;
+        sectionSubtitleRo?: T;
+        sectionSubtitleEn?: T;
+        sectionSubtitleHe?: T;
+        galleryImages?:
+          | T
+          | {
+              image?: T;
+              caption?:
+                | T
+                | {
+                    captionRo?: T;
+                    captionEn?: T;
+                    captionHe?: T;
+                  };
+              order?: T;
+              id?: T;
+            };
+        enableLightbox?: T;
+      };
+  imageGallerySection?:
+    | T
+    | {
+        isActive?: T;
+        mainTitleRo?: T;
+        mainTitleEn?: T;
+        mainTitleHe?: T;
+        subtitleRo?: T;
+        subtitleEn?: T;
+        subtitleHe?: T;
+        descriptionRo?: T;
+        descriptionEn?: T;
+        descriptionHe?: T;
+        images?:
+          | T
+          | {
+              image?: T;
+              caption?:
+                | T
+                | {
+                    captionRo?: T;
+                    captionEn?: T;
+                    captionHe?: T;
+                  };
+              order?: T;
+              id?: T;
+            };
+        enableLightbox?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "about-us-page_select".
+ */
+export interface AboutUsPageSelect<T extends boolean = true> {
+  heroSection?:
+    | T
+    | {
+        isActive?: T;
+        mainTitleRo?: T;
+        mainTitleEn?: T;
+        mainTitleHe?: T;
+        subtitleRo?: T;
+        subtitleEn?: T;
+        subtitleHe?: T;
+        backgroundImage?: T;
+        breadcrumbs?:
+          | T
+          | {
+              labelRo?: T;
+              labelEn?: T;
+              labelHe?: T;
+              href?: T;
+              isActive?: T;
+              id?: T;
+            };
+      };
+  aboutContentSection?:
+    | T
+    | {
+        isActive?: T;
+        sectionTitleRo?: T;
+        sectionTitleEn?: T;
+        sectionTitleHe?: T;
+        mainHeadingRo?: T;
+        mainHeadingEn?: T;
+        mainHeadingHe?: T;
+        contentParagraphs?:
+          | T
+          | {
+              paragraphRo?: T;
+              paragraphEn?: T;
+              paragraphHe?: T;
+              id?: T;
+            };
+        images?:
+          | T
+          | {
+              image?: T;
+              altTextRo?: T;
+              altTextEn?: T;
+              altTextHe?: T;
+              order?: T;
+              id?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "villa-complex-page_select".
+ */
+export interface VillaComplexPageSelect<T extends boolean = true> {
+  heroSection?:
+    | T
+    | {
+        isActive?: T;
+        mainTitleRo?: T;
+        mainTitleEn?: T;
+        mainTitleHe?: T;
+        subtitleRo?: T;
+        subtitleEn?: T;
+        subtitleHe?: T;
+        backgroundImage?: T;
+        breadcrumbs?:
+          | T
+          | {
+              labelRo?: T;
+              labelEn?: T;
+              labelHe?: T;
+              href?: T;
+              isActive?: T;
+              id?: T;
+            };
+      };
+  villaComplexContentSection?:
+    | T
+    | {
+        isActive?: T;
+        sectionTitleRo?: T;
+        sectionTitleEn?: T;
+        sectionTitleHe?: T;
+        mainHeadingRo?: T;
+        mainHeadingEn?: T;
+        mainHeadingHe?: T;
+        contentParagraphs?:
+          | T
+          | {
+              paragraphRo?: T;
+              paragraphEn?: T;
+              paragraphHe?: T;
+              id?: T;
+            };
+        images?:
+          | T
+          | {
+              image?: T;
+              altTextRo?: T;
+              altTextEn?: T;
+              altTextHe?: T;
+              order?: T;
+              id?: T;
+            };
+      };
+  floorPlansSection?:
+    | T
+    | {
+        isActive?: T;
+        sectionTitleRo?: T;
+        sectionTitleEn?: T;
+        sectionTitleHe?: T;
+        sectionSubtitleRo?: T;
+        sectionSubtitleEn?: T;
+        sectionSubtitleHe?: T;
+        sectionDescriptionRo?: T;
+        sectionDescriptionEn?: T;
+        sectionDescriptionHe?: T;
+        floorPlans?:
+          | T
+          | {
+              order?: T;
+              floorNameRo?: T;
+              floorNameEn?: T;
+              floorNameHe?: T;
+              floorPlanImage?: T;
+              floorPlanImageAltRo?: T;
+              floorPlanImageAltEn?: T;
+              floorPlanImageAltHe?: T;
+              builtArea?: T;
+              usableArea?: T;
+              builtAreaLabelRo?: T;
+              builtAreaLabelEn?: T;
+              builtAreaLabelHe?: T;
+              usableAreaLabelRo?: T;
+              usableAreaLabelEn?: T;
+              usableAreaLabelHe?: T;
+              roomDetails?:
+                | T
+                | {
+                    roomNameRo?: T;
+                    roomNameEn?: T;
+                    roomNameHe?: T;
+                    roomArea?: T;
+                    id?: T;
+                  };
+              pdfDownload?:
+                | T
+                | {
+                    buttonTextRo?: T;
+                    buttonTextEn?: T;
+                    buttonTextHe?: T;
+                    pdfFile?: T;
+                  };
+              id?: T;
+            };
+      };
+  facilitiesSection?:
+    | T
+    | {
+        isActive?: T;
+        sectionTitleRo?: T;
+        sectionTitleEn?: T;
+        sectionTitleHe?: T;
+        backgroundImage?: T;
+        backgroundImageAltRo?: T;
+        backgroundImageAltEn?: T;
+        backgroundImageAltHe?: T;
+        facilities?:
+          | T
+          | {
+              order?: T;
+              titleRo?: T;
+              titleEn?: T;
+              titleHe?: T;
+              descriptionRo?: T;
+              descriptionEn?: T;
+              descriptionHe?: T;
+              id?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "locationPage_select".
+ */
+export interface LocationPageSelect<T extends boolean = true> {
+  heroSection?:
+    | T
+    | {
+        backgroundImage?: T;
+        breadcrumbs?:
+          | T
+          | {
+              homeTextRo?: T;
+              homeTextEn?: T;
+              homeTextHe?: T;
+              currentPageTextRo?: T;
+              currentPageTextEn?: T;
+              currentPageTextHe?: T;
+              href?: T;
+            };
+        titleRo?: T;
+        titleEn?: T;
+        titleHe?: T;
+        subtitleRo?: T;
+        subtitleEn?: T;
+        subtitleHe?: T;
+      };
+  locationSection?:
+    | T
+    | {
+        address?: T;
+        decorativeTextRo?: T;
+        decorativeTextEn?: T;
+        decorativeTextHe?: T;
+        headingRo?: T;
+        headingEn?: T;
+        headingHe?: T;
+        descriptionRo?: T;
+        descriptionEn?: T;
+        descriptionHe?: T;
+        nearbyPlaces?:
+          | T
+          | {
+              nameRo?: T;
+              nameEn?: T;
+              nameHe?: T;
+              distance?: T;
+              id?: T;
+            };
+        ctaButton?:
+          | T
+          | {
+              textRo?: T;
+              textEn?: T;
+              textHe?: T;
+              link?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gallery-page_select".
+ */
+export interface GalleryPageSelect<T extends boolean = true> {
+  heroSection?:
+    | T
+    | {
+        isActive?: T;
+        mainTitleRo?: T;
+        mainTitleEn?: T;
+        mainTitleHe?: T;
+        subtitleRo?: T;
+        subtitleEn?: T;
+        subtitleHe?: T;
+        backgroundImage?: T;
+        breadcrumbs?:
+          | T
+          | {
+              labelRo?: T;
+              labelEn?: T;
+              labelHe?: T;
+              href?: T;
+              isActive?: T;
+              id?: T;
+            };
       };
   updatedAt?: T;
   createdAt?: T;

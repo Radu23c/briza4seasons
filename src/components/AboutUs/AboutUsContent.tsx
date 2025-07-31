@@ -1,0 +1,155 @@
+'use client'
+
+import type React from 'react'
+import Image from 'next/image'
+import { useLanguage } from '@/app/contexts/LanguageContext'
+
+interface MediaObject {
+  url: string
+  alt?: string
+}
+
+interface AboutImage {
+  image: MediaObject
+  altTextRo?: string | null // Allow null values
+  altTextEn?: string | null // Allow null values
+  altTextHe?: string | null // Allow null values
+  order: number
+}
+
+interface ContentParagraph {
+  paragraphRo: string
+  paragraphEn: string
+  paragraphHe: string
+}
+
+interface AboutUsContentProps {
+  sectionTitleRo: string
+  sectionTitleEn: string
+  sectionTitleHe: string
+  mainHeadingRo: string
+  mainHeadingEn: string
+  mainHeadingHe: string
+  contentParagraphs: ContentParagraph[]
+  images: AboutImage[]
+}
+
+const AboutUsContent: React.FC<AboutUsContentProps> = ({
+  sectionTitleRo,
+  sectionTitleEn,
+  sectionTitleHe,
+  mainHeadingRo,
+  mainHeadingEn,
+  mainHeadingHe,
+  contentParagraphs,
+  images,
+}) => {
+  const { t, currentLanguage } = useLanguage()
+
+  const sectionTitle = t({
+    ro: sectionTitleRo,
+    en: sectionTitleEn,
+    he: sectionTitleHe,
+  })
+
+  const mainHeading = t({
+    ro: mainHeadingRo,
+    en: mainHeadingEn,
+    he: mainHeadingHe,
+  })
+
+  // Sort images by order
+  const sortedImages = [...images].sort((a, b) => a.order - b.order)
+
+  return (
+    <section className="py-16 lg:py-24 bg-white">
+      <div className="container mx-auto px-4">
+        <div
+          className={`grid lg:grid-cols-2 gap-12 lg:gap-16 items-center ${
+            currentLanguage === 'he' ? 'lg:grid-flow-col-dense' : ''
+          }`}
+        >
+          {/* Left Side - Overlapping Images */}
+          <div className={`relative ${currentLanguage === 'he' ? 'lg:order-2' : ''}`}>
+            <div className="relative w-full h-[500px] lg:h-[600px]">
+              {sortedImages.map((item, index) => {
+                const altText = t({
+                  ro: item.altTextRo || `About us image ${index + 1}`,
+                  en: item.altTextEn || `About us image ${index + 1}`,
+                  he: item.altTextHe || `About us image ${index + 1}`,
+                })
+
+                // Create overlapping positions based on index
+                const positions = [
+                  { top: '0', left: '0', width: '70%', height: '60%', zIndex: 3 },
+                  { top: '30%', right: '0', width: '60%', height: '70%', zIndex: 2 },
+                  { top: '60%', left: '10%', width: '50%', height: '40%', zIndex: 1 },
+                  { top: '20%', left: '60%', width: '35%', height: '30%', zIndex: 4 },
+                ]
+
+                const position = positions[index] || positions[0]
+
+                return (
+                  <div
+                    key={index}
+                    className="absolute rounded-lg overflow-hidden shadow-xl"
+                    style={{
+                      top: position.top,
+                      left: position.left,
+                      right: position.right,
+                      width: position.width,
+                      height: position.height,
+                      zIndex: position.zIndex,
+                    }}
+                  >
+                    <Image
+                      src={item.image.url || '/placeholder.svg'}
+                      alt={altText}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+
+          {/* Right Side - Content */}
+          <div
+            className={`lg:pl-8 ${currentLanguage === 'he' ? 'lg:order-1 lg:pr-8 lg:pl-0 text-right' : 'text-left'}`}
+          >
+            {/* Section Title */}
+            <div className="font-elegant text-2xl lg:text-3xl text-[#D4B896] mb-6 italic">
+              {sectionTitle}
+            </div>
+
+            {/* Main Heading */}
+            <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-8 leading-tight">
+              {mainHeading}
+            </h2>
+
+            {/* Content Paragraphs */}
+            <div className="space-y-6">
+              {contentParagraphs.map((paragraph, index) => {
+                const content = t({
+                  ro: paragraph.paragraphRo,
+                  en: paragraph.paragraphEn,
+                  he: paragraph.paragraphHe,
+                })
+
+                return (
+                  <p key={index} className="text-gray-600 leading-relaxed text-lg">
+                    {content}
+                  </p>
+                )
+              })}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+export default AboutUsContent

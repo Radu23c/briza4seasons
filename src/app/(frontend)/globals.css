@@ -2,102 +2,229 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-size: unset;
-    font-weight: unset;
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+/* CSS Variables for fonts - using Next.js font variables */
+:root {
+  --font-primary:
+    var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-elegant: var(--font-playfair), Georgia, serif;
+}
+
+/* Base font setup */
+* {
+  font-family: var(--font-primary);
+}
+
+/* RTL Support */
+[dir='rtl'] {
+  direction: rtl;
+}
+
+[dir='rtl'] .hero-cta {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+/* Hebrew font optimization */
+:lang(he) {
+  font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+}
+
+:lang(he) .font-elegant,
+:lang(he) .hero-banner-title,
+:lang(he) .hero-banner-subtitle {
+  font-family: 'Times New Roman', serif;
+}
+
+/* Custom font classes */
+.font-primary {
+  font-family: var(--font-primary);
+}
+
+.font-elegant {
+  font-family: var(--font-elegant);
+}
+
+.font-script {
+  font-family: var(--font-elegant);
+}
+
+/* Enhanced typography styles */
+.text-elegant {
+  font-family: var(--font-elegant);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.text-elegant-bold {
+  font-family: var(--font-elegant);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.text-primary-light {
+  font-family: var(--font-primary);
+  font-weight: 300;
+  letter-spacing: 0.01em;
+}
+
+.text-primary-medium {
+  font-family: var(--font-primary);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+/* Hero section specific styles */
+.hero-heading {
+  font-family: var(--font-primary);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.hero-banner-title {
+  font-family: var(--font-elegant);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.hero-banner-subtitle {
+  font-family: var(--font-elegant);
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.hero-cta {
+  font-family: var(--font-primary);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Button styles */
+.btn-elegant {
+  font-family: var(--font-primary);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
+}
+
+.btn-elegant:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* General text improvements */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-primary);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.heading-elegant {
+  font-family: var(--font-elegant);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+p {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+/* Navigation styles */
+.nav-link {
+  font-family: var(--font-primary);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  transition: all 0.2s ease;
+}
+
+.nav-link:hover {
+  font-weight: 600;
+}
+
+/* Card and content styles */
+.card-title {
+  font-family: var(--font-elegant);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.card-text {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+/* Form styles */
+.form-label {
+  font-family: var(--font-primary);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+.form-input {
+  font-family: var(--font-primary);
+  font-weight: 400;
+}
+
+/* Footer styles */
+.footer-heading {
+  font-family: var(--font-elegant);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.footer-text {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+/* Responsive font sizes */
+@media (max-width: 768px) {
+  .hero-heading {
+    letter-spacing: -0.01em;
   }
 
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
-    --card: 240 5% 96%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 240 6% 80%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.2rem;
-
-    --success: 196 52% 74%;
-    --warning: 34 89% 85%;
-    --error: 10 100% 86%;
-  }
-
-  [data-theme='dark'] {
-    --background: 0 0% 0%;
-    --foreground: 210 40% 98%;
-
-    --card: 0 0% 4%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 0, 0%, 15%, 0.8;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-
-    --success: 196 100% 14%;
-    --warning: 34 51% 25%;
-    --error: 10 39% 43%;
+  .hero-banner-title {
+    letter-spacing: 0;
   }
 }
 
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground min-h-[100vh] flex flex-col;
-  }
+/* Additional utility classes */
+.text-balance {
+  text-wrap: balance;
 }
 
-html {
-  opacity: 0;
+.text-pretty {
+  text-wrap: pretty;
 }
 
-html[data-theme='dark'],
-html[data-theme='light'] {
-  opacity: initial;
+/* Payload CMS admin styles override (optional) */
+.payload-admin {
+  font-family: var(--font-primary) !important;
+}
+
+/* Custom Tailwind utilities using the fonts */
+@layer utilities {
+  .font-inter {
+    font-family: var(--font-primary);
+  }
+
+  .font-playfair {
+    font-family: var(--font-elegant);
+  }
 }
