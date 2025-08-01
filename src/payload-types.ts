@@ -157,9 +157,9 @@ export interface UserAuthOperations {
  */
 export interface Page {
   id: string;
-  title: string;
-  hero: {
-    type: 'none' | 'highImpact' | 'mediumImpact' | 'lowImpact';
+  title?: string | null;
+  hero?: {
+    type?: ('none' | 'highImpact' | 'mediumImpact' | 'lowImpact') | null;
     richText?: {
       root: {
         type: string;
@@ -177,7 +177,7 @@ export interface Page {
     } | null;
     links?:
       | {
-          link: {
+          link?: {
             type?: ('reference' | 'custom') | null;
             newTab?: boolean | null;
             reference?:
@@ -190,7 +190,7 @@ export interface Page {
                   value: string | Post;
                 } | null);
             url?: string | null;
-            label: string;
+            label?: string | null;
             /**
              * Choose how the link should be rendered.
              */
@@ -201,7 +201,7 @@ export interface Page {
       | null;
     media?: (string | null) | Media;
   };
-  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[];
+  layout?: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[] | null;
   meta?: {
     title?: string | null;
     /**
@@ -223,9 +223,9 @@ export interface Page {
  */
 export interface Post {
   id: string;
-  title: string;
+  title?: string | null;
   heroImage?: (string | null) | Media;
-  content: {
+  content?: {
     root: {
       type: string;
       children: {
@@ -239,7 +239,7 @@ export interface Post {
       version: number;
     };
     [k: string]: unknown;
-  };
+  } | null;
   relatedPosts?: (string | Post)[] | null;
   categories?: (string | Category)[] | null;
   meta?: {
@@ -362,7 +362,7 @@ export interface Media {
  */
 export interface Category {
   id: string;
-  title: string;
+  title?: string | null;
   slug?: string | null;
   slugLock?: boolean | null;
   parent?: (string | null) | Category;
@@ -424,7 +424,7 @@ export interface CallToActionBlock {
   } | null;
   links?:
     | {
-        link: {
+        link?: {
           type?: ('reference' | 'custom') | null;
           newTab?: boolean | null;
           reference?:
@@ -437,7 +437,7 @@ export interface CallToActionBlock {
                 value: string | Post;
               } | null);
           url?: string | null;
-          label: string;
+          label?: string | null;
           /**
            * Choose how the link should be rendered.
            */
@@ -487,7 +487,7 @@ export interface ContentBlock {
                 value: string | Post;
               } | null);
           url?: string | null;
-          label: string;
+          label?: string | null;
           /**
            * Choose how the link should be rendered.
            */
@@ -505,7 +505,7 @@ export interface ContentBlock {
  * via the `definition` "MediaBlock".
  */
 export interface MediaBlock {
-  media: string | Media;
+  media?: (string | null) | Media;
   id?: string | null;
   blockName?: string | null;
   blockType: 'mediaBlock';
@@ -549,7 +549,7 @@ export interface ArchiveBlock {
  * via the `definition` "FormBlock".
  */
 export interface FormBlock {
-  form: string | Form;
+  form?: (string | null) | Form;
   enableIntro?: boolean | null;
   introContent?: {
     root: {
@@ -1564,7 +1564,7 @@ export interface Header {
   id: string;
   navItems?:
     | {
-        link: {
+        link?: {
           type?: ('reference' | 'custom') | null;
           newTab?: boolean | null;
           reference?:
@@ -1577,7 +1577,7 @@ export interface Header {
                 value: string | Post;
               } | null);
           url?: string | null;
-          label: string;
+          label?: string | null;
         };
         id?: string | null;
       }[]
@@ -1593,7 +1593,7 @@ export interface Footer {
   id: string;
   navItems?:
     | {
-        link: {
+        link?: {
           type?: ('reference' | 'custom') | null;
           newTab?: boolean | null;
           reference?:
@@ -1606,7 +1606,7 @@ export interface Footer {
                 value: string | Post;
               } | null);
           url?: string | null;
-          label: string;
+          label?: string | null;
         };
         id?: string | null;
       }[]
@@ -1620,7 +1620,7 @@ export interface Footer {
  */
 export interface Homepage {
   id: string;
-  heroSection: {
+  heroSection?: {
     /**
      * Show/hide hero section
      */
@@ -1628,58 +1628,58 @@ export interface Homepage {
     /**
      * Main heading text in Romanian
      */
-    mainHeadingRo: string;
+    mainHeadingRo?: string | null;
     /**
      * Main heading text in English
      */
-    mainHeadingEn: string;
+    mainHeadingEn?: string | null;
     /**
      * Main heading text in Hebrew
      */
-    mainHeadingHe: string;
-    ctaButton: {
-      textRo: string;
-      textEn: string;
-      textHe: string;
-      link: string;
+    mainHeadingHe?: string | null;
+    ctaButton?: {
+      textRo?: string | null;
+      textEn?: string | null;
+      textHe?: string | null;
+      link?: string | null;
     };
-    projectNameRo: string;
-    projectNameEn: string;
-    projectNameHe: string;
-    projectSubtitleRo: string;
-    projectSubtitleEn: string;
-    projectSubtitleHe: string;
+    projectNameRo?: string | null;
+    projectNameEn?: string | null;
+    projectNameHe?: string | null;
+    projectSubtitleRo?: string | null;
+    projectSubtitleEn?: string | null;
+    projectSubtitleHe?: string | null;
     backgroundImage?: (string | null) | Media;
   };
-  featuresSection: {
+  featuresSection?: {
     /**
      * Show/hide features section
      */
     isActive?: boolean | null;
-    projectNameRo: string;
-    projectNameEn: string;
-    projectNameHe: string;
-    villaCount: number;
-    villaCountTextRo: string;
-    villaCountTextEn: string;
-    villaCountTextHe: string;
-    mainHeadingRo: string;
-    mainHeadingEn: string;
-    mainHeadingHe: string;
-    accentTextRo: string;
-    accentTextEn: string;
-    accentTextHe: string;
-    subHeadingRo: string;
-    subHeadingEn: string;
-    subHeadingHe: string;
-    detailsTextRo: string;
-    detailsTextEn: string;
-    detailsTextHe: string;
-    exteriorImage: string | Media;
-    interiorImage: string | Media;
+    projectNameRo?: string | null;
+    projectNameEn?: string | null;
+    projectNameHe?: string | null;
+    villaCount?: number | null;
+    villaCountTextRo?: string | null;
+    villaCountTextEn?: string | null;
+    villaCountTextHe?: string | null;
+    mainHeadingRo?: string | null;
+    mainHeadingEn?: string | null;
+    mainHeadingHe?: string | null;
+    accentTextRo?: string | null;
+    accentTextEn?: string | null;
+    accentTextHe?: string | null;
+    subHeadingRo?: string | null;
+    subHeadingEn?: string | null;
+    subHeadingHe?: string | null;
+    detailsTextRo?: string | null;
+    detailsTextEn?: string | null;
+    detailsTextHe?: string | null;
+    exteriorImage?: (string | null) | Media;
+    interiorImage?: (string | null) | Media;
     detailsLink?: string | null;
   };
-  featuresOverviewSection: {
+  featuresOverviewSection?: {
     /**
      * Show/hide features overview section
      */
@@ -1687,37 +1687,41 @@ export interface Homepage {
     titleRo?: string | null;
     titleEn?: string | null;
     titleHe?: string | null;
-    featureItems: {
-      order: number;
-      icon: 'sofa' | 'house' | 'car' | 'tree' | 'shield' | 'wifi' | 'heart' | 'star';
-      titleRo: string;
-      titleEn: string;
-      titleHe: string;
-      descriptionRo: string;
-      descriptionEn: string;
-      descriptionHe: string;
-      id?: string | null;
-    }[];
-    backgroundImage: string | Media;
+    featureItems?:
+      | {
+          order?: number | null;
+          icon?: ('sofa' | 'house' | 'car' | 'tree' | 'shield' | 'wifi' | 'heart' | 'star') | null;
+          titleRo?: string | null;
+          titleEn?: string | null;
+          titleHe?: string | null;
+          descriptionRo?: string | null;
+          descriptionEn?: string | null;
+          descriptionHe?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    backgroundImage?: (string | null) | Media;
     backgroundImageAltRo?: string | null;
     backgroundImageAltEn?: string | null;
     backgroundImageAltHe?: string | null;
   };
-  benefitsSection: {
+  benefitsSection?: {
     /**
      * Show/hide benefits section
      */
     isActive?: boolean | null;
-    sectionTitleRo: string;
-    sectionTitleEn: string;
-    sectionTitleHe: string;
-    benefits: {
-      benefitRo: string;
-      benefitEn: string;
-      benefitHe: string;
-      id?: string | null;
-    }[];
-    mainImage: string | Media;
+    sectionTitleRo?: string | null;
+    sectionTitleEn?: string | null;
+    sectionTitleHe?: string | null;
+    benefits?:
+      | {
+          benefitRo?: string | null;
+          benefitEn?: string | null;
+          benefitHe?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    mainImage?: (string | null) | Media;
     /**
      * Background color (hex code)
      */
@@ -1727,98 +1731,102 @@ export interface Homepage {
      */
     textColor?: string | null;
   };
-  faqSection: {
+  faqSection?: {
     /**
      * Show/hide FAQ section
      */
     isActive?: boolean | null;
-    sectionTitleRo: string;
-    sectionTitleEn: string;
-    sectionTitleHe: string;
-    mainHeadingRo: string;
-    mainHeadingEn: string;
-    mainHeadingHe: string;
-    faqItems: {
-      questionRo: string;
-      questionEn: string;
-      questionHe: string;
-      answerRo: string;
-      answerEn: string;
-      answerHe: string;
-      id?: string | null;
-    }[];
-    backgroundImage: string | Media;
+    sectionTitleRo?: string | null;
+    sectionTitleEn?: string | null;
+    sectionTitleHe?: string | null;
+    mainHeadingRo?: string | null;
+    mainHeadingEn?: string | null;
+    mainHeadingHe?: string | null;
+    faqItems?:
+      | {
+          questionRo?: string | null;
+          questionEn?: string | null;
+          questionHe?: string | null;
+          answerRo?: string | null;
+          answerEn?: string | null;
+          answerHe?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    backgroundImage?: (string | null) | Media;
   };
-  contactSection: {
+  contactSection?: {
     /**
      * Show/hide contact section
      */
     isActive?: boolean | null;
-    formTitleRo: string;
-    formTitleEn: string;
-    formTitleHe: string;
-    nameFieldRo: string;
-    nameFieldEn: string;
-    nameFieldHe: string;
-    emailFieldRo: string;
-    emailFieldEn: string;
-    emailFieldHe: string;
-    phoneFieldRo: string;
-    phoneFieldEn: string;
-    phoneFieldHe: string;
-    messageFieldRo: string;
-    messageFieldEn: string;
-    messageFieldHe: string;
-    submitButtonRo: string;
-    submitButtonEn: string;
-    submitButtonHe: string;
-    backgroundImage: string | Media;
+    formTitleRo?: string | null;
+    formTitleEn?: string | null;
+    formTitleHe?: string | null;
+    nameFieldRo?: string | null;
+    nameFieldEn?: string | null;
+    nameFieldHe?: string | null;
+    emailFieldRo?: string | null;
+    emailFieldEn?: string | null;
+    emailFieldHe?: string | null;
+    phoneFieldRo?: string | null;
+    phoneFieldEn?: string | null;
+    phoneFieldHe?: string | null;
+    messageFieldRo?: string | null;
+    messageFieldEn?: string | null;
+    messageFieldHe?: string | null;
+    submitButtonRo?: string | null;
+    submitButtonEn?: string | null;
+    submitButtonHe?: string | null;
+    backgroundImage?: (string | null) | Media;
   };
-  gallerySection: {
+  gallerySection?: {
     /**
      * Show/hide gallery section
      */
     isActive?: boolean | null;
-    sectionTitleRo: string;
-    sectionTitleEn: string;
-    sectionTitleHe: string;
-    sectionSubtitleRo: string;
-    sectionSubtitleEn: string;
-    sectionSubtitleHe: string;
+    sectionTitleRo?: string | null;
+    sectionTitleEn?: string | null;
+    sectionTitleHe?: string | null;
+    sectionSubtitleRo?: string | null;
+    sectionSubtitleEn?: string | null;
+    sectionSubtitleHe?: string | null;
     /**
      * Add as many images as you want to showcase your complex
      */
-    galleryImages: {
-      /**
-       * Upload an image of your complex
-       */
-      image: string | Media;
-      caption?: {
-        /**
-         * Optional caption in Romanian
-         */
-        captionRo?: string | null;
-        /**
-         * Optional caption in English
-         */
-        captionEn?: string | null;
-        /**
-         * Optional caption in Hebrew
-         */
-        captionHe?: string | null;
-      };
-      /**
-       * Order of appearance (optional, defaults to upload order)
-       */
-      order?: number | null;
-      id?: string | null;
-    }[];
+    galleryImages?:
+      | {
+          /**
+           * Upload an image of your complex
+           */
+          image?: (string | null) | Media;
+          caption?: {
+            /**
+             * Optional caption in Romanian
+             */
+            captionRo?: string | null;
+            /**
+             * Optional caption in English
+             */
+            captionEn?: string | null;
+            /**
+             * Optional caption in Hebrew
+             */
+            captionHe?: string | null;
+          };
+          /**
+           * Order of appearance (optional, defaults to upload order)
+           */
+          order?: number | null;
+          id?: string | null;
+        }[]
+      | null;
     /**
      * Enable lightbox/modal view when clicking images
      */
     enableLightbox?: boolean | null;
   };
-  imageGallerySection: {
+  imageGallerySection?: {
     /**
      * Show/hide image gallery section
      */
@@ -1826,67 +1834,69 @@ export interface Homepage {
     /**
      * Main title (first part) in Romanian
      */
-    mainTitleRo: string;
+    mainTitleRo?: string | null;
     /**
      * Main title (first part) in English
      */
-    mainTitleEn: string;
+    mainTitleEn?: string | null;
     /**
      * Main title (first part) in Hebrew
      */
-    mainTitleHe: string;
+    mainTitleHe?: string | null;
     /**
      * Subtitle (colored part) in Romanian
      */
-    subtitleRo: string;
+    subtitleRo?: string | null;
     /**
      * Subtitle (colored part) in English
      */
-    subtitleEn: string;
+    subtitleEn?: string | null;
     /**
      * Subtitle (colored part) in Hebrew
      */
-    subtitleHe: string;
+    subtitleHe?: string | null;
     /**
      * Description text in Romanian
      */
-    descriptionRo: string;
+    descriptionRo?: string | null;
     /**
      * Description text in English
      */
-    descriptionEn: string;
+    descriptionEn?: string | null;
     /**
      * Description text in Hebrew
      */
-    descriptionHe: string;
+    descriptionHe?: string | null;
     /**
      * Add as many images as you want - they will display in a 4-column grid
      */
-    images: {
-      /**
-       * Upload an image for the gallery
-       */
-      image: string | Media;
-      caption?: {
-        /**
-         * Optional caption in Romanian
-         */
-        captionRo?: string | null;
-        /**
-         * Optional caption in English
-         */
-        captionEn?: string | null;
-        /**
-         * Optional caption in Hebrew
-         */
-        captionHe?: string | null;
-      };
-      /**
-       * Order of appearance (optional, defaults to upload order)
-       */
-      order?: number | null;
-      id?: string | null;
-    }[];
+    images?:
+      | {
+          /**
+           * Upload an image for the gallery
+           */
+          image?: (string | null) | Media;
+          caption?: {
+            /**
+             * Optional caption in Romanian
+             */
+            captionRo?: string | null;
+            /**
+             * Optional caption in English
+             */
+            captionEn?: string | null;
+            /**
+             * Optional caption in Hebrew
+             */
+            captionHe?: string | null;
+          };
+          /**
+           * Order of appearance (optional, defaults to upload order)
+           */
+          order?: number | null;
+          id?: string | null;
+        }[]
+      | null;
     /**
      * Enable lightbox/modal view when clicking images
      */
@@ -1901,7 +1911,7 @@ export interface Homepage {
  */
 export interface AboutUsPage {
   id: string;
-  heroSection: {
+  heroSection?: {
     /**
      * Show/hide hero section
      */
@@ -1909,44 +1919,46 @@ export interface AboutUsPage {
     /**
      * Main hero title in Romanian
      */
-    mainTitleRo: string;
+    mainTitleRo?: string | null;
     /**
      * Main hero title in English
      */
-    mainTitleEn: string;
+    mainTitleEn?: string | null;
     /**
      * Main hero title in Hebrew
      */
-    mainTitleHe: string;
+    mainTitleHe?: string | null;
     /**
      * Hero subtitle in Romanian
      */
-    subtitleRo: string;
+    subtitleRo?: string | null;
     /**
      * Hero subtitle in English
      */
-    subtitleEn: string;
+    subtitleEn?: string | null;
     /**
      * Hero subtitle in Hebrew
      */
-    subtitleHe: string;
+    subtitleHe?: string | null;
     /**
      * Hero background image
      */
-    backgroundImage: string | Media;
-    breadcrumbs: {
-      labelRo: string;
-      labelEn: string;
-      labelHe: string;
-      href: string;
-      /**
-       * Is this the current page?
-       */
-      isActive?: boolean | null;
-      id?: string | null;
-    }[];
+    backgroundImage?: (string | null) | Media;
+    breadcrumbs?:
+      | {
+          labelRo?: string | null;
+          labelEn?: string | null;
+          labelHe?: string | null;
+          href?: string | null;
+          /**
+           * Is this the current page?
+           */
+          isActive?: boolean | null;
+          id?: string | null;
+        }[]
+      | null;
   };
-  aboutContentSection: {
+  aboutContentSection?: {
     /**
      * Show/hide about content section
      */
@@ -1954,65 +1966,69 @@ export interface AboutUsPage {
     /**
      * Section title in Romanian
      */
-    sectionTitleRo: string;
+    sectionTitleRo?: string | null;
     /**
      * Section title in English
      */
-    sectionTitleEn: string;
+    sectionTitleEn?: string | null;
     /**
      * Section title in Hebrew
      */
-    sectionTitleHe: string;
+    sectionTitleHe?: string | null;
     /**
      * Main heading in Romanian
      */
-    mainHeadingRo: string;
+    mainHeadingRo?: string | null;
     /**
      * Main heading in English
      */
-    mainHeadingEn: string;
+    mainHeadingEn?: string | null;
     /**
      * Main heading in Hebrew
      */
-    mainHeadingHe: string;
-    contentParagraphs: {
-      /**
-       * Paragraph content in Romanian
-       */
-      paragraphRo: string;
-      /**
-       * Paragraph content in English
-       */
-      paragraphEn: string;
-      /**
-       * Paragraph content in Hebrew
-       */
-      paragraphHe: string;
-      id?: string | null;
-    }[];
+    mainHeadingHe?: string | null;
+    contentParagraphs?:
+      | {
+          /**
+           * Paragraph content in Romanian
+           */
+          paragraphRo?: string | null;
+          /**
+           * Paragraph content in English
+           */
+          paragraphEn?: string | null;
+          /**
+           * Paragraph content in Hebrew
+           */
+          paragraphHe?: string | null;
+          id?: string | null;
+        }[]
+      | null;
     /**
      * Images for the overlapping layout (2-4 images recommended)
      */
-    images: {
-      image: string | Media;
-      /**
-       * Alt text in Romanian
-       */
-      altTextRo?: string | null;
-      /**
-       * Alt text in English
-       */
-      altTextEn?: string | null;
-      /**
-       * Alt text in Hebrew
-       */
-      altTextHe?: string | null;
-      /**
-       * Display order (1 = front, higher numbers = behind)
-       */
-      order: number;
-      id?: string | null;
-    }[];
+    images?:
+      | {
+          image?: (string | null) | Media;
+          /**
+           * Alt text in Romanian
+           */
+          altTextRo?: string | null;
+          /**
+           * Alt text in English
+           */
+          altTextEn?: string | null;
+          /**
+           * Alt text in Hebrew
+           */
+          altTextHe?: string | null;
+          /**
+           * Display order (1 = front, higher numbers = behind)
+           */
+          order?: number | null;
+          id?: string | null;
+        }[]
+      | null;
   };
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -2023,7 +2039,7 @@ export interface AboutUsPage {
  */
 export interface VillaComplexPage {
   id: string;
-  heroSection: {
+  heroSection?: {
     /**
      * Show/hide hero section
      */
@@ -2031,44 +2047,46 @@ export interface VillaComplexPage {
     /**
      * Main hero title in Romanian
      */
-    mainTitleRo: string;
+    mainTitleRo?: string | null;
     /**
      * Main hero title in English
      */
-    mainTitleEn: string;
+    mainTitleEn?: string | null;
     /**
      * Main hero title in Hebrew
      */
-    mainTitleHe: string;
+    mainTitleHe?: string | null;
     /**
      * Hero subtitle in Romanian
      */
-    subtitleRo: string;
+    subtitleRo?: string | null;
     /**
      * Hero subtitle in English
      */
-    subtitleEn: string;
+    subtitleEn?: string | null;
     /**
      * Hero subtitle in Hebrew
      */
-    subtitleHe: string;
+    subtitleHe?: string | null;
     /**
      * Hero background image
      */
-    backgroundImage: string | Media;
-    breadcrumbs: {
-      labelRo: string;
-      labelEn: string;
-      labelHe: string;
-      href: string;
-      /**
-       * Is this the current page?
-       */
-      isActive?: boolean | null;
-      id?: string | null;
-    }[];
+    backgroundImage?: (string | null) | Media;
+    breadcrumbs?:
+      | {
+          labelRo?: string | null;
+          labelEn?: string | null;
+          labelHe?: string | null;
+          href?: string | null;
+          /**
+           * Is this the current page?
+           */
+          isActive?: boolean | null;
+          id?: string | null;
+        }[]
+      | null;
   };
-  villaComplexContentSection: {
+  villaComplexContentSection?: {
     /**
      * Show/hide villa complex content section
      */
@@ -2076,67 +2094,71 @@ export interface VillaComplexPage {
     /**
      * Section title in Romanian
      */
-    sectionTitleRo: string;
+    sectionTitleRo?: string | null;
     /**
      * Section title in English
      */
-    sectionTitleEn: string;
+    sectionTitleEn?: string | null;
     /**
      * Section title in Hebrew
      */
-    sectionTitleHe: string;
+    sectionTitleHe?: string | null;
     /**
      * Main heading in Romanian
      */
-    mainHeadingRo: string;
+    mainHeadingRo?: string | null;
     /**
      * Main heading in English
      */
-    mainHeadingEn: string;
+    mainHeadingEn?: string | null;
     /**
      * Main heading in Hebrew
      */
-    mainHeadingHe: string;
-    contentParagraphs: {
-      /**
-       * Paragraph content in Romanian
-       */
-      paragraphRo: string;
-      /**
-       * Paragraph content in English
-       */
-      paragraphEn: string;
-      /**
-       * Paragraph content in Hebrew
-       */
-      paragraphHe: string;
-      id?: string | null;
-    }[];
+    mainHeadingHe?: string | null;
+    contentParagraphs?:
+      | {
+          /**
+           * Paragraph content in Romanian
+           */
+          paragraphRo?: string | null;
+          /**
+           * Paragraph content in English
+           */
+          paragraphEn?: string | null;
+          /**
+           * Paragraph content in Hebrew
+           */
+          paragraphHe?: string | null;
+          id?: string | null;
+        }[]
+      | null;
     /**
      * Images for the overlapping layout (2-4 images recommended)
      */
-    images: {
-      image: string | Media;
-      /**
-       * Alt text in Romanian
-       */
-      altTextRo?: string | null;
-      /**
-       * Alt text in English
-       */
-      altTextEn?: string | null;
-      /**
-       * Alt text in Hebrew
-       */
-      altTextHe?: string | null;
-      /**
-       * Display order (1 = front, higher numbers = behind)
-       */
-      order: number;
-      id?: string | null;
-    }[];
+    images?:
+      | {
+          image?: (string | null) | Media;
+          /**
+           * Alt text in Romanian
+           */
+          altTextRo?: string | null;
+          /**
+           * Alt text in English
+           */
+          altTextEn?: string | null;
+          /**
+           * Alt text in Hebrew
+           */
+          altTextHe?: string | null;
+          /**
+           * Display order (1 = front, higher numbers = behind)
+           */
+          order?: number | null;
+          id?: string | null;
+        }[]
+      | null;
   };
-  floorPlansSection: {
+  floorPlansSection?: {
     /**
      * Show/hide floor plans section
      */
@@ -2144,151 +2166,155 @@ export interface VillaComplexPage {
     /**
      * Section title (first part) in Romanian
      */
-    sectionTitleRo: string;
+    sectionTitleRo?: string | null;
     /**
      * Section title (first part) in English
      */
-    sectionTitleEn: string;
+    sectionTitleEn?: string | null;
     /**
      * Section title (first part) in Hebrew
      */
-    sectionTitleHe: string;
+    sectionTitleHe?: string | null;
     /**
      * Section subtitle (colored part) in Romanian
      */
-    sectionSubtitleRo: string;
+    sectionSubtitleRo?: string | null;
     /**
      * Section subtitle (colored part) in English
      */
-    sectionSubtitleEn: string;
+    sectionSubtitleEn?: string | null;
     /**
      * Section subtitle (colored part) in Hebrew
      */
-    sectionSubtitleHe: string;
+    sectionSubtitleHe?: string | null;
     /**
      * Section description in Romanian
      */
-    sectionDescriptionRo: string;
+    sectionDescriptionRo?: string | null;
     /**
      * Section description in English
      */
-    sectionDescriptionEn: string;
+    sectionDescriptionEn?: string | null;
     /**
      * Section description in Hebrew
      */
-    sectionDescriptionHe: string;
+    sectionDescriptionHe?: string | null;
     /**
      * Add as many floors as you want (Parter, Etaj1, Etaj2, etc.)
      */
-    floorPlans: {
-      /**
-       * Display order (1 = first tab, 2 = second tab, etc.)
-       */
-      order: number;
-      /**
-       * Floor name in Romanian (e.g., PARTER, ETAJ)
-       */
-      floorNameRo: string;
-      /**
-       * Floor name in English (e.g., GROUND FLOOR, FLOOR)
-       */
-      floorNameEn: string;
-      /**
-       * Floor name in Hebrew
-       */
-      floorNameHe: string;
-      /**
-       * Floor plan image
-       */
-      floorPlanImage: string | Media;
-      /**
-       * Floor plan image alt text in Romanian
-       */
-      floorPlanImageAltRo?: string | null;
-      /**
-       * Floor plan image alt text in English
-       */
-      floorPlanImageAltEn?: string | null;
-      /**
-       * Floor plan image alt text in Hebrew
-       */
-      floorPlanImageAltHe?: string | null;
-      /**
-       * Built area in square meters
-       */
-      builtArea: number;
-      /**
-       * Usable area in square meters
-       */
-      usableArea: number;
-      /**
-       * Built area label in Romanian
-       */
-      builtAreaLabelRo: string;
-      /**
-       * Built area label in English
-       */
-      builtAreaLabelEn: string;
-      /**
-       * Built area label in Hebrew
-       */
-      builtAreaLabelHe: string;
-      /**
-       * Usable area label in Romanian
-       */
-      usableAreaLabelRo: string;
-      /**
-       * Usable area label in English
-       */
-      usableAreaLabelEn: string;
-      /**
-       * Usable area label in Hebrew
-       */
-      usableAreaLabelHe: string;
-      /**
-       * Add room details with areas
-       */
-      roomDetails: {
-        /**
-         * Room name in Romanian
-         */
-        roomNameRo: string;
-        /**
-         * Room name in English
-         */
-        roomNameEn: string;
-        /**
-         * Room name in Hebrew
-         */
-        roomNameHe: string;
-        /**
-         * Room area in square meters
-         */
-        roomArea: number;
-        id?: string | null;
-      }[];
-      pdfDownload: {
-        /**
-         * PDF button text in Romanian
-         */
-        buttonTextRo: string;
-        /**
-         * PDF button text in English
-         */
-        buttonTextEn: string;
-        /**
-         * PDF button text in Hebrew
-         */
-        buttonTextHe: string;
-        /**
-         * PDF file for download
-         */
-        pdfFile: string | Media;
-      };
-      id?: string | null;
-    }[];
+    floorPlans?:
+      | {
+          /**
+           * Display order (1 = first tab, 2 = second tab, etc.)
+           */
+          order?: number | null;
+          /**
+           * Floor name in Romanian (e.g., PARTER, ETAJ)
+           */
+          floorNameRo?: string | null;
+          /**
+           * Floor name in English (e.g., GROUND FLOOR, FLOOR)
+           */
+          floorNameEn?: string | null;
+          /**
+           * Floor name in Hebrew
+           */
+          floorNameHe?: string | null;
+          /**
+           * Floor plan image
+           */
+          floorPlanImage?: (string | null) | Media;
+          /**
+           * Floor plan image alt text in Romanian
+           */
+          floorPlanImageAltRo?: string | null;
+          /**
+           * Floor plan image alt text in English
+           */
+          floorPlanImageAltEn?: string | null;
+          /**
+           * Floor plan image alt text in Hebrew
+           */
+          floorPlanImageAltHe?: string | null;
+          /**
+           * Built area in square meters
+           */
+          builtArea?: number | null;
+          /**
+           * Usable area in square meters
+           */
+          usableArea?: number | null;
+          /**
+           * Built area label in Romanian
+           */
+          builtAreaLabelRo?: string | null;
+          /**
+           * Built area label in English
+           */
+          builtAreaLabelEn?: string | null;
+          /**
+           * Built area label in Hebrew
+           */
+          builtAreaLabelHe?: string | null;
+          /**
+           * Usable area label in Romanian
+           */
+          usableAreaLabelRo?: string | null;
+          /**
+           * Usable area label in English
+           */
+          usableAreaLabelEn?: string | null;
+          /**
+           * Usable area label in Hebrew
+           */
+          usableAreaLabelHe?: string | null;
+          /**
+           * Add room details with areas
+           */
+          roomDetails?:
+            | {
+                /**
+                 * Room name in Romanian
+                 */
+                roomNameRo?: string | null;
+                /**
+                 * Room name in English
+                 */
+                roomNameEn?: string | null;
+                /**
+                 * Room name in Hebrew
+                 */
+                roomNameHe?: string | null;
+                /**
+                 * Room area in square meters
+                 */
+                roomArea?: number | null;
+                id?: string | null;
+              }[]
+            | null;
+          pdfDownload?: {
+            /**
+             * PDF button text in Romanian
+             */
+            buttonTextRo?: string | null;
+            /**
+             * PDF button text in English
+             */
+            buttonTextEn?: string | null;
+            /**
+             * PDF button text in Hebrew
+             */
+            buttonTextHe?: string | null;
+            /**
+             * PDF file for download
+             */
+            pdfFile?: (string | null) | Media;
+          };
+          id?: string | null;
+        }[]
+      | null;
   };
-  facilitiesSection: {
+  facilitiesSection?: {
     /**
      * Show/hide facilities section
      */
@@ -2296,19 +2322,19 @@ export interface VillaComplexPage {
     /**
      * Section title in Romanian
      */
-    sectionTitleRo: string;
+    sectionTitleRo?: string | null;
     /**
      * Section title in English
      */
-    sectionTitleEn: string;
+    sectionTitleEn?: string | null;
     /**
      * Section title in Hebrew
      */
-    sectionTitleHe: string;
+    sectionTitleHe?: string | null;
     /**
      * Background image for the facilities section
      */
-    backgroundImage: string | Media;
+    backgroundImage?: (string | null) | Media;
     /**
      * Background image alt text in Romanian
      */
@@ -2324,37 +2350,39 @@ export interface VillaComplexPage {
     /**
      * Add as many facilities as you want
      */
-    facilities: {
-      /**
-       * Display order (01, 02, 03, etc.)
-       */
-      order: number;
-      /**
-       * Facility title in Romanian
-       */
-      titleRo: string;
-      /**
-       * Facility title in English
-       */
-      titleEn: string;
-      /**
-       * Facility title in Hebrew
-       */
-      titleHe: string;
-      /**
-       * Optional description in Romanian
-       */
-      descriptionRo?: string | null;
-      /**
-       * Optional description in English
-       */
-      descriptionEn?: string | null;
-      /**
-       * Optional description in Hebrew
-       */
-      descriptionHe?: string | null;
-      id?: string | null;
-    }[];
+    facilities?:
+      | {
+          /**
+           * Display order (01, 02, 03, etc.)
+           */
+          order?: number | null;
+          /**
+           * Facility title in Romanian
+           */
+          titleRo?: string | null;
+          /**
+           * Facility title in English
+           */
+          titleEn?: string | null;
+          /**
+           * Facility title in Hebrew
+           */
+          titleHe?: string | null;
+          /**
+           * Optional description in Romanian
+           */
+          descriptionRo?: string | null;
+          /**
+           * Optional description in English
+           */
+          descriptionEn?: string | null;
+          /**
+           * Optional description in Hebrew
+           */
+          descriptionHe?: string | null;
+          id?: string | null;
+        }[]
+      | null;
   };
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -2419,7 +2447,7 @@ export interface LocationPage {
  */
 export interface GalleryPage {
   id: string;
-  heroSection: {
+  heroSection?: {
     /**
      * Show/hide hero section
      */
@@ -2427,42 +2455,44 @@ export interface GalleryPage {
     /**
      * Main hero title in Romanian
      */
-    mainTitleRo: string;
+    mainTitleRo?: string | null;
     /**
      * Main hero title in English
      */
-    mainTitleEn: string;
+    mainTitleEn?: string | null;
     /**
      * Main hero title in Hebrew
      */
-    mainTitleHe: string;
+    mainTitleHe?: string | null;
     /**
      * Hero subtitle in Romanian
      */
-    subtitleRo: string;
+    subtitleRo?: string | null;
     /**
      * Hero subtitle in English
      */
-    subtitleEn: string;
+    subtitleEn?: string | null;
     /**
      * Hero subtitle in Hebrew
      */
-    subtitleHe: string;
+    subtitleHe?: string | null;
     /**
      * Hero background image
      */
-    backgroundImage: string | Media;
-    breadcrumbs: {
-      labelRo: string;
-      labelEn: string;
-      labelHe: string;
-      href: string;
-      /**
-       * Is this the current page?
-       */
-      isActive?: boolean | null;
-      id?: string | null;
-    }[];
+    backgroundImage?: (string | null) | Media;
+    breadcrumbs?:
+      | {
+          labelRo?: string | null;
+          labelEn?: string | null;
+          labelHe?: string | null;
+          href?: string | null;
+          /**
+           * Is this the current page?
+           */
+          isActive?: boolean | null;
+          id?: string | null;
+        }[]
+      | null;
   };
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -3034,8 +3064,8 @@ export interface TaskSchedulePublish {
  * via the `definition` "BannerBlock".
  */
 export interface BannerBlock {
-  style: 'info' | 'warning' | 'error' | 'success';
-  content: {
+  style?: ('info' | 'warning' | 'error' | 'success') | null;
+  content?: {
     root: {
       type: string;
       children: {
@@ -3049,7 +3079,7 @@ export interface BannerBlock {
       version: number;
     };
     [k: string]: unknown;
-  };
+  } | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'banner';
@@ -3060,7 +3090,7 @@ export interface BannerBlock {
  */
 export interface CodeBlock {
   language?: ('typescript' | 'javascript' | 'css') | null;
-  code: string;
+  code?: string | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'code';

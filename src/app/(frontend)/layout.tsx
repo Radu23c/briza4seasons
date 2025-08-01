@@ -27,6 +27,8 @@ export const metadata: Metadata = {
   description: 'Ansamblul de vile Torga45 - Găsește locuința visurilor tale',
 }
 
+export const revalidate = 60
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ro" className={`${inter.variable} ${playfairDisplay.variable}`}>
