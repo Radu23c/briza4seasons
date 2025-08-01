@@ -25,7 +25,7 @@ export const GalleryPage: GlobalConfig = {
         {
           name: 'mainTitleRo',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'Galeria Ansamblului Rezidential Torga45',
           admin: {
             description: 'Main hero title in Romanian',
@@ -34,7 +34,7 @@ export const GalleryPage: GlobalConfig = {
         {
           name: 'mainTitleEn',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'Torga45 Residential Complex Gallery',
           admin: {
             description: 'Main hero title in English',
@@ -43,7 +43,7 @@ export const GalleryPage: GlobalConfig = {
         {
           name: 'mainTitleHe',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'גלריית מתחם המגורים טורגה45',
           admin: {
             description: 'Main hero title in Hebrew',
@@ -53,7 +53,7 @@ export const GalleryPage: GlobalConfig = {
         {
           name: 'subtitleRo',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'GALERIE FOTO',
           admin: {
             description: 'Hero subtitle in Romanian',
@@ -62,7 +62,7 @@ export const GalleryPage: GlobalConfig = {
         {
           name: 'subtitleEn',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'PHOTO GALLERY',
           admin: {
             description: 'Hero subtitle in English',
@@ -71,7 +71,7 @@ export const GalleryPage: GlobalConfig = {
         {
           name: 'subtitleHe',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'גלריית תמונות',
           admin: {
             description: 'Hero subtitle in Hebrew',
@@ -82,7 +82,7 @@ export const GalleryPage: GlobalConfig = {
           name: 'backgroundImage',
           type: 'upload',
           relationTo: 'media',
-          required: true,
+          required: false,
           admin: {
             description: 'Hero background image',
           },
@@ -91,29 +91,29 @@ export const GalleryPage: GlobalConfig = {
         {
           name: 'breadcrumbs',
           type: 'array',
-          required: true,
+          required: false,
           minRows: 1,
           maxRows: 5,
           fields: [
             {
               name: 'labelRo',
               type: 'text',
-              required: true,
+              required: false,
             },
             {
               name: 'labelEn',
               type: 'text',
-              required: true,
+              required: false,
             },
             {
               name: 'labelHe',
               type: 'text',
-              required: true,
+              required: false,
             },
             {
               name: 'href',
               type: 'text',
-              required: true,
+              required: false,
             },
             {
               name: 'isActive',

@@ -61,7 +61,7 @@ export const Pages: CollectionConfig<'pages'> = {
     {
       name: 'title',
       type: 'text',
-      required: true,
+      required: false,
     },
     {
       type: 'tabs',
@@ -76,7 +76,7 @@ export const Pages: CollectionConfig<'pages'> = {
               name: 'layout',
               type: 'blocks',
               blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock],
-              required: true,
+              required: false,
               admin: {
                 initCollapsed: true,
               },

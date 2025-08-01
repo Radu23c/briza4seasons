@@ -13,7 +13,7 @@ export const HeroSection: CollectionConfig = {
     {
       name: 'title',
       type: 'text',
-      required: true,
+      required: false,
       defaultValue: 'Hero Section',
       admin: {
         description: 'Internal title for this hero section',
@@ -23,7 +23,7 @@ export const HeroSection: CollectionConfig = {
     {
       name: 'mainHeadingRo',
       type: 'text',
-      required: true,
+      required: false,
       defaultValue: 'Vizitează showroom-ul nostru și găsește locuința visurilor tale',
       admin: {
         description: 'Main heading text in Romanian',
@@ -32,7 +32,7 @@ export const HeroSection: CollectionConfig = {
     {
       name: 'mainHeadingEn',
       type: 'text',
-      required: true,
+      required: false,
       defaultValue: 'Visit our showroom and find the home of your dreams',
       admin: {
         description: 'Main heading text in English',
@@ -41,7 +41,7 @@ export const HeroSection: CollectionConfig = {
     {
       name: 'mainHeadingHe',
       type: 'text',
-      required: true,
+      required: false,
       defaultValue: 'בקרו באולם התצוגה שלנו ומצאו את בית החלומות שלכם',
       admin: {
         description: 'Main heading text in Hebrew',
@@ -55,7 +55,7 @@ export const HeroSection: CollectionConfig = {
         {
           name: 'textRo',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'PROGRAMEAZĂ O VIZITĂ',
           admin: {
             description: 'Button text in Romanian',
@@ -64,7 +64,7 @@ export const HeroSection: CollectionConfig = {
         {
           name: 'textEn',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'SCHEDULE A VISIT',
           admin: {
             description: 'Button text in English',
@@ -73,7 +73,7 @@ export const HeroSection: CollectionConfig = {
         {
           name: 'textHe',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'קבעו ביקור',
           admin: {
             description: 'Button text in Hebrew',
@@ -82,7 +82,7 @@ export const HeroSection: CollectionConfig = {
         {
           name: 'link',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: '/contact',
           admin: {
             description: 'URL or path for the button link',
@@ -94,7 +94,7 @@ export const HeroSection: CollectionConfig = {
     {
       name: 'projectNameRo',
       type: 'text',
-      required: true,
+      required: false,
       defaultValue: 'Ansamblul de vile Torga15',
       admin: {
         description: 'Project name in Romanian',
@@ -103,7 +103,7 @@ export const HeroSection: CollectionConfig = {
     {
       name: 'projectNameEn',
       type: 'text',
-      required: true,
+      required: false,
       defaultValue: 'Torga15 Villa Complex',
       admin: {
         description: 'Project name in English',
@@ -112,7 +112,7 @@ export const HeroSection: CollectionConfig = {
     {
       name: 'projectNameHe',
       type: 'text',
-      required: true,
+      required: false,
       defaultValue: 'מתחם וילות טורגה15',
       admin: {
         description: 'Project name in Hebrew',
@@ -122,7 +122,7 @@ export const HeroSection: CollectionConfig = {
     {
       name: 'projectSubtitleRo',
       type: 'text',
-      required: true,
+      required: false,
       defaultValue: 'Residence',
       admin: {
         description: 'Project subtitle in Romanian',
@@ -131,7 +131,7 @@ export const HeroSection: CollectionConfig = {
     {
       name: 'projectSubtitleEn',
       type: 'text',
-      required: true,
+      required: false,
       defaultValue: 'Residence',
       admin: {
         description: 'Project subtitle in English',
@@ -140,7 +140,7 @@ export const HeroSection: CollectionConfig = {
     {
       name: 'projectSubtitleHe',
       type: 'text',
-      required: true,
+      required: false,
       defaultValue: 'מגורים',
       admin: {
         description: 'Project subtitle in Hebrew',

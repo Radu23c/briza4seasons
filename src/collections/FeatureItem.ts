@@ -13,7 +13,7 @@ export const FeatureItem: CollectionConfig = {
     {
       name: 'order',
       type: 'number',
-      required: true,
+      required: false,
       defaultValue: 1,
       admin: {
         description: 'Order of appearance (01, 02, 03, etc.)',
@@ -22,7 +22,7 @@ export const FeatureItem: CollectionConfig = {
     {
       name: 'icon',
       type: 'select',
-      required: true,
+      required: false,
       options: [
         { label: 'Sofa (Living)', value: 'sofa' },
         { label: 'House (Home)', value: 'house' },
@@ -41,7 +41,7 @@ export const FeatureItem: CollectionConfig = {
     {
       name: 'titleRo',
       type: 'text',
-      required: true,
+      required: false,
       admin: {
         description: 'Title in Romanian',
       },
@@ -49,7 +49,7 @@ export const FeatureItem: CollectionConfig = {
     {
       name: 'descriptionRo',
       type: 'textarea',
-      required: true,
+      required: false,
       admin: {
         description: 'Description in Romanian',
       },
@@ -58,7 +58,7 @@ export const FeatureItem: CollectionConfig = {
     {
       name: 'titleEn',
       type: 'text',
-      required: true,
+      required: false,
       admin: {
         description: 'Title in English',
       },
@@ -66,7 +66,7 @@ export const FeatureItem: CollectionConfig = {
     {
       name: 'descriptionEn',
       type: 'textarea',
-      required: true,
+      required: false,
       admin: {
         description: 'Description in English',
       },
@@ -75,7 +75,7 @@ export const FeatureItem: CollectionConfig = {
     {
       name: 'titleHe',
       type: 'text',
-      required: true,
+      required: false,
       admin: {
         description: 'Title in Hebrew',
       },
@@ -83,7 +83,7 @@ export const FeatureItem: CollectionConfig = {
     {
       name: 'descriptionHe',
       type: 'textarea',
-      required: true,
+      required: false,
       admin: {
         description: 'Description in Hebrew',
       },

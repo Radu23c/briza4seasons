@@ -13,7 +13,7 @@ export const BenefitsSection: CollectionConfig = {
     {
       name: 'title',
       type: 'text',
-      required: true,
+      required: false,
       defaultValue: 'Benefits Section',
       admin: {
         description: 'Internal title for this benefits section',
@@ -23,7 +23,7 @@ export const BenefitsSection: CollectionConfig = {
     {
       name: 'sectionTitleRo',
       type: 'text',
-      required: true,
+      required: false,
       defaultValue: 'BENEFICII TORGA45',
       admin: {
         description: 'Section title in Romanian',
@@ -32,7 +32,7 @@ export const BenefitsSection: CollectionConfig = {
     {
       name: 'sectionTitleEn',
       type: 'text',
-      required: true,
+      required: false,
       defaultValue: 'TORGA45 BENEFITS',
       admin: {
         description: 'Section title in English',
@@ -41,7 +41,7 @@ export const BenefitsSection: CollectionConfig = {
     {
       name: 'sectionTitleHe',
       type: 'text',
-      required: true,
+      required: false,
       defaultValue: 'יתרונות טורגה45',
       admin: {
         description: 'Section title in Hebrew',
@@ -51,14 +51,14 @@ export const BenefitsSection: CollectionConfig = {
     {
       name: 'benefits',
       type: 'array',
-      required: true,
+      required: false,
       minRows: 1,
       maxRows: 10,
       fields: [
         {
           name: 'benefitRo',
           type: 'text',
-          required: true,
+          required: false,
           admin: {
             description: 'Benefit text in Romanian',
           },
@@ -66,7 +66,7 @@ export const BenefitsSection: CollectionConfig = {
         {
           name: 'benefitEn',
           type: 'text',
-          required: true,
+          required: false,
           admin: {
             description: 'Benefit text in English',
           },
@@ -74,7 +74,7 @@ export const BenefitsSection: CollectionConfig = {
         {
           name: 'benefitHe',
           type: 'text',
-          required: true,
+          required: false,
           admin: {
             description: 'Benefit text in Hebrew',
           },
@@ -108,7 +108,7 @@ export const BenefitsSection: CollectionConfig = {
       name: 'mainImage',
       type: 'upload',
       relationTo: 'media',
-      required: true,
+      required: false,
       admin: {
         description: 'Main architectural image for the left side',
       },

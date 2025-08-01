@@ -13,7 +13,7 @@ export const FeaturesSection: CollectionConfig = {
     {
       name: 'title',
       type: 'text',
-      required: true,
+      required: false,
       defaultValue: 'Features Section',
       admin: {
         description: 'Internal title for this features section',
@@ -23,7 +23,7 @@ export const FeaturesSection: CollectionConfig = {
     {
       name: 'projectNameRo',
       type: 'text',
-      required: true,
+      required: false,
       defaultValue: 'Torga15',
       admin: {
         description: 'Project name in Romanian',
@@ -32,7 +32,7 @@ export const FeaturesSection: CollectionConfig = {
     {
       name: 'projectNameEn',
       type: 'text',
-      required: true,
+      required: false,
       defaultValue: 'Torga15',
       admin: {
         description: 'Project name in English',
@@ -41,7 +41,7 @@ export const FeaturesSection: CollectionConfig = {
     {
       name: 'projectNameHe',
       type: 'text',
-      required: true,
+      required: false,
       defaultValue: 'טורגה15',
       admin: {
         description: 'Project name in Hebrew',
@@ -50,7 +50,7 @@ export const FeaturesSection: CollectionConfig = {
     {
       name: 'villaCount',
       type: 'number',
-      required: true,
+      required: false,
       defaultValue: 21,
       admin: {
         description: 'Number of villas in the development',
@@ -60,7 +60,7 @@ export const FeaturesSection: CollectionConfig = {
     {
       name: 'villaCountTextRo',
       type: 'text',
-      required: true,
+      required: false,
       defaultValue: 'Vile în ansamblul',
       admin: {
         description: 'Villa count text in Romanian',
@@ -69,7 +69,7 @@ export const FeaturesSection: CollectionConfig = {
     {
       name: 'villaCountTextEn',
       type: 'text',
-      required: true,
+      required: false,
       defaultValue: 'Villas in the complex',
       admin: {
         description: 'Villa count text in English',
@@ -78,7 +78,7 @@ export const FeaturesSection: CollectionConfig = {
     {
       name: 'villaCountTextHe',
       type: 'text',
-      required: true,
+      required: false,
       defaultValue: 'וילות במתחם',
       admin: {
         description: 'Villa count text in Hebrew',
@@ -88,7 +88,7 @@ export const FeaturesSection: CollectionConfig = {
     {
       name: 'mainHeadingRo',
       type: 'text',
-      required: true,
+      required: false,
       defaultValue: 'oferă o experiență rezidențială aparte, cu',
       admin: {
         description: 'Main heading in Romanian',
@@ -97,7 +97,7 @@ export const FeaturesSection: CollectionConfig = {
     {
       name: 'mainHeadingEn',
       type: 'text',
-      required: true,
+      required: false,
       defaultValue: 'offers a unique residential experience, with',
       admin: {
         description: 'Main heading in English',
@@ -106,7 +106,7 @@ export const FeaturesSection: CollectionConfig = {
     {
       name: 'mainHeadingHe',
       type: 'text',
-      required: true,
+      required: false,
       defaultValue: 'מציע חוויית מגורים ייחודית, עם',
       admin: {
         description: 'Main heading in Hebrew',
@@ -116,7 +116,7 @@ export const FeaturesSection: CollectionConfig = {
     {
       name: 'accentTextRo',
       type: 'text',
-      required: true,
+      required: false,
       defaultValue: 'accent pe confort',
       admin: {
         description: 'Accent text in Romanian',
@@ -125,7 +125,7 @@ export const FeaturesSection: CollectionConfig = {
     {
       name: 'accentTextEn',
       type: 'text',
-      required: true,
+      required: false,
       defaultValue: 'emphasis on comfort',
       admin: {
         description: 'Accent text in English',
@@ -134,7 +134,7 @@ export const FeaturesSection: CollectionConfig = {
     {
       name: 'accentTextHe',
       type: 'text',
-      required: true,
+      required: false,
       defaultValue: 'דגש על נוחות',
       admin: {
         description: 'Accent text in Hebrew',
@@ -144,7 +144,7 @@ export const FeaturesSection: CollectionConfig = {
     {
       name: 'subHeadingRo',
       type: 'text',
-      required: true,
+      required: false,
       defaultValue: 'și comoditatea vieții moderne',
       admin: {
         description: 'Sub-heading in Romanian',
@@ -153,7 +153,7 @@ export const FeaturesSection: CollectionConfig = {
     {
       name: 'subHeadingEn',
       type: 'text',
-      required: true,
+      required: false,
       defaultValue: 'and the convenience of modern living',
       admin: {
         description: 'Sub-heading in English',
@@ -162,7 +162,7 @@ export const FeaturesSection: CollectionConfig = {
     {
       name: 'subHeadingHe',
       type: 'text',
-      required: true,
+      required: false,
       defaultValue: 'והנוחות של חיים מודרניים',
       admin: {
         description: 'Sub-heading in Hebrew',
@@ -172,7 +172,7 @@ export const FeaturesSection: CollectionConfig = {
     {
       name: 'detailsTextRo',
       type: 'text',
-      required: true,
+      required: false,
       defaultValue: 'MAI MULTE DETALII?',
       admin: {
         description: 'Details text in Romanian',
@@ -181,7 +181,7 @@ export const FeaturesSection: CollectionConfig = {
     {
       name: 'detailsTextEn',
       type: 'text',
-      required: true,
+      required: false,
       defaultValue: 'MORE DETAILS?',
       admin: {
         description: 'Details text in English',
@@ -190,7 +190,7 @@ export const FeaturesSection: CollectionConfig = {
     {
       name: 'detailsTextHe',
       type: 'text',
-      required: true,
+      required: false,
       defaultValue: 'פרטים נוספים?',
       admin: {
         description: 'Details text in Hebrew',
@@ -200,7 +200,7 @@ export const FeaturesSection: CollectionConfig = {
       name: 'exteriorImage',
       type: 'upload',
       relationTo: 'media',
-      required: true,
+      required: false,
       admin: {
         description: 'Main exterior/garden image',
       },
@@ -209,7 +209,7 @@ export const FeaturesSection: CollectionConfig = {
       name: 'interiorImage',
       type: 'upload',
       relationTo: 'media',
-      required: true,
+      required: false,
       admin: {
         description: 'Interior living space image',
       },

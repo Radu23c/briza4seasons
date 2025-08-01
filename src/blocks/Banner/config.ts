@@ -19,7 +19,7 @@ export const Banner: Block = {
         { label: 'Error', value: 'error' },
         { label: 'Success', value: 'success' },
       ],
-      required: true,
+      required: false,
     },
     {
       name: 'content',
@@ -30,7 +30,7 @@ export const Banner: Block = {
         },
       }),
       label: false,
-      required: true,
+      required: false,
     },
   ],
   interfaceName: 'BannerBlock',

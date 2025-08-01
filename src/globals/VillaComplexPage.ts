@@ -25,7 +25,7 @@ export const VillaComplexPage: GlobalConfig = {
         {
           name: 'mainTitleRo',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'Mai multe despre Ansamblul Rezidential Torga45',
           admin: {
             description: 'Main hero title in Romanian',
@@ -34,7 +34,7 @@ export const VillaComplexPage: GlobalConfig = {
         {
           name: 'mainTitleEn',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'More about Torga45 Residential Complex',
           admin: {
             description: 'Main hero title in English',
@@ -43,7 +43,7 @@ export const VillaComplexPage: GlobalConfig = {
         {
           name: 'mainTitleHe',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'עוד על מתחם המגורים טורגה45',
           admin: {
             description: 'Main hero title in Hebrew',
@@ -53,7 +53,7 @@ export const VillaComplexPage: GlobalConfig = {
         {
           name: 'subtitleRo',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'IMPARTIRE, SUPRAFETE, PLANURI',
           admin: {
             description: 'Hero subtitle in Romanian',
@@ -62,7 +62,7 @@ export const VillaComplexPage: GlobalConfig = {
         {
           name: 'subtitleEn',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'DIVISION, AREAS, PLANS',
           admin: {
             description: 'Hero subtitle in English',
@@ -71,7 +71,7 @@ export const VillaComplexPage: GlobalConfig = {
         {
           name: 'subtitleHe',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'חלוקה, שטחים, תוכניות',
           admin: {
             description: 'Hero subtitle in Hebrew',
@@ -82,7 +82,7 @@ export const VillaComplexPage: GlobalConfig = {
           name: 'backgroundImage',
           type: 'upload',
           relationTo: 'media',
-          required: true,
+          required: false,
           admin: {
             description: 'Hero background image',
           },
@@ -91,29 +91,29 @@ export const VillaComplexPage: GlobalConfig = {
         {
           name: 'breadcrumbs',
           type: 'array',
-          required: true,
+          required: false,
           minRows: 1,
           maxRows: 5,
           fields: [
             {
               name: 'labelRo',
               type: 'text',
-              required: true,
+              required: false,
             },
             {
               name: 'labelEn',
               type: 'text',
-              required: true,
+              required: false,
             },
             {
               name: 'labelHe',
               type: 'text',
-              required: true,
+              required: false,
             },
             {
               name: 'href',
               type: 'text',
-              required: true,
+              required: false,
             },
             {
               name: 'isActive',
@@ -162,7 +162,7 @@ export const VillaComplexPage: GlobalConfig = {
         {
           name: 'sectionTitleRo',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'Torga45',
           admin: {
             description: 'Section title in Romanian',
@@ -171,7 +171,7 @@ export const VillaComplexPage: GlobalConfig = {
         {
           name: 'sectionTitleEn',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'Torga45',
           admin: {
             description: 'Section title in English',
@@ -180,7 +180,7 @@ export const VillaComplexPage: GlobalConfig = {
         {
           name: 'sectionTitleHe',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'טורגה45',
           admin: {
             description: 'Section title in Hebrew',
@@ -190,7 +190,7 @@ export const VillaComplexPage: GlobalConfig = {
         {
           name: 'mainHeadingRo',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'Locul unde îți vei spune ACASĂ',
           admin: {
             description: 'Main heading in Romanian',
@@ -199,7 +199,7 @@ export const VillaComplexPage: GlobalConfig = {
         {
           name: 'mainHeadingEn',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'The place where you will say HOME',
           admin: {
             description: 'Main heading in English',
@@ -208,7 +208,7 @@ export const VillaComplexPage: GlobalConfig = {
         {
           name: 'mainHeadingHe',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'המקום שבו תגידו בית',
           admin: {
             description: 'Main heading in Hebrew',
@@ -218,14 +218,14 @@ export const VillaComplexPage: GlobalConfig = {
         {
           name: 'contentParagraphs',
           type: 'array',
-          required: true,
+          required: false,
           minRows: 1,
           maxRows: 10,
           fields: [
             {
               name: 'paragraphRo',
               type: 'textarea',
-              required: true,
+              required: false,
               admin: {
                 description: 'Paragraph content in Romanian',
               },
@@ -233,7 +233,7 @@ export const VillaComplexPage: GlobalConfig = {
             {
               name: 'paragraphEn',
               type: 'textarea',
-              required: true,
+              required: false,
               admin: {
                 description: 'Paragraph content in English',
               },
@@ -241,7 +241,7 @@ export const VillaComplexPage: GlobalConfig = {
             {
               name: 'paragraphHe',
               type: 'textarea',
-              required: true,
+              required: false,
               admin: {
                 description: 'Paragraph content in Hebrew',
               },
@@ -270,7 +270,7 @@ export const VillaComplexPage: GlobalConfig = {
         {
           name: 'images',
           type: 'array',
-          required: true,
+          required: false,
           minRows: 2,
           maxRows: 4,
           admin: {
@@ -281,7 +281,7 @@ export const VillaComplexPage: GlobalConfig = {
               name: 'image',
               type: 'upload',
               relationTo: 'media',
-              required: true,
+              required: false,
             },
             {
               name: 'altTextRo',
@@ -310,7 +310,7 @@ export const VillaComplexPage: GlobalConfig = {
             {
               name: 'order',
               type: 'number',
-              required: true,
+              required: false,
               defaultValue: 1,
               admin: {
                 description: 'Display order (1 = front, higher numbers = behind)',
@@ -340,7 +340,7 @@ export const VillaComplexPage: GlobalConfig = {
         {
           name: 'sectionTitleRo',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'Planul',
           admin: {
             description: 'Section title (first part) in Romanian',
@@ -349,7 +349,7 @@ export const VillaComplexPage: GlobalConfig = {
         {
           name: 'sectionTitleEn',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'Housing',
           admin: {
             description: 'Section title (first part) in English',
@@ -358,7 +358,7 @@ export const VillaComplexPage: GlobalConfig = {
         {
           name: 'sectionTitleHe',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'תוכנית',
           admin: {
             description: 'Section title (first part) in Hebrew',
@@ -368,7 +368,7 @@ export const VillaComplexPage: GlobalConfig = {
         {
           name: 'sectionSubtitleRo',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'Locuintelor',
           admin: {
             description: 'Section subtitle (colored part) in Romanian',
@@ -377,7 +377,7 @@ export const VillaComplexPage: GlobalConfig = {
         {
           name: 'sectionSubtitleEn',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'Plans',
           admin: {
             description: 'Section subtitle (colored part) in English',
@@ -386,7 +386,7 @@ export const VillaComplexPage: GlobalConfig = {
         {
           name: 'sectionSubtitleHe',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'דיור',
           admin: {
             description: 'Section subtitle (colored part) in Hebrew',
@@ -396,7 +396,7 @@ export const VillaComplexPage: GlobalConfig = {
         {
           name: 'sectionDescriptionRo',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'Impartirea pe niveluri si detalierea camerelor',
           admin: {
             description: 'Section description in Romanian',
@@ -405,7 +405,7 @@ export const VillaComplexPage: GlobalConfig = {
         {
           name: 'sectionDescriptionEn',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'Level division and room details',
           admin: {
             description: 'Section description in English',
@@ -414,7 +414,7 @@ export const VillaComplexPage: GlobalConfig = {
         {
           name: 'sectionDescriptionHe',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'חלוקת רמות ופרטי חדרים',
           admin: {
             description: 'Section description in Hebrew',
@@ -424,7 +424,7 @@ export const VillaComplexPage: GlobalConfig = {
         {
           name: 'floorPlans',
           type: 'array',
-          required: true,
+          required: false,
           minRows: 1,
           maxRows: 10,
           admin: {
@@ -434,7 +434,7 @@ export const VillaComplexPage: GlobalConfig = {
             {
               name: 'order',
               type: 'number',
-              required: true,
+              required: false,
               defaultValue: 1,
               admin: {
                 description: 'Display order (1 = first tab, 2 = second tab, etc.)',
@@ -444,7 +444,7 @@ export const VillaComplexPage: GlobalConfig = {
             {
               name: 'floorNameRo',
               type: 'text',
-              required: true,
+              required: false,
               admin: {
                 description: 'Floor name in Romanian (e.g., PARTER, ETAJ)',
               },
@@ -452,7 +452,7 @@ export const VillaComplexPage: GlobalConfig = {
             {
               name: 'floorNameEn',
               type: 'text',
-              required: true,
+              required: false,
               admin: {
                 description: 'Floor name in English (e.g., GROUND FLOOR, FLOOR)',
               },
@@ -460,7 +460,7 @@ export const VillaComplexPage: GlobalConfig = {
             {
               name: 'floorNameHe',
               type: 'text',
-              required: true,
+              required: false,
               admin: {
                 description: 'Floor name in Hebrew',
               },
@@ -470,7 +470,7 @@ export const VillaComplexPage: GlobalConfig = {
               name: 'floorPlanImage',
               type: 'upload',
               relationTo: 'media',
-              required: true,
+              required: false,
               admin: {
                 description: 'Floor plan image',
               },
@@ -504,7 +504,7 @@ export const VillaComplexPage: GlobalConfig = {
             {
               name: 'builtArea',
               type: 'number',
-              required: true,
+              required: false,
               admin: {
                 description: 'Built area in square meters',
               },
@@ -513,7 +513,7 @@ export const VillaComplexPage: GlobalConfig = {
             {
               name: 'usableArea',
               type: 'number',
-              required: true,
+              required: false,
               admin: {
                 description: 'Usable area in square meters',
               },
@@ -522,7 +522,7 @@ export const VillaComplexPage: GlobalConfig = {
             {
               name: 'builtAreaLabelRo',
               type: 'text',
-              required: true,
+              required: false,
               defaultValue: 'S.CONSTRUITA',
               admin: {
                 description: 'Built area label in Romanian',
@@ -531,7 +531,7 @@ export const VillaComplexPage: GlobalConfig = {
             {
               name: 'builtAreaLabelEn',
               type: 'text',
-              required: true,
+              required: false,
               defaultValue: 'BUILT AREA',
               admin: {
                 description: 'Built area label in English',
@@ -540,7 +540,7 @@ export const VillaComplexPage: GlobalConfig = {
             {
               name: 'builtAreaLabelHe',
               type: 'text',
-              required: true,
+              required: false,
               defaultValue: 'שטח בנוי',
               admin: {
                 description: 'Built area label in Hebrew',
@@ -550,7 +550,7 @@ export const VillaComplexPage: GlobalConfig = {
             {
               name: 'usableAreaLabelRo',
               type: 'text',
-              required: true,
+              required: false,
               defaultValue: 'S.UTILA',
               admin: {
                 description: 'Usable area label in Romanian',
@@ -559,7 +559,7 @@ export const VillaComplexPage: GlobalConfig = {
             {
               name: 'usableAreaLabelEn',
               type: 'text',
-              required: true,
+              required: false,
               defaultValue: 'USABLE AREA',
               admin: {
                 description: 'Usable area label in English',
@@ -568,7 +568,7 @@ export const VillaComplexPage: GlobalConfig = {
             {
               name: 'usableAreaLabelHe',
               type: 'text',
-              required: true,
+              required: false,
               defaultValue: 'שטח שימושי',
               admin: {
                 description: 'Usable area label in Hebrew',
@@ -578,7 +578,7 @@ export const VillaComplexPage: GlobalConfig = {
             {
               name: 'roomDetails',
               type: 'array',
-              required: true,
+              required: false,
               minRows: 1,
               maxRows: 20,
               admin: {
@@ -588,7 +588,7 @@ export const VillaComplexPage: GlobalConfig = {
                 {
                   name: 'roomNameRo',
                   type: 'text',
-                  required: true,
+                  required: false,
                   admin: {
                     description: 'Room name in Romanian',
                   },
@@ -596,7 +596,7 @@ export const VillaComplexPage: GlobalConfig = {
                 {
                   name: 'roomNameEn',
                   type: 'text',
-                  required: true,
+                  required: false,
                   admin: {
                     description: 'Room name in English',
                   },
@@ -604,7 +604,7 @@ export const VillaComplexPage: GlobalConfig = {
                 {
                   name: 'roomNameHe',
                   type: 'text',
-                  required: true,
+                  required: false,
                   admin: {
                     description: 'Room name in Hebrew',
                   },
@@ -612,7 +612,7 @@ export const VillaComplexPage: GlobalConfig = {
                 {
                   name: 'roomArea',
                   type: 'number',
-                  required: true,
+                  required: false,
                   admin: {
                     description: 'Room area in square meters',
                   },
@@ -627,7 +627,7 @@ export const VillaComplexPage: GlobalConfig = {
                 {
                   name: 'buttonTextRo',
                   type: 'text',
-                  required: true,
+                  required: false,
                   defaultValue: 'PLAN PARTER CU TERASA',
                   admin: {
                     description: 'PDF button text in Romanian',
@@ -636,7 +636,7 @@ export const VillaComplexPage: GlobalConfig = {
                 {
                   name: 'buttonTextEn',
                   type: 'text',
-                  required: true,
+                  required: false,
                   defaultValue: 'GROUND FLOOR PLAN WITH TERRACE',
                   admin: {
                     description: 'PDF button text in English',
@@ -645,7 +645,7 @@ export const VillaComplexPage: GlobalConfig = {
                 {
                   name: 'buttonTextHe',
                   type: 'text',
-                  required: true,
+                  required: false,
                   defaultValue: 'תוכנית קומת קרקע עם מרפסת',
                   admin: {
                     description: 'PDF button text in Hebrew',
@@ -655,7 +655,7 @@ export const VillaComplexPage: GlobalConfig = {
                   name: 'pdfFile',
                   type: 'upload',
                   relationTo: 'media',
-                  required: true,
+                  required: false,
                   admin: {
                     description: 'PDF file for download',
                   },
@@ -750,7 +750,7 @@ export const VillaComplexPage: GlobalConfig = {
         {
           name: 'sectionTitleRo',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'DOTARI & FACILITATI',
           admin: {
             description: 'Section title in Romanian',
@@ -759,7 +759,7 @@ export const VillaComplexPage: GlobalConfig = {
         {
           name: 'sectionTitleEn',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'AMENITIES & FACILITIES',
           admin: {
             description: 'Section title in English',
@@ -768,7 +768,7 @@ export const VillaComplexPage: GlobalConfig = {
         {
           name: 'sectionTitleHe',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'שירותים ומתקנים',
           admin: {
             description: 'Section title in Hebrew',
@@ -779,7 +779,7 @@ export const VillaComplexPage: GlobalConfig = {
           name: 'backgroundImage',
           type: 'upload',
           relationTo: 'media',
-          required: true,
+          required: false,
           admin: {
             description: 'Background image for the facilities section',
           },
@@ -813,7 +813,7 @@ export const VillaComplexPage: GlobalConfig = {
         {
           name: 'facilities',
           type: 'array',
-          required: true,
+          required: false,
           minRows: 1,
           maxRows: 20,
           admin: {
@@ -823,7 +823,7 @@ export const VillaComplexPage: GlobalConfig = {
             {
               name: 'order',
               type: 'number',
-              required: true,
+              required: false,
               defaultValue: 1,
               admin: {
                 description: 'Display order (01, 02, 03, etc.)',
@@ -832,7 +832,7 @@ export const VillaComplexPage: GlobalConfig = {
             {
               name: 'titleRo',
               type: 'text',
-              required: true,
+              required: false,
               admin: {
                 description: 'Facility title in Romanian',
               },
@@ -840,7 +840,7 @@ export const VillaComplexPage: GlobalConfig = {
             {
               name: 'titleEn',
               type: 'text',
-              required: true,
+              required: false,
               admin: {
                 description: 'Facility title in English',
               },
@@ -848,7 +848,7 @@ export const VillaComplexPage: GlobalConfig = {
             {
               name: 'titleHe',
               type: 'text',
-              required: true,
+              required: false,
               admin: {
                 description: 'Facility title in Hebrew',
               },

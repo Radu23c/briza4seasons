@@ -25,7 +25,7 @@ export const AboutUsPage: GlobalConfig = {
         {
           name: 'mainTitleRo',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'Despre Ansamblul Rezidential Torga45',
           admin: {
             description: 'Main hero title in Romanian',
@@ -34,7 +34,7 @@ export const AboutUsPage: GlobalConfig = {
         {
           name: 'mainTitleEn',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'About Torga45 Residential Complex',
           admin: {
             description: 'Main hero title in English',
@@ -43,7 +43,7 @@ export const AboutUsPage: GlobalConfig = {
         {
           name: 'mainTitleHe',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'אודות מתחם המגורים טורגה45',
           admin: {
             description: 'Main hero title in Hebrew',
@@ -53,7 +53,7 @@ export const AboutUsPage: GlobalConfig = {
         {
           name: 'subtitleRo',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'CINE SUNTEM?',
           admin: {
             description: 'Hero subtitle in Romanian',
@@ -62,7 +62,7 @@ export const AboutUsPage: GlobalConfig = {
         {
           name: 'subtitleEn',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'WHO ARE WE?',
           admin: {
             description: 'Hero subtitle in English',
@@ -71,7 +71,7 @@ export const AboutUsPage: GlobalConfig = {
         {
           name: 'subtitleHe',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'מי אנחנו?',
           admin: {
             description: 'Hero subtitle in Hebrew',
@@ -82,7 +82,7 @@ export const AboutUsPage: GlobalConfig = {
           name: 'backgroundImage',
           type: 'upload',
           relationTo: 'media',
-          required: true,
+          required: false,
           admin: {
             description: 'Hero background image',
           },
@@ -91,29 +91,29 @@ export const AboutUsPage: GlobalConfig = {
         {
           name: 'breadcrumbs',
           type: 'array',
-          required: true,
+          required: false,
           minRows: 1,
           maxRows: 5,
           fields: [
             {
               name: 'labelRo',
               type: 'text',
-              required: true,
+              required: false,
             },
             {
               name: 'labelEn',
               type: 'text',
-              required: true,
+              required: false,
             },
             {
               name: 'labelHe',
               type: 'text',
-              required: true,
+              required: false,
             },
             {
               name: 'href',
               type: 'text',
-              required: true,
+              required: false,
             },
             {
               name: 'isActive',
@@ -162,7 +162,7 @@ export const AboutUsPage: GlobalConfig = {
         {
           name: 'sectionTitleRo',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'Despre Noi',
           admin: {
             description: 'Section title in Romanian',
@@ -171,7 +171,7 @@ export const AboutUsPage: GlobalConfig = {
         {
           name: 'sectionTitleEn',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'About Us',
           admin: {
             description: 'Section title in English',
@@ -180,7 +180,7 @@ export const AboutUsPage: GlobalConfig = {
         {
           name: 'sectionTitleHe',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'אודותינו',
           admin: {
             description: 'Section title in Hebrew',
@@ -190,7 +190,7 @@ export const AboutUsPage: GlobalConfig = {
         {
           name: 'mainHeadingRo',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'Povestea proiectului nostru',
           admin: {
             description: 'Main heading in Romanian',
@@ -199,7 +199,7 @@ export const AboutUsPage: GlobalConfig = {
         {
           name: 'mainHeadingEn',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: "Our project's story",
           admin: {
             description: 'Main heading in English',
@@ -208,7 +208,7 @@ export const AboutUsPage: GlobalConfig = {
         {
           name: 'mainHeadingHe',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'הסיפור של הפרויקט שלנו',
           admin: {
             description: 'Main heading in Hebrew',
@@ -218,14 +218,14 @@ export const AboutUsPage: GlobalConfig = {
         {
           name: 'contentParagraphs',
           type: 'array',
-          required: true,
+          required: false,
           minRows: 1,
           maxRows: 10,
           fields: [
             {
               name: 'paragraphRo',
               type: 'textarea',
-              required: true,
+              required: false,
               admin: {
                 description: 'Paragraph content in Romanian',
               },
@@ -233,7 +233,7 @@ export const AboutUsPage: GlobalConfig = {
             {
               name: 'paragraphEn',
               type: 'textarea',
-              required: true,
+              required: false,
               admin: {
                 description: 'Paragraph content in English',
               },
@@ -241,7 +241,7 @@ export const AboutUsPage: GlobalConfig = {
             {
               name: 'paragraphHe',
               type: 'textarea',
-              required: true,
+              required: false,
               admin: {
                 description: 'Paragraph content in Hebrew',
               },
@@ -270,7 +270,7 @@ export const AboutUsPage: GlobalConfig = {
         {
           name: 'images',
           type: 'array',
-          required: true,
+          required: false,
           minRows: 2,
           maxRows: 4,
           admin: {
@@ -281,7 +281,7 @@ export const AboutUsPage: GlobalConfig = {
               name: 'image',
               type: 'upload',
               relationTo: 'media',
-              required: true,
+              required: false,
             },
             {
               name: 'altTextRo',
@@ -310,7 +310,7 @@ export const AboutUsPage: GlobalConfig = {
             {
               name: 'order',
               type: 'number',
-              required: true,
+              required: false,
               defaultValue: 1,
               admin: {
                 description: 'Display order (1 = front, higher numbers = behind)',

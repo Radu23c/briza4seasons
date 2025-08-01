@@ -25,7 +25,7 @@ export const Homepage: GlobalConfig = {
         {
           name: 'mainHeadingRo',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'Vizitează showroom-ul nostru și găsește locuința visurilor tale',
           admin: {
             description: 'Main heading text in Romanian',
@@ -34,7 +34,7 @@ export const Homepage: GlobalConfig = {
         {
           name: 'mainHeadingEn',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'Visit our showroom and find the home of your dreams',
           admin: {
             description: 'Main heading text in English',
@@ -43,7 +43,7 @@ export const Homepage: GlobalConfig = {
         {
           name: 'mainHeadingHe',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'בקרו באולם התצוגה שלנו ומצאו את בית החלומות שלכם',
           admin: {
             description: 'Main heading text in Hebrew',
@@ -57,25 +57,25 @@ export const Homepage: GlobalConfig = {
             {
               name: 'textRo',
               type: 'text',
-              required: true,
+              required: false,
               defaultValue: 'PROGRAMEAZĂ O VIZITĂ',
             },
             {
               name: 'textEn',
               type: 'text',
-              required: true,
+              required: false,
               defaultValue: 'SCHEDULE A VISIT',
             },
             {
               name: 'textHe',
               type: 'text',
-              required: true,
+              required: false,
               defaultValue: 'קבעו ביקור',
             },
             {
               name: 'link',
               type: 'text',
-              required: true,
+              required: false,
               defaultValue: '/contact',
             },
           ],
@@ -84,38 +84,38 @@ export const Homepage: GlobalConfig = {
         {
           name: 'projectNameRo',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'Ansamblul de vile Torga15',
         },
         {
           name: 'projectNameEn',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'Torga15 Villa Complex',
         },
         {
           name: 'projectNameHe',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'מתחם וילות טורגה15',
         },
         // Project Subtitle
         {
           name: 'projectSubtitleRo',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'Residence',
         },
         {
           name: 'projectSubtitleEn',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'Residence',
         },
         {
           name: 'projectSubtitleHe',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'מגורים',
         },
         {
@@ -145,133 +145,133 @@ export const Homepage: GlobalConfig = {
         {
           name: 'projectNameRo',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'Torga15',
         },
         {
           name: 'projectNameEn',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'Torga15',
         },
         {
           name: 'projectNameHe',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'טורגה15',
         },
         {
           name: 'villaCount',
           type: 'number',
-          required: true,
+          required: false,
           defaultValue: 21,
         },
         // Villa Count Text
         {
           name: 'villaCountTextRo',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'Vile în ansamblul',
         },
         {
           name: 'villaCountTextEn',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'Villas in the complex',
         },
         {
           name: 'villaCountTextHe',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'וילות במתחם',
         },
         // Main Heading
         {
           name: 'mainHeadingRo',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'oferă o experiență rezidențială aparte, cu',
         },
         {
           name: 'mainHeadingEn',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'offers a unique residential experience, with',
         },
         {
           name: 'mainHeadingHe',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'מציע חוויית מגורים ייחודית, עם',
         },
         // Accent Text
         {
           name: 'accentTextRo',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'accent pe confort',
         },
         {
           name: 'accentTextEn',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'emphasis on comfort',
         },
         {
           name: 'accentTextHe',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'דגש על נוחות',
         },
         // Sub Heading
         {
           name: 'subHeadingRo',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'și comoditatea vieții moderne',
         },
         {
           name: 'subHeadingEn',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'and the convenience of modern living',
         },
         {
           name: 'subHeadingHe',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'והנוחות של חיים מודרניים',
         },
         // Details Text
         {
           name: 'detailsTextRo',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'MAI MULTE DETALII?',
         },
         {
           name: 'detailsTextEn',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'MORE DETAILS?',
         },
         {
           name: 'detailsTextHe',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'פרטים נוספים?',
         },
         {
           name: 'exteriorImage',
           type: 'upload',
           relationTo: 'media',
-          required: true,
+          required: false,
         },
         {
           name: 'interiorImage',
           type: 'upload',
           relationTo: 'media',
-          required: true,
+          required: false,
         },
         {
           name: 'detailsLink',
@@ -316,20 +316,20 @@ export const Homepage: GlobalConfig = {
         {
           name: 'featureItems',
           type: 'array',
-          required: true,
+          required: false,
           minRows: 1,
           maxRows: 10,
           fields: [
             {
               name: 'order',
               type: 'number',
-              required: true,
+              required: false,
               defaultValue: 1,
             },
             {
               name: 'icon',
               type: 'select',
-              required: true,
+              required: false,
               options: [
                 { label: 'Sofa (Living)', value: 'sofa' },
                 { label: 'House (Home)', value: 'house' },
@@ -344,32 +344,32 @@ export const Homepage: GlobalConfig = {
             {
               name: 'titleRo',
               type: 'text',
-              required: true,
+              required: false,
             },
             {
               name: 'titleEn',
               type: 'text',
-              required: true,
+              required: false,
             },
             {
               name: 'titleHe',
               type: 'text',
-              required: true,
+              required: false,
             },
             {
               name: 'descriptionRo',
               type: 'textarea',
-              required: true,
+              required: false,
             },
             {
               name: 'descriptionEn',
               type: 'textarea',
-              required: true,
+              required: false,
             },
             {
               name: 'descriptionHe',
               type: 'textarea',
-              required: true,
+              required: false,
             },
           ],
           defaultValue: [
@@ -419,7 +419,7 @@ export const Homepage: GlobalConfig = {
           name: 'backgroundImage',
           type: 'upload',
           relationTo: 'media',
-          required: true,
+          required: false,
         },
         // Background Image Alt Text
         {
@@ -458,43 +458,43 @@ export const Homepage: GlobalConfig = {
         {
           name: 'sectionTitleRo',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'BENEFICII TORGA45',
         },
         {
           name: 'sectionTitleEn',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'TORGA45 BENEFITS',
         },
         {
           name: 'sectionTitleHe',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'יתרונות טורגה45',
         },
         // Benefits List
         {
           name: 'benefits',
           type: 'array',
-          required: true,
+          required: false,
           minRows: 1,
           maxRows: 10,
           fields: [
             {
               name: 'benefitRo',
               type: 'text',
-              required: true,
+              required: false,
             },
             {
               name: 'benefitEn',
               type: 'text',
-              required: true,
+              required: false,
             },
             {
               name: 'benefitHe',
               type: 'text',
-              required: true,
+              required: false,
             },
           ],
           defaultValue: [
@@ -525,7 +525,7 @@ export const Homepage: GlobalConfig = {
           name: 'mainImage',
           type: 'upload',
           relationTo: 'media',
-          required: true,
+          required: false,
         },
         // Styling Options
         {
@@ -567,77 +567,77 @@ export const Homepage: GlobalConfig = {
         {
           name: 'sectionTitleRo',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'Ce Trebuie Sa Stii',
         },
         {
           name: 'sectionTitleEn',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'What You Need to Know',
         },
         {
           name: 'sectionTitleHe',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'מה שאתם צריכים לדעת',
         },
         // Main Heading
         {
           name: 'mainHeadingRo',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'Informații utile despre proprietățile noastre',
         },
         {
           name: 'mainHeadingEn',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'Useful information about our properties',
         },
         {
           name: 'mainHeadingHe',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'מידע שימושי על הנכסים שלנו',
         },
         // FAQ Items
         {
           name: 'faqItems',
           type: 'array',
-          required: true,
+          required: false,
           minRows: 1,
           maxRows: 10,
           fields: [
             {
               name: 'questionRo',
               type: 'text',
-              required: true,
+              required: false,
             },
             {
               name: 'questionEn',
               type: 'text',
-              required: true,
+              required: false,
             },
             {
               name: 'questionHe',
               type: 'text',
-              required: true,
+              required: false,
             },
             {
               name: 'answerRo',
               type: 'textarea',
-              required: true,
+              required: false,
             },
             {
               name: 'answerEn',
               type: 'textarea',
-              required: true,
+              required: false,
             },
             {
               name: 'answerHe',
               type: 'textarea',
-              required: true,
+              required: false,
             },
           ],
           defaultValue: [
@@ -670,7 +670,7 @@ export const Homepage: GlobalConfig = {
           name: 'backgroundImage',
           type: 'upload',
           relationTo: 'media',
-          required: true,
+          required: false,
         },
       ],
     },
@@ -693,111 +693,111 @@ export const Homepage: GlobalConfig = {
         {
           name: 'formTitleRo',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'Discutați cu un reprezentant',
         },
         {
           name: 'formTitleEn',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'Discuss with a representative',
         },
         {
           name: 'formTitleHe',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'דברו עם נציג',
         },
         // Form Fields Labels
         {
           name: 'nameFieldRo',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'NUME',
         },
         {
           name: 'nameFieldEn',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'NAME',
         },
         {
           name: 'nameFieldHe',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'שם',
         },
         {
           name: 'emailFieldRo',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'EMAIL',
         },
         {
           name: 'emailFieldEn',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'EMAIL',
         },
         {
           name: 'emailFieldHe',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'אימייל',
         },
         {
           name: 'phoneFieldRo',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'TELEFON',
         },
         {
           name: 'phoneFieldEn',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'PHONE',
         },
         {
           name: 'phoneFieldHe',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'טלפון',
         },
         {
           name: 'messageFieldRo',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'MESAJ',
         },
         {
           name: 'messageFieldEn',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'MESSAGE',
         },
         {
           name: 'messageFieldHe',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'הודעה',
         },
         // Submit Button
         {
           name: 'submitButtonRo',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'TRIMITEȚI',
         },
         {
           name: 'submitButtonEn',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'SEND',
         },
         {
           name: 'submitButtonHe',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'שלח',
         },
         // Background Image
@@ -805,7 +805,7 @@ export const Homepage: GlobalConfig = {
           name: 'backgroundImage',
           type: 'upload',
           relationTo: 'media',
-          required: true,
+          required: false,
         },
       ],
     },
@@ -828,45 +828,45 @@ export const Homepage: GlobalConfig = {
         {
           name: 'sectionTitleRo',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'Prezentare',
         },
         {
           name: 'sectionTitleEn',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'Presentation',
         },
         {
           name: 'sectionTitleHe',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'מצגת',
         },
         // Section Subtitle
         {
           name: 'sectionSubtitleRo',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'Complex',
         },
         {
           name: 'sectionSubtitleEn',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'Complex',
         },
         {
           name: 'sectionSubtitleHe',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'מתחם',
         },
         // Gallery Images
         {
           name: 'galleryImages',
           type: 'array',
-          required: true,
+          required: false,
           minRows: 1,
           maxRows: 50,
           admin: {
@@ -877,7 +877,7 @@ export const Homepage: GlobalConfig = {
               name: 'image',
               type: 'upload',
               relationTo: 'media',
-              required: true,
+              required: false,
               admin: {
                 description: 'Upload an image of your complex',
               },
@@ -954,7 +954,7 @@ export const Homepage: GlobalConfig = {
         {
           name: 'mainTitleRo',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'Galerie',
           admin: {
             description: 'Main title (first part) in Romanian',
@@ -963,7 +963,7 @@ export const Homepage: GlobalConfig = {
         {
           name: 'mainTitleEn',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'Gallery',
           admin: {
             description: 'Main title (first part) in English',
@@ -972,7 +972,7 @@ export const Homepage: GlobalConfig = {
         {
           name: 'mainTitleHe',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'גלריה',
           admin: {
             description: 'Main title (first part) in Hebrew',
@@ -982,7 +982,7 @@ export const Homepage: GlobalConfig = {
         {
           name: 'subtitleRo',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'Imagini',
           admin: {
             description: 'Subtitle (colored part) in Romanian',
@@ -991,7 +991,7 @@ export const Homepage: GlobalConfig = {
         {
           name: 'subtitleEn',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'Images',
           admin: {
             description: 'Subtitle (colored part) in English',
@@ -1000,7 +1000,7 @@ export const Homepage: GlobalConfig = {
         {
           name: 'subtitleHe',
           type: 'text',
-          required: true,
+          required: false,
           defaultValue: 'תמונות',
           admin: {
             description: 'Subtitle (colored part) in Hebrew',
@@ -1010,7 +1010,7 @@ export const Homepage: GlobalConfig = {
         {
           name: 'descriptionRo',
           type: 'textarea',
-          required: true,
+          required: false,
           defaultValue:
             'Imaginile sunt cu titlu de prezentare, designul interior se poate personaliza în funcție de dorința dumneavoastră.',
           admin: {
@@ -1020,7 +1020,7 @@ export const Homepage: GlobalConfig = {
         {
           name: 'descriptionEn',
           type: 'textarea',
-          required: true,
+          required: false,
           defaultValue:
             'The images are for presentation purposes, the interior design can be customized according to your wishes.',
           admin: {
@@ -1030,7 +1030,7 @@ export const Homepage: GlobalConfig = {
         {
           name: 'descriptionHe',
           type: 'textarea',
-          required: true,
+          required: false,
           defaultValue: 'התמונות הן למטרות הצגה, עיצוב הפנים ניתן להתאמה אישית לפי רצונכם.',
           admin: {
             description: 'Description text in Hebrew',
@@ -1040,7 +1040,7 @@ export const Homepage: GlobalConfig = {
         {
           name: 'images',
           type: 'array',
-          required: true,
+          required: false,
           minRows: 1,
           maxRows: 100,
           admin: {
@@ -1051,7 +1051,7 @@ export const Homepage: GlobalConfig = {
               name: 'image',
               type: 'upload',
               relationTo: 'media',
-              required: true,
+              required: false,
               admin: {
                 description: 'Upload an image for the gallery',
               },

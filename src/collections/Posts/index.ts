@@ -72,7 +72,7 @@ export const Posts: CollectionConfig<'posts'> = {
     {
       name: 'title',
       type: 'text',
-      required: true,
+      required: false,
     },
     {
       type: 'tabs',
@@ -100,7 +100,7 @@ export const Posts: CollectionConfig<'posts'> = {
                 },
               }),
               label: false,
-              required: true,
+              required: false,
             },
           ],
           label: 'Content',
