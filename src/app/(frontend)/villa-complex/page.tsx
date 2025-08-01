@@ -23,12 +23,20 @@ interface AboutImage {
 }
 
 // General helper function to transform any Media field to MediaObject
-function transformMediaToObject(media: string | Media | null | undefined): any {
+function transformMediaToObject(media: string | Media | { url: string } | null | undefined): any {
   if (!media) return undefined
 
   if (typeof media === 'string') {
     return {
       url: media,
+      alt: '',
+    }
+  }
+
+  // Handle simple objects with just url
+  if (media && typeof media === 'object' && 'url' in media && !('id' in media)) {
+    return {
+      url: media.url,
       alt: '',
     }
   }
@@ -53,6 +61,8 @@ function ensureString(value: string | null | undefined, fallback: string = ''): 
 
 // Helper function to transform Payload images to AboutImage format
 function transformPayloadImages(payloadImages: any[]): AboutImage[] {
+  if (!payloadImages || !Array.isArray(payloadImages)) return []
+
   return payloadImages.map((item) => {
     return {
       image: transformMediaToObject(item.image),
@@ -67,6 +77,8 @@ function transformPayloadImages(payloadImages: any[]): AboutImage[] {
 
 // Helper function to transform Payload floor plans
 function transformFloorPlans(payloadFloorPlans: any[]): any[] {
+  if (!payloadFloorPlans || !Array.isArray(payloadFloorPlans)) return []
+
   return payloadFloorPlans.map((floorPlan) => {
     return {
       ...floorPlan,
@@ -84,6 +96,8 @@ function transformFloorPlans(payloadFloorPlans: any[]): any[] {
 
 // Helper function to transform Payload facilities
 function transformFacilities(payloadFacilities: any[]): any[] {
+  if (!payloadFacilities || !Array.isArray(payloadFacilities)) return []
+
   return payloadFacilities.map((facility) => {
     return {
       ...facility,
@@ -95,9 +109,9 @@ function transformFacilities(payloadFacilities: any[]): any[] {
   })
 }
 
-// Helper function to transform breadcrumbs
-function transformBreadcrumbs(breadcrumbs: any[] | undefined): any[] {
-  if (!breadcrumbs) return []
+// Helper function to transform breadcrumbs - FIXED VERSION
+function transformBreadcrumbs(breadcrumbs: any[] | null | undefined): any[] {
+  if (!breadcrumbs || !Array.isArray(breadcrumbs)) return []
 
   return breadcrumbs.map((crumb) => ({
     ...crumb,
@@ -292,8 +306,10 @@ async function VillaComplexPageContent() {
 
         {/* Villa Complex Content Section */}
         {villaComplexData?.villaComplexContentSection?.isActive &&
-          villaComplexData.villaComplexContentSection.images?.length > 0 &&
-          villaComplexData.villaComplexContentSection.contentParagraphs?.length > 0 && (
+          villaComplexData.villaComplexContentSection.images?.length &&
+          villaComplexData.villaComplexContentSection.images.length > 0 &&
+          villaComplexData.villaComplexContentSection.contentParagraphs?.length &&
+          villaComplexData.villaComplexContentSection.contentParagraphs.length > 0 && (
             <AboutUsContent
               sectionTitleRo={ensureString(
                 villaComplexData.villaComplexContentSection.sectionTitleRo,
@@ -322,7 +338,8 @@ async function VillaComplexPageContent() {
 
         {/* Floor Plans Section - ABOVE FACILITIES */}
         {villaComplexData?.floorPlansSection?.isActive &&
-          villaComplexData.floorPlansSection.floorPlans?.length > 0 && (
+          villaComplexData.floorPlansSection.floorPlans?.length &&
+          villaComplexData.floorPlansSection.floorPlans.length > 0 && (
             <FloorPlansSection
               sectionTitleRo={ensureString(villaComplexData.floorPlansSection.sectionTitleRo)}
               sectionTitleEn={ensureString(villaComplexData.floorPlansSection.sectionTitleEn)}
@@ -345,7 +362,8 @@ async function VillaComplexPageContent() {
 
         {/* Facilities Section - BELOW FLOOR PLANS */}
         {villaComplexData?.facilitiesSection?.isActive &&
-          villaComplexData.facilitiesSection.facilities?.length > 0 &&
+          villaComplexData.facilitiesSection.facilities?.length &&
+          villaComplexData.facilitiesSection.facilities.length > 0 &&
           villaComplexData.facilitiesSection.backgroundImage && (
             <FacilitiesSection
               sectionTitleRo={ensureString(villaComplexData.facilitiesSection.sectionTitleRo)}

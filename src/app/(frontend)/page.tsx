@@ -288,47 +288,47 @@ function convertHomepageData(payloadData: HomepageType): any {
     heroSection: {
       ...defaults.heroSection,
       ...payloadData.heroSection,
-      isActive: payloadData.heroSection.isActive ?? defaults.heroSection.isActive,
+      isActive: payloadData.heroSection?.isActive ?? defaults.heroSection.isActive,
     },
     featuresSection: {
       ...defaults.featuresSection,
       ...payloadData.featuresSection,
-      isActive: payloadData.featuresSection.isActive ?? defaults.featuresSection.isActive,
+      isActive: payloadData.featuresSection?.isActive ?? defaults.featuresSection.isActive,
     },
     featuresOverviewSection: {
       ...defaults.featuresOverviewSection,
       ...payloadData.featuresOverviewSection,
       isActive:
-        payloadData.featuresOverviewSection.isActive ?? defaults.featuresOverviewSection.isActive,
+        payloadData.featuresOverviewSection?.isActive ?? defaults.featuresOverviewSection.isActive,
     },
     benefitsSection: {
       ...defaults.benefitsSection,
       ...payloadData.benefitsSection,
-      isActive: payloadData.benefitsSection.isActive ?? defaults.benefitsSection.isActive,
+      isActive: payloadData.benefitsSection?.isActive ?? defaults.benefitsSection.isActive,
     },
     faqSection: {
       ...defaults.faqSection,
       ...payloadData.faqSection,
-      isActive: payloadData.faqSection.isActive ?? defaults.faqSection.isActive,
+      isActive: payloadData.faqSection?.isActive ?? defaults.faqSection.isActive,
     },
     contactSection: {
       ...defaults.contactSection,
       ...payloadData.contactSection,
-      isActive: payloadData.contactSection.isActive ?? defaults.contactSection.isActive,
+      isActive: payloadData.contactSection?.isActive ?? defaults.contactSection.isActive,
     },
     gallerySection: {
       ...defaults.gallerySection,
       ...payloadData.gallerySection,
-      isActive: payloadData.gallerySection.isActive ?? defaults.gallerySection.isActive,
+      isActive: payloadData.gallerySection?.isActive ?? defaults.gallerySection.isActive,
       enableLightbox:
-        payloadData.gallerySection.enableLightbox ?? defaults.gallerySection.enableLightbox,
+        payloadData.gallerySection?.enableLightbox ?? defaults.gallerySection.enableLightbox,
     },
     imageGallerySection: {
       ...defaults.imageGallerySection,
       ...payloadData.imageGallerySection,
-      isActive: payloadData.imageGallerySection.isActive ?? defaults.imageGallerySection.isActive,
+      isActive: payloadData.imageGallerySection?.isActive ?? defaults.imageGallerySection.isActive,
       enableLightbox:
-        payloadData.imageGallerySection.enableLightbox ??
+        payloadData.imageGallerySection?.enableLightbox ??
         defaults.imageGallerySection.enableLightbox,
     },
   }

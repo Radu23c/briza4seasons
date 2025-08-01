@@ -19,12 +19,22 @@ interface RawGalleryImage {
 }
 
 // General helper function to transform any Media field to MediaObject
-function transformMediaToObject(media: string | PayloadMedia | null | undefined): any {
+function transformMediaToObject(
+  media: string | PayloadMedia | { url: string } | null | undefined,
+): any {
   if (!media) return undefined
 
   if (typeof media === 'string') {
     return {
       url: media,
+      alt: '',
+    }
+  }
+
+  // Handle simple objects with just url
+  if (media && typeof media === 'object' && 'url' in media && !('id' in media)) {
+    return {
+      url: media.url,
       alt: '',
     }
   }
@@ -47,9 +57,9 @@ function ensureString(value: string | null | undefined, fallback: string = ''): 
   return value || fallback
 }
 
-// Helper function to transform breadcrumbs
-function transformBreadcrumbs(breadcrumbs: any[] | undefined): any[] {
-  if (!breadcrumbs) return []
+// Helper function to transform breadcrumbs - FIXED VERSION
+function transformBreadcrumbs(breadcrumbs: any[] | null | undefined): any[] {
+  if (!breadcrumbs || !Array.isArray(breadcrumbs)) return []
 
   return breadcrumbs.map((crumb) => ({
     ...crumb,
@@ -62,7 +72,9 @@ function transformBreadcrumbs(breadcrumbs: any[] | undefined): any[] {
 }
 
 // Helper function to convert raw gallery images to the expected format
-function convertGalleryImages(rawImages: Homepage['gallerySection']['galleryImages']) {
+function convertGalleryImages(rawImages: any[] | null | undefined) {
+  if (!rawImages || !Array.isArray(rawImages)) return []
+
   return rawImages.map((rawImage) => {
     const imageObject = transformMediaToObject(rawImage.image)
 
@@ -185,7 +197,8 @@ async function GalleryPageContent() {
         )}
 
         {homepageData?.gallerySection?.isActive &&
-          homepageData.gallerySection.galleryImages?.length > 0 && (
+          homepageData.gallerySection.galleryImages?.length &&
+          homepageData.gallerySection.galleryImages.length > 0 && (
             <GallerySection
               sectionTitleRo={ensureString(homepageData.gallerySection.sectionTitleRo)}
               sectionTitleEn={ensureString(homepageData.gallerySection.sectionTitleEn)}
@@ -199,7 +212,8 @@ async function GalleryPageContent() {
           )}
 
         {homepageData?.imageGallerySection?.isActive &&
-          homepageData.imageGallerySection.images?.length > 0 && (
+          homepageData.imageGallerySection.images?.length &&
+          homepageData.imageGallerySection.images.length > 0 && (
             <ImageGallerySection
               mainTitleRo={ensureString(homepageData.imageGallerySection.mainTitleRo)}
               mainTitleEn={ensureString(homepageData.imageGallerySection.mainTitleEn)}

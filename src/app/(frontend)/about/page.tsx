@@ -51,9 +51,9 @@ function ensureString(value: string | null | undefined, fallback: string = ''): 
   return value || fallback
 }
 
-// Helper function to transform breadcrumbs
-function transformBreadcrumbs(breadcrumbs: any[] | undefined): any[] {
-  if (!breadcrumbs) return []
+// Helper function to transform breadcrumbs - FIXED VERSION
+function transformBreadcrumbs(breadcrumbs: any[] | null | undefined): any[] {
+  if (!breadcrumbs || !Array.isArray(breadcrumbs)) return []
 
   return breadcrumbs.map((crumb) => ({
     ...crumb,
@@ -216,8 +216,10 @@ async function AboutUsPageContent() {
 
         {/* About Content Section */}
         {aboutUsData?.aboutContentSection?.isActive &&
-          aboutUsData.aboutContentSection.images?.length > 0 &&
-          aboutUsData.aboutContentSection.contentParagraphs?.length > 0 && (
+          aboutUsData.aboutContentSection.images?.length &&
+          aboutUsData.aboutContentSection.images.length > 0 &&
+          aboutUsData.aboutContentSection.contentParagraphs?.length &&
+          aboutUsData.aboutContentSection.contentParagraphs.length > 0 && (
             <AboutUsContent
               sectionTitleRo={ensureString(aboutUsData.aboutContentSection.sectionTitleRo)}
               sectionTitleEn={ensureString(aboutUsData.aboutContentSection.sectionTitleEn)}

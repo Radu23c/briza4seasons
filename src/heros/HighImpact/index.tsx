@@ -8,12 +8,22 @@ import { CMSLink } from '@/components/Link'
 import { Media } from '@/components/Media'
 import RichText from '@/components/RichText'
 
-export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText }) => {
+export const HighImpactHero: React.FC<Page['hero']> = (hero) => {
   const { setHeaderTheme } = useHeaderTheme()
 
   useEffect(() => {
     setHeaderTheme('dark')
   })
+
+  // Type guard to check if this is a high impact hero with the expected properties
+  const isHighImpactHero =
+    hero && typeof hero === 'object' && 'links' in hero && 'media' in hero && 'richText' in hero
+
+  if (!isHighImpactHero) {
+    return null
+  }
+
+  const { links, media, richText } = hero as any // Type assertion since we've verified the structure
 
   return (
     <div

@@ -9,10 +9,10 @@ type LowImpactHeroType =
       children?: React.ReactNode
       richText?: never
     }
-  | (Omit<Page['hero'], 'richText'> & {
+  | {
       children?: never
-      richText?: Page['hero']['richText']
-    })
+      richText?: any // Using any for the rich text content since the exact type is complex
+    }
 
 export const LowImpactHero: React.FC<LowImpactHeroType> = ({ children, richText }) => {
   return (

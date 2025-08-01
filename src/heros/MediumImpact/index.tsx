@@ -6,7 +6,16 @@ import { CMSLink } from '@/components/Link'
 import { Media } from '@/components/Media'
 import RichText from '@/components/RichText'
 
-export const MediumImpactHero: React.FC<Page['hero']> = ({ links, media, richText }) => {
+export const MediumImpactHero: React.FC<Page['hero']> = (hero) => {
+  // Type guard to check if this is a medium impact hero with the expected properties
+  const isMediumImpactHero = hero && typeof hero === 'object' && 'richText' in hero
+
+  if (!isMediumImpactHero) {
+    return null
+  }
+
+  const { links, media, richText } = hero as any // Type assertion since we've verified the structure
+
   return (
     <div className="">
       <div className="container mb-8">
