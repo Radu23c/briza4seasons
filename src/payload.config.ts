@@ -1,4 +1,5 @@
-// storage-adapter-import-placeholder
+// Add this import at the top
+import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import sharp from 'sharp' // sharp-import
 import path from 'path'
@@ -66,7 +67,14 @@ export default buildConfig({
   globals: [Header, Footer, Homepage, AboutUsPage, VillaComplexPage, LocationPage, GalleryPage], // Add GalleryPage here
   plugins: [
     ...plugins,
-    // storage-adapter-placeholder
+    // Add Vercel Blob storage plugin
+    vercelBlobStorage({
+      enabled: true,
+      collections: {
+        media: true,
+      },
+      token: process.env.BLOB_READ_WRITE_TOKEN,
+    }),
   ],
   secret: process.env.PAYLOAD_SECRET,
   sharp,

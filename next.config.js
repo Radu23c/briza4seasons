@@ -10,6 +10,7 @@ const NEXT_PUBLIC_SERVER_URL = process.env.VERCEL_PROJECT_PRODUCTION_URL
 const nextConfig = {
   images: {
     remotePatterns: [
+      // Your existing server URL pattern
       ...[NEXT_PUBLIC_SERVER_URL /* 'https://example.com' */].map((item) => {
         const url = new URL(item)
 
@@ -18,6 +19,16 @@ const nextConfig = {
           protocol: url.protocol.replace(':', ''),
         }
       }),
+      // Add Vercel Blob storage domain
+      {
+        protocol: 'https',
+        hostname: '*.public.blob.vercel-storage.com',
+      },
+      // Alternative pattern for specific blob URLs
+      {
+        protocol: 'https',
+        hostname: 'public.blob.vercel-storage.com',
+      },
     ],
   },
   webpack: (webpackConfig) => {
@@ -28,6 +39,12 @@ const nextConfig = {
     }
 
     return webpackConfig
+  },
+  // Increase API body size limit for file uploads
+  api: {
+    bodyParser: {
+      sizeLimit: '10mb',
+    },
   },
   reactStrictMode: true,
   redirects,
