@@ -43,6 +43,14 @@ interface FloorPlan {
   }
 }
 
+interface Villa {
+  key: 'spring' | 'summer' | 'autumn' | 'winter'
+  nameRo: string
+  nameEn: string
+  nameHe: string
+  floorPlans: FloorPlan[]
+}
+
 interface FloorPlansSectionProps {
   sectionTitleRo: string
   sectionTitleEn: string
@@ -53,7 +61,7 @@ interface FloorPlansSectionProps {
   sectionDescriptionRo: string
   sectionDescriptionEn: string
   sectionDescriptionHe: string
-  floorPlans: FloorPlan[]
+  villas: Villa[]
 }
 
 const FloorPlansSection: React.FC<FloorPlansSectionProps> = ({
@@ -66,19 +74,34 @@ const FloorPlansSection: React.FC<FloorPlansSectionProps> = ({
   sectionDescriptionRo,
   sectionDescriptionEn,
   sectionDescriptionHe,
-  floorPlans,
+  villas,
 }) => {
   const { t, currentLanguage } = useLanguage()
+  const [activeVilla, setActiveVilla] = useState(0)
   const [activeFloor, setActiveFloor] = useState(0)
 
-  // Early return if no floor plans
-  if (!floorPlans?.length) {
-    console.warn('FloorPlansSection: No floor plans provided')
+  // Early return if no villas
+  if (!villas?.length) {
+    console.warn('FloorPlansSection: No villas provided')
+    return null
+  }
+
+  // Reset floor selection when villa changes
+  const handleVillaChange = (villaIndex: number) => {
+    setActiveVilla(villaIndex)
+    setActiveFloor(0) // Reset to first floor
+  }
+
+  const currentVilla = villas[activeVilla]
+
+  // Early return if current villa has no floor plans
+  if (!currentVilla?.floorPlans?.length) {
+    console.warn(`FloorPlansSection: Villa ${activeVilla} has no floor plans`)
     return null
   }
 
   // Sort floor plans by order
-  const sortedFloorPlans = [...floorPlans].sort((a, b) => a.order - b.order)
+  const sortedFloorPlans = [...currentVilla.floorPlans].sort((a, b) => a.order - b.order)
 
   const sectionTitle = t({
     ro: sectionTitleRo,
@@ -126,6 +149,21 @@ const FloorPlansSection: React.FC<FloorPlansSectionProps> = ({
       })
     : ''
 
+  // Villa selection icons/colors
+  const villaIcons = {
+    spring: '🌸',
+    summer: '☀️',
+    autumn: '🍂',
+    winter: '❄️',
+  }
+
+  const villaColors = {
+    spring: 'from-green-400 to-pink-400',
+    summer: 'from-yellow-400 to-orange-400',
+    autumn: 'from-orange-400 to-red-400',
+    winter: 'from-blue-400 to-cyan-400',
+  }
+
   return (
     <section className="py-16 lg:py-24 bg-white">
       <div className="container mx-auto px-4">
@@ -138,6 +176,44 @@ const FloorPlansSection: React.FC<FloorPlansSectionProps> = ({
             <span className="font-elegant text-[#D4B896] italic">{sectionSubtitle}</span>
           </h2>
           <p className="text-gray-600 text-lg">{sectionDescription}</p>
+        </div>
+
+        {/* Villa Selection */}
+        <div className="flex justify-center mb-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {villas.map((villa, index) => {
+              const villaName = t({
+                ro: villa.nameRo,
+                en: villa.nameEn,
+                he: villa.nameHe,
+              })
+
+              return (
+                <button
+                  key={villa.key}
+                  onClick={() => handleVillaChange(index)}
+                  className={`relative px-6 py-4 rounded-xl font-semibold text-sm tracking-wider uppercase transition-all duration-300 overflow-hidden group ${
+                    activeVilla === index
+                      ? 'text-white shadow-lg transform scale-105'
+                      : 'text-gray-700 bg-white hover:text-white shadow-md hover:shadow-lg hover:transform hover:scale-105'
+                  }`}
+                >
+                  {/* Background gradient */}
+                  <div
+                    className={`absolute inset-0 bg-gradient-to-r ${villaColors[villa.key]} transition-opacity duration-300 ${
+                      activeVilla === index ? 'opacity-100' : 'opacity-0 group-hover:opacity-90'
+                    }`}
+                  />
+
+                  {/* Content */}
+                  <div className="relative flex items-center justify-center space-x-2">
+                    <span className="text-lg">{villaIcons[villa.key]}</span>
+                    <span>{villaName}</span>
+                  </div>
+                </button>
+              )
+            })}
+          </div>
         </div>
 
         {/* Floor Tabs */}

@@ -322,7 +322,7 @@ export const VillaComplexPage: GlobalConfig = {
       ],
     },
 
-    // FLOOR PLANS SECTION - ABOVE FACILITIES
+    // FLOOR PLANS SECTION WITH VILLA SELECTION - ABOVE FACILITIES
     {
       name: 'floorPlansSection',
       type: 'group',
@@ -420,312 +420,392 @@ export const VillaComplexPage: GlobalConfig = {
             description: 'Section description in Hebrew',
           },
         },
-        // Floor Plans
+        // Villa Types Configuration
         {
-          name: 'floorPlans',
+          name: 'villas',
           type: 'array',
           required: false,
-          minRows: 1,
-          maxRows: 10,
+          minRows: 4,
+          maxRows: 4,
           admin: {
-            description: 'Add as many floors as you want (Parter, Etaj1, Etaj2, etc.)',
+            description: 'Configure the 4 villa types (Spring, Summer, Autumn, Winter)',
           },
           fields: [
             {
-              name: 'order',
-              type: 'number',
-              required: false,
-              defaultValue: 1,
+              name: 'villaType',
+              type: 'select',
+              required: true,
+              options: [
+                { label: 'Spring Villa', value: 'spring' },
+                { label: 'Summer Villa', value: 'summer' },
+                { label: 'Autumn Villa', value: 'autumn' },
+                { label: 'Winter Villa', value: 'winter' },
+              ],
               admin: {
-                description: 'Display order (1 = first tab, 2 = second tab, etc.)',
+                description: 'Select the villa season type (each must be unique)',
               },
             },
-            // Floor Name
             {
-              name: 'floorNameRo',
+              name: 'nameRo',
               type: 'text',
-              required: false,
+              required: true,
               admin: {
-                description: 'Floor name in Romanian (e.g., PARTER, ETAJ)',
+                description: 'Villa name in Romanian',
               },
             },
             {
-              name: 'floorNameEn',
+              name: 'nameEn',
               type: 'text',
-              required: false,
+              required: true,
               admin: {
-                description: 'Floor name in English (e.g., GROUND FLOOR, FLOOR)',
+                description: 'Villa name in English',
               },
             },
             {
-              name: 'floorNameHe',
+              name: 'nameHe',
               type: 'text',
-              required: false,
+              required: true,
               admin: {
-                description: 'Floor name in Hebrew',
+                description: 'Villa name in Hebrew',
               },
             },
-            // Floor Plan Image
+            // Floor Plans for this specific villa
             {
-              name: 'floorPlanImage',
-              type: 'upload',
-              relationTo: 'media',
-              required: false,
-              admin: {
-                description: 'Floor plan image',
-              },
-            },
-            // Floor Plan Image Alt Text
-            {
-              name: 'floorPlanImageAltRo',
-              type: 'text',
-              required: false,
-              admin: {
-                description: 'Floor plan image alt text in Romanian',
-              },
-            },
-            {
-              name: 'floorPlanImageAltEn',
-              type: 'text',
-              required: false,
-              admin: {
-                description: 'Floor plan image alt text in English',
-              },
-            },
-            {
-              name: 'floorPlanImageAltHe',
-              type: 'text',
-              required: false,
-              admin: {
-                description: 'Floor plan image alt text in Hebrew',
-              },
-            },
-            // Built Area
-            {
-              name: 'builtArea',
-              type: 'number',
-              required: false,
-              admin: {
-                description: 'Built area in square meters',
-              },
-            },
-            // Usable Area
-            {
-              name: 'usableArea',
-              type: 'number',
-              required: false,
-              admin: {
-                description: 'Usable area in square meters',
-              },
-            },
-            // Built Area Label
-            {
-              name: 'builtAreaLabelRo',
-              type: 'text',
-              required: false,
-              defaultValue: 'S.CONSTRUITA',
-              admin: {
-                description: 'Built area label in Romanian',
-              },
-            },
-            {
-              name: 'builtAreaLabelEn',
-              type: 'text',
-              required: false,
-              defaultValue: 'BUILT AREA',
-              admin: {
-                description: 'Built area label in English',
-              },
-            },
-            {
-              name: 'builtAreaLabelHe',
-              type: 'text',
-              required: false,
-              defaultValue: 'שטח בנוי',
-              admin: {
-                description: 'Built area label in Hebrew',
-              },
-            },
-            // Usable Area Label
-            {
-              name: 'usableAreaLabelRo',
-              type: 'text',
-              required: false,
-              defaultValue: 'S.UTILA',
-              admin: {
-                description: 'Usable area label in Romanian',
-              },
-            },
-            {
-              name: 'usableAreaLabelEn',
-              type: 'text',
-              required: false,
-              defaultValue: 'USABLE AREA',
-              admin: {
-                description: 'Usable area label in English',
-              },
-            },
-            {
-              name: 'usableAreaLabelHe',
-              type: 'text',
-              required: false,
-              defaultValue: 'שטח שימושי',
-              admin: {
-                description: 'Usable area label in Hebrew',
-              },
-            },
-            // Room Details
-            {
-              name: 'roomDetails',
+              name: 'floorPlans',
               type: 'array',
               required: false,
               minRows: 1,
-              maxRows: 20,
+              maxRows: 10,
               admin: {
-                description: 'Add room details with areas',
+                description: 'Floor plans for this villa type',
               },
               fields: [
                 {
-                  name: 'roomNameRo',
-                  type: 'text',
-                  required: false,
-                  admin: {
-                    description: 'Room name in Romanian',
-                  },
-                },
-                {
-                  name: 'roomNameEn',
-                  type: 'text',
-                  required: false,
-                  admin: {
-                    description: 'Room name in English',
-                  },
-                },
-                {
-                  name: 'roomNameHe',
-                  type: 'text',
-                  required: false,
-                  admin: {
-                    description: 'Room name in Hebrew',
-                  },
-                },
-                {
-                  name: 'roomArea',
+                  name: 'order',
                   type: 'number',
                   required: false,
+                  defaultValue: 1,
                   admin: {
-                    description: 'Room area in square meters',
+                    description: 'Display order (1 = first tab, 2 = second tab, etc.)',
                   },
                 },
-              ],
-            },
-            // PDF Download Button
-            {
-              name: 'pdfDownload',
-              type: 'group',
-              fields: [
+                // Floor Name
                 {
-                  name: 'buttonTextRo',
+                  name: 'floorNameRo',
                   type: 'text',
                   required: false,
-                  defaultValue: 'PLAN PARTER CU TERASA',
                   admin: {
-                    description: 'PDF button text in Romanian',
+                    description: 'Floor name in Romanian (e.g., PARTER, ETAJ)',
                   },
                 },
                 {
-                  name: 'buttonTextEn',
+                  name: 'floorNameEn',
                   type: 'text',
                   required: false,
-                  defaultValue: 'GROUND FLOOR PLAN WITH TERRACE',
                   admin: {
-                    description: 'PDF button text in English',
+                    description: 'Floor name in English (e.g., GROUND FLOOR, FLOOR)',
                   },
                 },
                 {
-                  name: 'buttonTextHe',
+                  name: 'floorNameHe',
                   type: 'text',
                   required: false,
-                  defaultValue: 'תוכנית קומת קרקע עם מרפסת',
                   admin: {
-                    description: 'PDF button text in Hebrew',
+                    description: 'Floor name in Hebrew',
                   },
                 },
+                // Floor Plan Image
                 {
-                  name: 'pdfFile',
+                  name: 'floorPlanImage',
                   type: 'upload',
                   relationTo: 'media',
                   required: false,
                   admin: {
-                    description: 'PDF file for download',
+                    description: 'Floor plan image',
                   },
+                },
+                // Floor Plan Image Alt Text
+                {
+                  name: 'floorPlanImageAltRo',
+                  type: 'text',
+                  required: false,
+                  admin: {
+                    description: 'Floor plan image alt text in Romanian',
+                  },
+                },
+                {
+                  name: 'floorPlanImageAltEn',
+                  type: 'text',
+                  required: false,
+                  admin: {
+                    description: 'Floor plan image alt text in English',
+                  },
+                },
+                {
+                  name: 'floorPlanImageAltHe',
+                  type: 'text',
+                  required: false,
+                  admin: {
+                    description: 'Floor plan image alt text in Hebrew',
+                  },
+                },
+                // Built Area
+                {
+                  name: 'builtArea',
+                  type: 'number',
+                  required: false,
+                  admin: {
+                    description: 'Built area in square meters',
+                  },
+                },
+                // Usable Area
+                {
+                  name: 'usableArea',
+                  type: 'number',
+                  required: false,
+                  admin: {
+                    description: 'Usable area in square meters',
+                  },
+                },
+                // Built Area Label
+                {
+                  name: 'builtAreaLabelRo',
+                  type: 'text',
+                  required: false,
+                  defaultValue: 'S.CONSTRUITA',
+                  admin: {
+                    description: 'Built area label in Romanian',
+                  },
+                },
+                {
+                  name: 'builtAreaLabelEn',
+                  type: 'text',
+                  required: false,
+                  defaultValue: 'BUILT AREA',
+                  admin: {
+                    description: 'Built area label in English',
+                  },
+                },
+                {
+                  name: 'builtAreaLabelHe',
+                  type: 'text',
+                  required: false,
+                  defaultValue: 'שטח בנוי',
+                  admin: {
+                    description: 'Built area label in Hebrew',
+                  },
+                },
+                // Usable Area Label
+                {
+                  name: 'usableAreaLabelRo',
+                  type: 'text',
+                  required: false,
+                  defaultValue: 'S.UTILA',
+                  admin: {
+                    description: 'Usable area label in Romanian',
+                  },
+                },
+                {
+                  name: 'usableAreaLabelEn',
+                  type: 'text',
+                  required: false,
+                  defaultValue: 'USABLE AREA',
+                  admin: {
+                    description: 'Usable area label in English',
+                  },
+                },
+                {
+                  name: 'usableAreaLabelHe',
+                  type: 'text',
+                  required: false,
+                  defaultValue: 'שטח שימושי',
+                  admin: {
+                    description: 'Usable area label in Hebrew',
+                  },
+                },
+                // Room Details
+                {
+                  name: 'roomDetails',
+                  type: 'array',
+                  required: false,
+                  minRows: 1,
+                  maxRows: 20,
+                  admin: {
+                    description: 'Add room details with areas',
+                  },
+                  fields: [
+                    {
+                      name: 'roomNameRo',
+                      type: 'text',
+                      required: false,
+                      admin: {
+                        description: 'Room name in Romanian',
+                      },
+                    },
+                    {
+                      name: 'roomNameEn',
+                      type: 'text',
+                      required: false,
+                      admin: {
+                        description: 'Room name in English',
+                      },
+                    },
+                    {
+                      name: 'roomNameHe',
+                      type: 'text',
+                      required: false,
+                      admin: {
+                        description: 'Room name in Hebrew',
+                      },
+                    },
+                    {
+                      name: 'roomArea',
+                      type: 'number',
+                      required: false,
+                      admin: {
+                        description: 'Room area in square meters',
+                      },
+                    },
+                  ],
+                },
+                // PDF Download Button
+                {
+                  name: 'pdfDownload',
+                  type: 'group',
+                  fields: [
+                    {
+                      name: 'buttonTextRo',
+                      type: 'text',
+                      required: false,
+                      defaultValue: 'PLAN PARTER CU TERASA',
+                      admin: {
+                        description: 'PDF button text in Romanian',
+                      },
+                    },
+                    {
+                      name: 'buttonTextEn',
+                      type: 'text',
+                      required: false,
+                      defaultValue: 'GROUND FLOOR PLAN WITH TERRACE',
+                      admin: {
+                        description: 'PDF button text in English',
+                      },
+                    },
+                    {
+                      name: 'buttonTextHe',
+                      type: 'text',
+                      required: false,
+                      defaultValue: 'תוכנית קומת קרקע עם מרפסת',
+                      admin: {
+                        description: 'PDF button text in Hebrew',
+                      },
+                    },
+                    {
+                      name: 'pdfFile',
+                      type: 'upload',
+                      relationTo: 'media',
+                      required: false,
+                      admin: {
+                        description: 'PDF file for download',
+                      },
+                    },
+                  ],
                 },
               ],
             },
           ],
           defaultValue: [
             {
-              order: 1,
-              floorNameRo: 'PARTER',
-              floorNameEn: 'GROUND FLOOR',
-              floorNameHe: 'קומת קרקע',
-              builtArea: 87.0,
-              usableArea: 69.5,
-              builtAreaLabelRo: 'S.CONSTRUITA PARTER',
-              builtAreaLabelEn: 'GROUND FLOOR BUILT AREA',
-              builtAreaLabelHe: 'שטח בנוי קומת קרקע',
-              usableAreaLabelRo: 'S.UTILA PARTER',
-              usableAreaLabelEn: 'GROUND FLOOR USABLE AREA',
-              usableAreaLabelHe: 'שטח שימושי קומת קרקע',
-              roomDetails: [
+              villaType: 'spring',
+              nameRo: 'Vila Primăvară',
+              nameEn: 'Spring Villa',
+              nameHe: 'וילת אביב',
+              floorPlans: [
                 {
-                  roomNameRo: 'HOL + CASA DE SCARA',
-                  roomNameEn: 'HALL + STAIRCASE',
-                  roomNameHe: 'אולם + גרם מדרגות',
-                  roomArea: 11.5,
-                },
-                {
-                  roomNameRo: 'LIVING+DINING',
-                  roomNameEn: 'LIVING+DINING',
-                  roomNameHe: 'סלון+פינת אוכל',
-                  roomArea: 19.5,
-                },
-                {
-                  roomNameRo: 'BUCATARIE',
-                  roomNameEn: 'KITCHEN',
-                  roomNameHe: 'מטבח',
-                  roomArea: 11.0,
-                },
-                {
-                  roomNameRo: 'BIROU',
-                  roomNameEn: 'OFFICE',
-                  roomNameHe: 'משרד',
-                  roomArea: 14.5,
-                },
-                {
-                  roomNameRo: 'BAIE',
-                  roomNameEn: 'BATHROOM',
-                  roomNameHe: 'חדר רחצה',
-                  roomArea: 4.5,
-                },
-                {
-                  roomNameRo: 'CAMERA TEHNICA',
-                  roomNameEn: 'TECHNICAL ROOM',
-                  roomNameHe: 'חדר טכני',
-                  roomArea: 5.5,
-                },
-                {
-                  roomNameRo: 'TERASA',
-                  roomNameEn: 'TERRACE',
-                  roomNameHe: 'מרפסת',
-                  roomArea: 12.5,
+                  order: 1,
+                  floorNameRo: 'PARTER',
+                  floorNameEn: 'GROUND FLOOR',
+                  floorNameHe: 'קומת קרקע',
+                  builtArea: 87.0,
+                  usableArea: 69.5,
+                  builtAreaLabelRo: 'S.CONSTRUITA PARTER',
+                  builtAreaLabelEn: 'GROUND FLOOR BUILT AREA',
+                  builtAreaLabelHe: 'שטח בנוי קומת קרקע',
+                  usableAreaLabelRo: 'S.UTILA PARTER',
+                  usableAreaLabelEn: 'GROUND FLOOR USABLE AREA',
+                  usableAreaLabelHe: 'שטח שימושי קומת קרקע',
+                  roomDetails: [
+                    {
+                      roomNameRo: 'HOL + CASA DE SCARA',
+                      roomNameEn: 'HALL + STAIRCASE',
+                      roomNameHe: 'אולם + גרם מדרגות',
+                      roomArea: 11.5,
+                    },
+                    {
+                      roomNameRo: 'LIVING+DINING',
+                      roomNameEn: 'LIVING+DINING',
+                      roomNameHe: 'סלון+פינת אוכל',
+                      roomArea: 19.5,
+                    },
+                    {
+                      roomNameRo: 'BUCATARIE',
+                      roomNameEn: 'KITCHEN',
+                      roomNameHe: 'מטבח',
+                      roomArea: 11.0,
+                    },
+                    {
+                      roomNameRo: 'BIROU',
+                      roomNameEn: 'OFFICE',
+                      roomNameHe: 'משרד',
+                      roomArea: 14.5,
+                    },
+                    {
+                      roomNameRo: 'BAIE',
+                      roomNameEn: 'BATHROOM',
+                      roomNameHe: 'חדר רחצה',
+                      roomArea: 4.5,
+                    },
+                    {
+                      roomNameRo: 'CAMERA TEHNICA',
+                      roomNameEn: 'TECHNICAL ROOM',
+                      roomNameHe: 'חדר טכני',
+                      roomArea: 5.5,
+                    },
+                    {
+                      roomNameRo: 'TERASA',
+                      roomNameEn: 'TERRACE',
+                      roomNameHe: 'מרפסת',
+                      roomArea: 12.5,
+                    },
+                  ],
+                  pdfDownload: {
+                    buttonTextRo: 'PLAN PARTER CU TERASA 3.5 X 3.5',
+                    buttonTextEn: 'GROUND FLOOR PLAN WITH 3.5 X 3.5 TERRACE',
+                    buttonTextHe: 'תוכנית קומת קרקע עם מרפסת 3.5 X 3.5',
+                  },
                 },
               ],
-              pdfDownload: {
-                buttonTextRo: 'PLAN PARTER CU TERASA 3.5 X 3.5',
-                buttonTextEn: 'GROUND FLOOR PLAN WITH 3.5 X 3.5 TERRACE',
-                buttonTextHe: 'תוכנית קומת קרקע עם מרפסת 3.5 X 3.5',
-              },
+            },
+            {
+              villaType: 'summer',
+              nameRo: 'Vila Vară',
+              nameEn: 'Summer Villa',
+              nameHe: 'וילת קיץ',
+              floorPlans: [],
+            },
+            {
+              villaType: 'autumn',
+              nameRo: 'Vila Toamnă',
+              nameEn: 'Autumn Villa',
+              nameHe: 'וילת סתיו',
+              floorPlans: [],
+            },
+            {
+              villaType: 'winter',
+              nameRo: 'Vila Iarnă',
+              nameEn: 'Winter Villa',
+              nameHe: 'וילת חורף',
+              floorPlans: [],
             },
           ],
         },

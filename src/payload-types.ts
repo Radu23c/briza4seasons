@@ -2200,116 +2200,140 @@ export interface VillaComplexPage {
      */
     sectionDescriptionHe?: string | null;
     /**
-     * Add as many floors as you want (Parter, Etaj1, Etaj2, etc.)
+     * Configure the 4 villa types (Spring, Summer, Autumn, Winter)
      */
-    floorPlans?:
+    villas?:
       | {
           /**
-           * Display order (1 = first tab, 2 = second tab, etc.)
+           * Select the villa season type (each must be unique)
            */
-          order?: number | null;
+          villaType: 'spring' | 'summer' | 'autumn' | 'winter';
           /**
-           * Floor name in Romanian (e.g., PARTER, ETAJ)
+           * Villa name in Romanian
            */
-          floorNameRo?: string | null;
+          nameRo: string;
           /**
-           * Floor name in English (e.g., GROUND FLOOR, FLOOR)
+           * Villa name in English
            */
-          floorNameEn?: string | null;
+          nameEn: string;
           /**
-           * Floor name in Hebrew
+           * Villa name in Hebrew
            */
-          floorNameHe?: string | null;
+          nameHe: string;
           /**
-           * Floor plan image
+           * Floor plans for this villa type
            */
-          floorPlanImage?: (string | null) | Media;
-          /**
-           * Floor plan image alt text in Romanian
-           */
-          floorPlanImageAltRo?: string | null;
-          /**
-           * Floor plan image alt text in English
-           */
-          floorPlanImageAltEn?: string | null;
-          /**
-           * Floor plan image alt text in Hebrew
-           */
-          floorPlanImageAltHe?: string | null;
-          /**
-           * Built area in square meters
-           */
-          builtArea?: number | null;
-          /**
-           * Usable area in square meters
-           */
-          usableArea?: number | null;
-          /**
-           * Built area label in Romanian
-           */
-          builtAreaLabelRo?: string | null;
-          /**
-           * Built area label in English
-           */
-          builtAreaLabelEn?: string | null;
-          /**
-           * Built area label in Hebrew
-           */
-          builtAreaLabelHe?: string | null;
-          /**
-           * Usable area label in Romanian
-           */
-          usableAreaLabelRo?: string | null;
-          /**
-           * Usable area label in English
-           */
-          usableAreaLabelEn?: string | null;
-          /**
-           * Usable area label in Hebrew
-           */
-          usableAreaLabelHe?: string | null;
-          /**
-           * Add room details with areas
-           */
-          roomDetails?:
+          floorPlans?:
             | {
                 /**
-                 * Room name in Romanian
+                 * Display order (1 = first tab, 2 = second tab, etc.)
                  */
-                roomNameRo?: string | null;
+                order?: number | null;
                 /**
-                 * Room name in English
+                 * Floor name in Romanian (e.g., PARTER, ETAJ)
                  */
-                roomNameEn?: string | null;
+                floorNameRo?: string | null;
                 /**
-                 * Room name in Hebrew
+                 * Floor name in English (e.g., GROUND FLOOR, FLOOR)
                  */
-                roomNameHe?: string | null;
+                floorNameEn?: string | null;
                 /**
-                 * Room area in square meters
+                 * Floor name in Hebrew
                  */
-                roomArea?: number | null;
+                floorNameHe?: string | null;
+                /**
+                 * Floor plan image
+                 */
+                floorPlanImage?: (string | null) | Media;
+                /**
+                 * Floor plan image alt text in Romanian
+                 */
+                floorPlanImageAltRo?: string | null;
+                /**
+                 * Floor plan image alt text in English
+                 */
+                floorPlanImageAltEn?: string | null;
+                /**
+                 * Floor plan image alt text in Hebrew
+                 */
+                floorPlanImageAltHe?: string | null;
+                /**
+                 * Built area in square meters
+                 */
+                builtArea?: number | null;
+                /**
+                 * Usable area in square meters
+                 */
+                usableArea?: number | null;
+                /**
+                 * Built area label in Romanian
+                 */
+                builtAreaLabelRo?: string | null;
+                /**
+                 * Built area label in English
+                 */
+                builtAreaLabelEn?: string | null;
+                /**
+                 * Built area label in Hebrew
+                 */
+                builtAreaLabelHe?: string | null;
+                /**
+                 * Usable area label in Romanian
+                 */
+                usableAreaLabelRo?: string | null;
+                /**
+                 * Usable area label in English
+                 */
+                usableAreaLabelEn?: string | null;
+                /**
+                 * Usable area label in Hebrew
+                 */
+                usableAreaLabelHe?: string | null;
+                /**
+                 * Add room details with areas
+                 */
+                roomDetails?:
+                  | {
+                      /**
+                       * Room name in Romanian
+                       */
+                      roomNameRo?: string | null;
+                      /**
+                       * Room name in English
+                       */
+                      roomNameEn?: string | null;
+                      /**
+                       * Room name in Hebrew
+                       */
+                      roomNameHe?: string | null;
+                      /**
+                       * Room area in square meters
+                       */
+                      roomArea?: number | null;
+                      id?: string | null;
+                    }[]
+                  | null;
+                pdfDownload?: {
+                  /**
+                   * PDF button text in Romanian
+                   */
+                  buttonTextRo?: string | null;
+                  /**
+                   * PDF button text in English
+                   */
+                  buttonTextEn?: string | null;
+                  /**
+                   * PDF button text in Hebrew
+                   */
+                  buttonTextHe?: string | null;
+                  /**
+                   * PDF file for download
+                   */
+                  pdfFile?: (string | null) | Media;
+                };
                 id?: string | null;
               }[]
             | null;
-          pdfDownload?: {
-            /**
-             * PDF button text in Romanian
-             */
-            buttonTextRo?: string | null;
-            /**
-             * PDF button text in English
-             */
-            buttonTextEn?: string | null;
-            /**
-             * PDF button text in Hebrew
-             */
-            buttonTextHe?: string | null;
-            /**
-             * PDF file for download
-             */
-            pdfFile?: (string | null) | Media;
-          };
           id?: string | null;
         }[]
       | null;
@@ -2877,41 +2901,50 @@ export interface VillaComplexPageSelect<T extends boolean = true> {
         sectionDescriptionRo?: T;
         sectionDescriptionEn?: T;
         sectionDescriptionHe?: T;
-        floorPlans?:
+        villas?:
           | T
           | {
-              order?: T;
-              floorNameRo?: T;
-              floorNameEn?: T;
-              floorNameHe?: T;
-              floorPlanImage?: T;
-              floorPlanImageAltRo?: T;
-              floorPlanImageAltEn?: T;
-              floorPlanImageAltHe?: T;
-              builtArea?: T;
-              usableArea?: T;
-              builtAreaLabelRo?: T;
-              builtAreaLabelEn?: T;
-              builtAreaLabelHe?: T;
-              usableAreaLabelRo?: T;
-              usableAreaLabelEn?: T;
-              usableAreaLabelHe?: T;
-              roomDetails?:
+              villaType?: T;
+              nameRo?: T;
+              nameEn?: T;
+              nameHe?: T;
+              floorPlans?:
                 | T
                 | {
-                    roomNameRo?: T;
-                    roomNameEn?: T;
-                    roomNameHe?: T;
-                    roomArea?: T;
+                    order?: T;
+                    floorNameRo?: T;
+                    floorNameEn?: T;
+                    floorNameHe?: T;
+                    floorPlanImage?: T;
+                    floorPlanImageAltRo?: T;
+                    floorPlanImageAltEn?: T;
+                    floorPlanImageAltHe?: T;
+                    builtArea?: T;
+                    usableArea?: T;
+                    builtAreaLabelRo?: T;
+                    builtAreaLabelEn?: T;
+                    builtAreaLabelHe?: T;
+                    usableAreaLabelRo?: T;
+                    usableAreaLabelEn?: T;
+                    usableAreaLabelHe?: T;
+                    roomDetails?:
+                      | T
+                      | {
+                          roomNameRo?: T;
+                          roomNameEn?: T;
+                          roomNameHe?: T;
+                          roomArea?: T;
+                          id?: T;
+                        };
+                    pdfDownload?:
+                      | T
+                      | {
+                          buttonTextRo?: T;
+                          buttonTextEn?: T;
+                          buttonTextHe?: T;
+                          pdfFile?: T;
+                        };
                     id?: T;
-                  };
-              pdfDownload?:
-                | T
-                | {
-                    buttonTextRo?: T;
-                    buttonTextEn?: T;
-                    buttonTextHe?: T;
-                    pdfFile?: T;
                   };
               id?: T;
             };

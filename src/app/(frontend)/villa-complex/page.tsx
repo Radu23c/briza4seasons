@@ -75,6 +75,38 @@ function transformPayloadImages(payloadImages: any[]): AboutImage[] {
   })
 }
 
+// Helper function to transform villa floor plans - NEW VERSION
+function transformVillaFloorPlans(payloadVillas: any[]): any[] {
+  if (!payloadVillas || !Array.isArray(payloadVillas)) return []
+
+  // Ensure villas are in the correct order (spring, summer, autumn, winter)
+  const villaOrder = ['spring', 'summer', 'autumn', 'winter'] as const
+
+  const sortedVillas = villaOrder.map((season) => {
+    const villa = payloadVillas.find((v) => v.villaType === season)
+    if (!villa) {
+      // Return a default villa structure if missing
+      return {
+        key: season,
+        nameRo: `Vila ${season.charAt(0).toUpperCase() + season.slice(1)}`,
+        nameEn: `${season.charAt(0).toUpperCase() + season.slice(1)} Villa`,
+        nameHe: `וילת ${season}`,
+        floorPlans: [],
+      }
+    }
+
+    return {
+      key: season,
+      nameRo: villa.nameRo,
+      nameEn: villa.nameEn,
+      nameHe: villa.nameHe,
+      floorPlans: transformFloorPlans(villa.floorPlans || []),
+    }
+  })
+
+  return sortedVillas
+}
+
 // Helper function to transform Payload floor plans
 function transformFloorPlans(payloadFloorPlans: any[]): any[] {
   if (!payloadFloorPlans || !Array.isArray(payloadFloorPlans)) return []
@@ -89,6 +121,12 @@ function transformFloorPlans(payloadFloorPlans: any[]): any[] {
       descriptionRo: nullToUndefined(floorPlan.descriptionRo),
       descriptionEn: nullToUndefined(floorPlan.descriptionEn),
       descriptionHe: nullToUndefined(floorPlan.descriptionHe),
+      pdfDownload: floorPlan.pdfDownload
+        ? {
+            ...floorPlan.pdfDownload,
+            pdfFile: transformMediaToObject(floorPlan.pdfDownload.pdfFile),
+          }
+        : undefined,
       id: nullToUndefined(floorPlan.id),
     }
   })
@@ -129,9 +167,9 @@ function transformContentParagraphs(paragraphs: any[] | undefined): any[] {
 
   return paragraphs.map((paragraph) => ({
     ...paragraph,
-    textRo: nullToUndefined(paragraph.textRo),
-    textEn: nullToUndefined(paragraph.textEn),
-    textHe: nullToUndefined(paragraph.textHe),
+    textRo: nullToUndefined(paragraph.paragraphRo), // Note: mapping paragraphRo to textRo
+    textEn: nullToUndefined(paragraph.paragraphEn), // Note: mapping paragraphEn to textEn
+    textHe: nullToUndefined(paragraph.paragraphHe), // Note: mapping paragraphHe to textHe
     id: nullToUndefined(paragraph.id),
   }))
 }
@@ -175,12 +213,20 @@ function VillaComplexPageSkeleton() {
         </div>
       </section>
 
-      {/* Floor Plans Skeleton */}
+      {/* Villa Selection Skeleton */}
       <section className="py-16 lg:py-24 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <div className="h-12 bg-gray-200 rounded w-80 mx-auto mb-4 animate-pulse"></div>
             <div className="h-6 bg-gray-200 rounded w-96 mx-auto animate-pulse"></div>
+          </div>
+          {/* Villa Selection Skeleton */}
+          <div className="flex justify-center mb-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {[1, 2, 3, 4].map((i) => (
+                <div key={i} className="h-16 bg-gray-300 rounded-xl w-32 animate-pulse"></div>
+              ))}
+            </div>
           </div>
           <div className="flex justify-center mb-12">
             <div className="flex space-x-8 bg-gray-100 rounded-lg p-2">
@@ -273,7 +319,7 @@ async function VillaComplexPageContent() {
         },
         floorPlansSection: {
           isActive: false,
-          floorPlans: [],
+          villas: [],
         },
         facilitiesSection: {
           isActive: false,
@@ -336,10 +382,10 @@ async function VillaComplexPageContent() {
             />
           )}
 
-        {/* Floor Plans Section - ABOVE FACILITIES */}
+        {/* Floor Plans Section with Villa Selection - ABOVE FACILITIES */}
         {villaComplexData?.floorPlansSection?.isActive &&
-          villaComplexData.floorPlansSection.floorPlans?.length &&
-          villaComplexData.floorPlansSection.floorPlans.length > 0 && (
+          villaComplexData.floorPlansSection.villas?.length &&
+          villaComplexData.floorPlansSection.villas.length > 0 && (
             <FloorPlansSection
               sectionTitleRo={ensureString(villaComplexData.floorPlansSection.sectionTitleRo)}
               sectionTitleEn={ensureString(villaComplexData.floorPlansSection.sectionTitleEn)}
@@ -356,7 +402,7 @@ async function VillaComplexPageContent() {
               sectionDescriptionHe={ensureString(
                 villaComplexData.floorPlansSection.sectionDescriptionHe,
               )}
-              floorPlans={transformFloorPlans(villaComplexData.floorPlansSection.floorPlans)}
+              villas={transformVillaFloorPlans(villaComplexData.floorPlansSection.villas)}
             />
           )}
 
