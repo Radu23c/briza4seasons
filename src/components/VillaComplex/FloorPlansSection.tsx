@@ -26,11 +26,7 @@ interface FloorPlan {
   floorPlanImageAltRo?: string
   floorPlanImageAltEn?: string
   floorPlanImageAltHe?: string
-  builtArea: number
   usableArea: number
-  builtAreaLabelRo: string
-  builtAreaLabelEn: string
-  builtAreaLabelHe: string
   usableAreaLabelRo: string
   usableAreaLabelEn: string
   usableAreaLabelHe: string
@@ -127,12 +123,6 @@ const FloorPlansSection: React.FC<FloorPlansSectionProps> = ({
     ro: currentFloorPlan.floorPlanImageAltRo || `Floor plan ${activeFloor + 1}`,
     en: currentFloorPlan.floorPlanImageAltEn || `Floor plan ${activeFloor + 1}`,
     he: currentFloorPlan.floorPlanImageAltHe || `Floor plan ${activeFloor + 1}`,
-  })
-
-  const builtAreaLabel = t({
-    ro: currentFloorPlan.builtAreaLabelRo,
-    en: currentFloorPlan.builtAreaLabelEn,
-    he: currentFloorPlan.builtAreaLabelHe,
   })
 
   const usableAreaLabel = t({
@@ -284,12 +274,6 @@ const FloorPlansSection: React.FC<FloorPlansSectionProps> = ({
             <div className={currentLanguage === 'he' ? 'lg:order-2' : ''}>
               {/* Area Information */}
               <div className="mb-8">
-                <div className="flex items-center justify-between mb-4 pb-4 border-b border-gray-200">
-                  <span className="text-gray-900 font-semibold text-lg">{builtAreaLabel}</span>
-                  <span className="text-2xl font-bold text-gray-900">
-                    {currentFloorPlan.builtArea.toFixed(2)} MP
-                  </span>
-                </div>
                 <div className="flex items-center justify-between mb-6 pb-4 border-b border-gray-200">
                   <span className="text-gray-900 font-semibold text-lg">{usableAreaLabel}</span>
                   <span className="text-2xl font-bold text-gray-900">

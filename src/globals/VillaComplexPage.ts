@@ -549,15 +549,6 @@ export const VillaComplexPage: GlobalConfig = {
                     description: 'Floor plan image alt text in Hebrew',
                   },
                 },
-                // Built Area
-                {
-                  name: 'builtArea',
-                  type: 'number',
-                  required: false,
-                  admin: {
-                    description: 'Built area in square meters',
-                  },
-                },
                 // Usable Area
                 {
                   name: 'usableArea',
@@ -565,34 +556,6 @@ export const VillaComplexPage: GlobalConfig = {
                   required: false,
                   admin: {
                     description: 'Usable area in square meters',
-                  },
-                },
-                // Built Area Label
-                {
-                  name: 'builtAreaLabelRo',
-                  type: 'text',
-                  required: false,
-                  defaultValue: 'S.CONSTRUITA',
-                  admin: {
-                    description: 'Built area label in Romanian',
-                  },
-                },
-                {
-                  name: 'builtAreaLabelEn',
-                  type: 'text',
-                  required: false,
-                  defaultValue: 'BUILT AREA',
-                  admin: {
-                    description: 'Built area label in English',
-                  },
-                },
-                {
-                  name: 'builtAreaLabelHe',
-                  type: 'text',
-                  required: false,
-                  defaultValue: 'שטח בנוי',
-                  admin: {
-                    description: 'Built area label in Hebrew',
                   },
                 },
                 // Usable Area Label
@@ -726,11 +689,7 @@ export const VillaComplexPage: GlobalConfig = {
                   floorNameRo: 'PARTER',
                   floorNameEn: 'GROUND FLOOR',
                   floorNameHe: 'קומת קרקע',
-                  builtArea: 87.0,
                   usableArea: 69.5,
-                  builtAreaLabelRo: 'S.CONSTRUITA PARTER',
-                  builtAreaLabelEn: 'GROUND FLOOR BUILT AREA',
-                  builtAreaLabelHe: 'שטח בנוי קומת קרקע',
                   usableAreaLabelRo: 'S.UTILA PARTER',
                   usableAreaLabelEn: 'GROUND FLOOR USABLE AREA',
                   usableAreaLabelHe: 'שטח שימושי קומת קרקע',

@@ -2258,25 +2258,9 @@ export interface VillaComplexPage {
                  */
                 floorPlanImageAltHe?: string | null;
                 /**
-                 * Built area in square meters
-                 */
-                builtArea?: number | null;
-                /**
                  * Usable area in square meters
                  */
                 usableArea?: number | null;
-                /**
-                 * Built area label in Romanian
-                 */
-                builtAreaLabelRo?: string | null;
-                /**
-                 * Built area label in English
-                 */
-                builtAreaLabelEn?: string | null;
-                /**
-                 * Built area label in Hebrew
-                 */
-                builtAreaLabelHe?: string | null;
                 /**
                  * Usable area label in Romanian
                  */
@@ -2919,11 +2903,7 @@ export interface VillaComplexPageSelect<T extends boolean = true> {
                     floorPlanImageAltRo?: T;
                     floorPlanImageAltEn?: T;
                     floorPlanImageAltHe?: T;
-                    builtArea?: T;
                     usableArea?: T;
-                    builtAreaLabelRo?: T;
-                    builtAreaLabelEn?: T;
-                    builtAreaLabelHe?: T;
                     usableAreaLabelRo?: T;
                     usableAreaLabelEn?: T;
                     usableAreaLabelHe?: T;
