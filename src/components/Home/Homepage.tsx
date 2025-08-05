@@ -358,7 +358,6 @@ const Homepage: React.FC<HomepageProps> = ({ data }) => {
           descriptionHe={data.imageGallerySection.descriptionHe}
           images={data.imageGallerySection.images}
           enableLightbox={data.imageGallerySection.enableLightbox}
-          dateDisplayFormat={data.imageGallerySection.dateDisplayFormat}
         />
       )}
     </div>
