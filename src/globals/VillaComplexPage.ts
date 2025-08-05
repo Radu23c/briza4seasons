@@ -467,6 +467,31 @@ export const VillaComplexPage: GlobalConfig = {
                 description: 'Villa name in Hebrew',
               },
             },
+            // Villa Description - NEW ADDITION
+            {
+              name: 'descriptionRo',
+              type: 'textarea',
+              required: false,
+              admin: {
+                description: 'Villa description in Romanian',
+              },
+            },
+            {
+              name: 'descriptionEn',
+              type: 'textarea',
+              required: false,
+              admin: {
+                description: 'Villa description in English',
+              },
+            },
+            {
+              name: 'descriptionHe',
+              type: 'textarea',
+              required: false,
+              admin: {
+                description: 'Villa description in Hebrew',
+              },
+            },
             // Floor Plans for this specific villa
             {
               name: 'floorPlans',
@@ -701,6 +726,12 @@ export const VillaComplexPage: GlobalConfig = {
               nameRo: 'Vila Primăvară',
               nameEn: 'Spring Villa',
               nameHe: 'וילת אביב',
+              descriptionRo:
+                'Vila Primăvară oferă un design fresh și luminos, inspirat de renașterea naturii. Cu finisaje în tonuri pastelate și spații generoase, această vilă este perfectă pentru familiile care doresc să se bucure de confortul modern într-un cadru elegant.',
+              descriptionEn:
+                "Spring Villa offers a fresh and bright design, inspired by nature's rebirth. With pastel-toned finishes and generous spaces, this villa is perfect for families who want to enjoy modern comfort in an elegant setting.",
+              descriptionHe:
+                'וילת האביב מציעה עיצוב רענן ובהיר, בהשראת התחדשות הטבע. עם גימורים בגוני פסטל וחללים נדיבים, וילה זו מושלמת למשפחות שרוצות ליהנות מנוחות מודרנית במסגרת אלגנטית.',
               floorPlans: [
                 {
                   order: 1,
@@ -769,6 +800,12 @@ export const VillaComplexPage: GlobalConfig = {
               nameRo: 'Vila Vară',
               nameEn: 'Summer Villa',
               nameHe: 'וילת קיץ',
+              descriptionRo:
+                'Vila Vară aduce căldura și energia sezonului estival în designul său vibrant. Cu accente în culori calde și spații deschise care invită la relaxare, această vilă este ideală pentru cei care iubesc luminozitatea și atmosfera de vacanță.',
+              descriptionEn:
+                'Summer Villa brings the warmth and energy of the summer season into its vibrant design. With warm color accents and open spaces that invite relaxation, this villa is ideal for those who love brightness and vacation atmosphere.',
+              descriptionHe:
+                'וילת הקיץ מביאה את החום והאנרגיה של עונת הקיץ לעיצוב התוסס שלה. עם הדגשות צבע חמות וחללים פתוחים המזמינים להירגעות, וילה זו אידיאלית לאלה שאוהבים בהירות ואווירת חופשה.',
               floorPlans: [],
             },
             {
@@ -776,6 +813,12 @@ export const VillaComplexPage: GlobalConfig = {
               nameRo: 'Vila Toamnă',
               nameEn: 'Autumn Villa',
               nameHe: 'וילת סתיו',
+              descriptionRo:
+                'Vila Toamnă îmbină eleganța cu căldura, folosind o paletă de culori inspirată din frumusețea toamnei. Cu materiale naturale și o atmosferă primitoare, această vilă oferă un refugiu perfect pentru momentele de liniște și contemplare.',
+              descriptionEn:
+                "Autumn Villa combines elegance with warmth, using a color palette inspired by autumn's beauty. With natural materials and a welcoming atmosphere, this villa offers a perfect refuge for moments of peace and contemplation.",
+              descriptionHe:
+                'וילת הסתיו משלבת אלגנטיות עם חמימות, תוך שימוש בפלטת צבעים בהשראת יופי הסתיו. עם חומרים טבעיים ואווירה מזמינה, וילה זו מציעה מקלט מושלם לרגעים של שקט והתבוננות.',
               floorPlans: [],
             },
             {
@@ -783,6 +826,12 @@ export const VillaComplexPage: GlobalConfig = {
               nameRo: 'Vila Iarnă',
               nameEn: 'Winter Villa',
               nameHe: 'וילת חורף',
+              descriptionRo:
+                'Vila Iarnă creează o oază de confort și eleganță rafinată. Cu un design sofisticat în tonuri neutre și accente luxoase, această vilă oferă un spațiu intim și cald, perfect pentru cei care apreciază liniștea și stilul contemporan.',
+              descriptionEn:
+                'Winter Villa creates an oasis of comfort and refined elegance. With sophisticated design in neutral tones and luxurious accents, this villa offers an intimate and warm space, perfect for those who appreciate tranquility and contemporary style.',
+              descriptionHe:
+                'וילת החורף יוצרת נווה מדבר של נוחות ואלגנטיות מעודנת. עם עיצוב מתוחכם בגוונים ניטרליים והדגשות יוקרתיות, וילה זו מציעה חלל אינטימי וחם, מושלם לאלה שמעריכים שלווה וסגנון עכשווי.',
               floorPlans: [],
             },
           ],

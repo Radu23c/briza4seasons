@@ -86,6 +86,9 @@ function transformVillaFloorPlans(payloadVillas: any[]): any[] {
         nameRo: `Vila ${season.charAt(0).toUpperCase() + season.slice(1)}`,
         nameEn: `${season.charAt(0).toUpperCase() + season.slice(1)} Villa`,
         nameHe: `וילת ${season}`,
+        descriptionRo: undefined,
+        descriptionEn: undefined,
+        descriptionHe: undefined,
         floorPlans: [],
       }
     }
@@ -94,6 +97,9 @@ function transformVillaFloorPlans(payloadVillas: any[]): any[] {
       nameRo: villa.nameRo,
       nameEn: villa.nameEn,
       nameHe: villa.nameHe,
+      descriptionRo: nullToUndefined(villa.descriptionRo),
+      descriptionEn: nullToUndefined(villa.descriptionEn),
+      descriptionHe: nullToUndefined(villa.descriptionHe),
       floorPlans: transformFloorPlans(villa.floorPlans || []),
     }
   })

@@ -2221,6 +2221,18 @@ export interface VillaComplexPage {
            */
           nameHe: string;
           /**
+           * Villa description in Romanian
+           */
+          descriptionRo?: string | null;
+          /**
+           * Villa description in English
+           */
+          descriptionEn?: string | null;
+          /**
+           * Villa description in Hebrew
+           */
+          descriptionHe?: string | null;
+          /**
            * Floor plans for this villa type
            */
           floorPlans?:
@@ -2904,6 +2916,9 @@ export interface VillaComplexPageSelect<T extends boolean = true> {
               nameRo?: T;
               nameEn?: T;
               nameHe?: T;
+              descriptionRo?: T;
+              descriptionEn?: T;
+              descriptionHe?: T;
               floorPlans?:
                 | T
                 | {
