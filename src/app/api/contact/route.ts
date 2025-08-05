@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
     // Send email using Resend
     const data = await resend.emails.send({
       from: 'Contact Form <onboarding@resend.dev>', // Use Resend's default sender for now
-      to: ['cristea.radu23@gmail.com'],
+      to: ['blissimobiliare@briza4seasons.ro'],
       subject: `New contact form submission from ${nume}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">

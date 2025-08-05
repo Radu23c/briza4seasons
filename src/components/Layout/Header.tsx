@@ -100,7 +100,7 @@ const Header: React.FC = () => {
       labelRo: 'Contact telefonic:',
       labelEn: 'Phone contact:',
       labelHe: 'יצירת קשר טלפונית:',
-      value: '+40 751 116 116',
+      value: '+40 729 005 624',
     },
   }
 

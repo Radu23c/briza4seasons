@@ -38,13 +38,13 @@ const Footer: React.FC = () => {
         en: 'Phone contact:',
         he: 'יצירת קשר טלפונית:',
       },
-      phone: '+40 751 116 116',
+      phone: '+40 729 005 624',
       emailLabel: {
         ro: 'Email:',
         en: 'Email:',
         he: 'אימייל:',
       },
-      email: 'contact@briza4seasons.ro',
+      email: 'blissimobiliare@briza4seasons.ro',
     },
     legal: {
       terms: {

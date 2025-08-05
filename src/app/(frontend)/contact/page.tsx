@@ -404,10 +404,10 @@ function ContactForm() {
                     </svg>
                   </div>
                   <a
-                    href="tel:+40751116116"
+                    href="tel:+40729005624"
                     className="text-gray-700 hover:text-amber-600 transition-colors duration-200"
                   >
-                    +40 751 116 116
+                    +40 729 005 624
                   </a>
                 </div>
 
@@ -430,10 +430,10 @@ function ContactForm() {
                     </svg>
                   </div>
                   <a
-                    href="mailto:contact@iorga45.ro"
+                    href="mailto:blissimobiliare@briza4seasons.ro"
                     className="text-gray-700 hover:text-amber-600 transition-colors duration-200"
                   >
-                    contact@iorga45.ro
+                    blissimobiliare@briza4seasons.ro
                   </a>
                 </div>
               </div>
@@ -514,10 +514,10 @@ function ContactHero() {
             </div>
             <h3 className="text-lg font-semibold text-gray-800 mb-3">{t.phone}</h3>
             <a
-              href="tel:+40751116116"
+              href="tel:+40729005624"
               className="text-gray-600 hover:text-amber-600 transition-colors duration-200"
             >
-              +40 751 116 116
+              +40 729 005 624
             </a>
           </div>
 
@@ -540,7 +540,7 @@ function ContactHero() {
             </div>
             <h3 className="text-lg font-semibold text-gray-800 mb-3">{t.email}</h3>
             <a
-              href="mailto:contact@iorga45.ro"
+              href="blissimobiliare@briza4seasons.ro"
               className="text-gray-600 hover:text-amber-600 transition-colors duration-200"
             >
               blissimobiliare@briza4seasons.ro

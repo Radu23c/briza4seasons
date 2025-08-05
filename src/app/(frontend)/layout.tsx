@@ -2,9 +2,11 @@ import type React from 'react'
 import type { Metadata } from 'next'
 import { Inter, Playfair_Display } from 'next/font/google'
 import { LanguageProvider } from '@/app/contexts/LanguageContext'
+import { CookieProvider } from '@/components/CookieProvider'
 import LanguageToggle from '@/components/LanguageToggle'
 import Header from '@/components/Layout/Header'
 import Footer from '@/components/Layout/Footer'
+import Analytics from '@/components/Analytics'
 import './globals.css'
 
 // Configure the fonts with Next.js optimization
@@ -33,12 +35,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ro" className={`${inter.variable} ${playfairDisplay.variable}`}>
       <body className={inter.className}>
-        <LanguageProvider>
-          <Header />
-          {/* Add top padding to account for fixed header */}
-          <main className="">{children}</main>
-          <Footer />
-        </LanguageProvider>
+        <CookieProvider>
+          <LanguageProvider>
+            <Header />
+            {/* Add top padding to account for fixed header */}
+            <main className="">{children}</main>
+            <Footer />
+            {/* Analytics component - only loads when cookies are accepted */}
+            <Analytics />
+          </LanguageProvider>
+        </CookieProvider>
       </body>
     </html>
   )

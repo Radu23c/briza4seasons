@@ -1,10 +1,12 @@
+// app/page.tsx - Complete Homepage Implementation
 import { getPayloadHMR } from '@payloadcms/next/utilities'
 import configPromise from '@payload-config'
 import Homepage from '@/components/Home/Homepage'
+import CookieConsent from '@/components/CookieConsent'
 import { Suspense } from 'react'
 import type { Homepage as HomepageType } from '@/payload-types'
 
-// Single loading component for entire homepage
+// Complete loading skeleton for entire homepage
 function HomepageSkeleton() {
   return (
     <div className="min-h-screen">
@@ -155,7 +157,7 @@ function HomepageSkeleton() {
 
 // Helper function to convert Payload data to component-expected format
 function convertHomepageData(payloadData: HomepageType): any {
-  // Define defaults
+  // Define comprehensive defaults for all sections
   const defaults = {
     heroSection: {
       isActive: true,
@@ -168,9 +170,9 @@ function convertHomepageData(payloadData: HomepageType): any {
         textHe: 'קבעו ביקור',
         link: '/contact',
       },
-      projectNameRo: 'Ansamblul de vile Torga45',
-      projectNameEn: 'Torga45 Villa Complex',
-      projectNameHe: 'מתחם וילות טורגה45',
+      projectNameRo: 'Ansamblul de vile Briza4Seasons',
+      projectNameEn: 'Briza4Seasons Villa Complex',
+      projectNameHe: 'מתחם וילות בריזה4עונות',
       projectSubtitleRo: '',
       projectSubtitleEn: '',
       projectSubtitleHe: '',
@@ -178,9 +180,9 @@ function convertHomepageData(payloadData: HomepageType): any {
     },
     featuresSection: {
       isActive: false,
-      projectNameRo: 'Torga45',
-      projectNameEn: 'Torga45',
-      projectNameHe: 'טורגה45',
+      projectNameRo: 'Briza4Seasons',
+      projectNameEn: 'Briza4Seasons',
+      projectNameHe: 'בריזה4עונות',
       villaCount: 25,
       villaCountTextRo: 'VILE',
       villaCountTextEn: 'VILLAS',
@@ -349,9 +351,9 @@ function createDefaultHomepageData(): HomepageType {
         textHe: 'קבעו ביקור',
         link: '/contact',
       },
-      projectNameRo: 'Ansamblul de vile Torga45',
-      projectNameEn: 'Torga45 Villa Complex',
-      projectNameHe: 'מתחם וילות טורגה45',
+      projectNameRo: 'Ansamblul de vile Briza4Seasons',
+      projectNameEn: 'Briza4Seasons Villa Complex',
+      projectNameHe: 'מתחם וילות בריזה4עונות',
       projectSubtitleRo: '',
       projectSubtitleEn: '',
       projectSubtitleHe: '',
@@ -359,9 +361,9 @@ function createDefaultHomepageData(): HomepageType {
     },
     featuresSection: {
       isActive: false,
-      projectNameRo: 'Torga45',
-      projectNameEn: 'Torga45',
-      projectNameHe: 'טורגה45',
+      projectNameRo: 'Briza4Seasons',
+      projectNameEn: 'Briza4Seasons',
+      projectNameHe: 'בריזה4עונות',
       villaCount: 25,
       villaCountTextRo: 'VILE',
       villaCountTextEn: 'VILLAS',
@@ -466,6 +468,7 @@ function createDefaultHomepageData(): HomepageType {
   }
 }
 
+// Main content component that fetches data
 async function HomepageContent() {
   try {
     const payload = await getPayloadHMR({ config: configPromise })
@@ -475,22 +478,53 @@ async function HomepageContent() {
     })
 
     if (!homepageData) {
-      return <Homepage data={convertHomepageData(createDefaultHomepageData())} />
+      console.log('No homepage data found, using defaults')
+      return (
+        <>
+          <Homepage data={convertHomepageData(createDefaultHomepageData())} />
+          <CookieConsent />
+        </>
+      )
     }
 
-    return <Homepage data={convertHomepageData(homepageData)} />
+    console.log('Homepage data loaded successfully')
+    return (
+      <>
+        <Homepage data={convertHomepageData(homepageData)} />
+        <CookieConsent />
+      </>
+    )
   } catch (error) {
     console.error('Error fetching homepage data:', error)
 
     // Return safe fallback on error using the same structure
-    return <Homepage data={convertHomepageData(createDefaultHomepageData())} />
+    return (
+      <>
+        <Homepage data={convertHomepageData(createDefaultHomepageData())} />
+        <CookieConsent />
+      </>
+    )
   }
 }
 
+// Main page component with Suspense wrapper
 export default function HomePage() {
   return (
     <Suspense fallback={<HomepageSkeleton />}>
       <HomepageContent />
     </Suspense>
   )
+}
+
+// Metadata for SEO
+export const metadata = {
+  title: 'Briza4Seasons - Ansamblul de Vile Premium',
+  description:
+    'Descoperă ansamblul de vile Briza4Seasons - locuințe premium în mijlocul naturii. Programează o vizită astăzi!',
+  keywords: 'vile, Briza4Seasons, complex rezidențial, premium, natură',
+  openGraph: {
+    title: 'Briza4Seasons Villa Complex',
+    description: 'Premium residential complex in the heart of nature',
+    type: 'website',
+  },
 }
