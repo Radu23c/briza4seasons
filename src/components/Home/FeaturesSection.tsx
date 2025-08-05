@@ -59,7 +59,7 @@ const FeaturesSection: React.FC<FeaturesSectionProps> = ({
   detailsTextHe,
   exteriorImage,
   interiorImage,
-  detailsLink = '/details',
+  detailsLink = '/about',
 }) => {
   const { t, currentLanguage } = useLanguage()
 

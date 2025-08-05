@@ -218,7 +218,7 @@ export const FeaturesSection: CollectionConfig = {
       name: 'detailsLink',
       type: 'text',
       required: false,
-      defaultValue: '/details',
+      defaultValue: '/about',
       admin: {
         description: 'Link for the details section (optional)',
       },

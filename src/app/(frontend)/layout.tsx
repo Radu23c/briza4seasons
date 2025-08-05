@@ -34,7 +34,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="ro" className={`${inter.variable} ${playfairDisplay.variable}`}>
       <body className={inter.className}>
         <LanguageProvider>
-          <LanguageToggle />
           <Header />
           {/* Add top padding to account for fixed header */}
           <main className="">{children}</main>

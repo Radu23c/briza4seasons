@@ -29,9 +29,9 @@ const Footer: React.FC = () => {
         he: 'כתובת:',
       },
       address: {
-        ro: 'Strada Nicolae Iorga 45, Tunari',
-        en: 'Nicolae Iorga Street 45, Tunari',
-        he: 'רחוב ניקולאה יורגה 45, טונארי',
+        ro: '23 August Otopeni, Bucuresti / Ilfov',
+        en: '23 August Otopeni, Bucuresti / Ilfov',
+        he: '23 אוגוסט אוטופני, בוקרשט / אילפוב',
       },
       phoneLabel: {
         ro: 'Contact telefonic:',
@@ -44,7 +44,7 @@ const Footer: React.FC = () => {
         en: 'Email:',
         he: 'אימייל:',
       },
-      email: 'contact@iorga45.ro',
+      email: 'contact@briza4seasons.ro',
     },
     legal: {
       terms: {
@@ -117,7 +117,7 @@ const Footer: React.FC = () => {
                   className="text-4xl font-light text-[#D4B896] mb-4"
                   style={{ fontFamily: 'serif' }}
                 >
-                  Iorga45
+                  Briza4Seasons
                 </h3>
                 <p className="text-gray-400 text-lg leading-relaxed">
                   {currentLanguage === 'ro' && 'Proprietăți premium în inima Tunari'}
@@ -285,7 +285,7 @@ const Footer: React.FC = () => {
         <div className="container mx-auto px-4 max-w-7xl">
           <div className={`text-center ${currentLanguage === 'he' ? 'text-right' : 'text-left'}`}>
             <p className="text-gray-400 text-sm leading-relaxed">
-              ©Iorga45 {currentYear}.{' '}
+              ©Briza4Seasons {currentYear}.{' '}
               {t({
                 ro: footerContent.copyright.ro,
                 en: footerContent.copyright.en,

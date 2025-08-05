@@ -1,6 +1,123 @@
 'use client'
 
 import { Suspense, useState } from 'react'
+import { useLanguage } from '@/app/contexts/LanguageContext'
+
+// Translations object
+const translations = {
+  ro: {
+    // Hero Section
+    contactUs: 'Contactează-ne',
+    heroSubtitle: 'SUNTEM AICI PENTRU TINE',
+
+    // Contact Cards
+    address: 'Adresa',
+    phone: 'Telefon',
+    email: 'Email',
+
+    // Form Section
+    sendMessage: 'Trimiteți-ne un mesaj!',
+    formDescription:
+      'Orice întrebare ați avea, suntem siguri că avem un răspuns sau o soluție pentru dumneavoastră.',
+
+    // Form Fields
+    name: 'NUME',
+    emailField: 'EMAIL',
+    phoneField: 'TELEFON',
+    message: 'MESAJ',
+    send: 'TRIMITEȚI',
+    sending: 'TRIMITERE...',
+
+    // Status Messages
+    successMessage: 'Mesajul a fost trimis cu succes! Vă vom contacta în curând.',
+    errorMessage: 'A apărut o eroare. Vă rugăm să încercați din nou.',
+    connectionError: 'A apărut o eroare de conexiune. Vă rugăm să încercați din nou.',
+
+    // Representative Section
+    talkToRep: 'Discutați cu un reprezentant',
+    showLargerMap: 'Afișați harta mărită',
+
+    // Address
+    fullAddress: '23 August, Otopeni',
+    cityRegion: 'București / Ilfov',
+    postalCode: '075100',
+  },
+
+  en: {
+    // Hero Section
+    contactUs: 'Contact Us',
+    heroSubtitle: 'WE ARE HERE FOR YOU',
+
+    // Contact Cards
+    address: 'Address',
+    phone: 'Phone',
+    email: 'Email',
+
+    // Form Section
+    sendMessage: 'Send us a message!',
+    formDescription:
+      'Whatever question you have, we are sure we have an answer or solution for you.',
+
+    // Form Fields
+    name: 'NAME',
+    emailField: 'EMAIL',
+    phoneField: 'PHONE',
+    message: 'MESSAGE',
+    send: 'SEND',
+    sending: 'SENDING...',
+
+    // Status Messages
+    successMessage: 'Message sent successfully! We will contact you soon.',
+    errorMessage: 'An error occurred. Please try again.',
+    connectionError: 'A connection error occurred. Please try again.',
+
+    // Representative Section
+    talkToRep: 'Talk to a representative',
+    showLargerMap: 'Show larger map',
+
+    // Address
+    fullAddress: '23 August, Otopeni',
+    cityRegion: 'Bucharest / Ilfov',
+    postalCode: '075100',
+  },
+
+  he: {
+    // Hero Section
+    contactUs: 'צור קשר',
+    heroSubtitle: 'אנחנו כאן בשבילך',
+
+    // Contact Cards
+    address: 'כתובת',
+    phone: 'טלפון',
+    email: 'אימייל',
+
+    // Form Section
+    sendMessage: 'שלח לנו הודעה!',
+    formDescription: 'איזו שאלה שיש לך, אנחנו בטוחים שיש לנו תשובה או פתרון עבורך.',
+
+    // Form Fields
+    name: 'שם',
+    emailField: 'אימייל',
+    phoneField: 'טלפון',
+    message: 'הודעה',
+    send: 'שלח',
+    sending: 'שולח...',
+
+    // Status Messages
+    successMessage: 'ההודעה נשלחה בהצלחה! ניצור איתך קשר בקרוב.',
+    errorMessage: 'אירעה שגיאה. אנא נסה שוב.',
+    connectionError: 'אירעה שגיאת חיבור. אנא נסה שוב.',
+
+    // Representative Section
+    talkToRep: 'דבר עם נציג',
+    showLargerMap: 'הצג מפה מוגדלת',
+
+    // Address
+    fullAddress: '23 אוגוסט, אוטופיני',
+    cityRegion: 'בוקרשט / איילפוב',
+    postalCode: '075100',
+  },
+}
 
 // Loading skeleton for Contact page
 function ContactPageSkeleton() {
@@ -34,6 +151,10 @@ function ContactPageSkeleton() {
 
 // Contact Form Component
 function ContactForm() {
+  const { currentLanguage } = useLanguage()
+  const t = translations[currentLanguage]
+  const isRTL = currentLanguage === 'he'
+
   const [formData, setFormData] = useState({
     nume: '',
     email: '',
@@ -78,7 +199,7 @@ function ContactForm() {
       if (response.ok) {
         setSubmitStatus({
           type: 'success',
-          message: 'Mesajul a fost trimis cu succes! Vă vom contacta în curând.',
+          message: t.successMessage,
         })
         // Reset form
         setFormData({
@@ -90,13 +211,13 @@ function ContactForm() {
       } else {
         setSubmitStatus({
           type: 'error',
-          message: result.error || 'A apărut o eroare. Vă rugăm să încercați din nou.',
+          message: result.error || t.errorMessage,
         })
       }
     } catch (error) {
       setSubmitStatus({
         type: 'error',
-        message: 'A apărut o eroare de conexiune. Vă rugăm să încercați din nou.',
+        message: t.connectionError,
       })
     } finally {
       setIsSubmitting(false)
@@ -104,7 +225,10 @@ function ContactForm() {
   }
 
   return (
-    <section className="py-16 lg:py-24 bg-gray-50">
+    <section
+      className={`py-16 lg:py-24 bg-gray-50 ${isRTL ? 'rtl' : 'ltr'}`}
+      dir={isRTL ? 'rtl' : 'ltr'}
+    >
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-start">
@@ -112,12 +236,9 @@ function ContactForm() {
             <div>
               <div className="mb-8">
                 <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-                  Trimiteți-ne un mesaj!
+                  {t.sendMessage}
                 </h2>
-                <p className="text-gray-600 text-lg">
-                  Orice întrebare ați avea, suntem siguri că avem un răspuns sau o soluție pentru
-                  dumneavoastră.
-                </p>
+                <p className="text-gray-600 text-lg">{t.formDescription}</p>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-6">
@@ -138,12 +259,12 @@ function ContactForm() {
                   <input
                     type="text"
                     name="nume"
-                    placeholder="NUME"
+                    placeholder={t.name}
                     value={formData.nume}
                     onChange={handleInputChange}
                     required
                     disabled={isSubmitting}
-                    className="w-full px-4 py-4 border-b-2 border-gray-200 bg-transparent focus:border-amber-500 focus:outline-none transition-colors duration-300 text-gray-900 placeholder-gray-500 text-lg disabled:opacity-50"
+                    className={`w-full px-4 py-4 border-b-2 border-gray-200 bg-transparent focus:border-amber-500 focus:outline-none transition-colors duration-300 text-gray-900 placeholder-gray-500 text-lg disabled:opacity-50 ${isRTL ? 'text-right' : 'text-left'}`}
                   />
                 </div>
 
@@ -151,12 +272,12 @@ function ContactForm() {
                   <input
                     type="email"
                     name="email"
-                    placeholder="EMAIL"
+                    placeholder={t.emailField}
                     value={formData.email}
                     onChange={handleInputChange}
                     required
                     disabled={isSubmitting}
-                    className="w-full px-4 py-4 border-b-2 border-gray-200 bg-transparent focus:border-amber-500 focus:outline-none transition-colors duration-300 text-gray-900 placeholder-gray-500 text-lg disabled:opacity-50"
+                    className={`w-full px-4 py-4 border-b-2 border-gray-200 bg-transparent focus:border-amber-500 focus:outline-none transition-colors duration-300 text-gray-900 placeholder-gray-500 text-lg disabled:opacity-50 ${isRTL ? 'text-right' : 'text-left'}`}
                   />
                 </div>
 
@@ -164,25 +285,25 @@ function ContactForm() {
                   <input
                     type="tel"
                     name="telefon"
-                    placeholder="TELEFON"
+                    placeholder={t.phoneField}
                     value={formData.telefon}
                     onChange={handleInputChange}
                     required
                     disabled={isSubmitting}
-                    className="w-full px-4 py-4 border-b-2 border-gray-200 bg-transparent focus:border-amber-500 focus:outline-none transition-colors duration-300 text-gray-900 placeholder-gray-500 text-lg disabled:opacity-50"
+                    className={`w-full px-4 py-4 border-b-2 border-gray-200 bg-transparent focus:border-amber-500 focus:outline-none transition-colors duration-300 text-gray-900 placeholder-gray-500 text-lg disabled:opacity-50 ${isRTL ? 'text-right' : 'text-left'}`}
                   />
                 </div>
 
                 <div>
                   <textarea
                     name="mesaj"
-                    placeholder="MESAJ"
+                    placeholder={t.message}
                     value={formData.mesaj}
                     onChange={handleInputChange}
                     required
                     rows={6}
                     disabled={isSubmitting}
-                    className="w-full px-4 py-4 border-b-2 border-gray-200 bg-transparent focus:border-amber-500 focus:outline-none transition-colors duration-300 text-gray-900 placeholder-gray-500 text-lg resize-none disabled:opacity-50"
+                    className={`w-full px-4 py-4 border-b-2 border-gray-200 bg-transparent focus:border-amber-500 focus:outline-none transition-colors duration-300 text-gray-900 placeholder-gray-500 text-lg resize-none disabled:opacity-50 ${isRTL ? 'text-right' : 'text-left'}`}
                   />
                 </div>
 
@@ -214,10 +335,10 @@ function ContactForm() {
                             d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                           ></path>
                         </svg>
-                        TRIMITERE...
+                        {t.sending}
                       </>
                     ) : (
-                      'TRIMITEȚI'
+                      t.send
                     )}
                   </button>
                 </div>
@@ -226,37 +347,37 @@ function ContactForm() {
 
             {/* Right Side - Representative Section */}
             <div className="bg-white rounded-lg p-8 shadow-lg">
-              <h3 className="text-3xl font-bold text-gray-900 mb-6">
-                Discutați cu un reprezentant
-              </h3>
+              <h3 className="text-3xl font-bold text-gray-900 mb-6">{t.talkToRep}</h3>
 
               {/* Map Section */}
               <div className="mb-8">
                 <div className="bg-gray-100 rounded-lg p-4 mb-4">
                   <div className="flex items-center justify-between mb-2">
-                    <h4 className="font-semibold text-gray-900">Strada Nicolae Iorga 45</h4>
+                    <h4 className="font-semibold text-gray-900">{t.fullAddress}</h4>
                   </div>
                   <p className="text-gray-600 text-sm mb-3">
-                    Strada Nicolae Iorga 45, Tunari
+                    {t.fullAddress}
                     <br />
-                    077180
+                    {t.cityRegion}
+                    <br />
+                    {t.postalCode}
                   </p>
                   <button className="text-amber-600 hover:text-amber-700 text-sm font-medium transition-colors duration-200">
-                    Afișați harta mărită
+                    {t.showLargerMap}
                   </button>
                 </div>
 
-                {/* Embedded Map Placeholder */}
+                {/* Embedded Map - Updated for Otopeni location */}
                 <div className="aspect-[4/3] bg-gray-200 rounded-lg overflow-hidden">
                   <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2843.5!2d26.0826!3d44.5675!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b1ff4770b5b5b5%3A0x5!2sStrada%20Nicolae%20Iorga%2045%2C%20Tunari%2C%20Ilfov!5e0!3m2!1sen!2sro!4v1642684800000!5m2!1sen!2sro"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2846.123456789!2d26.056789!3d44.553456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b201a0a0a0a0a0%3A0x1234567890abcdef!2s23%20August%2C%20Otopeni%2C%20Ilfov%2C%20Romania!5e0!3m2!1sen!2sro!4v1642684800000!5m2!1sen!2sro"
                     width="100%"
                     height="100%"
                     style={{ border: 0 }}
                     allowFullScreen
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
-                    title="Locația Torga45"
+                    title="Locația 23 August Otopeni"
                     className="rounded-lg"
                   />
                 </div>
@@ -264,7 +385,9 @@ function ContactForm() {
 
               {/* Contact Info */}
               <div className="space-y-4">
-                <div className="flex items-center space-x-3">
+                <div
+                  className={`flex items-center space-x-3 ${isRTL ? 'flex-row-reverse space-x-reverse' : ''}`}
+                >
                   <div className="w-8 h-8 bg-amber-500 rounded-full flex items-center justify-center">
                     <svg
                       className="w-4 h-4 text-white"
@@ -288,7 +411,9 @@ function ContactForm() {
                   </a>
                 </div>
 
-                <div className="flex items-center space-x-3">
+                <div
+                  className={`flex items-center space-x-3 ${isRTL ? 'flex-row-reverse space-x-reverse' : ''}`}
+                >
                   <div className="w-8 h-8 bg-amber-500 rounded-full flex items-center justify-center">
                     <svg
                       className="w-4 h-4 text-white"
@@ -300,7 +425,7 @@ function ContactForm() {
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         strokeWidth={2}
-                        d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 002 2z"
+                        d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                       />
                     </svg>
                   </div>
@@ -319,10 +444,16 @@ function ContactForm() {
     </section>
   )
 }
+
 function ContactHero() {
+  const { currentLanguage } = useLanguage()
+  const t = translations[currentLanguage]
+  const isRTL = currentLanguage === 'he'
+
   return (
     <section
-      className="relative min-h-[80vh] flex items-center justify-center bg-cover bg-center bg-no-repeat"
+      className={`relative min-h-[80vh] flex items-center justify-center bg-cover bg-center bg-no-repeat ${isRTL ? 'rtl' : 'ltr'}`}
+      dir={isRTL ? 'rtl' : 'ltr'}
       style={{
         backgroundImage: "url('/images/contact-hero-bg.jpg')",
       }}
@@ -333,8 +464,8 @@ function ContactHero() {
       <div className="relative z-10 container mx-auto px-4">
         {/* Hero Content */}
         <div className="text-center text-white mb-16">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">Contactează-ne</h1>
-          <p className="text-xl md:text-2xl font-light opacity-90">SUNTEM AICI PENTRU TINE</p>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">{t.contactUs}</h1>
+          <p className="text-xl md:text-2xl font-light opacity-90">{t.heroSubtitle}</p>
         </div>
 
         {/* Contact Cards */}
@@ -356,8 +487,12 @@ function ContactHero() {
                 />
               </svg>
             </div>
-            <h3 className="text-lg font-semibold text-gray-800 mb-3">Adresa</h3>
-            <p className="text-gray-600 leading-relaxed">Str. Nicolae Iorga 45, Tunari</p>
+            <h3 className="text-lg font-semibold text-gray-800 mb-3">{t.address}</h3>
+            <p className="text-gray-600 leading-relaxed">
+              {t.fullAddress}
+              <br />
+              {t.cityRegion}
+            </p>
           </div>
 
           {/* Phone Card */}
@@ -377,7 +512,7 @@ function ContactHero() {
                 />
               </svg>
             </div>
-            <h3 className="text-lg font-semibold text-gray-800 mb-3">Telefon</h3>
+            <h3 className="text-lg font-semibold text-gray-800 mb-3">{t.phone}</h3>
             <a
               href="tel:+40751116116"
               className="text-gray-600 hover:text-amber-600 transition-colors duration-200"
@@ -403,7 +538,7 @@ function ContactHero() {
                 />
               </svg>
             </div>
-            <h3 className="text-lg font-semibold text-gray-800 mb-3">Email</h3>
+            <h3 className="text-lg font-semibold text-gray-800 mb-3">{t.email}</h3>
             <a
               href="mailto:contact@iorga45.ro"
               className="text-gray-600 hover:text-amber-600 transition-colors duration-200"

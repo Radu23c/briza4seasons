@@ -1,13 +1,13 @@
 'use client'
-
 import type React from 'react'
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useLanguage } from '@/app/contexts/LanguageContext'
 import { usePathname } from 'next/navigation'
+import LanguageToggle from '../LanguageToggle'
 
 const Header: React.FC = () => {
-  const { t, currentLanguage } = useLanguage()
+  const { t, currentLanguage, setLanguage } = useLanguage()
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const pathname = usePathname()
@@ -41,19 +41,19 @@ const Header: React.FC = () => {
       labelRo: 'VILE COMPLEX',
       labelEn: 'VILLA COMPLEX',
       labelHe: 'מתחם וילות',
-      href: '/villa-complex', // Changed from "/vile-complex"
+      href: '/villa-complex',
     },
     {
       labelRo: 'LOCALIZARE',
       labelEn: 'LOCATION',
       labelHe: 'מיקום',
-      href: '/location', // Changed from "/localizare"
+      href: '/location',
     },
     {
       labelRo: 'GALERIE FOTO',
       labelEn: 'PHOTO GALLERY',
       labelHe: 'גלריית תמונות',
-      href: '/gallery', // Changed from "/galerie-foto"
+      href: '/gallery',
     },
     {
       labelRo: 'CONTACT',
@@ -69,9 +69,9 @@ const Header: React.FC = () => {
       labelRo: 'Adresa:',
       labelEn: 'Address:',
       labelHe: 'כתובת:',
-      valueRo: 'Str. Nicolae Iorga 45, Tunari',
-      valueEn: 'Nicolae Iorga Street 45, Tunari',
-      valueHe: 'רחוב ניקולאה יורגה 45, טונארי',
+      valueRo: '23 August Otopeni, Bucuresti / Ilfov',
+      valueEn: '23 August Otopeni, Bucuresti / Ilfov',
+      valueHe: '23 אוגוסט אוטופני, בוקרשט / אילפוב',
     },
     phone: {
       labelRo: 'Contact telefonic:',
@@ -83,9 +83,9 @@ const Header: React.FC = () => {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
-      {/* Top Header Section - Full width white background */}
+      {/* Top Header Section - Full width white background with higher z-index */}
       <div
-        className={`bg-white w-full border-b border-gray-100 transition-all duration-500 ease-in-out overflow-hidden ${
+        className={`bg-white w-full border-b border-gray-100 transition-all duration-500 ease-in-out overflow-hidden relative z-60 ${
           isScrolled ? 'max-h-0 opacity-0 -translate-y-full' : 'max-h-32 opacity-100 translate-y-0'
         }`}
       >
@@ -101,10 +101,9 @@ const Header: React.FC = () => {
                 href="/"
                 className="font-elegant text-2xl sm:text-3xl lg:text-4xl text-gray-900 hover:text-[#D4B896] transition-colors duration-300"
               >
-                Iorga45
+                Briza4Seasons
               </Link>
             </div>
-
             {/* Contact Information - Hidden on mobile */}
             <div
               className={`hidden md:flex items-center space-x-4 lg:space-x-8 xl:space-x-12 ${
@@ -139,7 +138,6 @@ const Header: React.FC = () => {
                   </div>
                 </div>
               </div>
-
               {/* Phone */}
               <div
                 className={`flex items-center space-x-2 lg:space-x-3 ${
@@ -170,16 +168,20 @@ const Header: React.FC = () => {
                 </div>
               </div>
             </div>
+            {/* Language Toggle - Always visible with highest z-index */}
+            <div className={`relative z-70 ${currentLanguage === 'he' ? 'order-3' : 'order-3'}`}>
+              <LanguageToggle />
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Navigation Bar - Centered container with rounded corners */}
-      <div className="flex justify-center px-4 sm:px-6 lg:px-8">
+      {/* Navigation Bar - Full width on mobile, centered container with rounded corners on desktop */}
+      <div className="lg:flex lg:justify-center lg:px-4 lg:px-6 xl:px-8 relative z-40">
         <nav
-          className={`bg-gray-800 text-white transition-all duration-500 ease-in-out rounded-b-lg shadow-lg ${
+          className={`bg-gray-800 text-white transition-all duration-500 ease-in-out shadow-lg ${
             isScrolled ? 'shadow-xl' : ''
-          } w-full max-w-5xl`}
+          } w-full lg:max-w-5xl lg:rounded-b-lg`}
         >
           <div className="px-4 sm:px-6 lg:px-8 py-4 lg:py-6">
             {/* Desktop Navigation */}
@@ -195,9 +197,7 @@ const Header: React.FC = () => {
                     en: item.labelEn,
                     he: item.labelHe,
                   })
-
                   const isActive = pathname === item.href || (pathname === '/' && item.href === '/')
-
                   return (
                     <Link
                       key={index}
@@ -227,8 +227,13 @@ const Header: React.FC = () => {
                 {/* Mobile Logo (shown when top header is hidden) */}
                 <div className={`${isScrolled ? 'block' : 'hidden'}`}>
                   <Link href="/" className="font-elegant text-xl text-[#D4B896]">
-                    Iorga45
+                    Briza4Seasons
                   </Link>
+                </div>
+
+                {/* Mobile Language Toggle (when header is scrolled) - with higher z-index */}
+                <div className={`${isScrolled ? 'block' : 'hidden'} mr-2 relative z-70`}>
+                  <LanguageToggle />
                 </div>
 
                 {/* Mobile menu button */}
@@ -257,7 +262,7 @@ const Header: React.FC = () => {
                 </button>
               </div>
 
-              {/* Mobile menu dropdown */}
+              {/* Mobile menu dropdown - REMOVED language toggle from here */}
               <div
                 className={`mt-4 transition-all duration-300 ease-in-out overflow-hidden ${
                   isMobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
@@ -270,10 +275,8 @@ const Header: React.FC = () => {
                       en: item.labelEn,
                       he: item.labelHe,
                     })
-
                     const isActive =
                       pathname === item.href || (pathname === '/' && item.href === '/')
-
                     return (
                       <Link
                         key={index}
@@ -306,9 +309,7 @@ const Header: React.FC = () => {
                     en: item.labelEn,
                     he: item.labelHe,
                   })
-
                   const isActive = pathname === item.href || (pathname === '/' && item.href === '/')
-
                   return (
                     <Link
                       key={index}
