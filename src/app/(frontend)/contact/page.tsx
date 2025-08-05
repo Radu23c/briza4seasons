@@ -455,7 +455,7 @@ function ContactHero() {
       className={`relative min-h-[80vh] flex items-center justify-center bg-cover bg-center bg-no-repeat ${isRTL ? 'rtl' : 'ltr'}`}
       dir={isRTL ? 'rtl' : 'ltr'}
       style={{
-        backgroundImage: "url('/media/home-hero-bg.jpg')",
+        backgroundImage: "url('/images/home-hero-bg.jpg')",
       }}
     >
       {/* Background Overlay */}
