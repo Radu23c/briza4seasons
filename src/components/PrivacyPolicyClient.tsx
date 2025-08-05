@@ -1,6 +1,7 @@
 // app/(frontend)/cookie-policy/PrivacyPolicyClient.tsx
 'use client'
 
+import Link from 'next/link'
 import { useLanguage } from '@/app/contexts/LanguageContext'
 
 const privacyContent = {
@@ -241,10 +242,10 @@ const privacyContent = {
       },
     ],
   },
-}
+} as const
 
 export default function PrivacyPolicyClient() {
-  const { language, currentLanguage } = useLanguage()
+  const { currentLanguage } = useLanguage()
   const content =
     privacyContent[currentLanguage as keyof typeof privacyContent] || privacyContent.ro
   const isRTL = currentLanguage === 'he'
@@ -286,7 +287,7 @@ export default function PrivacyPolicyClient() {
                   <p className="text-gray-700 leading-relaxed mb-4">{section.content}</p>
 
                   {/* List Items */}
-                  {section.list && (
+                  {'list' in section && section.list && (
                     <ul className="space-y-3 mb-6">
                       {section.list.map((item, itemIndex) => (
                         <li key={itemIndex} className="flex items-start space-x-3">
@@ -298,14 +299,14 @@ export default function PrivacyPolicyClient() {
                   )}
 
                   {/* Additional Content */}
-                  {section.additional && (
+                  {'additional' in section && section.additional && (
                     <p className="text-gray-600 italic bg-gray-50 p-4 rounded-lg border-l-4 border-[#D4B896]">
                       {section.additional}
                     </p>
                   )}
 
                   {/* Contact Information */}
-                  {section.contact && (
+                  {'contact' in section && section.contact && (
                     <div className="bg-[#D4B896]/10 p-6 rounded-lg border border-[#D4B896]/20">
                       <div className="space-y-3">
                         <div className="flex items-center space-x-3">
@@ -342,7 +343,7 @@ export default function PrivacyPolicyClient() {
 
             {/* Back to Home Button */}
             <div className="mt-12 pt-8 border-t border-gray-200 text-center">
-              <a
+              <Link
                 href="/"
                 className="inline-block bg-[#D4B896] hover:bg-[#c9a87d] text-black px-8 py-3 rounded-sm transition-all duration-300 font-medium hover:shadow-lg transform hover:scale-105"
               >
@@ -351,7 +352,7 @@ export default function PrivacyPolicyClient() {
                   : currentLanguage === 'en'
                     ? 'Back to Homepage'
                     : 'חזרה לעמוד הבית'}
-              </a>
+              </Link>
             </div>
           </div>
         </div>

@@ -33,7 +33,7 @@ const cookieTexts = {
 export default function CookieConsent() {
   const [showConsent, setShowConsent] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
-  const { language, currentLanguage } = useLanguage()
+  const { currentLanguage } = useLanguage()
 
   useEffect(() => {
     // Check if user has already made a choice
@@ -82,7 +82,7 @@ export default function CookieConsent() {
 
   if (!showConsent) return null
 
-  const currentTexts = cookieTexts[language as keyof typeof cookieTexts] || cookieTexts.ro
+  const currentTexts = cookieTexts[currentLanguage as keyof typeof cookieTexts] || cookieTexts.ro
   const isRTL = currentLanguage === 'he'
 
   return (
