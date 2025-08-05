@@ -143,7 +143,6 @@ export const VillaComplexPage: GlobalConfig = {
         },
       ],
     },
-
     // VILLA COMPLEX CONTENT SECTION
     {
       name: 'villaComplexContentSection',
@@ -321,7 +320,6 @@ export const VillaComplexPage: GlobalConfig = {
         },
       ],
     },
-
     // FLOOR PLANS SECTION WITH VILLA SELECTION - ABOVE FACILITIES
     {
       name: 'floorPlansSection',
@@ -469,15 +467,6 @@ export const VillaComplexPage: GlobalConfig = {
                 description: 'Villa name in Hebrew',
               },
             },
-            // NEW: Disable villa button
-            {
-              name: 'isDisabled',
-              type: 'checkbox',
-              defaultValue: false,
-              admin: {
-                description: 'Disable this villa button (shows "Coming Soon")',
-              },
-            },
             // Floor Plans for this specific villa
             {
               name: 'floorPlans',
@@ -523,7 +512,7 @@ export const VillaComplexPage: GlobalConfig = {
                     description: 'Floor name in Hebrew',
                   },
                 },
-                // UPDATED: Multiple Floor Plan Images instead of single image
+                // CHANGED: Multiple Floor Plan Images instead of single image
                 {
                   name: 'floorPlanImages',
                   type: 'array',
@@ -531,7 +520,7 @@ export const VillaComplexPage: GlobalConfig = {
                   minRows: 1,
                   maxRows: 10,
                   admin: {
-                    description: 'Multiple floor plan images for this floor (slideable)',
+                    description: 'Multiple floor plan images for this floor',
                   },
                   fields: [
                     {
@@ -573,7 +562,7 @@ export const VillaComplexPage: GlobalConfig = {
                       required: false,
                       defaultValue: 1,
                       admin: {
-                        description: 'Display order in image slider (1 = first, 2 = second, etc.)',
+                        description: 'Image display order',
                       },
                     },
                   ],
@@ -712,47 +701,17 @@ export const VillaComplexPage: GlobalConfig = {
               nameRo: 'Vila Primăvară',
               nameEn: 'Spring Villa',
               nameHe: 'וילת אביב',
-              isDisabled: true, // Disabled by default
-              floorPlans: [],
-            },
-            {
-              villaType: 'summer',
-              nameRo: 'Vila Vară',
-              nameEn: 'Summer Villa',
-              nameHe: 'וילת קיץ',
-              isDisabled: true, // Disabled by default
-              floorPlans: [],
-            },
-            {
-              villaType: 'autumn',
-              nameRo: 'Vila Toamnă',
-              nameEn: 'Autumn Villa',
-              nameHe: 'וילת סתיו',
-              isDisabled: false, // Only autumn is enabled
               floorPlans: [
                 {
                   order: 1,
                   floorNameRo: 'PARTER',
                   floorNameEn: 'GROUND FLOOR',
                   floorNameHe: 'קומת קרקע',
-                  floorPlanImages: [
-                    {
-                      order: 1,
-                      altTextRo: 'Plan parter vila toamnă - vedere generală',
-                      altTextEn: 'Autumn villa ground floor plan - general view',
-                      altTextHe: 'תוכנית קומת קרקע וילת סתיו - מבט כללי',
-                    },
-                    {
-                      order: 2,
-                      altTextRo: 'Plan parter vila toamnă - detalii cotare',
-                      altTextEn: 'Autumn villa ground floor plan - detailed dimensions',
-                      altTextHe: 'תוכנית קומת קרקע וילת סתיו - מידות מפורטות',
-                    },
-                  ],
                   usableArea: 69.5,
                   usableAreaLabelRo: 'S.UTILA PARTER',
                   usableAreaLabelEn: 'GROUND FLOOR USABLE AREA',
                   usableAreaLabelHe: 'שטח שימושי קומת קרקע',
+                  floorPlanImages: [],
                   roomDetails: [
                     {
                       roomNameRo: 'HOL + CASA DE SCARA',
@@ -806,18 +765,30 @@ export const VillaComplexPage: GlobalConfig = {
               ],
             },
             {
+              villaType: 'summer',
+              nameRo: 'Vila Vară',
+              nameEn: 'Summer Villa',
+              nameHe: 'וילת קיץ',
+              floorPlans: [],
+            },
+            {
+              villaType: 'autumn',
+              nameRo: 'Vila Toamnă',
+              nameEn: 'Autumn Villa',
+              nameHe: 'וילת סתיו',
+              floorPlans: [],
+            },
+            {
               villaType: 'winter',
               nameRo: 'Vila Iarnă',
               nameEn: 'Winter Villa',
               nameHe: 'וילת חורף',
-              isDisabled: true, // Disabled by default
               floorPlans: [],
             },
           ],
         },
       ],
     },
-
     // FACILITIES SECTION - BELOW FLOOR PLANS
     {
       name: 'facilitiesSection',

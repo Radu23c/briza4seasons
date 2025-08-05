@@ -2221,10 +2221,6 @@ export interface VillaComplexPage {
            */
           nameHe: string;
           /**
-           * Disable this villa button (shows "Coming Soon")
-           */
-          isDisabled?: boolean | null;
-          /**
            * Floor plans for this villa type
            */
           floorPlans?:
@@ -2246,7 +2242,7 @@ export interface VillaComplexPage {
                  */
                 floorNameHe?: string | null;
                 /**
-                 * Multiple floor plan images for this floor (slideable)
+                 * Multiple floor plan images for this floor
                  */
                 floorPlanImages?:
                   | {
@@ -2267,7 +2263,7 @@ export interface VillaComplexPage {
                        */
                       altTextHe?: string | null;
                       /**
-                       * Display order in image slider (1 = first, 2 = second, etc.)
+                       * Image display order
                        */
                       order?: number | null;
                       id?: string | null;
@@ -2908,7 +2904,6 @@ export interface VillaComplexPageSelect<T extends boolean = true> {
               nameRo?: T;
               nameEn?: T;
               nameHe?: T;
-              isDisabled?: T;
               floorPlans?:
                 | T
                 | {

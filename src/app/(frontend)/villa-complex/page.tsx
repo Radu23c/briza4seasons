@@ -25,14 +25,12 @@ interface AboutImage {
 // General helper function to transform any Media field to MediaObject
 function transformMediaToObject(media: string | Media | { url: string } | null | undefined): any {
   if (!media) return undefined
-
   if (typeof media === 'string') {
     return {
       url: media,
       alt: '',
     }
   }
-
   // Handle simple objects with just url
   if (media && typeof media === 'object' && 'url' in media && !('id' in media)) {
     return {
@@ -40,7 +38,6 @@ function transformMediaToObject(media: string | Media | { url: string } | null |
       alt: '',
     }
   }
-
   return {
     url: (media as Media).url || '/images/default-image.jpg',
     alt: (media as Media).alt || '',
@@ -55,14 +52,13 @@ function nullToUndefined<T>(value: T | null): T | undefined {
 }
 
 // Helper function to ensure required string fields have fallback values
-function ensureString(value: string | null | undefined, fallback: string = ''): string {
+function ensureString(value: string | null | undefined, fallback = ''): string {
   return value || fallback
 }
 
 // Helper function to transform Payload images to AboutImage format
 function transformPayloadImages(payloadImages: any[]): AboutImage[] {
   if (!payloadImages || !Array.isArray(payloadImages)) return []
-
   return payloadImages.map((item) => {
     return {
       image: transformMediaToObject(item.image),
@@ -75,13 +71,12 @@ function transformPayloadImages(payloadImages: any[]): AboutImage[] {
   })
 }
 
-// Helper function to transform villa floor plans - NEW VERSION
+// UPDATED: Helper function to transform villa floor plans with multiple images
 function transformVillaFloorPlans(payloadVillas: any[]): any[] {
   if (!payloadVillas || !Array.isArray(payloadVillas)) return []
 
   // Ensure villas are in the correct order (spring, summer, autumn, winter)
   const villaOrder = ['spring', 'summer', 'autumn', 'winter'] as const
-
   const sortedVillas = villaOrder.map((season) => {
     const villa = payloadVillas.find((v) => v.villaType === season)
     if (!villa) {
@@ -94,7 +89,6 @@ function transformVillaFloorPlans(payloadVillas: any[]): any[] {
         floorPlans: [],
       }
     }
-
     return {
       key: season,
       nameRo: villa.nameRo,
@@ -103,24 +97,22 @@ function transformVillaFloorPlans(payloadVillas: any[]): any[] {
       floorPlans: transformFloorPlans(villa.floorPlans || []),
     }
   })
-
   return sortedVillas
 }
 
-// Helper function to transform Payload floor plans
+// UPDATED: Helper function to transform Payload floor plans with multiple images
 function transformFloorPlans(payloadFloorPlans: any[]): any[] {
   if (!payloadFloorPlans || !Array.isArray(payloadFloorPlans)) return []
-
   return payloadFloorPlans.map((floorPlan) => {
     return {
       ...floorPlan,
-      floorPlanImage: transformMediaToObject(floorPlan.floorPlanImage),
-      floorPlanImageAltRo: nullToUndefined(floorPlan.floorPlanImageAltRo),
-      floorPlanImageAltEn: nullToUndefined(floorPlan.floorPlanImageAltEn),
-      floorPlanImageAltHe: nullToUndefined(floorPlan.floorPlanImageAltHe),
-      descriptionRo: nullToUndefined(floorPlan.descriptionRo),
-      descriptionEn: nullToUndefined(floorPlan.descriptionEn),
-      descriptionHe: nullToUndefined(floorPlan.descriptionHe),
+      // Transform multiple images instead of single image
+      floorPlanImages: transformFloorPlanImages(floorPlan.floorPlanImages || []),
+      usableArea: floorPlan.usableArea || 0,
+      usableAreaLabelRo: nullToUndefined(floorPlan.usableAreaLabelRo),
+      usableAreaLabelEn: nullToUndefined(floorPlan.usableAreaLabelEn),
+      usableAreaLabelHe: nullToUndefined(floorPlan.usableAreaLabelHe),
+      roomDetails: floorPlan.roomDetails || [],
       pdfDownload: floorPlan.pdfDownload
         ? {
             ...floorPlan.pdfDownload,
@@ -132,10 +124,23 @@ function transformFloorPlans(payloadFloorPlans: any[]): any[] {
   })
 }
 
+// NEW: Helper function to transform floor plan images array
+function transformFloorPlanImages(payloadImages: any[]): any[] {
+  if (!payloadImages || !Array.isArray(payloadImages)) return []
+  return payloadImages.map((imageItem) => {
+    return {
+      image: transformMediaToObject(imageItem.image),
+      altTextRo: nullToUndefined(imageItem.altTextRo),
+      altTextEn: nullToUndefined(imageItem.altTextEn),
+      altTextHe: nullToUndefined(imageItem.altTextHe),
+      order: imageItem.order || 1,
+    }
+  })
+}
+
 // Helper function to transform Payload facilities
 function transformFacilities(payloadFacilities: any[]): any[] {
   if (!payloadFacilities || !Array.isArray(payloadFacilities)) return []
-
   return payloadFacilities.map((facility) => {
     return {
       ...facility,
@@ -150,7 +155,6 @@ function transformFacilities(payloadFacilities: any[]): any[] {
 // Helper function to transform breadcrumbs - FIXED VERSION
 function transformBreadcrumbs(breadcrumbs: any[] | null | undefined): any[] {
   if (!breadcrumbs || !Array.isArray(breadcrumbs)) return []
-
   return breadcrumbs.map((crumb) => ({
     ...crumb,
     labelRo: nullToUndefined(crumb.labelRo),
@@ -164,7 +168,6 @@ function transformBreadcrumbs(breadcrumbs: any[] | null | undefined): any[] {
 // Helper function to transform content paragraphs
 function transformContentParagraphs(paragraphs: any[] | undefined): any[] {
   if (!paragraphs) return []
-
   return paragraphs.map((paragraph) => ({
     ...paragraph,
     textRo: nullToUndefined(paragraph.paragraphRo), // Note: mapping paragraphRo to textRo
@@ -192,7 +195,6 @@ function VillaComplexPageSkeleton() {
           </div>
         </div>
       </section>
-
       {/* Content Skeleton */}
       <section className="py-16 lg:py-24 bg-white">
         <div className="container mx-auto px-4">
@@ -212,7 +214,6 @@ function VillaComplexPageSkeleton() {
           </div>
         </div>
       </section>
-
       {/* Villa Selection Skeleton */}
       <section className="py-16 lg:py-24 bg-white">
         <div className="container mx-auto px-4">
@@ -249,7 +250,6 @@ function VillaComplexPageSkeleton() {
           </div>
         </div>
       </section>
-
       {/* Facilities Skeleton - BELOW FLOOR PLANS */}
       <section className="py-16 lg:py-24 bg-gray-100">
         <div className="container mx-auto px-4">
@@ -278,7 +278,6 @@ function VillaComplexPageSkeleton() {
 async function VillaComplexPageContent() {
   try {
     const payload = await getPayloadHMR({ config: configPromise })
-
     const villaComplexData = await payload.findGlobal({
       slug: 'villa-complex-page',
     })
@@ -434,7 +433,6 @@ async function VillaComplexPageContent() {
     )
   } catch (error) {
     console.error('Error fetching villa complex data:', error)
-
     // Return safe fallback on error
     const fallbackData = {
       heroSection: {
@@ -464,7 +462,6 @@ async function VillaComplexPageContent() {
         ],
       },
     }
-
     return (
       <div>
         <AboutUsHero {...fallbackData.heroSection} />

@@ -3,18 +3,12 @@
 import type React from 'react'
 import { useState } from 'react'
 import Image from 'next/image'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { useLanguage } from '@/app/contexts/LanguageContext'
 
 interface MediaObject {
   url: string
   alt?: string
-}
-
-interface RoomDetail {
-  roomNameRo: string
-  roomNameEn: string
-  roomNameHe: string
-  roomArea: number
 }
 
 interface FloorPlanImage {
@@ -25,12 +19,19 @@ interface FloorPlanImage {
   order: number
 }
 
+interface RoomDetail {
+  roomNameRo: string
+  roomNameEn: string
+  roomNameHe: string
+  roomArea: number
+}
+
 interface FloorPlan {
   order: number
   floorNameRo: string
   floorNameEn: string
   floorNameHe: string
-  floorPlanImages: FloorPlanImage[]
+  floorPlanImages?: FloorPlanImage[]
   usableArea: number
   usableAreaLabelRo: string
   usableAreaLabelEn: string
@@ -50,7 +51,6 @@ interface Villa {
   nameEn: string
   nameHe: string
   floorPlans: FloorPlan[]
-  isDisabled?: boolean
 }
 
 interface FloorPlansSectionProps {
@@ -79,19 +79,9 @@ const FloorPlansSection: React.FC<FloorPlansSectionProps> = ({
   villas,
 }) => {
   const { t, currentLanguage } = useLanguage()
-
-  // Find autumn villa index and set it as default, or find first enabled villa
-  const getDefaultVillaIndex = () => {
-    const autumnIndex = villas.findIndex((villa) => villa.key === 'autumn')
-    if (autumnIndex !== -1 && !villas[autumnIndex].isDisabled) {
-      return autumnIndex
-    }
-    // Fallback to first non-disabled villa
-    const firstEnabledIndex = villas.findIndex((villa) => !villa.isDisabled)
-    return firstEnabledIndex !== -1 ? firstEnabledIndex : 0
-  }
-
-  const [activeVilla, setActiveVilla] = useState(getDefaultVillaIndex())
+  // Find the autumn villa index, default to 0 if not found
+  const autumnIndex = villas.findIndex((villa) => villa.key === 'autumn')
+  const [activeVilla, setActiveVilla] = useState(autumnIndex >= 0 ? autumnIndex : 0)
   const [activeFloor, setActiveFloor] = useState(0)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
@@ -101,17 +91,14 @@ const FloorPlansSection: React.FC<FloorPlansSectionProps> = ({
     return null
   }
 
-  // Reset floor selection and image index when villa changes
+  // Reset floor and image selection when villa changes
   const handleVillaChange = (villaIndex: number) => {
-    const villa = villas[villaIndex]
-    if (villa.isDisabled) return // Don't allow selecting disabled villas
-
     setActiveVilla(villaIndex)
     setActiveFloor(0) // Reset to first floor
     setCurrentImageIndex(0) // Reset to first image
   }
 
-  // Reset image index when floor changes
+  // Reset image selection when floor changes
   const handleFloorChange = (floorIndex: number) => {
     setActiveFloor(floorIndex)
     setCurrentImageIndex(0) // Reset to first image
@@ -127,6 +114,12 @@ const FloorPlansSection: React.FC<FloorPlansSectionProps> = ({
 
   // Sort floor plans by order
   const sortedFloorPlans = [...currentVilla.floorPlans].sort((a, b) => a.order - b.order)
+  const currentFloorPlan = sortedFloorPlans[activeFloor]
+
+  // Sort images by order
+  const sortedImages = currentFloorPlan.floorPlanImages
+    ? [...currentFloorPlan.floorPlanImages].sort((a, b) => a.order - b.order)
+    : []
 
   const sectionTitle = t({
     ro: sectionTitleRo,
@@ -146,27 +139,6 @@ const FloorPlansSection: React.FC<FloorPlansSectionProps> = ({
     he: sectionDescriptionHe,
   })
 
-  const currentFloorPlan = sortedFloorPlans[activeFloor]
-
-  // Sort floor plan images by order
-  const sortedImages = currentFloorPlan.floorPlanImages
-    ? [...currentFloorPlan.floorPlanImages].sort((a, b) => a.order - b.order)
-    : []
-
-  const currentImage = sortedImages[currentImageIndex]
-
-  const floorPlanImageAlt = currentImage
-    ? t({
-        ro: currentImage.altTextRo || `Floor plan image ${currentImageIndex + 1}`,
-        en: currentImage.altTextEn || `Floor plan image ${currentImageIndex + 1}`,
-        he: currentImage.altTextHe || `Floor plan image ${currentImageIndex + 1}`,
-      })
-    : t({
-        ro: `Planul etajului ${activeFloor + 1}`,
-        en: `Floor plan ${activeFloor + 1}`,
-        he: `תוכנית הקומה ${activeFloor + 1}`,
-      })
-
   const usableAreaLabel = t({
     ro: currentFloorPlan.usableAreaLabelRo,
     en: currentFloorPlan.usableAreaLabelEn,
@@ -181,6 +153,27 @@ const FloorPlansSection: React.FC<FloorPlansSectionProps> = ({
       })
     : ''
 
+  // Navigation functions for images
+  const goToPreviousImage = () => {
+    setCurrentImageIndex((prev) => (prev === 0 ? sortedImages.length - 1 : prev - 1))
+  }
+
+  const goToNextImage = () => {
+    setCurrentImageIndex((prev) => (prev === sortedImages.length - 1 ? 0 : prev + 1))
+  }
+
+  // Get current image alt text
+  const getCurrentImageAlt = () => {
+    if (!sortedImages[currentImageIndex]) return 'Floor plan image'
+
+    const currentImage = sortedImages[currentImageIndex]
+    return t({
+      ro: currentImage.altTextRo || `Floor plan image ${currentImageIndex + 1}`,
+      en: currentImage.altTextEn || `Floor plan image ${currentImageIndex + 1}`,
+      he: currentImage.altTextHe || `Floor plan image ${currentImageIndex + 1}`,
+    })
+  }
+
   // Villa selection icons/colors
   const villaIcons = {
     spring: '🌸',
@@ -194,23 +187,6 @@ const FloorPlansSection: React.FC<FloorPlansSectionProps> = ({
     summer: 'from-yellow-400 to-orange-400',
     autumn: 'from-orange-400 to-red-400',
     winter: 'from-blue-400 to-cyan-400',
-  }
-
-  // Image navigation functions
-  const nextImage = () => {
-    if (sortedImages.length > 1) {
-      setCurrentImageIndex((prev) => (prev + 1) % sortedImages.length)
-    }
-  }
-
-  const prevImage = () => {
-    if (sortedImages.length > 1) {
-      setCurrentImageIndex((prev) => (prev - 1 + sortedImages.length) % sortedImages.length)
-    }
-  }
-
-  const goToImage = (index: number) => {
-    setCurrentImageIndex(index)
   }
 
   return (
@@ -236,34 +212,39 @@ const FloorPlansSection: React.FC<FloorPlansSectionProps> = ({
                 en: villa.nameEn,
                 he: villa.nameHe,
               })
-
-              const isDisabled = villa.isDisabled
-              const isActive = activeVilla === index
+              const isAutumn = villa.key === 'autumn'
+              const isDisabled = !isAutumn
 
               return (
                 <button
                   key={villa.key}
-                  onClick={() => handleVillaChange(index)}
+                  onClick={() => !isDisabled && handleVillaChange(index)}
                   disabled={isDisabled}
                   className={`relative px-6 py-4 rounded-xl font-semibold text-sm tracking-wider uppercase transition-all duration-300 overflow-hidden group ${
                     isDisabled
                       ? 'text-gray-400 bg-gray-100 cursor-not-allowed opacity-50'
-                      : isActive
+                      : activeVilla === index
                         ? 'text-white shadow-lg transform scale-105'
                         : 'text-gray-700 bg-white hover:text-white shadow-md hover:shadow-lg hover:transform hover:scale-105'
                   }`}
+                  title={
+                    isDisabled
+                      ? t({
+                          ro: 'În curând disponibil',
+                          en: 'Coming soon',
+                          he: 'בקרוב',
+                        })
+                      : undefined
+                  }
                 >
-                  {/* Background gradient */}
-                  <div
-                    className={`absolute inset-0 bg-gradient-to-r ${villaColors[villa.key]} transition-opacity duration-300 ${
-                      isDisabled
-                        ? 'opacity-20'
-                        : isActive
-                          ? 'opacity-100'
-                          : 'opacity-0 group-hover:opacity-90'
-                    }`}
-                  />
-
+                  {/* Background gradient - only for autumn or active villa */}
+                  {!isDisabled && (
+                    <div
+                      className={`absolute inset-0 bg-gradient-to-r ${villaColors[villa.key]} transition-opacity duration-300 ${
+                        activeVilla === index ? 'opacity-100' : 'opacity-0 group-hover:opacity-90'
+                      }`}
+                    />
+                  )}
                   {/* Content */}
                   <div className="relative flex items-center justify-center space-x-2">
                     <span className={`text-lg ${isDisabled ? 'grayscale' : ''}`}>
@@ -271,14 +252,13 @@ const FloorPlansSection: React.FC<FloorPlansSectionProps> = ({
                     </span>
                     <span>{villaName}</span>
                   </div>
-
-                  {/* Disabled overlay */}
+                  {/* Coming soon overlay for disabled buttons */}
                   {isDisabled && (
-                    <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/10 rounded-xl">
                       <span className="text-xs text-gray-500 font-medium">
                         {t({
                           ro: 'În curând',
-                          en: 'Coming Soon',
+                          en: 'Soon',
                           he: 'בקרוב',
                         })}
                       </span>
@@ -299,7 +279,6 @@ const FloorPlansSection: React.FC<FloorPlansSectionProps> = ({
                 en: floorPlan.floorNameEn,
                 he: floorPlan.floorNameHe,
               })
-
               return (
                 <button
                   key={index}
@@ -321,97 +300,71 @@ const FloorPlansSection: React.FC<FloorPlansSectionProps> = ({
         <div className="max-w-6xl mx-auto">
           {/* Floor Plan Images with Navigation */}
           <div className="relative aspect-[16/10] mb-12 rounded-lg overflow-hidden shadow-2xl bg-gray-200">
-            {currentImage?.image?.url ? (
+            {sortedImages.length > 0 && sortedImages[currentImageIndex]?.image?.url ? (
               <>
                 <Image
-                  src={currentImage.image.url || '/placeholder.svg'}
-                  alt={floorPlanImageAlt}
+                  src={sortedImages[currentImageIndex].image.url || '/placeholder.svg'}
+                  alt={getCurrentImageAlt()}
                   fill
                   className="object-cover"
                   sizes="100vw"
                   priority
                 />
 
-                {/* Navigation arrows - only show if more than 1 image */}
+                {/* Navigation Arrows - Only show if more than 1 image */}
                 {sortedImages.length > 1 && (
                   <>
+                    {/* Left Arrow */}
                     <button
-                      onClick={prevImage}
-                      className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-3 rounded-full transition-all duration-300 group"
+                      onClick={goToPreviousImage}
+                      className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-all duration-300 hover:scale-110 z-10"
                       aria-label={t({
                         ro: 'Imaginea anterioară',
                         en: 'Previous image',
                         he: 'תמונה קודמת',
                       })}
                     >
-                      <svg
-                        className="w-6 h-6 transform group-hover:scale-110"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M15 19l-7-7 7-7"
-                        />
-                      </svg>
+                      <ChevronLeft className="w-6 h-6" />
                     </button>
 
+                    {/* Right Arrow */}
                     <button
-                      onClick={nextImage}
-                      className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-3 rounded-full transition-all duration-300 group"
+                      onClick={goToNextImage}
+                      className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-all duration-300 hover:scale-110 z-10"
                       aria-label={t({
                         ro: 'Imaginea următoare',
                         en: 'Next image',
                         he: 'תמונה הבאה',
                       })}
                     >
-                      <svg
-                        className="w-6 h-6 transform group-hover:scale-110"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M9 5l7 7-7 7"
-                        />
-                      </svg>
+                      <ChevronRight className="w-6 h-6" />
                     </button>
+
+                    {/* Image Counter */}
+                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 text-white px-4 py-2 rounded-full text-sm font-medium z-10">
+                      {currentImageIndex + 1} / {sortedImages.length}
+                    </div>
+
+                    {/* Image Dots Indicator */}
+                    <div className="absolute bottom-4 right-4 flex space-x-2 z-10">
+                      {sortedImages.map((_, index) => (
+                        <button
+                          key={index}
+                          onClick={() => setCurrentImageIndex(index)}
+                          className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                            index === currentImageIndex
+                              ? 'bg-white scale-125'
+                              : 'bg-white/50 hover:bg-white/75'
+                          }`}
+                          aria-label={`${t({
+                            ro: 'Mergi la imaginea',
+                            en: 'Go to image',
+                            he: 'עבור לתמונה',
+                          })} ${index + 1}`}
+                        />
+                      ))}
+                    </div>
                   </>
-                )}
-
-                {/* Image indicators - only show if more than 1 image */}
-                {sortedImages.length > 1 && (
-                  <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-                    {sortedImages.map((_, index) => (
-                      <button
-                        key={index}
-                        onClick={() => goToImage(index)}
-                        className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                          index === currentImageIndex
-                            ? 'bg-white shadow-lg'
-                            : 'bg-white bg-opacity-50 hover:bg-opacity-80'
-                        }`}
-                        aria-label={t({
-                          ro: `Mergi la imaginea ${index + 1}`,
-                          en: `Go to image ${index + 1}`,
-                          he: `עבור לתמונה ${index + 1}`,
-                        })}
-                      />
-                    ))}
-                  </div>
-                )}
-
-                {/* Image counter */}
-                {sortedImages.length > 1 && (
-                  <div className="absolute top-4 right-4 bg-black bg-opacity-50 text-white px-3 py-1 rounded-full text-sm">
-                    {currentImageIndex + 1} / {sortedImages.length}
-                  </div>
                 )}
               </>
             ) : (
@@ -424,9 +377,9 @@ const FloorPlansSection: React.FC<FloorPlansSectionProps> = ({
                   </div>
                   <p className="text-gray-500 text-lg">
                     {t({
-                      ro: 'Planul va fi disponibil în curând',
-                      en: 'Floor plan will be available soon',
-                      he: 'תוכנית הקומה תהיה זמינה בקרוב',
+                      ro: 'Planurile vor fi disponibile în curând',
+                      en: 'Floor plans will be available soon',
+                      he: 'תוכניות הקומה יהיו זמינות בקרוב',
                     })}
                   </p>
                 </div>
@@ -458,7 +411,6 @@ const FloorPlansSection: React.FC<FloorPlansSectionProps> = ({
                     en: room.roomNameEn,
                     he: room.roomNameHe,
                   })
-
                   return (
                     <div
                       key={index}
