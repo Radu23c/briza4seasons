@@ -126,7 +126,6 @@ export const Homepage: GlobalConfig = {
         },
       ],
     },
-
     // FEATURES SECTION
     {
       name: 'featuresSection',
@@ -281,7 +280,6 @@ export const Homepage: GlobalConfig = {
         },
       ],
     },
-
     // FEATURES OVERVIEW SECTION
     {
       name: 'featuresOverviewSection',
@@ -439,7 +437,6 @@ export const Homepage: GlobalConfig = {
         },
       ],
     },
-
     // BENEFITS SECTION
     {
       name: 'benefitsSection',
@@ -548,7 +545,6 @@ export const Homepage: GlobalConfig = {
         },
       ],
     },
-
     // FAQ SECTION
     {
       name: 'faqSection',
@@ -674,7 +670,6 @@ export const Homepage: GlobalConfig = {
         },
       ],
     },
-
     // CONTACT SECTION
     {
       name: 'contactSection',
@@ -809,8 +804,7 @@ export const Homepage: GlobalConfig = {
         },
       ],
     },
-
-    // FIRST GALLERY SECTION (Full Width)
+    // FIRST GALLERY SECTION (Full Width) - UPDATED WITH DATE GROUPING
     {
       name: 'gallerySection',
       type: 'group',
@@ -862,15 +856,15 @@ export const Homepage: GlobalConfig = {
           required: false,
           defaultValue: 'מתחם',
         },
-        // Gallery Images
+        // Gallery Images - UPDATED WITH DATE FIELD
         {
           name: 'galleryImages',
           type: 'array',
           required: false,
           minRows: 1,
-          maxRows: 50,
+          maxRows: 200,
           admin: {
-            description: 'Add as many images as you want to showcase your complex',
+            description: 'Add images - they will be automatically grouped by upload date',
           },
           fields: [
             {
@@ -880,6 +874,18 @@ export const Homepage: GlobalConfig = {
               required: false,
               admin: {
                 description: 'Upload an image of your complex',
+              },
+            },
+            {
+              name: 'uploadDate',
+              type: 'date',
+              required: false,
+              defaultValue: () => new Date().toISOString().split('T')[0],
+              admin: {
+                description: 'Date when this image was uploaded (used for grouping)',
+                date: {
+                  pickerAppearance: 'dayOnly',
+                },
               },
             },
             {
@@ -918,7 +924,7 @@ export const Homepage: GlobalConfig = {
               required: false,
               defaultValue: 1,
               admin: {
-                description: 'Order of appearance (optional, defaults to upload order)',
+                description: 'Order within the same date group',
               },
             },
           ],
@@ -933,10 +939,24 @@ export const Homepage: GlobalConfig = {
             description: 'Enable lightbox/modal view when clicking images',
           },
         },
+        // Date Display Options - NEW FIELD
+        {
+          name: 'dateDisplayFormat',
+          type: 'select',
+          defaultValue: 'full',
+          options: [
+            { label: 'Full Date (5 August, 2025)', value: 'full' },
+            { label: 'Short Date (5 Aug, 2025)', value: 'short' },
+            { label: 'Numeric (05/08/2025)', value: 'numeric' },
+            { label: 'ISO (2025-08-05)', value: 'iso' },
+          ],
+          admin: {
+            description: 'How to display the date subtitles',
+          },
+        },
       ],
     },
-
-    // SECOND GALLERY SECTION (Container Width)
+    // SECOND GALLERY SECTION (Container Width) - UPDATED WITH DATE GROUPING
     {
       name: 'imageGallerySection',
       type: 'group',
@@ -1036,15 +1056,16 @@ export const Homepage: GlobalConfig = {
             description: 'Description text in Hebrew',
           },
         },
-        // Gallery Images
+        // Gallery Images - UPDATED WITH DATE FIELD
         {
           name: 'images',
           type: 'array',
           required: false,
           minRows: 1,
-          maxRows: 100,
+          maxRows: 200,
           admin: {
-            description: 'Add as many images as you want - they will display in a 4-column grid',
+            description:
+              'Add images - they will be automatically grouped by upload date and displayed in a 4-column grid',
           },
           fields: [
             {
@@ -1054,6 +1075,18 @@ export const Homepage: GlobalConfig = {
               required: false,
               admin: {
                 description: 'Upload an image for the gallery',
+              },
+            },
+            {
+              name: 'uploadDate',
+              type: 'date',
+              required: false,
+              defaultValue: () => new Date().toISOString().split('T')[0],
+              admin: {
+                description: 'Date when this image was uploaded (used for grouping)',
+                date: {
+                  pickerAppearance: 'dayOnly',
+                },
               },
             },
             {
@@ -1092,7 +1125,7 @@ export const Homepage: GlobalConfig = {
               required: false,
               defaultValue: 1,
               admin: {
-                description: 'Order of appearance (optional, defaults to upload order)',
+                description: 'Order within the same date group',
               },
             },
           ],
@@ -1105,6 +1138,21 @@ export const Homepage: GlobalConfig = {
           defaultValue: true,
           admin: {
             description: 'Enable lightbox/modal view when clicking images',
+          },
+        },
+        // Date Display Options - NEW FIELD
+        {
+          name: 'dateDisplayFormat',
+          type: 'select',
+          defaultValue: 'full',
+          options: [
+            { label: 'Full Date (5 August, 2025)', value: 'full' },
+            { label: 'Short Date (5 Aug, 2025)', value: 'short' },
+            { label: 'Numeric (05/08/2025)', value: 'numeric' },
+            { label: 'ISO (2025-08-05)', value: 'iso' },
+          ],
+          admin: {
+            description: 'How to display the date subtitles',
           },
         },
       ],

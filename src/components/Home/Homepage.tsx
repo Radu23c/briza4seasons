@@ -163,6 +163,7 @@ interface HomepageData {
         url: string
         alt?: string
       }
+      uploadDate?: string
       caption?: {
         captionRo?: string
         captionEn?: string
@@ -171,6 +172,7 @@ interface HomepageData {
       order?: number
     }>
     enableLightbox?: boolean
+    dateDisplayFormat?: 'full' | 'short' | 'numeric' | 'iso'
   }
   imageGallerySection: {
     isActive: boolean
@@ -188,6 +190,7 @@ interface HomepageData {
         url: string
         alt?: string
       }
+      uploadDate?: string
       caption?: {
         captionRo?: string
         captionEn?: string
@@ -196,6 +199,7 @@ interface HomepageData {
       order?: number
     }>
     enableLightbox?: boolean
+    dateDisplayFormat?: 'full' | 'short' | 'numeric' | 'iso'
   }
 }
 
@@ -336,6 +340,7 @@ const Homepage: React.FC<HomepageProps> = ({ data }) => {
           sectionSubtitleHe={data.gallerySection.sectionSubtitleHe}
           galleryImages={data.gallerySection.galleryImages}
           enableLightbox={data.gallerySection.enableLightbox}
+          dateDisplayFormat={data.gallerySection.dateDisplayFormat}
         />
       )}
 
@@ -353,6 +358,7 @@ const Homepage: React.FC<HomepageProps> = ({ data }) => {
           descriptionHe={data.imageGallerySection.descriptionHe}
           images={data.imageGallerySection.images}
           enableLightbox={data.imageGallerySection.enableLightbox}
+          dateDisplayFormat={data.imageGallerySection.dateDisplayFormat}
         />
       )}
     </div>

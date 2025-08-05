@@ -1792,7 +1792,7 @@ export interface Homepage {
     sectionSubtitleEn?: string | null;
     sectionSubtitleHe?: string | null;
     /**
-     * Add as many images as you want to showcase your complex
+     * Add images - they will be automatically grouped by upload date
      */
     galleryImages?:
       | {
@@ -1800,6 +1800,10 @@ export interface Homepage {
            * Upload an image of your complex
            */
           image?: (string | null) | Media;
+          /**
+           * Date when this image was uploaded (used for grouping)
+           */
+          uploadDate?: string | null;
           caption?: {
             /**
              * Optional caption in Romanian
@@ -1815,7 +1819,7 @@ export interface Homepage {
             captionHe?: string | null;
           };
           /**
-           * Order of appearance (optional, defaults to upload order)
+           * Order within the same date group
            */
           order?: number | null;
           id?: string | null;
@@ -1825,6 +1829,10 @@ export interface Homepage {
      * Enable lightbox/modal view when clicking images
      */
     enableLightbox?: boolean | null;
+    /**
+     * How to display the date subtitles
+     */
+    dateDisplayFormat?: ('full' | 'short' | 'numeric' | 'iso') | null;
   };
   imageGallerySection?: {
     /**
@@ -1868,7 +1876,7 @@ export interface Homepage {
      */
     descriptionHe?: string | null;
     /**
-     * Add as many images as you want - they will display in a 4-column grid
+     * Add images - they will be automatically grouped by upload date and displayed in a 4-column grid
      */
     images?:
       | {
@@ -1876,6 +1884,10 @@ export interface Homepage {
            * Upload an image for the gallery
            */
           image?: (string | null) | Media;
+          /**
+           * Date when this image was uploaded (used for grouping)
+           */
+          uploadDate?: string | null;
           caption?: {
             /**
              * Optional caption in Romanian
@@ -1891,7 +1903,7 @@ export interface Homepage {
             captionHe?: string | null;
           };
           /**
-           * Order of appearance (optional, defaults to upload order)
+           * Order within the same date group
            */
           order?: number | null;
           id?: string | null;
@@ -1901,6 +1913,10 @@ export interface Homepage {
      * Enable lightbox/modal view when clicking images
      */
     enableLightbox?: boolean | null;
+    /**
+     * How to display the date subtitles
+     */
+    dateDisplayFormat?: ('full' | 'short' | 'numeric' | 'iso') | null;
   };
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -2735,6 +2751,7 @@ export interface HomepageSelect<T extends boolean = true> {
           | T
           | {
               image?: T;
+              uploadDate?: T;
               caption?:
                 | T
                 | {
@@ -2746,6 +2763,7 @@ export interface HomepageSelect<T extends boolean = true> {
               id?: T;
             };
         enableLightbox?: T;
+        dateDisplayFormat?: T;
       };
   imageGallerySection?:
     | T
@@ -2764,6 +2782,7 @@ export interface HomepageSelect<T extends boolean = true> {
           | T
           | {
               image?: T;
+              uploadDate?: T;
               caption?:
                 | T
                 | {
@@ -2775,6 +2794,7 @@ export interface HomepageSelect<T extends boolean = true> {
               id?: T;
             };
         enableLightbox?: T;
+        dateDisplayFormat?: T;
       };
   updatedAt?: T;
   createdAt?: T;
