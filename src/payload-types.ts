@@ -2221,6 +2221,10 @@ export interface VillaComplexPage {
            */
           nameHe: string;
           /**
+           * Disable this villa button (shows "Coming Soon")
+           */
+          isDisabled?: boolean | null;
+          /**
            * Floor plans for this villa type
            */
           floorPlans?:
@@ -2242,21 +2246,33 @@ export interface VillaComplexPage {
                  */
                 floorNameHe?: string | null;
                 /**
-                 * Floor plan image
+                 * Multiple floor plan images for this floor (slideable)
                  */
-                floorPlanImage?: (string | null) | Media;
-                /**
-                 * Floor plan image alt text in Romanian
-                 */
-                floorPlanImageAltRo?: string | null;
-                /**
-                 * Floor plan image alt text in English
-                 */
-                floorPlanImageAltEn?: string | null;
-                /**
-                 * Floor plan image alt text in Hebrew
-                 */
-                floorPlanImageAltHe?: string | null;
+                floorPlanImages?:
+                  | {
+                      /**
+                       * Floor plan image
+                       */
+                      image?: (string | null) | Media;
+                      /**
+                       * Image alt text in Romanian
+                       */
+                      altTextRo?: string | null;
+                      /**
+                       * Image alt text in English
+                       */
+                      altTextEn?: string | null;
+                      /**
+                       * Image alt text in Hebrew
+                       */
+                      altTextHe?: string | null;
+                      /**
+                       * Display order in image slider (1 = first, 2 = second, etc.)
+                       */
+                      order?: number | null;
+                      id?: string | null;
+                    }[]
+                  | null;
                 /**
                  * Usable area in square meters
                  */
@@ -2892,6 +2908,7 @@ export interface VillaComplexPageSelect<T extends boolean = true> {
               nameRo?: T;
               nameEn?: T;
               nameHe?: T;
+              isDisabled?: T;
               floorPlans?:
                 | T
                 | {
@@ -2899,10 +2916,16 @@ export interface VillaComplexPageSelect<T extends boolean = true> {
                     floorNameRo?: T;
                     floorNameEn?: T;
                     floorNameHe?: T;
-                    floorPlanImage?: T;
-                    floorPlanImageAltRo?: T;
-                    floorPlanImageAltEn?: T;
-                    floorPlanImageAltHe?: T;
+                    floorPlanImages?:
+                      | T
+                      | {
+                          image?: T;
+                          altTextRo?: T;
+                          altTextEn?: T;
+                          altTextHe?: T;
+                          order?: T;
+                          id?: T;
+                        };
                     usableArea?: T;
                     usableAreaLabelRo?: T;
                     usableAreaLabelEn?: T;
