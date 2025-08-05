@@ -214,35 +214,26 @@ const FloorPlansSection: React.FC<FloorPlansSectionProps> = ({
                 en: villa.nameEn,
                 he: villa.nameHe,
               })
-              const isAutumn = villa.key === 'autumn'
-              const isDisabled = !isAutumn
 
               return (
                 <button
                   key={villa.key}
-                  onClick={() => !isDisabled && handleVillaChange(index)}
-                  disabled={isDisabled}
+                  onClick={() => handleVillaChange(index)}
                   className={`relative px-6 py-4 rounded-xl font-semibold text-sm tracking-wider uppercase transition-all duration-300 overflow-hidden group ${
-                    isDisabled
-                      ? 'text-gray-400 bg-gray-100 cursor-not-allowed opacity-50'
-                      : activeVilla === index
-                        ? 'text-white shadow-lg transform scale-105'
-                        : 'text-gray-700 bg-white hover:text-white shadow-md hover:shadow-lg hover:transform hover:scale-105'
+                    activeVilla === index
+                      ? 'text-white shadow-lg transform scale-105'
+                      : 'text-gray-700 bg-white hover:text-white shadow-md hover:shadow-lg hover:transform hover:scale-105'
                   }`}
                 >
-                  {/* Background gradient - only for autumn or active villa */}
-                  {!isDisabled && (
-                    <div
-                      className={`absolute inset-0 bg-gradient-to-r ${villaColors[villa.key]} transition-opacity duration-300 ${
-                        activeVilla === index ? 'opacity-100' : 'opacity-0 group-hover:opacity-90'
-                      }`}
-                    />
-                  )}
+                  {/* Background gradient */}
+                  <div
+                    className={`absolute inset-0 bg-gradient-to-r ${villaColors[villa.key]} transition-opacity duration-300 ${
+                      activeVilla === index ? 'opacity-100' : 'opacity-0 group-hover:opacity-90'
+                    }`}
+                  />
                   {/* Content */}
                   <div className="relative flex items-center justify-center space-x-2">
-                    <span className={`text-lg ${isDisabled ? 'grayscale' : ''}`}>
-                      {villaIcons[villa.key]}
-                    </span>
+                    <span className="text-lg">{villaIcons[villa.key]}</span>
                     <span>{villaName}</span>
                   </div>
                 </button>
@@ -298,7 +289,7 @@ const FloorPlansSection: React.FC<FloorPlansSectionProps> = ({
             </div>
           </div>
         )}
-        ;{/* Floor Tabs */}
+        {/* Floor Tabs */}
         <div className="flex justify-center mb-12">
           <div className="flex space-x-8 bg-gray-100 rounded-lg p-2">
             {sortedFloorPlans.map((floorPlan, index) => {
