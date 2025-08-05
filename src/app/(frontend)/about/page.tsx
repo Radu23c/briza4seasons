@@ -294,6 +294,6 @@ export default function AboutUsPage() {
 }
 
 export const metadata = {
-  title: 'About Us - Torga45 Residence',
+  title: 'About Us - Briza4Seasons',
   description: "Learn more about Torga45 residential complex and our project's story.",
 }

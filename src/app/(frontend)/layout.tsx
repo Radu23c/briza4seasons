@@ -23,8 +23,8 @@ const playfairDisplay = Playfair_Display({
 })
 
 export const metadata: Metadata = {
-  title: 'Torga45 Residence',
-  description: 'Ansamblul de vile Torga45 - Găsește locuința visurilor tale',
+  title: 'Briza4Seasons',
+  description: 'Ansamblul de vile Briza4Seasons - Găsește locuința visurilor tale',
 }
 
 export const revalidate = 60

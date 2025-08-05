@@ -104,13 +104,13 @@ export const Homepage: GlobalConfig = {
           name: 'projectSubtitleRo',
           type: 'text',
           required: false,
-          defaultValue: 'Residence',
+          defaultValue: '',
         },
         {
           name: 'projectSubtitleEn',
           type: 'text',
           required: false,
-          defaultValue: 'Residence',
+          defaultValue: '',
         },
         {
           name: 'projectSubtitleHe',

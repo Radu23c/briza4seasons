@@ -78,7 +78,7 @@ const AboutUsHero: React.FC<AboutUsHeroProps> = ({
           {/* Main Content */}
           <div className={`flex-1 ${currentLanguage === 'he' ? 'text-right' : 'text-left'}`}>
             {/* Main Title */}
-            <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-4 leading-tight max-w-4xl">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-4 pt-24 leading-tight max-w-4xl">
               {mainTitle}
             </h1>
 

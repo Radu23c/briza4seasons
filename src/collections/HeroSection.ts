@@ -123,7 +123,7 @@ export const HeroSection: CollectionConfig = {
       name: 'projectSubtitleRo',
       type: 'text',
       required: false,
-      defaultValue: 'Residence',
+      defaultValue: '',
       admin: {
         description: 'Project subtitle in Romanian',
       },
@@ -132,7 +132,7 @@ export const HeroSection: CollectionConfig = {
       name: 'projectSubtitleEn',
       type: 'text',
       required: false,
-      defaultValue: 'Residence',
+      defaultValue: '',
       admin: {
         description: 'Project subtitle in English',
       },

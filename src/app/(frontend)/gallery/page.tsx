@@ -282,6 +282,6 @@ export default function GalleryPage() {
 }
 
 export const metadata = {
-  title: 'Gallery - Torga45 Residence',
+  title: 'Gallery - Briza4Seasons',
   description: 'Explore the photo gallery of Torga45 residential complex.',
 }
