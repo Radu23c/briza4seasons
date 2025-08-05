@@ -455,7 +455,7 @@ function ContactHero() {
       className={`relative min-h-[80vh] flex items-center justify-center bg-cover bg-center bg-no-repeat ${isRTL ? 'rtl' : 'ltr'}`}
       dir={isRTL ? 'rtl' : 'ltr'}
       style={{
-        backgroundImage: "url('/images/contact-hero-bg.jpg')",
+        backgroundImage: "url('/media/home-hero-bg.jpg')",
       }}
     >
       {/* Background Overlay */}
@@ -464,7 +464,7 @@ function ContactHero() {
       <div className="relative z-10 container mx-auto px-4">
         {/* Hero Content */}
         <div className="text-center text-white mb-16">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">{t.contactUs}</h1>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mt-24 mb-4">{t.contactUs}</h1>
           <p className="text-xl md:text-2xl font-light opacity-90">{t.heroSubtitle}</p>
         </div>
 
