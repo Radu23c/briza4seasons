@@ -543,7 +543,7 @@ function ContactHero() {
               href="mailto:contact@iorga45.ro"
               className="text-gray-600 hover:text-amber-600 transition-colors duration-200"
             >
-              contact@iorga45.ro
+              blissimobiliare@briza4seasons.ro
             </a>
           </div>
         </div>

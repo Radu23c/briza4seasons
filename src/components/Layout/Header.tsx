@@ -8,20 +8,8 @@ import LanguageToggle from '../LanguageToggle'
 
 const Header: React.FC = () => {
   const { t, currentLanguage, setLanguage } = useLanguage()
-  const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const pathname = usePathname()
-
-  // Handle scroll behavior
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY
-      setIsScrolled(scrollPosition > 50) // Hide header after 50px scroll
-    }
-
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
 
   // Navigation items with multi-language support
   const navigationItems = [
@@ -83,11 +71,11 @@ const Header: React.FC = () => {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
-      {/* Top Header Section - Full width white background with higher z-index */}
+      {/* Top Header Section - Apply scroll behavior only on desktop (lg and up) */}
       <div
-        className={`bg-white w-full border-b border-gray-100 transition-all duration-500 ease-in-out overflow-hidden relative z-60 ${
-          isScrolled ? 'max-h-0 opacity-0 -translate-y-full' : 'max-h-32 opacity-100 translate-y-0'
-        }`}
+        className={`bg-white w-full border-b border-gray-100 transition-all duration-500 ease-in-out overflow-visible relative z-[100] 
+          lg:max-h-32 opacity-100 translate-y-0
+          max-lg:max-h-32 max-lg:opacity-100 max-lg:translate-y-0`}
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
           <div
@@ -169,19 +157,18 @@ const Header: React.FC = () => {
               </div>
             </div>
             {/* Language Toggle - Always visible with highest z-index */}
-            <div className={`relative z-70 ${currentLanguage === 'he' ? 'order-3' : 'order-3'}`}>
+            <div className={`relative z-[110] ${currentLanguage === 'he' ? 'order-3' : 'order-3'}`}>
               <LanguageToggle />
             </div>
           </div>
         </div>
       </div>
-
       {/* Navigation Bar - Full width on mobile, centered container with rounded corners on desktop */}
-      <div className="lg:flex lg:justify-center lg:px-4 lg:px-6 xl:px-8 relative z-40">
+      <div className="lg:flex lg:justify-center lg:px-4 lg:px-6 xl:px-8 relative z-[90]">
         <nav
-          className={`bg-gray-800 text-white transition-all duration-500 ease-in-out shadow-lg ${
-            isScrolled ? 'shadow-xl' : ''
-          } w-full lg:max-w-5xl lg:rounded-b-lg`}
+          className={`bg-gray-800 text-white transition-all duration-500 ease-in-out shadow-lg 
+            lg:shadow-xl
+            w-full lg:max-w-5xl lg:rounded-b-lg`}
         >
           <div className="px-4 sm:px-6 lg:px-8 py-4 lg:py-6">
             {/* Desktop Navigation */}
@@ -220,22 +207,9 @@ const Header: React.FC = () => {
                 })}
               </div>
             </div>
-
             {/* Mobile Navigation */}
             <div className="lg:hidden">
               <div className="flex items-center justify-between">
-                {/* Mobile Logo (shown when top header is hidden) */}
-                <div className={`${isScrolled ? 'block' : 'hidden'}`}>
-                  <Link href="/" className="font-elegant text-xl text-[#D4B896]">
-                    Briza4Seasons
-                  </Link>
-                </div>
-
-                {/* Mobile Language Toggle (when header is scrolled) - with higher z-index */}
-                <div className={`${isScrolled ? 'block' : 'hidden'} mr-2 relative z-70`}>
-                  <LanguageToggle />
-                </div>
-
                 {/* Mobile menu button */}
                 <button
                   onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -261,8 +235,7 @@ const Header: React.FC = () => {
                   </svg>
                 </button>
               </div>
-
-              {/* Mobile menu dropdown - REMOVED language toggle from here */}
+              {/* Mobile menu dropdown */}
               <div
                 className={`mt-4 transition-all duration-300 ease-in-out overflow-hidden ${
                   isMobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
@@ -295,7 +268,6 @@ const Header: React.FC = () => {
                 </div>
               </div>
             </div>
-
             {/* Tablet Navigation */}
             <div className="hidden md:block lg:hidden">
               <div

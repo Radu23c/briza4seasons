@@ -1,5 +1,4 @@
 'use client'
-
 import type React from 'react'
 import { useState, useEffect, useRef } from 'react'
 import { useLanguage } from '@/app/contexts/LanguageContext'
@@ -74,11 +73,17 @@ const LanguageToggle: React.FC = () => {
           </svg>
         </button>
 
-        {/* Dropdown menu */}
+        {/* Dropdown menu with higher z-index and fixed positioning */}
         <div
-          className={`absolute top-full left-0 mt-1 bg-white rounded-lg shadow-lg border border-gray-200 overflow-hidden transition-all duration-200 origin-top min-w-[100px] z-[100] ${
+          className={`absolute top-full left-0 mt-1 bg-white rounded-lg shadow-lg border border-gray-200 overflow-hidden transition-all duration-200 origin-top min-w-[100px] z-[9999] ${
             isDropdownOpen ? 'opacity-100 scale-100 visible' : 'opacity-0 scale-95 invisible'
           }`}
+          style={{
+            position: 'absolute',
+            top: '100%',
+            left: '0',
+            zIndex: 9999,
+          }}
         >
           {languages.map((lang) => (
             <button
