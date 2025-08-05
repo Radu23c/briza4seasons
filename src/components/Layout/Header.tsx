@@ -5,11 +5,46 @@ import Link from 'next/link'
 import { useLanguage } from '@/app/contexts/LanguageContext'
 import { usePathname } from 'next/navigation'
 import LanguageToggle from '../LanguageToggle'
+import Image from 'next/image'
 
 const Header: React.FC = () => {
   const { t, currentLanguage, setLanguage } = useLanguage()
+  const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const pathname = usePathname()
+
+  // Handle scroll behavior - only for desktop
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY
+      // Only set scroll state on desktop (lg breakpoint and up)
+      if (window.innerWidth >= 1024) {
+        setIsScrolled(scrollPosition > 50)
+      } else {
+        setIsScrolled(false) // Always false on mobile/tablet
+      }
+    }
+
+    const handleResize = () => {
+      // Reset scroll state when resizing
+      if (window.innerWidth < 1024) {
+        setIsScrolled(false)
+      } else {
+        handleScroll()
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('resize', handleResize)
+
+    // Initial check
+    handleScroll()
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
 
   // Navigation items with multi-language support
   const navigationItems = [
@@ -73,8 +108,12 @@ const Header: React.FC = () => {
     <header className="fixed top-0 left-0 right-0 z-50">
       {/* Top Header Section - Apply scroll behavior only on desktop (lg and up) */}
       <div
-        className={`bg-white w-full border-b border-gray-100 transition-all duration-500 ease-in-out overflow-visible relative z-[100] 
-          lg:max-h-32 opacity-100 translate-y-0
+        className={`bg-white w-full border-b border-gray-100 transition-all duration-500 ease-in-out overflow-hidden relative z-[100] 
+          ${
+            isScrolled
+              ? 'lg:max-h-0 lg:opacity-0 lg:-translate-y-full'
+              : 'lg:max-h-32 lg:opacity-100 lg:translate-y-0'
+          }
           max-lg:max-h-32 max-lg:opacity-100 max-lg:translate-y-0`}
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
@@ -87,9 +126,16 @@ const Header: React.FC = () => {
             <div className={`${currentLanguage === 'he' ? 'order-2' : 'order-1'}`}>
               <Link
                 href="/"
-                className="font-elegant text-2xl sm:text-3xl lg:text-4xl text-gray-900 hover:text-[#D4B896] transition-colors duration-300"
+                className="inline-block hover:opacity-80 transition-opacity duration-300"
               >
-                Briza4Seasons
+                <Image
+                  src="/images/briza-logo.jpg"
+                  alt="Briza Logo"
+                  width={120}
+                  height={60}
+                  className="h-auto w-auto max-h-12 sm:max-h-14 lg:max-h-16"
+                  priority
+                />
               </Link>
             </div>
             {/* Contact Information - Hidden on mobile */}
@@ -167,7 +213,7 @@ const Header: React.FC = () => {
       <div className="lg:flex lg:justify-center lg:px-4 lg:px-6 xl:px-8 relative z-[90]">
         <nav
           className={`bg-gray-800 text-white transition-all duration-500 ease-in-out shadow-lg 
-            lg:shadow-xl
+            ${isScrolled ? 'lg:shadow-xl' : ''}
             w-full lg:max-w-5xl lg:rounded-b-lg`}
         >
           <div className="px-4 sm:px-6 lg:px-8 py-4 lg:py-6">
