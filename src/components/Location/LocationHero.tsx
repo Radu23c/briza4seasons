@@ -56,7 +56,7 @@ const LocationHero = () => {
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/media/home-hero-bg.jpg"
+          src="/images/home-hero-bg.jpg"
           alt={backgroundImage.alt}
           fill
           className="object-cover"
