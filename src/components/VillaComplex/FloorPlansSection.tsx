@@ -257,9 +257,9 @@ const FloorPlansSection: React.FC<FloorPlansSectionProps> = ({
                     <div className="absolute inset-0 flex items-center justify-center bg-black/10 rounded-xl">
                       <span className="text-xs text-gray-500 font-medium">
                         {t({
-                          ro: 'În curând',
-                          en: 'Soon',
-                          he: 'בקרוב',
+                          ro: '',
+                          en: '',
+                          he: '',
                         })}
                       </span>
                     </div>
