@@ -108,10 +108,10 @@ const Header: React.FC = () => {
     <header className="fixed top-0 left-0 right-0 z-50">
       {/* Top Header Section - Apply scroll behavior only on desktop (lg and up) */}
       <div
-        className={`bg-white w-full border-b border-gray-100 transition-all duration-500 ease-in-out overflow-hidden relative z-[100] 
+        className={`bg-white w-full border-b border-gray-100 transition-all duration-500 ease-in-out relative z-[100]
           ${
             isScrolled
-              ? 'lg:max-h-0 lg:opacity-0 lg:-translate-y-full'
+              ? 'lg:max-h-0 lg:opacity-0 lg:-translate-y-full lg:overflow-hidden'
               : 'lg:max-h-32 lg:opacity-100 lg:translate-y-0'
           }
           max-lg:max-h-32 max-lg:opacity-100 max-lg:translate-y-0`}

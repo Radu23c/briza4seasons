@@ -73,33 +73,35 @@ const LanguageToggle: React.FC = () => {
           </svg>
         </button>
 
-        {/* Dropdown menu with higher z-index and fixed positioning */}
-        <div
-          className={`absolute top-full left-0 mt-1 bg-white rounded-lg shadow-lg border border-gray-200 overflow-hidden transition-all duration-200 origin-top min-w-[100px] z-[9999] ${
-            isDropdownOpen ? 'opacity-100 scale-100 visible' : 'opacity-0 scale-95 invisible'
-          }`}
-          style={{
-            position: 'absolute',
-            top: '100%',
-            left: '0',
-            zIndex: 9999,
-          }}
-        >
-          {languages.map((lang) => (
-            <button
-              key={lang.code}
-              onClick={() => handleLanguageSelect(lang.code)}
-              className={`w-full px-4 py-3 text-left text-sm font-medium transition-colors duration-200 flex items-center space-x-2 hover:bg-gray-50 ${
-                currentLanguage === lang.code
-                  ? 'bg-[#D4B896] text-white hover:bg-[#c9a87d]'
-                  : 'text-gray-700'
-              }`}
-            >
-              <span>{lang.flag}</span>
-              <span>{lang.name}</span>
-            </button>
-          ))}
-        </div>
+        {/* Dropdown menu with portal-like positioning */}
+        {isDropdownOpen && (
+          <div
+            className="fixed bg-white rounded-lg shadow-lg border border-gray-200 min-w-[100px] z-[9999]"
+            style={{
+              top: dropdownRef.current?.getBoundingClientRect().bottom
+                ? `${dropdownRef.current.getBoundingClientRect().bottom + window.scrollY + 4}px`
+                : 'auto',
+              left: dropdownRef.current?.getBoundingClientRect().left
+                ? `${dropdownRef.current.getBoundingClientRect().left + window.scrollX}px`
+                : 'auto',
+            }}
+          >
+            {languages.map((lang) => (
+              <button
+                key={lang.code}
+                onClick={() => handleLanguageSelect(lang.code)}
+                className={`w-full px-4 py-3 text-left text-sm font-medium transition-colors duration-200 flex items-center space-x-2 hover:bg-gray-50 first:rounded-t-lg last:rounded-b-lg ${
+                  currentLanguage === lang.code
+                    ? 'bg-[#D4B896] text-white hover:bg-[#c9a87d]'
+                    : 'text-gray-700'
+                }`}
+              >
+                <span>{lang.flag}</span>
+                <span>{lang.name}</span>
+              </button>
+            ))}
+          </div>
+        )}
       </div>
     </>
   )
