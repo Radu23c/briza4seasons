@@ -72,28 +72,32 @@ const LocationHero: React.FC<LocationHeroProps> = ({
       </div>
 
       {/* Content Container */}
-      <div className="relative z-10 container mx-auto px-4">
+      <div className="relative z-10 container mx-auto px-4 py-8">
         <div
-          className={`flex items-center justify-between ${currentLanguage === 'he' ? 'flex-row-reverse' : 'flex-row'}`}
+          className={`flex flex-col lg:flex-row lg:items-center lg:justify-between ${
+            currentLanguage === 'he' ? 'lg:flex-row-reverse' : ''
+          }`}
         >
           {/* Main Content */}
           <div className={`flex-1 ${currentLanguage === 'he' ? 'text-right' : 'text-left'}`}>
             {/* Main Title */}
-            <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-4 leading-tight max-w-4xl">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-4 pt-8 lg:pt-0 leading-tight max-w-4xl">
               {mainTitle}
             </h1>
             {/* Subtitle */}
-            <p className="text-lg md:text-xl lg:text-2xl text-white/90 font-light tracking-wider uppercase">
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/90 font-light tracking-wider uppercase mb-6 lg:mb-0">
               {subtitle}
             </p>
           </div>
 
           {/* Breadcrumbs */}
-          <div className="flex-shrink-0 ml-8">
-            <div className="bg-[#D4B896]/90 backdrop-blur-sm px-6 py-4 rounded-lg">
+          <div
+            className={`flex-shrink-0 lg:ml-8 ${currentLanguage === 'he' ? 'lg:mr-8 lg:ml-0' : ''}`}
+          >
+            <div className="bg-[#D4B896]/90 backdrop-blur-sm px-4 sm:px-6 py-3 sm:py-4 rounded-lg inline-block">
               <nav
-                className={`flex items-center space-x-2 text-sm font-medium tracking-wider uppercase ${
-                  currentLanguage === 'he' ? 'space-x-reverse' : ''
+                className={`flex flex-wrap items-center gap-x-2 gap-y-1 text-xs sm:text-sm font-medium tracking-wider uppercase ${
+                  currentLanguage === 'he' ? 'justify-end' : 'justify-start'
                 }`}
               >
                 {breadcrumbs.map((item, index) => {
@@ -105,19 +109,19 @@ const LocationHero: React.FC<LocationHeroProps> = ({
                   return (
                     <React.Fragment key={index}>
                       {item.isActive ? (
-                        <span className="text-gray-900 font-semibold">{label}</span>
+                        <span className="text-gray-900 font-semibold whitespace-nowrap">
+                          {label}
+                        </span>
                       ) : (
                         <Link
                           href={item.href}
-                          className="text-gray-700 hover:text-gray-900 transition-colors duration-300"
+                          className="text-gray-700 hover:text-gray-900 transition-colors duration-300 whitespace-nowrap"
                         >
                           {label}
                         </Link>
                       )}
                       {/* Separator */}
-                      {index < breadcrumbs.length - 1 && (
-                        <span className="text-gray-600 mx-2">/</span>
-                      )}
+                      {index < breadcrumbs.length - 1 && <span className="text-gray-600">/</span>}
                     </React.Fragment>
                   )
                 })}
