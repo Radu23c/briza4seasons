@@ -1,43 +1,47 @@
 'use client'
-
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useLanguage } from '@/app/contexts/LanguageContext'
 
-const LocationHero = () => {
+interface MediaObject {
+  url: string
+  alt?: string
+  width?: number
+  height?: number
+}
+
+interface Breadcrumb {
+  labelRo: string
+  labelEn: string
+  labelHe: string
+  href: string
+  isActive: boolean
+  id?: string
+}
+
+interface LocationHeroProps {
+  mainTitleRo: string
+  mainTitleEn: string
+  mainTitleHe: string
+  subtitleRo: string
+  subtitleEn: string
+  subtitleHe: string
+  backgroundImage: MediaObject
+  breadcrumbs: Breadcrumb[]
+}
+
+const LocationHero: React.FC<LocationHeroProps> = ({
+  mainTitleRo,
+  mainTitleEn,
+  mainTitleHe,
+  subtitleRo,
+  subtitleEn,
+  subtitleHe,
+  backgroundImage,
+  breadcrumbs,
+}) => {
   const { t, currentLanguage } = useLanguage()
-
-  // Hardcoded data
-  const mainTitleRo = 'Locație Strategică'
-  const mainTitleEn = 'Strategic Location'
-  const mainTitleHe = 'מיקום אסטרטגי'
-
-  const subtitleRo = 'Tunari, Ilfov'
-  const subtitleEn = 'Tunari, Ilfov'
-  const subtitleHe = 'טונארי, איילפוב'
-
-  const backgroundImage = {
-    url: '/images/location-hero-bg.png',
-    alt: 'Location hero background',
-  }
-
-  const breadcrumbs = [
-    {
-      labelRo: 'Acasă',
-      labelEn: 'Home',
-      labelHe: 'בית',
-      href: '/',
-      isActive: false,
-    },
-    {
-      labelRo: 'Locație',
-      labelEn: 'Location',
-      labelHe: 'מיקום',
-      href: '/location',
-      isActive: true,
-    },
-  ]
 
   const mainTitle = t({
     ro: mainTitleRo,
@@ -56,8 +60,8 @@ const LocationHero = () => {
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/images/home-hero-bg.jpg"
-          alt={backgroundImage.alt}
+          src={backgroundImage.url || '/placeholder.svg'}
+          alt={backgroundImage.alt || 'Location hero background'}
           fill
           className="object-cover"
           priority
@@ -78,7 +82,6 @@ const LocationHero = () => {
             <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-4 leading-tight max-w-4xl">
               {mainTitle}
             </h1>
-
             {/* Subtitle */}
             <p className="text-lg md:text-xl lg:text-2xl text-white/90 font-light tracking-wider uppercase">
               {subtitle}
@@ -99,7 +102,6 @@ const LocationHero = () => {
                     en: item.labelEn,
                     he: item.labelHe,
                   })
-
                   return (
                     <React.Fragment key={index}>
                       {item.isActive ? (
@@ -112,7 +114,6 @@ const LocationHero = () => {
                           {label}
                         </Link>
                       )}
-
                       {/* Separator */}
                       {index < breadcrumbs.length - 1 && (
                         <span className="text-gray-600 mx-2">/</span>

@@ -1,5 +1,4 @@
 'use client'
-
 import type React from 'react'
 import { useLanguage } from '@/app/contexts/LanguageContext'
 
@@ -9,81 +8,50 @@ interface LocationPoint {
   nameHe: string
   distance: string
   category: 'shopping' | 'education' | 'transport' | 'retail' | 'other'
+  order: number
+  id?: string | null
 }
 
-const LocationMap: React.FC = () => {
+interface LocationMapProps {
+  sectionTitleRo: string
+  sectionTitleEn: string
+  sectionTitleHe: string
+  sectionSubtitleRo: string
+  sectionSubtitleEn: string
+  sectionSubtitleHe: string
+  sectionDescriptionRo: string
+  sectionDescriptionEn: string
+  sectionDescriptionHe: string
+  mapEmbedUrl: string
+  locationPoints: LocationPoint[]
+  ctaButtonTextRo: string
+  ctaButtonTextEn: string
+  ctaButtonTextHe: string
+  ctaDescriptionRo: string
+  ctaDescriptionEn: string
+  ctaDescriptionHe: string
+}
+
+const LocationMap: React.FC<LocationMapProps> = ({
+  sectionTitleRo,
+  sectionTitleEn,
+  sectionTitleHe,
+  sectionSubtitleRo,
+  sectionSubtitleEn,
+  sectionSubtitleHe,
+  sectionDescriptionRo,
+  sectionDescriptionEn,
+  sectionDescriptionHe,
+  mapEmbedUrl,
+  locationPoints,
+  ctaButtonTextRo,
+  ctaButtonTextEn,
+  ctaButtonTextHe,
+  ctaDescriptionRo,
+  ctaDescriptionEn,
+  ctaDescriptionHe,
+}) => {
   const { t, currentLanguage } = useLanguage()
-
-  // Hardcoded data
-  const sectionTitleRo = 'Localizare'
-  const sectionTitleEn = 'Location'
-  const sectionTitleHe = 'מיקום'
-
-  const sectionSubtitleRo = 'Avantaje'
-  const sectionSubtitleEn = 'Advantages'
-  const sectionSubtitleHe = 'יתרונות'
-
-  const sectionDescriptionRo =
-    'Locuirea în Tunari, în comparație cu București, aduce numeroase avantaje. Tunari este o comună mică și liniștită, situată în apropierea Bucureștiului, oferind un echilibru perfect între viața urbană și confortul rural.'
-  const sectionDescriptionEn =
-    'Living in Tunari, compared to Bucharest, brings numerous advantages. Tunari is a small and quiet commune, located near Bucharest, offering a perfect balance between urban life and rural comfort.'
-  const sectionDescriptionHe =
-    'מגורים בטונארי, בהשוואה לבוקרשט, מביאים יתרונות רבים. טונארי היא קומונה קטנה ושקטה, הממוקמת ליד בוקרשט, המציעה איזון מושלם בין חיים עירוניים לנוחות כפרית.'
-
-  const mapEmbedUrl =
-    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2843.5!2d26.0826!3d44.5675!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b1ff4770b5b5b5%3A0x5!2s23%20August%2C%20Otopeni%2C%20Ilfov%2C%20Romania!5e0!3m2!1sen!2sro!4v1642684800000!5m2!1sen!2sro'
-
-  const locationPoints: LocationPoint[] = [
-    {
-      nameRo: 'Baneasa Shopping City',
-      nameEn: 'Baneasa Shopping City',
-      nameHe: 'בנאסה שופינג סיטי',
-      distance: '16 km',
-      category: 'shopping',
-    },
-    {
-      nameRo: 'Școala Olga Gudynn',
-      nameEn: 'Olga Gudynn School',
-      nameHe: 'בית ספר אולגה גודין',
-      distance: '2.5 km',
-      category: 'education',
-    },
-    {
-      nameRo: 'Școala Americană',
-      nameEn: 'American School',
-      nameHe: 'בית הספר האמריקני',
-      distance: '2.7 km',
-      category: 'education',
-    },
-    {
-      nameRo: 'Lidl',
-      nameEn: 'Lidl',
-      nameHe: 'לידל',
-      distance: '1.6 km',
-      category: 'retail',
-    },
-    {
-      nameRo: 'Benzinărie Carbogaz',
-      nameEn: 'Carbogaz Gas Station',
-      nameHe: 'תחנת דלק קרבוגז',
-      distance: '1.6 km',
-      category: 'other',
-    },
-    {
-      nameRo: "D'N 1 Mc Donalds",
-      nameEn: "D'N 1 Mc Donalds",
-      nameHe: "מקדונלדס D'N 1",
-      distance: '8 km',
-      category: 'retail',
-    },
-    {
-      nameRo: 'Aeroport',
-      nameEn: 'Airport',
-      nameHe: 'שדה תעופה',
-      distance: '9 km',
-      category: 'transport',
-    },
-  ]
 
   const sectionTitle = t({
     ro: sectionTitleRo,
@@ -101,6 +69,18 @@ const LocationMap: React.FC = () => {
     ro: sectionDescriptionRo,
     en: sectionDescriptionEn,
     he: sectionDescriptionHe,
+  })
+
+  const ctaButtonText = t({
+    ro: ctaButtonTextRo,
+    en: ctaButtonTextEn,
+    he: ctaButtonTextHe,
+  })
+
+  const ctaDescription = t({
+    ro: ctaDescriptionRo,
+    en: ctaDescriptionEn,
+    he: ctaDescriptionHe,
   })
 
   const getCategoryIcon = (category: string) => {
@@ -137,12 +117,6 @@ const LocationMap: React.FC = () => {
         )
     }
   }
-
-  const findMoreButtonText = t({
-    ro: 'AFLĂ MAI MULTE',
-    en: 'FIND OUT MORE',
-    he: 'גלה עוד',
-  })
 
   return (
     <section className="py-16 lg:py-24 bg-white">
@@ -182,8 +156,7 @@ const LocationMap: React.FC = () => {
                   className="rounded-lg"
                 />
               </div>
-
-              {/* Address */}
+              {/* Address - Fixed as requested */}
               <div className="mt-6 text-center">
                 <p className="text-gray-900 font-semibold text-lg mb-2">
                   {t({
@@ -207,10 +180,9 @@ const LocationMap: React.FC = () => {
                     en: point.nameEn,
                     he: point.nameHe,
                   })
-
                   return (
                     <div
-                      key={index}
+                      key={point.id || index}
                       className={`flex items-center justify-between py-4 px-6 ${
                         index % 2 === 0 ? 'bg-gray-50' : 'bg-white'
                       } rounded-lg border border-gray-100 hover:border-[#D4B896] transition-all duration-300`}
@@ -229,15 +201,9 @@ const LocationMap: React.FC = () => {
 
               {/* CTA Button */}
               <div className="text-center">
-                <p className="text-gray-600 mb-6">
-                  {t({
-                    ro: 'Pentru a vă ajuta să vă orientați mai bine în zonă, iată câteva zone importante la care puteți ajunge cu ușurință cu mașina din Tunari în mai puțin de 10 km:',
-                    en: 'To help you navigate the area better, here are some important areas you can easily reach by car from Tunari in less than 10 km:',
-                    he: 'כדי לעזור לכם להתמצא טוב יותר באזור, הנה כמה אזורים חשובים שתוכלו להגיע אליהם בקלות ברכב מטונארי בפחות מ-10 ק"מ:',
-                  })}
-                </p>
+                <p className="text-gray-600 mb-6">{ctaDescription}</p>
                 <button className="inline-block bg-[#D4B896] hover:bg-[#c9a87d] text-white px-12 py-6 rounded-lg transition-all duration-300 text-lg font-semibold tracking-wider uppercase btn-elegant transform hover:scale-105 shadow-lg hover:shadow-xl">
-                  {findMoreButtonText}
+                  {ctaButtonText}
                 </button>
               </div>
             </div>

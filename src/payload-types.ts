@@ -106,7 +106,7 @@ export interface Config {
     homepage: Homepage;
     'about-us-page': AboutUsPage;
     'villa-complex-page': VillaComplexPage;
-    locationPage: LocationPage;
+    'location-page': LocationPage;
     'gallery-page': GalleryPage;
   };
   globalsSelect: {
@@ -115,7 +115,7 @@ export interface Config {
     homepage: HomepageSelect<false> | HomepageSelect<true>;
     'about-us-page': AboutUsPageSelect<false> | AboutUsPageSelect<true>;
     'villa-complex-page': VillaComplexPageSelect<false> | VillaComplexPageSelect<true>;
-    locationPage: LocationPageSelect<false> | LocationPageSelect<true>;
+    'location-page': LocationPageSelect<false> | LocationPageSelect<true>;
     'gallery-page': GalleryPageSelect<false> | GalleryPageSelect<true>;
   };
   locale: null;
@@ -2437,54 +2437,60 @@ export interface VillaComplexPage {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "locationPage".
+ * via the `definition` "location-page".
  */
 export interface LocationPage {
   id: string;
-  heroSection?: {
-    backgroundImage?: (string | null) | Media;
-    breadcrumbs?: {
-      homeTextRo?: string | null;
-      homeTextEn?: string | null;
-      homeTextHe?: string | null;
-      currentPageTextRo?: string | null;
-      currentPageTextEn?: string | null;
-      currentPageTextHe?: string | null;
-      href?: string | null;
-    };
-    titleRo?: string | null;
-    titleEn?: string | null;
-    titleHe?: string | null;
-    subtitleRo?: string | null;
-    subtitleEn?: string | null;
-    subtitleHe?: string | null;
-  };
-  locationSection?: {
-    address?: string | null;
-    decorativeTextRo?: string | null;
-    decorativeTextEn?: string | null;
-    decorativeTextHe?: string | null;
-    headingRo?: string | null;
-    headingEn?: string | null;
-    headingHe?: string | null;
-    descriptionRo?: string | null;
-    descriptionEn?: string | null;
-    descriptionHe?: string | null;
-    nearbyPlaces?:
+  heroSection: {
+    isActive?: boolean | null;
+    mainTitleRo: string;
+    mainTitleEn: string;
+    mainTitleHe: string;
+    subtitleRo: string;
+    subtitleEn: string;
+    subtitleHe: string;
+    backgroundImage: string | Media;
+    breadcrumbs?:
       | {
-          nameRo?: string | null;
-          nameEn?: string | null;
-          nameHe?: string | null;
-          distance?: string | null;
+          labelRo: string;
+          labelEn: string;
+          labelHe: string;
+          href: string;
+          isActive?: boolean | null;
           id?: string | null;
         }[]
       | null;
-    ctaButton?: {
-      textRo?: string | null;
-      textEn?: string | null;
-      textHe?: string | null;
-      link?: string | null;
-    };
+  };
+  locationMapSection: {
+    isActive?: boolean | null;
+    sectionTitleRo: string;
+    sectionTitleEn: string;
+    sectionTitleHe: string;
+    sectionSubtitleRo: string;
+    sectionSubtitleEn: string;
+    sectionSubtitleHe: string;
+    sectionDescriptionRo: string;
+    sectionDescriptionEn: string;
+    sectionDescriptionHe: string;
+    mapEmbedUrl: string;
+    address: string;
+    locationPoints?:
+      | {
+          nameRo: string;
+          nameEn: string;
+          nameHe: string;
+          distance: string;
+          category: 'shopping' | 'education' | 'transport' | 'retail' | 'other';
+          order?: number | null;
+          id?: string | null;
+        }[]
+      | null;
+    ctaButtonTextRo: string;
+    ctaButtonTextEn: string;
+    ctaButtonTextHe: string;
+    ctaDescriptionRo: string;
+    ctaDescriptionEn: string;
+    ctaDescriptionHe: string;
   };
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -3012,61 +3018,63 @@ export interface VillaComplexPageSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "locationPage_select".
+ * via the `definition` "location-page_select".
  */
 export interface LocationPageSelect<T extends boolean = true> {
   heroSection?:
     | T
     | {
+        isActive?: T;
+        mainTitleRo?: T;
+        mainTitleEn?: T;
+        mainTitleHe?: T;
+        subtitleRo?: T;
+        subtitleEn?: T;
+        subtitleHe?: T;
         backgroundImage?: T;
         breadcrumbs?:
           | T
           | {
-              homeTextRo?: T;
-              homeTextEn?: T;
-              homeTextHe?: T;
-              currentPageTextRo?: T;
-              currentPageTextEn?: T;
-              currentPageTextHe?: T;
+              labelRo?: T;
+              labelEn?: T;
+              labelHe?: T;
               href?: T;
+              isActive?: T;
+              id?: T;
             };
-        titleRo?: T;
-        titleEn?: T;
-        titleHe?: T;
-        subtitleRo?: T;
-        subtitleEn?: T;
-        subtitleHe?: T;
       };
-  locationSection?:
+  locationMapSection?:
     | T
     | {
+        isActive?: T;
+        sectionTitleRo?: T;
+        sectionTitleEn?: T;
+        sectionTitleHe?: T;
+        sectionSubtitleRo?: T;
+        sectionSubtitleEn?: T;
+        sectionSubtitleHe?: T;
+        sectionDescriptionRo?: T;
+        sectionDescriptionEn?: T;
+        sectionDescriptionHe?: T;
+        mapEmbedUrl?: T;
         address?: T;
-        decorativeTextRo?: T;
-        decorativeTextEn?: T;
-        decorativeTextHe?: T;
-        headingRo?: T;
-        headingEn?: T;
-        headingHe?: T;
-        descriptionRo?: T;
-        descriptionEn?: T;
-        descriptionHe?: T;
-        nearbyPlaces?:
+        locationPoints?:
           | T
           | {
               nameRo?: T;
               nameEn?: T;
               nameHe?: T;
               distance?: T;
+              category?: T;
+              order?: T;
               id?: T;
             };
-        ctaButton?:
-          | T
-          | {
-              textRo?: T;
-              textEn?: T;
-              textHe?: T;
-              link?: T;
-            };
+        ctaButtonTextRo?: T;
+        ctaButtonTextEn?: T;
+        ctaButtonTextHe?: T;
+        ctaDescriptionRo?: T;
+        ctaDescriptionEn?: T;
+        ctaDescriptionHe?: T;
       };
   updatedAt?: T;
   createdAt?: T;
