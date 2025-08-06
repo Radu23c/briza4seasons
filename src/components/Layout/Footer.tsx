@@ -29,9 +29,9 @@ const Footer: React.FC = () => {
         he: 'כתובת:',
       },
       address: {
-        ro: '23 August Otopeni, Bucuresti / Ilfov',
-        en: '23 August Otopeni, Bucuresti / Ilfov',
-        he: '23 אוגוסט אוטופני, בוקרשט / אילפוב',
+        ro: 'Intrarea Mesteacănului, Otopeni, București / Ilfov',
+        en: 'Intrarea Mesteacănului, Otopeni, București / Ilfov',
+        he: 'אינטרה מסטאקן, אוטופני, בוקרשט / אילפוב',
       },
       phoneLabel: {
         ro: 'Contact telefonic:',

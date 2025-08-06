@@ -92,9 +92,9 @@ const Header: React.FC = () => {
       labelRo: 'Adresa:',
       labelEn: 'Address:',
       labelHe: 'כתובת:',
-      valueRo: '23 August Otopeni, Bucuresti / Ilfov',
-      valueEn: '23 August Otopeni, Bucuresti / Ilfov',
-      valueHe: '23 אוגוסט אוטופני, בוקרשט / אילפוב',
+      valueRo: 'Intrarea Mesteacănului, Otopeni, București / Ilfov',
+      valueEn: 'Intrarea Mesteacănului, Otopeni, Bucharest / Ilfov',
+      valueHe: 'אינטרה מסטאקן, אוטופני, בוקרשט / אילפוב',
     },
     phone: {
       labelRo: 'Contact telefonic:',

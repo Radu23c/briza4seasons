@@ -38,7 +38,7 @@ const translations = {
     showLargerMap: 'Afișați harta mărită',
 
     // Address
-    fullAddress: '23 August, Otopeni',
+    fullAddress: 'Intrarea Mesteacănului, Otopeni',
     cityRegion: 'București / Ilfov',
     postalCode: '075100',
   },
@@ -76,7 +76,7 @@ const translations = {
     showLargerMap: 'Show larger map',
 
     // Address
-    fullAddress: '23 August, Otopeni',
+    fullAddress: 'Intrarea Mesteacănului, Otopeni',
     cityRegion: 'Bucharest / Ilfov',
     postalCode: '075100',
   },
@@ -377,7 +377,7 @@ function ContactForm() {
                     allowFullScreen
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
-                    title="Locația 23 August Otopeni"
+                    title="Locația Intrarea Mesteacănului, Otopeni"
                     className="rounded-lg"
                   />
                 </div>
@@ -463,7 +463,7 @@ function ContactHero() {
 
       <div className="relative z-10 container mx-auto px-4">
         {/* Hero Content */}
-        <div className="text-center text-white mb-16">
+        <div className="text-center text-white mb-16 pt-36">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mt-24 mb-4">{t.contactUs}</h1>
           <p className="text-xl md:text-2xl font-light opacity-90">{t.heroSubtitle}</p>
         </div>
@@ -522,7 +522,7 @@ function ContactHero() {
           </div>
 
           {/* Email Card */}
-          <div className="bg-white/95 backdrop-blur-sm rounded-lg p-8 text-center shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <div className="bg-white/95 backdrop-blur-sm rounded-lg p-2 pt-8 text-center shadow-lg hover:shadow-xl transition-shadow duration-300">
             <div className="w-16 h-16 bg-amber-500 rounded-full flex items-center justify-center mx-auto mb-6">
               <svg
                 className="w-8 h-8 text-white"
@@ -534,14 +534,14 @@ function ContactHero() {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={2}
-                  d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                  d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 002 2v10a2 2 0 002 2z"
                 />
               </svg>
             </div>
             <h3 className="text-lg font-semibold text-gray-800 mb-3">{t.email}</h3>
             <a
-              href="blissimobiliare@briza4seasons.ro"
-              className="text-gray-600 hover:text-amber-600 transition-colors duration-200"
+              href="mailto:blissimobiliare@briza4seasons.ro"
+              className="text-gray-600 hover:text-amber-600 transition-colors duration-200 break-all text-sm sm:text-base inline-block"
             >
               blissimobiliare@briza4seasons.ro
             </a>
