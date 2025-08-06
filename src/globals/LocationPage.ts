@@ -337,7 +337,7 @@ export const LocationPage: GlobalConfig = {
           label: 'CTA Description (Romanian)',
           required: true,
           defaultValue:
-            'Pentru a vă ajuta să vă orientați mai bine în zonă, iată câteva zone importante la care puteți ajunge cu ușurință cu mașina din Tunari în mai puțin de 10 km:',
+            'Pentru a vă ajuta să vă orientați mai bine în zonă, iată câteva zone importante la care puteți ajunge cu ușurință cu mașina din Otopeni în mai puțin de 10 km:',
         },
         {
           name: 'ctaDescriptionEn',

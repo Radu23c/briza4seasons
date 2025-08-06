@@ -120,9 +120,9 @@ const Footer: React.FC = () => {
                   Briza4Seasons
                 </h3>
                 <p className="text-gray-400 text-lg leading-relaxed">
-                  {currentLanguage === 'ro' && 'Proprietăți premium în inima Tunari'}
-                  {currentLanguage === 'en' && 'Premium properties in the heart of Tunari'}
-                  {currentLanguage === 'he' && 'נכסים פרמיום בלב טונארי'}
+                  {currentLanguage === 'ro' && 'Proprietăți premium în inima Otopeni'}
+                  {currentLanguage === 'en' && 'Premium properties in the heart of Otopeni'}
+                  {currentLanguage === 'he' && 'נכסים פרמיום בלב אוטופני'}
                 </p>
               </div>
 

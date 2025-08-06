@@ -156,7 +156,7 @@ const LocationMap: React.FC<LocationMapProps> = ({
                   className="rounded-lg"
                 />
               </div>
-              {/* Address - Fixed as requested */}
+              {/* Address - Updated to new location */}
               <div className="mt-6 text-center">
                 <p className="text-gray-900 font-semibold text-lg mb-2">
                   {t({
@@ -166,13 +166,19 @@ const LocationMap: React.FC<LocationMapProps> = ({
                   })}
                 </p>
                 <p className="text-[#D4B896] font-medium text-xl">
-                  23 August Otopeni, București / Ilfov
+                  Intrarea Mesteacănului, Otopeni, București / Ilfov
                 </p>
               </div>
             </div>
 
-            {/* Right Side - Location Points */}
+            {/* Right Side - CTA Description, Location Points, and Button */}
             <div className={currentLanguage === 'he' ? 'lg:order-1' : ''}>
+              {/* CTA Description - Moved to top */}
+              <div className="text-center mb-8">
+                <p className="text-gray-600 text-lg">{ctaDescription}</p>
+              </div>
+
+              {/* Location Points List */}
               <div className="space-y-4 mb-8">
                 {locationPoints.map((point, index) => {
                   const pointName = t({
@@ -199,9 +205,8 @@ const LocationMap: React.FC<LocationMapProps> = ({
                 })}
               </div>
 
-              {/* CTA Button */}
+              {/* CTA Button - Stays at bottom */}
               <div className="text-center">
-                <p className="text-gray-600 mb-6">{ctaDescription}</p>
                 <button className="inline-block bg-[#D4B896] hover:bg-[#c9a87d] text-white px-12 py-6 rounded-lg transition-all duration-300 text-lg font-semibold tracking-wider uppercase btn-elegant transform hover:scale-105 shadow-lg hover:shadow-xl">
                   {ctaButtonText}
                 </button>
