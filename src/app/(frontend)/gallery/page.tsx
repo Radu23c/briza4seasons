@@ -9,6 +9,7 @@ import type { Media as PayloadMedia, Homepage } from '@/payload-types'
 // Types for CMS data - matching Payload's exact structure
 interface RawGalleryImage {
   image: string | PayloadMedia
+  uploadDate?: string | null // Add uploadDate to the interface
   caption?: {
     captionRo?: string | null
     captionEn?: string | null
@@ -71,7 +72,7 @@ function transformBreadcrumbs(breadcrumbs: any[] | null | undefined): any[] {
   }))
 }
 
-// Helper function to convert raw gallery images to the expected format
+// FIXED: Helper function to convert raw gallery images to the expected format with uploadDate
 function convertGalleryImages(rawImages: any[] | null | undefined) {
   if (!rawImages || !Array.isArray(rawImages)) return []
 
@@ -88,6 +89,7 @@ function convertGalleryImages(rawImages: any[] | null | undefined) {
 
     return {
       image: imageObject,
+      uploadDate: nullToUndefined(rawImage.uploadDate), // ← ADD THIS LINE
       caption,
       order: nullToUndefined(rawImage.order),
       id: nullToUndefined(rawImage.id),
@@ -208,6 +210,7 @@ async function GalleryPageContent() {
               sectionSubtitleHe={ensureString(homepageData.gallerySection.sectionSubtitleHe)}
               galleryImages={convertGalleryImages(homepageData.gallerySection.galleryImages)}
               enableLightbox={nullToUndefined(homepageData.gallerySection.enableLightbox)}
+              dateDisplayFormat={nullToUndefined(homepageData.gallerySection.dateDisplayFormat)} // ← ADD THIS LINE
             />
           )}
 

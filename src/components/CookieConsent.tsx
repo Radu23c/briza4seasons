@@ -87,10 +87,7 @@ export default function CookieConsent() {
     window.open('/privacy-policy', '_blank')
   }
 
-  const handleLanguageChange = (languageCode: string) => {
-    setLanguage(languageCode)
-    setIsLanguageDropdownOpen(false)
-  }
+  // REMOVED: The unused handleLanguageChange function that was causing the error
 
   if (!showConsent) return null
 
