@@ -64,9 +64,9 @@ function transformBreadcrumbs(breadcrumbs: any[] | null | undefined): any[] {
   }))
 }
 
-// Helper function to transform location points
-function transformLocationPoints(points: any[] | undefined): LocationPoint[] {
-  if (!points) return []
+// Helper function to transform location points - updated to handle null
+function transformLocationPoints(points: any[] | null | undefined): LocationPoint[] {
+  if (!points || !Array.isArray(points)) return []
   return points
     .map((point) => ({
       nameRo: ensureString(point.nameRo),
@@ -133,7 +133,7 @@ async function LocationPageContent() {
       const defaultData = {
         heroSection: {
           isActive: true,
-          mainTitleRo: 'Locație Strategică',
+          mainTitleRo: 'Locație Strategicăss',
           mainTitleEn: 'Strategic Location',
           mainTitleHe: 'מיקום אסטרטגי',
           subtitleRo: 'Tunari, Ilfov',
