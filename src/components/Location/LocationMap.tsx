@@ -42,7 +42,7 @@ const LocationMap: React.FC<LocationMapProps> = ({
   sectionDescriptionRo,
   sectionDescriptionEn,
   sectionDescriptionHe,
-  mapEmbedUrl,
+  // mapEmbedUrl is no longer used since we're hardcoding it
   locationPoints,
   ctaButtonTextRo,
   ctaButtonTextEn,
@@ -52,6 +52,10 @@ const LocationMap: React.FC<LocationMapProps> = ({
   ctaDescriptionHe,
 }) => {
   const { t, currentLanguage } = useLanguage()
+
+  // Hardcoded Google Maps embed URL for Intrarea Mesteacănului, Otopeni
+  const hardcodedMapUrl =
+    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3565.1943385180093!2d26.095480976714853!3d44.550572493930936!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b21ceb096d5d31%3A0xac8553244cabe0c7!2sIntrarea%20Mesteac%C4%83nului%2C%20075100%20Otopeni!5e1!3m2!1sde!2sro!4v1754480844195!5m2!1sde!2sro'
 
   const sectionTitle = t({
     ro: sectionTitleRo,
@@ -141,7 +145,7 @@ const LocationMap: React.FC<LocationMapProps> = ({
             <div className={currentLanguage === 'he' ? 'lg:order-2' : ''}>
               <div className="relative aspect-[4/3] rounded-lg overflow-hidden shadow-2xl bg-gray-200">
                 <iframe
-                  src={mapEmbedUrl}
+                  src={hardcodedMapUrl}
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
