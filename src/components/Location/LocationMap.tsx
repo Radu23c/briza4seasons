@@ -208,13 +208,6 @@ const LocationMap: React.FC<LocationMapProps> = ({
                   )
                 })}
               </div>
-
-              {/* CTA Button - Stays at bottom */}
-              <div className="text-center">
-                <button className="inline-block bg-[#D4B896] hover:bg-[#c9a87d] text-white px-12 py-6 rounded-lg transition-all duration-300 text-lg font-semibold tracking-wider uppercase btn-elegant transform hover:scale-105 shadow-lg hover:shadow-xl">
-                  {ctaButtonText}
-                </button>
-              </div>
             </div>
           </div>
         </div>
