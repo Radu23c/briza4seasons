@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useLanguage } from '@/app/contexts/LanguageContext'
+import LanguageToggle from '../components/LanguageToggle'
 
 const cookieTexts = {
   ro: {
@@ -29,6 +30,12 @@ const cookieTexts = {
     learnMore: 'מדיניות פרטיות',
   },
 }
+
+const languageOptions = [
+  { code: 'ro', name: 'RO', flag: '🇷🇴' },
+  { code: 'en', name: 'EN', flag: '🇬🇧' },
+  { code: 'he', name: 'עב', flag: '🇮🇱' },
+]
 
 export default function CookieConsent() {
   const [showConsent, setShowConsent] = useState(false)
@@ -80,6 +87,11 @@ export default function CookieConsent() {
     window.open('/privacy-policy', '_blank')
   }
 
+  const handleLanguageChange = (languageCode: string) => {
+    setLanguage(languageCode)
+    setIsLanguageDropdownOpen(false)
+  }
+
   if (!showConsent) return null
 
   const currentTexts = cookieTexts[currentLanguage as keyof typeof cookieTexts] || cookieTexts.ro
@@ -96,6 +108,11 @@ export default function CookieConsent() {
         `}
         dir={isRTL ? 'rtl' : 'ltr'}
       >
+        {/* Language Toggle - positioned at top right/left based on direction */}
+        <div className={`absolute top-4 ${isRTL ? 'left-4' : 'right-4'} z-10`}>
+          <LanguageToggle />
+        </div>
+
         {/* Decorative border accent */}
         <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
           <div className="w-16 h-16 bg-[#D4B896] rounded-full flex items-center justify-center shadow-lg">
