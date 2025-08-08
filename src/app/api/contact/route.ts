@@ -1,11 +1,13 @@
-import { Resend } from 'resend'
 import { NextRequest, NextResponse } from 'next/server'
+import sgMail from '@sendgrid/mail'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+// Set SendGrid API key
+sgMail.setApiKey(process.env.SENDGRID_API_KEY!)
 
 export async function POST(request: NextRequest) {
   try {
-    const { nume, email, telefon, mesaj } = await request.json()
+    const body = await request.json()
+    const { nume, email, telefon, mesaj } = body
 
     // Validate required fields
     if (!nume || !email || !telefon || !mesaj) {
@@ -18,55 +20,69 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Invalid email format' }, { status: 400 })
     }
 
-    // Send email using Resend
-    const data = await resend.emails.send({
-      from: 'Contact Form <onboarding@resend.dev>', // Use Resend's default sender for now
-      to: ['blissimobiliare@briza4seasons.ro'],
-      subject: `New contact form submission from ${nume}`,
+    // Create email content
+    const msg = {
+      to: process.env.SENDGRID_TO_EMAIL!, // Recipient email
+      from: process.env.SENDGRID_FROM_EMAIL!, // Verified sender email
+      replyTo: email, // User's email for easy reply
+      subject: `New Contact Form Submission from ${nume}`,
+      text: `
+New contact form submission:
+
+Name: ${nume}
+Email: ${email}
+Phone: ${telefon}
+
+Message:
+${mesaj}
+
+---
+This message was sent from your website contact form.
+      `,
       html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <h2 style="color: #D4B896; border-bottom: 2px solid #D4B896; padding-bottom: 10px;">
-            New Contact Form Submission - Torga45
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+          <h2 style="color: #f59e0b; border-bottom: 2px solid #f59e0b; padding-bottom: 10px;">
+            New Contact Form Submission
           </h2>
           
-          <div style="background-color: #f9f9f9; padding: 20px; border-radius: 8px; margin: 20px 0;">
-            <h3 style="margin-top: 0; color: #333;">Contact Details:</h3>
-            <p><strong>Nume:</strong> ${nume}</p>
-            <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
-            <p><strong>Telefon:</strong> <a href="tel:${telefon}">${telefon}</a></p>
+          <div style="background-color: #f9fafb; padding: 20px; border-radius: 8px; margin: 20px 0;">
+            <h3 style="color: #374151; margin-top: 0;">Contact Details:</h3>
+            <p><strong>Name:</strong> ${nume}</p>
+            <p><strong>Email:</strong> <a href="mailto:${email}" style="color: #f59e0b;">${email}</a></p>
+            <p><strong>Phone:</strong> <a href="tel:${telefon}" style="color: #f59e0b;">${telefon}</a></p>
           </div>
           
-          <div style="background-color: #fff; padding: 20px; border-left: 4px solid #D4B896; margin: 20px 0;">
-            <h3 style="margin-top: 0; color: #333;">Message:</h3>
-            <p style="white-space: pre-wrap; line-height: 1.6;">${mesaj}</p>
+          <div style="background-color: #ffffff; padding: 20px; border: 1px solid #e5e7eb; border-radius: 8px;">
+            <h3 style="color: #374151; margin-top: 0;">Message:</h3>
+            <p style="line-height: 1.6; color: #4b5563;">${mesaj.replace(/\n/g, '<br>')}</p>
           </div>
           
-          <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; color: #666; font-size: 14px;">
-            <p>This message was sent from the Torga45 contact form.</p>
-            <p>Reply directly to this email to respond to ${nume}.</p>
+          <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e5e7eb; color: #6b7280; font-size: 14px;">
+            <p>This message was sent from your website contact form.</p>
+            <p>You can reply directly to this email to respond to ${nume}.</p>
           </div>
         </div>
       `,
-      // Set reply-to to the form submitter's email
-      replyTo: email,
-    })
+    }
 
-    return NextResponse.json(
-      {
-        success: true,
-        message: 'Email sent successfully',
-        data: data,
-      },
-      { status: 200 },
-    )
+    // Send email
+    await sgMail.send(msg)
+
+    return NextResponse.json({ message: 'Email sent successfully' }, { status: 200 })
   } catch (error) {
-    console.error('Error sending email:', error)
-    return NextResponse.json(
-      {
-        error: 'Failed to send email',
-        details: error instanceof Error ? error.message : 'Unknown error',
-      },
-      { status: 500 },
-    )
+    console.error('SendGrid error:', error)
+
+    // Handle specific SendGrid errors
+    if (error && typeof error === 'object' && 'response' in error) {
+      const sgError = error as any
+      console.error('SendGrid error details:', sgError.response?.body)
+
+      return NextResponse.json(
+        { error: 'Failed to send email. Please check your SendGrid configuration.' },
+        { status: 500 },
+      )
+    }
+
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }

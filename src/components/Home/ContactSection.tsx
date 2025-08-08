@@ -1,5 +1,4 @@
 'use client'
-
 import type React from 'react'
 import { useState } from 'react'
 import Image from 'next/image'
@@ -61,6 +60,13 @@ const ContactSection: React.FC<ContactSectionProps> = ({
     message: '',
   })
 
+  // Add loading and status states
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: 'success' | 'error' | null
+    message: string
+  }>({ type: null, message: '' })
+
   // Early return if required data is missing
   if (!backgroundImage?.url) {
     console.warn('ContactSection: Missing required background image')
@@ -103,18 +109,92 @@ const ContactSection: React.FC<ContactSectionProps> = ({
     he: submitButtonHe || '',
   })
 
+  // Status messages in multiple languages
+  const statusMessages = {
+    success: t({
+      ro: 'Mesajul a fost trimis cu succes! Vă vom contacta în curând.',
+      en: 'Message sent successfully! We will contact you soon.',
+      he: 'ההודעה נשלחה בהצלחה! ניצור איתך קשר בקרוב.',
+    }),
+    error: t({
+      ro: 'A apărut o eroare. Vă rugăm să încercați din nou.',
+      en: 'An error occurred. Please try again.',
+      he: 'אירעה שגיאה. אנא נסה שוב.',
+    }),
+    connectionError: t({
+      ro: 'A apărut o eroare de conexiune. Vă rugăm să încercați din nou.',
+      en: 'A connection error occurred. Please try again.',
+      he: 'אירעה שגיאת חיבור. אנא נסה שוב.',
+    }),
+    sending: t({
+      ro: 'TRIMITERE...',
+      en: 'SENDING...',
+      he: 'שולח...',
+    }),
+  }
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
     setFormData((prev) => ({
       ...prev,
       [name]: value,
     }))
+    // Clear status when user starts typing
+    if (submitStatus.type) {
+      setSubmitStatus({ type: null, message: '' })
+    }
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // TODO: Implement form submission logic
-    console.log('Form submitted:', formData)
+    setIsSubmitting(true)
+    setSubmitStatus({ type: null, message: '' })
+
+    try {
+      // Map field names to match the API expectations
+      const apiData = {
+        nume: formData.name,
+        email: formData.email,
+        telefon: formData.phone,
+        mesaj: formData.message,
+      }
+
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(apiData),
+      })
+
+      const result = await response.json()
+
+      if (response.ok) {
+        setSubmitStatus({
+          type: 'success',
+          message: statusMessages.success,
+        })
+        // Reset form
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          message: '',
+        })
+      } else {
+        setSubmitStatus({
+          type: 'error',
+          message: result.error || statusMessages.error,
+        })
+      }
+    } catch (error) {
+      setSubmitStatus({
+        type: 'error',
+        message: statusMessages.connectionError,
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -149,6 +229,19 @@ const ContactSection: React.FC<ContactSectionProps> = ({
 
           {/* Contact Form */}
           <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Status Message */}
+            {submitStatus.type && (
+              <div
+                className={`p-4 rounded-lg ${
+                  submitStatus.type === 'success'
+                    ? 'bg-green-50 border border-green-200 text-green-800'
+                    : 'bg-red-50 border border-red-200 text-red-800'
+                } ${currentLanguage === 'he' ? 'text-right' : 'text-left'}`}
+              >
+                {submitStatus.message}
+              </div>
+            )}
+
             {/* Name Field */}
             <div>
               <label
@@ -166,7 +259,8 @@ const ContactSection: React.FC<ContactSectionProps> = ({
                 value={formData.name}
                 onChange={handleInputChange}
                 required
-                className={`w-full px-4 py-3 border border-gray-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#D4B896] focus:border-transparent transition-all duration-300 ${
+                disabled={isSubmitting}
+                className={`w-full px-4 py-3 border border-gray-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#D4B896] focus:border-transparent transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed ${
                   currentLanguage === 'he' ? 'text-right' : 'text-left'
                 }`}
                 dir={currentLanguage === 'he' ? 'rtl' : 'ltr'}
@@ -190,7 +284,8 @@ const ContactSection: React.FC<ContactSectionProps> = ({
                 value={formData.email}
                 onChange={handleInputChange}
                 required
-                className={`w-full px-4 py-3 border border-gray-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#D4B896] focus:border-transparent transition-all duration-300 ${
+                disabled={isSubmitting}
+                className={`w-full px-4 py-3 border border-gray-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#D4B896] focus:border-transparent transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed ${
                   currentLanguage === 'he' ? 'text-right' : 'text-left'
                 }`}
                 dir={currentLanguage === 'he' ? 'rtl' : 'ltr'}
@@ -214,7 +309,8 @@ const ContactSection: React.FC<ContactSectionProps> = ({
                 value={formData.phone}
                 onChange={handleInputChange}
                 required
-                className={`w-full px-4 py-3 border border-gray-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#D4B896] focus:border-transparent transition-all duration-300 ${
+                disabled={isSubmitting}
+                className={`w-full px-4 py-3 border border-gray-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#D4B896] focus:border-transparent transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed ${
                   currentLanguage === 'he' ? 'text-right' : 'text-left'
                 }`}
                 dir={currentLanguage === 'he' ? 'rtl' : 'ltr'}
@@ -238,7 +334,8 @@ const ContactSection: React.FC<ContactSectionProps> = ({
                 onChange={handleInputChange}
                 required
                 rows={5}
-                className={`w-full px-4 py-3 border border-gray-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#D4B896] focus:border-transparent transition-all duration-300 resize-vertical ${
+                disabled={isSubmitting}
+                className={`w-full px-4 py-3 border border-gray-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#D4B896] focus:border-transparent transition-all duration-300 resize-vertical disabled:opacity-50 disabled:cursor-not-allowed ${
                   currentLanguage === 'he' ? 'text-right' : 'text-left'
                 }`}
                 dir={currentLanguage === 'he' ? 'rtl' : 'ltr'}
@@ -251,9 +348,36 @@ const ContactSection: React.FC<ContactSectionProps> = ({
             >
               <button
                 type="submit"
-                className="bg-[#D4B896] hover:bg-[#c9a87d] text-white px-8 py-4 rounded-sm transition-all duration-300 text-sm font-semibold tracking-wider uppercase btn-elegant transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#D4B896] focus:ring-offset-2"
+                disabled={isSubmitting}
+                className="bg-[#D4B896] hover:bg-[#c9a87d] disabled:bg-[#D4B896]/50 disabled:cursor-not-allowed text-white px-8 py-4 rounded-sm transition-all duration-300 text-sm font-semibold tracking-wider uppercase btn-elegant transform hover:scale-105 disabled:transform-none focus:outline-none focus:ring-2 focus:ring-[#D4B896] focus:ring-offset-2 flex items-center justify-center min-w-[200px] mx-auto"
               >
-                {submitButton}
+                {isSubmitting ? (
+                  <>
+                    <svg
+                      className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      ></circle>
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                      ></path>
+                    </svg>
+                    {statusMessages.sending}
+                  </>
+                ) : (
+                  submitButton
+                )}
               </button>
             </div>
           </form>

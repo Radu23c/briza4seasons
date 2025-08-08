@@ -284,8 +284,8 @@ export default function LocationPage() {
 }
 
 export const metadata: Metadata = {
-  title: 'Location | Torga45 Villa Complex',
+  title: 'Location | Briza4Seasons Villa Complex',
   description:
-    'Discover the strategic location of Torga45 villa complex in Tunari, just 15 minutes from downtown Bucharest.',
+    'Discover the strategic location of Briza4Seasons villa complex in Tunari, just 15 minutes from downtown Bucharest.',
   keywords: 'location, Tunari, Bucharest, villa complex, strategic position',
 }

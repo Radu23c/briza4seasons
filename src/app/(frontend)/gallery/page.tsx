@@ -161,9 +161,9 @@ async function GalleryPageContent() {
     const defaultGalleryData = {
       heroSection: {
         isActive: true,
-        mainTitleRo: 'Galeria Ansamblului Rezidential Torga45',
-        mainTitleEn: 'Torga45 Residential Complex Gallery',
-        mainTitleHe: 'גלריית מתחם המגורים טורגה45',
+        mainTitleRo: 'Galeria Ansamblului Rezidential Briza4Seasons',
+        mainTitleEn: 'Briza4Seasons Residential Complex Gallery',
+        mainTitleHe: 'גלריית מתחם המגורים בריזה4סיזונס',
         subtitleRo: 'GALERIE FOTO',
         subtitleEn: 'PHOTO GALLERY',
         subtitleHe: 'גלריית תמונות',
@@ -239,9 +239,9 @@ async function GalleryPageContent() {
     const fallbackData = {
       heroSection: {
         isActive: true,
-        mainTitleRo: 'Galeria Ansamblului Rezidential Torga45',
-        mainTitleEn: 'Torga45 Residential Complex Gallery',
-        mainTitleHe: 'גלריית מתחם המגורים טורגה45',
+        mainTitleRo: 'Galeria Ansamblului Rezidential Briza4Seasons',
+        mainTitleEn: 'Briza4Seasons Residential Complex Gallery',
+        mainTitleHe: 'גלריית מתחם המגורים בריזה4סיזונס',
         subtitleRo: 'GALERIE FOTO',
         subtitleEn: 'PHOTO GALLERY',
         subtitleHe: 'גלריית תמונות',
@@ -286,5 +286,5 @@ export default function GalleryPage() {
 
 export const metadata = {
   title: 'Gallery - Briza4Seasons',
-  description: 'Explore the photo gallery of Torga45 residential complex.',
+  description: 'Explore the photo gallery of Briza4Seasons residential complex.',
 }

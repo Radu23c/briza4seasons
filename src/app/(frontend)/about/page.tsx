@@ -133,9 +133,9 @@ async function AboutUsPageContent() {
       const defaultData = {
         heroSection: {
           isActive: true,
-          mainTitleRo: 'Despre Ansamblul Rezidential Torga45',
-          mainTitleEn: 'About Torga45 Residential Complex',
-          mainTitleHe: 'אודות מתחם המגורים טורגה45',
+          mainTitleRo: 'Despre Ansamblul Rezidential Briza4Seasons',
+          mainTitleEn: 'About Briza4Seasons Residential Complex',
+          mainTitleHe: 'אודות מתחם המגורים בריזה4סיזונס',
           subtitleRo: 'CINE SUNTEM?',
           subtitleEn: 'WHO ARE WE?',
           subtitleHe: 'מי אנחנו?',
@@ -242,9 +242,9 @@ async function AboutUsPageContent() {
     const fallbackData = {
       heroSection: {
         isActive: true,
-        mainTitleRo: 'Despre Ansamblul Rezidential Torga45',
-        mainTitleEn: 'About Torga45 Residential Complex',
-        mainTitleHe: 'אודות מתחם המגורים טורגה45',
+        mainTitleRo: 'Despre Ansamblul Rezidential Briza4Seasons',
+        mainTitleEn: 'About Briza4Seasons Residential Complex',
+        mainTitleHe: 'אודות מתחם המגורים בריזה4סיזונס',
         subtitleRo: 'CINE SUNTEM?',
         subtitleEn: 'WHO ARE WE?',
         subtitleHe: 'מי אנחנו?',
@@ -295,5 +295,5 @@ export default function AboutUsPage() {
 
 export const metadata = {
   title: 'About Us - Briza4Seasons',
-  description: "Learn more about Torga45 residential complex and our project's story.",
+  description: "Learn more about Briza4Seasons residential complex and our project's story.",
 }

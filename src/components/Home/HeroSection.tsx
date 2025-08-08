@@ -1,5 +1,4 @@
 'use client'
-
 import type React from 'react'
 import { useState } from 'react'
 import Image from 'next/image'
@@ -56,6 +55,9 @@ const ContactPopup: React.FC<{
     setSubmitStatus({ type: null, message: '' })
 
     try {
+      console.log('=== Contact Popup Form Submission Started ===')
+      console.log('Form data:', formData)
+
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
@@ -65,6 +67,7 @@ const ContactPopup: React.FC<{
       })
 
       const result = await response.json()
+      console.log('API Response:', result)
 
       if (response.ok) {
         setSubmitStatus({
@@ -78,7 +81,6 @@ const ContactPopup: React.FC<{
           telefon: '',
           mesaj: '',
         })
-
         // Auto close after success message
         setTimeout(() => {
           setSubmitStatus({ type: null, message: '' })
@@ -92,6 +94,7 @@ const ContactPopup: React.FC<{
         })
       }
     } catch (error) {
+      console.error('Contact popup form error:', error)
       setSubmitStatus({
         type: 'error',
         message: translations[currentLanguage as keyof typeof translations].connectionError,
@@ -178,6 +181,7 @@ const ContactPopup: React.FC<{
           <button
             onClick={onClose}
             className="text-gray-400 hover:text-gray-600 text-3xl leading-none transition-colors duration-200"
+            disabled={isSubmitting}
           >
             ×
           </button>
@@ -199,6 +203,7 @@ const ContactPopup: React.FC<{
               </div>
             )}
 
+            {/* Name Field */}
             <div>
               <input
                 type="text"
@@ -208,10 +213,11 @@ const ContactPopup: React.FC<{
                 onChange={handleInputChange}
                 required
                 disabled={isSubmitting}
-                className={`w-full px-4 py-4 border-b-2 border-gray-200 bg-transparent focus:border-amber-500 focus:outline-none transition-colors duration-300 text-gray-900 placeholder-gray-500 text-lg disabled:opacity-50 ${isRTL ? 'text-right' : 'text-left'}`}
+                className={`w-full px-4 py-4 border-b-2 border-gray-200 bg-transparent focus:border-amber-500 focus:outline-none transition-colors duration-300 text-gray-900 placeholder-gray-500 text-lg disabled:opacity-50 disabled:cursor-not-allowed ${isRTL ? 'text-right' : 'text-left'}`}
               />
             </div>
 
+            {/* Email Field */}
             <div>
               <input
                 type="email"
@@ -221,10 +227,11 @@ const ContactPopup: React.FC<{
                 onChange={handleInputChange}
                 required
                 disabled={isSubmitting}
-                className={`w-full px-4 py-4 border-b-2 border-gray-200 bg-transparent focus:border-amber-500 focus:outline-none transition-colors duration-300 text-gray-900 placeholder-gray-500 text-lg disabled:opacity-50 ${isRTL ? 'text-right' : 'text-left'}`}
+                className={`w-full px-4 py-4 border-b-2 border-gray-200 bg-transparent focus:border-amber-500 focus:outline-none transition-colors duration-300 text-gray-900 placeholder-gray-500 text-lg disabled:opacity-50 disabled:cursor-not-allowed ${isRTL ? 'text-right' : 'text-left'}`}
               />
             </div>
 
+            {/* Phone Field */}
             <div>
               <input
                 type="tel"
@@ -234,10 +241,11 @@ const ContactPopup: React.FC<{
                 onChange={handleInputChange}
                 required
                 disabled={isSubmitting}
-                className={`w-full px-4 py-4 border-b-2 border-gray-200 bg-transparent focus:border-amber-500 focus:outline-none transition-colors duration-300 text-gray-900 placeholder-gray-500 text-lg disabled:opacity-50 ${isRTL ? 'text-right' : 'text-left'}`}
+                className={`w-full px-4 py-4 border-b-2 border-gray-200 bg-transparent focus:border-amber-500 focus:outline-none transition-colors duration-300 text-gray-900 placeholder-gray-500 text-lg disabled:opacity-50 disabled:cursor-not-allowed ${isRTL ? 'text-right' : 'text-left'}`}
               />
             </div>
 
+            {/* Message Field */}
             <div>
               <textarea
                 name="mesaj"
@@ -247,10 +255,11 @@ const ContactPopup: React.FC<{
                 required
                 rows={4}
                 disabled={isSubmitting}
-                className={`w-full px-4 py-4 border-b-2 border-gray-200 bg-transparent focus:border-amber-500 focus:outline-none transition-colors duration-300 text-gray-900 placeholder-gray-500 text-lg resize-none disabled:opacity-50 ${isRTL ? 'text-right' : 'text-left'}`}
+                className={`w-full px-4 py-4 border-b-2 border-gray-200 bg-transparent focus:border-amber-500 focus:outline-none transition-colors duration-300 text-gray-900 placeholder-gray-500 text-lg resize-none disabled:opacity-50 disabled:cursor-not-allowed ${isRTL ? 'text-right' : 'text-left'}`}
               />
             </div>
 
+            {/* Buttons */}
             <div className="flex gap-3 pt-4">
               <button
                 type="submit"
@@ -288,7 +297,7 @@ const ContactPopup: React.FC<{
               <button
                 type="button"
                 onClick={onClose}
-                className="px-6 py-4 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-all duration-300 text-lg"
+                className="px-6 py-4 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-all duration-300 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
                 disabled={isSubmitting}
               >
                 {t.close}
@@ -346,7 +355,13 @@ const HeroSection: React.FC<HeroSectionProps> = ({
 
   const handleCtaClick = (e: React.MouseEvent) => {
     e.preventDefault()
+    console.log('CTA button clicked - opening contact popup')
     setIsContactPopupOpen(true)
+  }
+
+  const handleClosePopup = () => {
+    console.log('Closing contact popup')
+    setIsContactPopupOpen(false)
   }
 
   return (
@@ -380,7 +395,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
           {/* CTA Button - Now opens popup */}
           <button
             onClick={handleCtaClick}
-            className="hero-cta inline-block bg-[#D4B896] hover:bg-[#c9a87d] text-black px-8 py-4 rounded-sm transition-all duration-300 text-sm md:text-base mb-16 btn-elegant cursor-pointer"
+            className="hero-cta inline-block bg-[#D4B896] hover:bg-[#c9a87d] text-black px-8 py-4 rounded-sm transition-all duration-300 text-sm md:text-base mb-16 btn-elegant cursor-pointer transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#D4B896] focus:ring-offset-2"
           >
             {ctaText}
           </button>
@@ -422,7 +437,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
       {/* Contact Popup */}
       <ContactPopup
         isOpen={isContactPopupOpen}
-        onClose={() => setIsContactPopupOpen(false)}
+        onClose={handleClosePopup}
         currentLanguage={currentLanguage}
       />
     </>

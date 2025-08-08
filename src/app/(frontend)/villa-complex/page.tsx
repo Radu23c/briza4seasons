@@ -293,9 +293,9 @@ async function VillaComplexPageContent() {
       const defaultData = {
         heroSection: {
           isActive: true,
-          mainTitleRo: 'Mai multe despre Ansamblul Rezidential Torga45',
-          mainTitleEn: 'More about Torga45 Residential Complex',
-          mainTitleHe: 'עוד על מתחם המגורים טורגה45',
+          mainTitleRo: 'Mai multe despre Ansamblul Rezidential Briza4Seasons',
+          mainTitleEn: 'More about Briza4Seasons Residential Complex',
+          mainTitleHe: 'עוד על מתחם המגורים בריזה4סיזונס',
           subtitleRo: 'IMPARTIRE, SUPRAFETE, PLANURI',
           subtitleEn: 'DIVISION, AREAS, PLANS',
           subtitleHe: 'חלוקה, שטחים, תוכניות',
@@ -443,9 +443,9 @@ async function VillaComplexPageContent() {
     const fallbackData = {
       heroSection: {
         isActive: true,
-        mainTitleRo: 'Mai multe despre Ansamblul Rezidential Torga45',
-        mainTitleEn: 'More about Torga45 Residential Complex',
-        mainTitleHe: 'עוד על מתחם המגורים טורגה45',
+        mainTitleRo: 'Mai multe despre Ansamblul Rezidential Briza4Seasons',
+        mainTitleEn: 'More about Briza4Seasons Residential Complex',
+        mainTitleHe: 'עוד על מתחם המגורים בריזה4סיזונס',
         subtitleRo: 'IMPARTIRE, SUPRAFETE, PLANURI',
         subtitleEn: 'DIVISION, AREAS, PLANS',
         subtitleHe: 'חלוקה, שטחים, תוכניות',
@@ -485,6 +485,7 @@ export default function VillaComplexPage() {
 }
 
 export const metadata = {
-  title: 'Villa Complex - Torga45 Residence',
-  description: 'Discover more about Torga45 residential complex - division, areas, and plans.',
+  title: 'Villa Complex - Briza4Seasons Residence',
+  description:
+    'Discover more about Briza4Seasons residential complex - division, areas, and plans.',
 }
