@@ -15,9 +15,9 @@ const Footer: React.FC = () => {
       titleRo: 'Sunteți interesat de una din proprietățile noastre?',
       titleEn: 'Are you interested in one of our properties?',
       titleHe: 'האם אתם מעוניינים באחד מהנכסים שלנו?',
-      buttonRo: 'SPRE CONTACT',
-      buttonEn: 'TO CONTACT',
-      buttonHe: 'ליצירת קשר',
+      buttonRo: 'VREAU INFORMAȚII',
+      buttonEn: 'I WANT INFORMATION',
+      buttonHe: 'אני רוצה מידע',
     },
     contact: {
       titleRo: 'Contact',
@@ -70,7 +70,7 @@ const Footer: React.FC = () => {
       {/* Call to Action Section - Floating Card */}
       <div className="relative z-10 flex justify-center px-4 sm:px-6 lg:px-8 -mb-20 lg:-mb-24">
         <div
-          className="bg-[#D4B896] text-white rounded-2xl w-full max-w-6xl transform hover:scale-[1.02] transition-all duration-300 shadow-2xl hover:shadow-3xl"
+          className="bg-[#D4B896] text-white rounded-2xl w-full max-w-6xl transform hover:scale-[1.02] transition-all duration-300 shadow-2xl hover:shadow-3xl mt-8"
           style={{
             boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.05)',
             background: 'linear-gradient(135deg, #D4B896 0%, #C5A882 100%)',

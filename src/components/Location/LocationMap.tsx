@@ -55,7 +55,7 @@ const LocationMap: React.FC<LocationMapProps> = ({
 
   // Hardcoded Google Maps embed URL for Intrarea Mesteacănului, Otopeni
   const hardcodedMapUrl =
-    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3565.1943385180093!2d26.095480976714853!3d44.550572493930936!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b21ceb096d5d31%3A0xac8553244cabe0c7!2sIntrarea%20Mesteac%C4%83nului%2C%20075100%20Otopeni!5e1!3m2!1sde!2sro!4v1754480844195!5m2!1sde!2sro'
+    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2843.2702512791516!2d26.095480976671514!3d44.550572493931035!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b21ceb096d5d31%3A0xac8553244cabe0c7!2sIntrarea%20Mesteac%C4%83nului%2C%20075100%20Otopeni!5e0!3m2!1sen!2sro!4v1754647091068!5m2!1sen!2sro'
 
   const sectionTitle = t({
     ro: sectionTitleRo,

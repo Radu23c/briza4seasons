@@ -9,6 +9,8 @@ const cookieTexts = {
     title: 'Cookie-uri',
     message:
       'Folosim cookie-uri pentru a îmbunătăți experiența dvs. pe site-ul nostru și pentru a analiza traficul. Prin continuarea navigării, sunteți de acord cu folosirea cookie-urilor.',
+    declineWarning:
+      'Prin refuzul cookie-urilor, vă recomandăm să nu continuați navigarea pe site-ul nostru, deoarece funcționalitatea poate fi limitată.',
     accept: 'Accept',
     decline: 'Refuz',
     learnMore: 'Politica de confidențialitate',
@@ -17,6 +19,8 @@ const cookieTexts = {
     title: 'Cookies',
     message:
       'We use cookies to improve your experience on our website and to analyze traffic. By continuing to browse, you agree to the use of cookies.',
+    declineWarning:
+      'By declining cookies, we recommend that you do not continue browsing our website as functionality may be limited.',
     accept: 'Accept',
     decline: 'Decline',
     learnMore: 'Privacy Policy',
@@ -25,6 +29,8 @@ const cookieTexts = {
     title: 'עוגיות',
     message:
       'אנחנו משתמשים בעוגיות כדי לשפר את החוויה שלכם באתר ולנתח תנועה. על ידי המשך הגלישה, אתם מסכימים לשימוש בעוגיות.',
+    declineWarning:
+      'על ידי דחיית העוגיות, אנו ממליצים שלא תמשיכו לגלוש באתר שלנו מכיוון שהפונקציונליות עלולה להיות מוגבלת.',
     accept: 'קבל',
     decline: 'דחה',
     learnMore: 'מדיניות פרטיות',
@@ -40,6 +46,7 @@ const languageOptions = [
 export default function CookieConsent() {
   const [showConsent, setShowConsent] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
+  const [showDeclineWarning, setShowDeclineWarning] = useState(false)
   const { currentLanguage } = useLanguage()
 
   useEffect(() => {
@@ -69,6 +76,10 @@ export default function CookieConsent() {
   }
 
   const handleDecline = () => {
+    setShowDeclineWarning(true)
+  }
+
+  const handleDeclineConfirm = () => {
     localStorage.setItem('cookieConsent', 'declined')
     localStorage.setItem('cookieConsentDate', new Date().toISOString())
     setIsVisible(false)
@@ -82,12 +93,14 @@ export default function CookieConsent() {
     console.log('Cookies declined for Briza4Seasons - tracking disabled')
   }
 
+  const handleBackToConsent = () => {
+    setShowDeclineWarning(false)
+  }
+
   const handleLearnMore = () => {
     // Open privacy policy in new tab
     window.open('/privacy-policy', '_blank')
   }
-
-  // REMOVED: The unused handleLanguageChange function that was causing the error
 
   if (!showConsent) return null
 
@@ -110,61 +123,118 @@ export default function CookieConsent() {
           <LanguageToggle />
         </div>
 
-        {/* Decorative border accent */}
-        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-          <div className="w-16 h-16 bg-[#D4B896] rounded-full flex items-center justify-center shadow-lg">
-            <span className="text-2xl">🍪</span>
-          </div>
-        </div>
+        {!showDeclineWarning ? (
+          <>
+            {/* Decorative border accent */}
+            <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+              <div className="w-16 h-16 bg-[#D4B896] rounded-full flex items-center justify-center shadow-lg">
+                <span className="text-2xl">🍪</span>
+              </div>
+            </div>
 
-        <div className="pt-4 mb-6">
-          <div className="text-center mb-6">
-            <h3 className="text-2xl font-semibold text-gray-900 font-playfair mb-2">
-              {currentTexts.title}
-            </h3>
-            <div className="w-16 h-0.5 bg-[#D4B896] mx-auto"></div>
-          </div>
+            <div className="pt-4 mb-6">
+              <div className="text-center mb-6">
+                <h3 className="text-2xl font-semibold text-gray-900 font-playfair mb-2">
+                  {currentTexts.title}
+                </h3>
+                <div className="w-16 h-0.5 bg-[#D4B896] mx-auto"></div>
+              </div>
 
-          <p className="text-gray-700 text-sm leading-relaxed mb-6 text-center">
-            {currentTexts.message}
-          </p>
+              <p className="text-gray-700 text-sm leading-relaxed mb-6 text-center">
+                {currentTexts.message}
+              </p>
 
-          {/* Privacy policy link */}
-          <div className="text-center mb-6">
-            <button
-              className="text-[#D4B896] hover:text-[#c9a87d] text-sm underline transition-colors duration-300 font-medium"
-              onClick={handleLearnMore}
+              {/* Privacy policy link */}
+              <div className="text-center mb-6">
+                <button
+                  className="text-[#D4B896] hover:text-[#c9a87d] text-sm underline transition-colors duration-300 font-medium"
+                  onClick={handleLearnMore}
+                >
+                  {currentTexts.learnMore}
+                </button>
+              </div>
+            </div>
+
+            <div
+              className={`flex gap-4 ${isRTL ? 'flex-row-reverse' : 'flex-row'} flex-col sm:flex-row`}
             >
-              {currentTexts.learnMore}
-            </button>
-          </div>
-        </div>
+              <button
+                onClick={handleAccept}
+                className="
+                  flex-1 bg-[#D4B896] hover:bg-[#c9a87d] text-black px-6 py-3 rounded-sm
+                  transition-all duration-300 font-medium text-sm hover:shadow-lg
+                  transform hover:scale-105 active:scale-95 btn-elegant
+                "
+              >
+                {currentTexts.accept}
+              </button>
+              <button
+                onClick={handleDecline}
+                className="
+                  flex-1 bg-transparent border-2 border-gray-300 hover:border-[#D4B896] 
+                  text-gray-700 hover:text-[#D4B896] px-6 py-3 rounded-sm
+                  transition-all duration-300 font-medium text-sm hover:shadow-md
+                  transform hover:scale-105 active:scale-95
+                "
+              >
+                {currentTexts.decline}
+              </button>
+            </div>
+          </>
+        ) : (
+          <>
+            {/* Warning icon */}
+            <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+              <div className="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center shadow-lg">
+                <span className="text-2xl">⚠️</span>
+              </div>
+            </div>
 
-        <div
-          className={`flex gap-4 ${isRTL ? 'flex-row-reverse' : 'flex-row'} flex-col sm:flex-row`}
-        >
-          <button
-            onClick={handleAccept}
-            className="
-              flex-1 bg-[#D4B896] hover:bg-[#c9a87d] text-black px-6 py-3 rounded-sm
-              transition-all duration-300 font-medium text-sm hover:shadow-lg
-              transform hover:scale-105 active:scale-95 btn-elegant
-            "
-          >
-            {currentTexts.accept}
-          </button>
-          <button
-            onClick={handleDecline}
-            className="
-              flex-1 bg-transparent border-2 border-gray-300 hover:border-[#D4B896] 
-              text-gray-700 hover:text-[#D4B896] px-6 py-3 rounded-sm
-              transition-all duration-300 font-medium text-sm hover:shadow-md
-              transform hover:scale-105 active:scale-95
-            "
-          >
-            {currentTexts.decline}
-          </button>
-        </div>
+            <div className="pt-4 mb-6">
+              <div className="text-center mb-6">
+                <h3 className="text-2xl font-semibold text-gray-900 font-playfair mb-2">
+                  {currentTexts.title}
+                </h3>
+                <div className="w-16 h-0.5 bg-orange-500 mx-auto"></div>
+              </div>
+
+              <div className="bg-orange-50 border border-orange-200 rounded-lg p-4 mb-6">
+                <p className="text-orange-800 text-sm leading-relaxed text-center font-medium">
+                  {currentTexts.declineWarning}
+                </p>
+              </div>
+            </div>
+
+            <div
+              className={`flex gap-4 ${isRTL ? 'flex-row-reverse' : 'flex-row'} flex-col sm:flex-row`}
+            >
+              <button
+                onClick={handleBackToConsent}
+                className="
+                  flex-1 bg-[#D4B896] hover:bg-[#c9a87d] text-black px-6 py-3 rounded-sm
+                  transition-all duration-300 font-medium text-sm hover:shadow-lg
+                  transform hover:scale-105 active:scale-95 btn-elegant
+                "
+              >
+                {currentLanguage === 'ro' ? 'Înapoi' : currentLanguage === 'en' ? 'Back' : 'חזור'}
+              </button>
+              <button
+                onClick={handleDeclineConfirm}
+                className="
+                  flex-1 bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-sm
+                  transition-all duration-300 font-medium text-sm hover:shadow-lg
+                  transform hover:scale-105 active:scale-95
+                "
+              >
+                {currentLanguage === 'ro'
+                  ? 'Confirm Refuz'
+                  : currentLanguage === 'en'
+                    ? 'Confirm Decline'
+                    : 'אשר דחייה'}
+              </button>
+            </div>
+          </>
+        )}
 
         {/* Decorative corner elements */}
         <div className="absolute top-4 right-4 w-2 h-2 bg-[#D4B896]/30 rounded-full"></div>
