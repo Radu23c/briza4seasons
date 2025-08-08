@@ -71,7 +71,7 @@ interface HomepageData {
     titleHe?: string
     featureItems: Array<{
       order: number
-      icon: string
+      // Removed icon: string
       titleRo: string
       titleEn: string
       titleHe: string
@@ -262,9 +262,9 @@ const Homepage: React.FC<HomepageProps> = ({ data }) => {
         data.featuresOverviewSection.backgroundImage &&
         data.featuresOverviewSection.featureItems?.length > 0 && (
           <FeaturesOverview
-            titleRo={data.featuresOverviewSection.titleRo}
-            titleEn={data.featuresOverviewSection.titleEn}
-            titleHe={data.featuresOverviewSection.titleHe}
+            titleRo={data.featuresOverviewSection.titleRo || ''}
+            titleEn={data.featuresOverviewSection.titleEn || ''}
+            titleHe={data.featuresOverviewSection.titleHe || ''}
             backgroundImage={data.featuresOverviewSection.backgroundImage}
             backgroundImageAltRo={data.featuresOverviewSection.backgroundImageAltRo}
             backgroundImageAltEn={data.featuresOverviewSection.backgroundImageAltEn}

@@ -12,7 +12,7 @@ interface MediaObject {
 
 interface FeatureItemData {
   order: number
-  icon: string
+  // Removed icon: string
   titleRo: string
   titleEn: string
   titleHe: string
@@ -81,7 +81,7 @@ const FeaturesOverview: React.FC<FeaturesOverviewProps> = ({
             <FeatureItem
               key={index}
               order={item.order}
-              icon={item.icon}
+              // Removed icon={item.icon}
               titleRo={item.titleRo}
               titleEn={item.titleEn}
               titleHe={item.titleHe}
