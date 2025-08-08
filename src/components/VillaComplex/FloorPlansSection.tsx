@@ -3,7 +3,7 @@
 import type React from 'react'
 import { useState } from 'react'
 import Image from 'next/image'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react'
 import { useLanguage } from '@/app/contexts/LanguageContext'
 
 interface MediaObject {
@@ -192,6 +192,38 @@ const FloorPlansSection: React.FC<FloorPlansSectionProps> = ({
     winter: 'from-blue-400 to-cyan-400',
   }
 
+  // Direction labels for villas
+  const getDirectionLabel = (villaKey: string) => {
+    switch (villaKey) {
+      case 'spring':
+        return t({
+          ro: 'EST',
+          en: 'EAST',
+          he: 'מזרח',
+        })
+      case 'summer':
+        return t({
+          ro: 'EST',
+          en: 'EAST',
+          he: 'מזרח',
+        })
+      case 'autumn':
+        return t({
+          ro: 'VEST',
+          en: 'WEST',
+          he: 'מערב',
+        })
+      case 'winter':
+        return t({
+          ro: 'VEST',
+          en: 'WEST',
+          he: 'מערב',
+        })
+      default:
+        return ''
+    }
+  }
+
   return (
     <section className="py-16 lg:py-24 bg-white">
       <div className="container mx-auto px-4">
@@ -205,43 +237,101 @@ const FloorPlansSection: React.FC<FloorPlansSectionProps> = ({
           </h2>
           <p className="text-gray-600 text-lg">{sectionDescription}</p>
         </div>
-        {/* Villa Selection */}
-        <div className="flex justify-center mb-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {villas.map((villa, index) => {
-              const villaName = t({
-                ro: villa.nameRo,
-                en: villa.nameEn,
-                he: villa.nameHe,
-              })
 
-              return (
-                <button
-                  key={villa.key}
-                  onClick={() => handleVillaChange(index)}
-                  className={`relative px-6 py-4 rounded-xl font-semibold text-sm tracking-wider uppercase transition-all duration-300 overflow-hidden group ${
-                    activeVilla === index
-                      ? 'text-white shadow-lg transform scale-105'
-                      : 'text-gray-700 bg-white hover:text-white shadow-md hover:shadow-lg hover:transform hover:scale-105'
-                  }`}
-                >
-                  {/* Background gradient */}
-                  <div
-                    className={`absolute inset-0 bg-gradient-to-r ${villaColors[villa.key]} transition-opacity duration-300 ${
-                      activeVilla === index ? 'opacity-100' : 'opacity-0 group-hover:opacity-90'
-                    }`}
-                  />
-                  {/* Content */}
-                  <div className="relative flex items-center justify-center space-x-2">
-                    <span className="text-lg">{villaIcons[villa.key]}</span>
-                    <span>{villaName}</span>
+        {/* Villa Selection with Direction Indicator */}
+        <div className="flex justify-center mb-8">
+          <div className="relative">
+            {/* Villa Selection Grid */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {villas.map((villa, index) => {
+                const villaName = t({
+                  ro: villa.nameRo,
+                  en: villa.nameEn,
+                  he: villa.nameHe,
+                })
+
+                return (
+                  <div key={villa.key} className="text-center">
+                    <button
+                      onClick={() => handleVillaChange(index)}
+                      className={`relative px-6 py-4 rounded-xl font-semibold text-sm tracking-wider uppercase transition-all duration-300 overflow-hidden group w-full ${
+                        activeVilla === index
+                          ? 'text-white shadow-lg transform scale-105'
+                          : 'text-gray-700 bg-white hover:text-white shadow-md hover:shadow-lg hover:transform hover:scale-105'
+                      }`}
+                    >
+                      {/* Background gradient */}
+                      <div
+                        className={`absolute inset-0 bg-gradient-to-r ${villaColors[villa.key]} transition-opacity duration-300 ${
+                          activeVilla === index ? 'opacity-100' : 'opacity-0 group-hover:opacity-90'
+                        }`}
+                      />
+                      {/* Content */}
+                      <div className="relative flex items-center justify-center space-x-2">
+                        <span className="text-lg">{villaIcons[villa.key]}</span>
+                        <span>{villaName}</span>
+                      </div>
+                    </button>
+
+                    {/* Direction Label */}
+                    <div className="mt-2">
+                      <span className="text-xs font-bold tracking-widest text-gray-600 uppercase">
+                        {getDirectionLabel(villa.key)}
+                      </span>
+                    </div>
                   </div>
-                </button>
-              )
-            })}
+                )
+              })}
+            </div>
+
+            {/* Direction Arrow */}
+            <div className="hidden md:flex items-center justify-center mt-6 mb-4">
+              <div className="flex items-center space-x-4">
+                <span className="text-sm font-semibold text-gray-700 tracking-wider">
+                  {t({
+                    ro: 'EST',
+                    en: 'EAST',
+                    he: 'מזרח',
+                  })}
+                </span>
+                <div className="flex items-center space-x-2">
+                  <div className="w-24 h-px bg-gradient-to-r from-gray-400 to-gray-600"></div>
+                  <ArrowRight className="w-5 h-5 text-gray-600" />
+                  <div className="w-24 h-px bg-gradient-to-r from-gray-600 to-gray-400"></div>
+                </div>
+                <span className="text-sm font-semibold text-gray-700 tracking-wider">
+                  {t({
+                    ro: 'VEST',
+                    en: 'WEST',
+                    he: 'מערב',
+                  })}
+                </span>
+              </div>
+            </div>
+
+            {/* Mobile Direction Indicator */}
+            <div className="md:hidden flex items-center justify-center mt-4 mb-2">
+              <div className="flex items-center space-x-2 text-xs text-gray-600">
+                <span className="font-semibold">
+                  {t({
+                    ro: 'Orientare:',
+                    en: 'Orientation:',
+                    he: 'כיוון:',
+                  })}
+                </span>
+                <span>
+                  {t({
+                    ro: 'EST ← → VEST',
+                    en: 'EAST ← → WEST',
+                    he: 'מזרח ← → מערב',
+                  })}
+                </span>
+              </div>
+            </div>
           </div>
         </div>
-        {/* Villa Description - NEW SECTION */}
+
+        {/* Villa Description */}
         {currentVilla && (
           <div className="max-w-4xl mx-auto mb-12">
             <div className="bg-gradient-to-r from-gray-50 to-gray-100 rounded-2xl p-8 shadow-lg">
@@ -289,6 +379,7 @@ const FloorPlansSection: React.FC<FloorPlansSectionProps> = ({
             </div>
           </div>
         )}
+
         {/* Floor Tabs */}
         <div className="flex justify-center mb-12">
           <div className="flex space-x-8 bg-gray-100 rounded-lg p-2">
@@ -314,6 +405,7 @@ const FloorPlansSection: React.FC<FloorPlansSectionProps> = ({
             })}
           </div>
         </div>
+
         {/* Floor Plan Display */}
         <div className="max-w-6xl mx-auto">
           {/* Floor Plan Images with Navigation */}

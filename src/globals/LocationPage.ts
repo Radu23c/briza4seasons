@@ -207,7 +207,7 @@ export const LocationPage: GlobalConfig = {
           label: 'Google Maps Embed URL',
           required: true,
           defaultValue:
-            'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2843.5!2d26.0826!3d44.5675!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b1ff4770b5b5b5%3A0x5!2s23%20August%2C%20Otopeni%2C%20Ilfov%2C%20Romania!5e0!3m2!1sen!2sro!4v1642684800000!5m2!1sen!2sro',
+            'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2843.2702512791516!2d26.095480976671514!3d44.550572493931035!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b21ceb096d5d31%3A0xac8553244cabe0c7!2sIntrarea%20Mesteac%C4%83nului%2C%20075100%20Otopeni!5e0!3m2!1sen!2sro!4v1754647091068!5m2!1sen!2sro',
         },
         {
           name: 'address',
