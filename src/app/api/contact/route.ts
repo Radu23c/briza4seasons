@@ -22,8 +22,8 @@ export async function POST(request: NextRequest) {
 
     // Create email content
     const msg = {
-      to: process.env.SENDGRID_TO_EMAIL!, // Recipient email
-      from: process.env.SENDGRID_FROM_EMAIL!, // Verified sender email
+      to: 'blissimobiliare@briza4seasons.ro', // Recipient email
+      from: 'formular@briza4seasons.ro', // Verified sender email
       replyTo: email, // User's email for easy reply
       subject: `New Contact Form Submission from ${nume}`,
       text: `
