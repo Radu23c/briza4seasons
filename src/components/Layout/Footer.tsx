@@ -292,10 +292,10 @@ const Footer: React.FC = () => {
                 he: footerContent.copyright.he,
               })}{' '}
               <a
-                href="https://www.linkedin.com/in/radu-cristea-63b514222/"
+                href="https://www.blissconsulting.ro/"
                 className="text-[#D4B896] hover:text-white transition-colors duration-300 font-medium"
               >
-                Radu Cristea
+                BLISS Consulting
               </a>
             </p>
           </div>
