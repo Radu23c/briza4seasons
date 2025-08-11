@@ -254,7 +254,7 @@ const Footer: React.FC = () => {
             >
               <div className={`flex gap-6 ${currentLanguage === 'he' ? 'flex-row-reverse' : ''}`}>
                 <Link
-                  href="/terms-conditions"
+                  href="/terms-and-conditions"
                   className="text-[#D4B896] hover:text-white transition-all duration-300 text-sm font-medium uppercase tracking-wider border-b border-transparent hover:border-[#D4B896] pb-1"
                 >
                   {t({

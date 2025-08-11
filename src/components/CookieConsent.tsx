@@ -15,7 +15,6 @@ const cookieTexts = {
     decline: 'Refuz',
     termsAndConditions: 'Termeni și Condiții',
     cookiePolicy: 'Politica Cookie-uri',
-    privacyPolicy: 'Politica de Confidențialitate',
   },
   en: {
     title: 'Cookies',
@@ -27,7 +26,6 @@ const cookieTexts = {
     decline: 'Decline',
     termsAndConditions: 'Terms & Conditions',
     cookiePolicy: 'Cookie Policy',
-    privacyPolicy: 'Privacy Policy',
   },
   he: {
     title: 'עוגיות',
@@ -39,7 +37,6 @@ const cookieTexts = {
     decline: 'דחה',
     termsAndConditions: 'תנאי השימוש',
     cookiePolicy: 'מדיניות עוגיות',
-    privacyPolicy: 'מדיניות פרטיות',
   },
 }
 
@@ -113,11 +110,6 @@ export default function CookieConsent() {
     window.open('/cookie-policy', '_blank')
   }
 
-  const handlePrivacyPolicyClick = () => {
-    // Open privacy policy in new tab
-    window.open('/privacy-policy', '_blank')
-  }
-
   if (!showConsent) return null
 
   const currentTexts = cookieTexts[currentLanguage as keyof typeof cookieTexts] || cookieTexts.ro
@@ -160,7 +152,7 @@ export default function CookieConsent() {
                 {currentTexts.message}
               </p>
 
-              {/* Terms, Cookie Policy, and Privacy Policy links */}
+              {/* Terms and Cookie Policy links */}
               <div className="text-center mb-6 space-y-2">
                 <div
                   className={`flex gap-3 justify-center items-center flex-wrap ${isRTL ? 'flex-row-reverse' : 'flex-row'}`}
@@ -177,13 +169,6 @@ export default function CookieConsent() {
                     onClick={handleCookiePolicyClick}
                   >
                     {currentTexts.cookiePolicy}
-                  </button>
-                  <span className="text-gray-400 text-sm">|</span>
-                  <button
-                    className="text-[#D4B896] hover:text-[#c9a87d] text-sm underline transition-colors duration-300 font-medium"
-                    onClick={handlePrivacyPolicyClick}
-                  >
-                    {currentTexts.privacyPolicy}
                   </button>
                 </div>
               </div>

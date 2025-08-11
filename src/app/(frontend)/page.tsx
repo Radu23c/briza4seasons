@@ -201,7 +201,7 @@ function convertHomepageData(payloadData: HomepageType): any {
       detailsTextHe: 'פרטים מלאים',
       exteriorImage: '/images/default-exterior.jpg',
       interiorImage: '/images/default-interior.jpg',
-      detailsLink: '/villa-complex',
+      detailsLink: '/villas',
     },
     featuresOverviewSection: {
       isActive: false,
@@ -382,7 +382,7 @@ function createDefaultHomepageData(): HomepageType {
       detailsTextHe: 'פרטים מלאים',
       exteriorImage: '/images/default-exterior.jpg',
       interiorImage: '/images/default-interior.jpg',
-      detailsLink: '/villa-complex',
+      detailsLink: '/villas',
     },
     featuresOverviewSection: {
       isActive: false,

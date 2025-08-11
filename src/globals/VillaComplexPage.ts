@@ -136,7 +136,7 @@ export const VillaComplexPage: GlobalConfig = {
               labelRo: 'PROPRIETATEA TA',
               labelEn: 'YOUR PROPERTY',
               labelHe: 'הנכס שלך',
-              href: '/villa-complex',
+              href: '/villas',
               isActive: true,
             },
           ],

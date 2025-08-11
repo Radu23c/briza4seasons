@@ -276,7 +276,7 @@ export const Homepage: GlobalConfig = {
           name: 'detailsLink',
           type: 'text',
           required: false,
-          defaultValue: '/about',
+          defaultValue: '/about-us',
         },
       ],
     },

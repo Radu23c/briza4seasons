@@ -321,7 +321,14 @@ export default function PrivacyPolicyClient() {
                         </div>
                         <div className="flex items-center space-x-3">
                           <div className="w-2 h-2 bg-[#D4B896] rounded-full"></div>
-                          <span className="font-medium">Telefon:</span>
+                          <span className="font-medium">
+                            {currentLanguage === 'ro'
+                              ? 'Telefon'
+                              : currentLanguage === 'en'
+                                ? 'Phone'
+                                : 'טלפון'}
+                            :
+                          </span>
                           <a
                             href={`tel:${section.contact.phone}`}
                             className="text-[#D4B896] hover:text-[#c9a87d] transition-colors"
@@ -331,7 +338,14 @@ export default function PrivacyPolicyClient() {
                         </div>
                         <div className="flex items-center space-x-3">
                           <div className="w-2 h-2 bg-[#D4B896] rounded-full"></div>
-                          <span className="font-medium">Adresă:</span>
+                          <span className="font-medium">
+                            {currentLanguage === 'ro'
+                              ? 'Adresă'
+                              : currentLanguage === 'en'
+                                ? 'Address'
+                                : 'כתובת'}
+                            :
+                          </span>
                           <span className="text-gray-700">{section.contact.address}</span>
                         </div>
                       </div>

@@ -58,13 +58,13 @@ const Header: React.FC = () => {
       labelRo: 'DESPRE NOI',
       labelEn: 'ABOUT US',
       labelHe: 'אודותינו',
-      href: '/about',
+      href: '/about-us',
     },
     {
-      labelRo: 'VILE COMPLEX',
-      labelEn: 'VILLA COMPLEX',
-      labelHe: 'מתחם וילות',
-      href: '/villa-complex',
+      labelRo: 'VILE',
+      labelEn: 'VILLAS',
+      labelHe: 'וילות',
+      href: '/villas',
     },
     {
       labelRo: 'LOCALIZARE',
