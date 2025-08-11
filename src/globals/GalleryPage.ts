@@ -54,7 +54,7 @@ export const GalleryPage: GlobalConfig = {
           name: 'subtitleRo',
           type: 'text',
           required: false,
-          defaultValue: 'GALERIE FOTO',
+          defaultValue: 'GALERIE',
           admin: {
             description: 'Hero subtitle in Romanian',
           },
@@ -63,7 +63,7 @@ export const GalleryPage: GlobalConfig = {
           name: 'subtitleEn',
           type: 'text',
           required: false,
-          defaultValue: 'PHOTO GALLERY',
+          defaultValue: 'GALLERY',
           admin: {
             description: 'Hero subtitle in English',
           },
@@ -72,7 +72,7 @@ export const GalleryPage: GlobalConfig = {
           name: 'subtitleHe',
           type: 'text',
           required: false,
-          defaultValue: 'גלריית תמונות',
+          defaultValue: 'גלריה',
           admin: {
             description: 'Hero subtitle in Hebrew',
           },

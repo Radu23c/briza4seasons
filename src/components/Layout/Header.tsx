@@ -73,9 +73,9 @@ const Header: React.FC = () => {
       href: '/location',
     },
     {
-      labelRo: 'GALERIE FOTO',
-      labelEn: 'PHOTO GALLERY',
-      labelHe: 'גלריית תמונות',
+      labelRo: 'GALERIE',
+      labelEn: 'GALLERY',
+      labelHe: 'גלריה',
       href: '/gallery',
     },
     {

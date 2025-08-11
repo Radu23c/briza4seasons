@@ -164,9 +164,9 @@ async function GalleryPageContent() {
         mainTitleRo: 'Galeria Ansamblului Rezidential Briza4Seasons',
         mainTitleEn: 'Briza4Seasons Residential Complex Gallery',
         mainTitleHe: 'גלריית מתחם המגורים בריזה4סיזונס',
-        subtitleRo: 'GALERIE FOTO',
-        subtitleEn: 'PHOTO GALLERY',
-        subtitleHe: 'גלריית תמונות',
+        subtitleRo: 'GALERIE',
+        subtitleEn: 'GALLERY',
+        subtitleHe: 'גלריה',
         backgroundImage: { url: '/images/gallery-hero-bg.jpg' },
         breadcrumbs: [
           { labelRo: 'ACASĂ', labelEn: 'HOME', labelHe: 'בית', href: '/', isActive: false },
@@ -242,9 +242,9 @@ async function GalleryPageContent() {
         mainTitleRo: 'Galeria Ansamblului Rezidential Briza4Seasons',
         mainTitleEn: 'Briza4Seasons Residential Complex Gallery',
         mainTitleHe: 'גלריית מתחם המגורים בריזה4סיזונס',
-        subtitleRo: 'GALERIE FOTO',
-        subtitleEn: 'PHOTO GALLERY',
-        subtitleHe: 'גלריית תמונות',
+        subtitleRo: 'GALERIE',
+        subtitleEn: 'GALLERY',
+        subtitleHe: 'גלריה',
         backgroundImage: { url: '/images/gallery-hero-bg.jpg' },
         breadcrumbs: [
           { labelRo: 'ACASĂ', labelEn: 'HOME', labelHe: 'בית', href: '/', isActive: false },
@@ -286,5 +286,5 @@ export default function GalleryPage() {
 
 export const metadata = {
   title: 'Gallery - Briza4Seasons',
-  description: 'Explore the photo gallery of Briza4Seasons residential complex.',
+  description: 'Explore the gallery of Briza4Seasons residential complex.',
 }
