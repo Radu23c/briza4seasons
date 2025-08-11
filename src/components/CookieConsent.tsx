@@ -8,32 +8,38 @@ const cookieTexts = {
   ro: {
     title: 'Cookie-uri',
     message:
-      'Folosim cookie-uri pentru a îmbunătăți experiența dvs. pe site-ul nostru și pentru a analiza traficul. Prin continuarea navigării, sunteți de acord cu folosirea cookie-urilor.',
+      'Folosim cookie-uri pentru a îmbunătăți experiența dvs. pe site-ul nostru și pentru a analiza traficul. Prin continuarea navigării, sunteți de acord cu folosirea cookie-urilor. Dacă nu sunteți de acord cu folosirea cookie-urilor, vă rugăm să nu continuați cu navigarea website-ului.',
     declineWarning:
       'Prin refuzul cookie-urilor, vă recomandăm să nu continuați navigarea pe site-ul nostru, deoarece funcționalitatea poate fi limitată.',
     accept: 'Accept',
     decline: 'Refuz',
-    learnMore: 'Politica de confidențialitate',
+    termsAndConditions: 'Termeni și Condiții',
+    cookiePolicy: 'Politica Cookie-uri',
+    privacyPolicy: 'Politica de Confidențialitate',
   },
   en: {
     title: 'Cookies',
     message:
-      'We use cookies to improve your experience on our website and to analyze traffic. By continuing to browse, you agree to the use of cookies.',
+      'We use cookies to improve your experience on our website and to analyze traffic. By continuing to browse, you agree to the use of cookies. If you do not agree to the use of cookies, please do not continue browsing the website.',
     declineWarning:
       'By declining cookies, we recommend that you do not continue browsing our website as functionality may be limited.',
     accept: 'Accept',
     decline: 'Decline',
-    learnMore: 'Privacy Policy',
+    termsAndConditions: 'Terms & Conditions',
+    cookiePolicy: 'Cookie Policy',
+    privacyPolicy: 'Privacy Policy',
   },
   he: {
     title: 'עוגיות',
     message:
-      'אנחנו משתמשים בעוגיות כדי לשפר את החוויה שלכם באתר ולנתח תנועה. על ידי המשך הגלישה, אתם מסכימים לשימוש בעוגיות.',
+      'אנחנו משתמשים בעוגיות כדי לשפר את החוויה שלכם באתר ולנתח תנועה. על ידי המשך הגלישה, אתם מסכימים לשימוש בעוגיות. אם אינכם מסכימים לשימוש בעוגיות, אנא אל תמשיכו לגלוש באתר.',
     declineWarning:
       'על ידי דחיית העוגיות, אנו ממליצים שלא תמשיכו לגלוש באתר שלנו מכיוון שהפונקציונליות עלולה להיות מוגבלת.',
     accept: 'קבל',
     decline: 'דחה',
-    learnMore: 'מדיניות פרטיות',
+    termsAndConditions: 'תנאי השימוש',
+    cookiePolicy: 'מדיניות עוגיות',
+    privacyPolicy: 'מדיניות פרטיות',
   },
 }
 
@@ -97,7 +103,17 @@ export default function CookieConsent() {
     setShowDeclineWarning(false)
   }
 
-  const handleLearnMore = () => {
+  const handleTermsClick = () => {
+    // Open terms and conditions in new tab
+    window.open('/terms-and-conditions', '_blank')
+  }
+
+  const handleCookiePolicyClick = () => {
+    // Open cookie policy in new tab
+    window.open('/cookie-policy', '_blank')
+  }
+
+  const handlePrivacyPolicyClick = () => {
     // Open privacy policy in new tab
     window.open('/privacy-policy', '_blank')
   }
@@ -144,14 +160,32 @@ export default function CookieConsent() {
                 {currentTexts.message}
               </p>
 
-              {/* Privacy policy link */}
-              <div className="text-center mb-6">
-                <button
-                  className="text-[#D4B896] hover:text-[#c9a87d] text-sm underline transition-colors duration-300 font-medium"
-                  onClick={handleLearnMore}
+              {/* Terms, Cookie Policy, and Privacy Policy links */}
+              <div className="text-center mb-6 space-y-2">
+                <div
+                  className={`flex gap-3 justify-center items-center flex-wrap ${isRTL ? 'flex-row-reverse' : 'flex-row'}`}
                 >
-                  {currentTexts.learnMore}
-                </button>
+                  <button
+                    className="text-[#D4B896] hover:text-[#c9a87d] text-sm underline transition-colors duration-300 font-medium"
+                    onClick={handleTermsClick}
+                  >
+                    {currentTexts.termsAndConditions}
+                  </button>
+                  <span className="text-gray-400 text-sm">|</span>
+                  <button
+                    className="text-[#D4B896] hover:text-[#c9a87d] text-sm underline transition-colors duration-300 font-medium"
+                    onClick={handleCookiePolicyClick}
+                  >
+                    {currentTexts.cookiePolicy}
+                  </button>
+                  <span className="text-gray-400 text-sm">|</span>
+                  <button
+                    className="text-[#D4B896] hover:text-[#c9a87d] text-sm underline transition-colors duration-300 font-medium"
+                    onClick={handlePrivacyPolicyClick}
+                  >
+                    {currentTexts.privacyPolicy}
+                  </button>
+                </div>
               </div>
             </div>
 

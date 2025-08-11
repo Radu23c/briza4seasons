@@ -322,7 +322,7 @@ const FloorPlansSection: React.FC<FloorPlansSectionProps> = ({
 
         {/* Floor Tabs */}
         <div className="flex justify-center mb-12">
-          <div className="flex space-x-8 bg-gray-100 rounded-lg p-2">
+          <div className="flex flex-col sm:flex-row sm:space-x-8 space-y-2 sm:space-y-0 bg-gray-100 rounded-lg p-2">
             {sortedFloorPlans.map((floorPlan, index) => {
               const floorName = t({
                 ro: floorPlan.floorNameRo,
