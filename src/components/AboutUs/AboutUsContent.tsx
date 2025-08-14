@@ -65,7 +65,7 @@ const AboutUsContent: React.FC<AboutUsContentProps> = ({
     <section className="py-16 lg:py-24 bg-white">
       <div className="container mx-auto px-4">
         <div
-          className={`grid lg:grid-cols-2 gap-12 lg:gap-16 items-center ${
+          className={`grid lg:grid-cols-2 gap-12 lg:gap-16 items-start ${
             currentLanguage === 'he' ? 'lg:grid-flow-col-dense' : ''
           }`}
         >
@@ -79,12 +79,12 @@ const AboutUsContent: React.FC<AboutUsContentProps> = ({
                   he: item.altTextHe || `About us image ${index + 1}`,
                 })
 
-                // Create overlapping positions based on index
+                // Create overlapping positions at the top
                 const positions = [
-                  { top: '0', left: '0', width: '70%', height: '60%', zIndex: 3 },
-                  { top: '30%', right: '0', width: '60%', height: '70%', zIndex: 2 },
-                  { top: '60%', left: '10%', width: '50%', height: '40%', zIndex: 1 },
-                  { top: '20%', left: '60%', width: '35%', height: '30%', zIndex: 4 },
+                  { top: '0', left: '0', width: '70%', height: '50%', zIndex: 3 },
+                  { top: '10%', right: '0', width: '60%', height: '45%', zIndex: 2 },
+                  { top: '25%', left: '10%', width: '50%', height: '40%', zIndex: 1 },
+                  { top: '5%', left: '50%', width: '35%', height: '30%', zIndex: 4 },
                 ]
 
                 const position = positions[index] || positions[0]
