@@ -272,6 +272,7 @@ function convertHomepageData(payloadData: HomepageType): any {
       sectionSubtitleHe: 'תמונות',
       galleryImages: [],
       enableLightbox: true,
+      dateDisplayFormat: 'full', // ADD DEFAULT
     },
     imageGallerySection: {
       isActive: false,
@@ -329,6 +330,9 @@ function convertHomepageData(payloadData: HomepageType): any {
       isActive: payloadData.gallerySection?.isActive ?? defaults.gallerySection.isActive,
       enableLightbox:
         payloadData.gallerySection?.enableLightbox ?? defaults.gallerySection.enableLightbox,
+      // FIXED: Add dateDisplayFormat with fallback
+      dateDisplayFormat:
+        payloadData.gallerySection?.dateDisplayFormat ?? defaults.gallerySection.dateDisplayFormat,
     },
     imageGallerySection: {
       ...defaults.imageGallerySection,
@@ -453,6 +457,7 @@ function createDefaultHomepageData(): HomepageType {
       sectionSubtitleHe: 'תמונות',
       galleryImages: [],
       enableLightbox: true,
+      dateDisplayFormat: 'full', // ADD DEFAULT
     },
     imageGallerySection: {
       isActive: false,

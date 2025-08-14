@@ -23,6 +23,17 @@ interface GalleryImage {
   order?: number
 }
 
+interface DateInfo {
+  date: string
+  titleRo?: string
+  titleEn?: string
+  titleHe?: string
+  descriptionRo?: string
+  descriptionEn?: string
+  descriptionHe?: string
+  order?: number
+}
+
 interface GallerySectionProps {
   sectionTitleRo: string
   sectionTitleEn: string
@@ -31,6 +42,7 @@ interface GallerySectionProps {
   sectionSubtitleEn: string
   sectionSubtitleHe: string
   galleryImages: GalleryImage[]
+  dateInfoBoxes?: DateInfo[]
   enableLightbox?: boolean
   dateDisplayFormat?: 'full' | 'short' | 'numeric' | 'iso'
 }
@@ -47,13 +59,14 @@ const GallerySection: React.FC<GallerySectionProps> = ({
   sectionSubtitleEn,
   sectionSubtitleHe,
   galleryImages,
+  dateInfoBoxes = [],
   enableLightbox = true,
   dateDisplayFormat = 'full',
 }) => {
   const { t, currentLanguage } = useLanguage()
   const [lightboxImage, setLightboxImage] = useState<string | null>(null)
   const [lightboxIndex, setLightboxIndex] = useState<number>(0)
-  const [allImages, setAllImages] = useState<GalleryImage[]>([])
+  const isRTL = currentLanguage === 'he'
 
   // Early return if no images
   if (!galleryImages?.length) {
@@ -91,6 +104,11 @@ const GallerySection: React.FC<GallerySectionProps> = ({
     })
 
     return grouped
+  }
+
+  // Get date info for a specific date
+  const getDateInfo = (date: string): DateInfo | undefined => {
+    return dateInfoBoxes?.find((info) => info.date === date)
   }
 
   // Format date for display
@@ -194,10 +212,13 @@ const GallerySection: React.FC<GallerySectionProps> = ({
 
   return (
     <>
-      <section className="py-16 lg:py-24 bg-white">
+      <section
+        className={`py-16 lg:py-24 bg-white ${isRTL ? 'rtl' : 'ltr'}`}
+        dir={isRTL ? 'rtl' : 'ltr'}
+      >
         {/* Section Title */}
         <div
-          className={`text-center mb-16 px-4 ${currentLanguage === 'he' ? 'text-right' : 'text-left'} md:text-center`}
+          className={`text-center mb-16 px-4 ${isRTL ? 'text-right' : 'text-left'} md:text-center`}
         >
           <h2 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 mb-4">
             {sectionTitle}{' '}
@@ -216,15 +237,72 @@ const GallerySection: React.FC<GallerySectionProps> = ({
               currentImageIndex += groupedImages[sortedDates[i]].length
             }
 
+            // Get date info for this date
+            const dateInfo = getDateInfo(date)
+
             return (
               <div key={date} className="mb-12 lg:mb-16">
                 {/* Date Subtitle */}
-                <div className="text-center mb-8">
+                <div
+                  className={`text-center mb-8 ${isRTL ? 'text-right' : 'text-left'} md:text-center`}
+                >
                   <h3 className="text-2xl lg:text-3xl font-bold text-gray-800 mb-2">
                     {formatDate(date, dateDisplayFormat, currentLanguage)}
                   </h3>
                   <div className="w-24 h-1 bg-gradient-to-r from-[#D4B896] to-amber-600 mx-auto rounded-full"></div>
                 </div>
+
+                {/* Date Info Box */}
+                {dateInfo && (
+                  <div className="max-w-4xl mx-auto mb-8 px-4">
+                    <div className="bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow duration-300">
+                      {/* Info box title if provided */}
+                      {(dateInfo.titleRo || dateInfo.titleEn || dateInfo.titleHe) && (
+                        <h4
+                          className={`text-xl lg:text-2xl font-semibold text-gray-900 mb-4 ${isRTL ? 'text-right' : 'text-left'}`}
+                        >
+                          {t({
+                            ro: dateInfo.titleRo || '',
+                            en: dateInfo.titleEn || '',
+                            he: dateInfo.titleHe || '',
+                          })}
+                        </h4>
+                      )}
+
+                      {/* Info box description */}
+                      {(dateInfo.descriptionRo ||
+                        dateInfo.descriptionEn ||
+                        dateInfo.descriptionHe) && (
+                        <div
+                          className={`prose prose-amber max-w-none ${isRTL ? 'text-right prose-rtl' : 'text-left'}`}
+                        >
+                          <p className="text-gray-700 leading-relaxed text-lg">
+                            {t({
+                              ro: dateInfo.descriptionRo || '',
+                              en: dateInfo.descriptionEn || '',
+                              he: dateInfo.descriptionHe || '',
+                            })}
+                          </p>
+                        </div>
+                      )}
+
+                      {/* Decorative icon */}
+                      <div className={`absolute top-4 ${isRTL ? 'left-4' : 'right-4'} opacity-10`}>
+                        <svg
+                          className="w-8 h-8 text-amber-600"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                )}
 
                 {/* Images Grid - Same styling as original */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
@@ -285,7 +363,11 @@ const GallerySection: React.FC<GallerySectionProps> = ({
                         {/* Caption */}
                         {caption && (
                           <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-3">
-                            <p className="text-white text-xs font-medium">{caption}</p>
+                            <p
+                              className={`text-white text-xs font-medium ${isRTL ? 'text-right' : 'text-left'}`}
+                            >
+                              {caption}
+                            </p>
                           </div>
                         )}
                       </div>

@@ -2550,6 +2550,112 @@ export interface GalleryPage {
         }[]
       | null;
   };
+  gallerySection?: {
+    /**
+     * Show/hide the main gallery section
+     */
+    isActive?: boolean | null;
+    /**
+     * Main section title in Romanian
+     */
+    sectionTitleRo?: string | null;
+    /**
+     * Main section title in English
+     */
+    sectionTitleEn?: string | null;
+    /**
+     * Main section title in Hebrew
+     */
+    sectionTitleHe?: string | null;
+    /**
+     * Section subtitle in Romanian (appears after title in italic)
+     */
+    sectionSubtitleRo?: string | null;
+    /**
+     * Section subtitle in English (appears after title in italic)
+     */
+    sectionSubtitleEn?: string | null;
+    /**
+     * Section subtitle in Hebrew (appears after title in italic)
+     */
+    sectionSubtitleHe?: string | null;
+    /**
+     * Allow users to click images to view them in fullscreen lightbox
+     */
+    enableLightbox?: boolean | null;
+    /**
+     * How to display dates above image groups
+     */
+    dateDisplayFormat?: ('full' | 'short' | 'numeric' | 'iso') | null;
+    /**
+     * Upload and organize your gallery images by date
+     */
+    galleryImages?:
+      | {
+          /**
+           * The image to display in the gallery
+           */
+          image: string | Media;
+          /**
+           * Images will be grouped by this date. Use the same date for images that should appear together.
+           */
+          uploadDate: string;
+          /**
+           * Order within the date group (lower numbers appear first)
+           */
+          order?: number | null;
+          /**
+           * Optional caption that appears over the image on hover
+           */
+          caption?: {
+            captionRo?: string | null;
+            captionEn?: string | null;
+            captionHe?: string | null;
+          };
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * Add informative text boxes for specific dates. These will appear below the date heading but above the images for that date.
+     */
+    dateInfoBoxes?:
+      | {
+          /**
+           * Must exactly match the upload date of images to appear for that date group
+           */
+          date: string;
+          /**
+           * If multiple info boxes exist for the same date, they will be ordered by this field (lower numbers first)
+           */
+          order?: number | null;
+          /**
+           * Optional title for the info box - leave empty if you only want description
+           */
+          titleRo?: string | null;
+          /**
+           * Optional title for the info box - leave empty if you only want description
+           */
+          titleEn?: string | null;
+          /**
+           * Optional title for the info box - leave empty if you only want description
+           */
+          titleHe?: string | null;
+          /**
+           * Main informative text about the photos from this date
+           */
+          descriptionRo?: string | null;
+          /**
+           * Main informative text about the photos from this date
+           */
+          descriptionEn?: string | null;
+          /**
+           * Main informative text about the photos from this date
+           */
+          descriptionHe?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -3203,6 +3309,47 @@ export interface GalleryPageSelect<T extends boolean = true> {
               labelHe?: T;
               href?: T;
               isActive?: T;
+              id?: T;
+            };
+      };
+  gallerySection?:
+    | T
+    | {
+        isActive?: T;
+        sectionTitleRo?: T;
+        sectionTitleEn?: T;
+        sectionTitleHe?: T;
+        sectionSubtitleRo?: T;
+        sectionSubtitleEn?: T;
+        sectionSubtitleHe?: T;
+        enableLightbox?: T;
+        dateDisplayFormat?: T;
+        galleryImages?:
+          | T
+          | {
+              image?: T;
+              uploadDate?: T;
+              order?: T;
+              caption?:
+                | T
+                | {
+                    captionRo?: T;
+                    captionEn?: T;
+                    captionHe?: T;
+                  };
+              id?: T;
+            };
+        dateInfoBoxes?:
+          | T
+          | {
+              date?: T;
+              order?: T;
+              titleRo?: T;
+              titleEn?: T;
+              titleHe?: T;
+              descriptionRo?: T;
+              descriptionEn?: T;
+              descriptionHe?: T;
               id?: T;
             };
       };
