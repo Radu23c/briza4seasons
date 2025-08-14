@@ -2,9 +2,9 @@
 import { Suspense } from 'react'
 import ContactPageClient from './ContactPageClient'
 
-// ADD THIS TYPE AT THE TOP
+// FIXED: Updated PageProps for Next.js 15
 type PageProps = {
-  params: { locale: string }
+  params: Promise<{ locale: string }>
 }
 
 // Loading skeleton for Contact page
@@ -37,8 +37,10 @@ function ContactPageSkeleton() {
   )
 }
 
-// SERVER COMPONENT - NO "use client"
-export default function ContactPage({ params: { locale } }: PageProps) {
+// FIXED: Updated to handle Promise params
+export default async function ContactPage({ params }: PageProps) {
+  const { locale } = await params // Await the params Promise
+
   return (
     <Suspense fallback={<ContactPageSkeleton />}>
       <ContactPageClient />
@@ -46,8 +48,10 @@ export default function ContactPage({ params: { locale } }: PageProps) {
   )
 }
 
-// THESE FUNCTIONS STAY IN THE SERVER COMPONENT
-export function generateMetadata({ params }: PageProps) {
+// FIXED: Updated generateMetadata to handle Promise params
+export async function generateMetadata({ params }: PageProps) {
+  const { locale } = await params // Await the params Promise
+
   const titles = {
     ro: 'Contact - Bliss Imobiliare',
     en: 'Contact - Bliss Real Estate',
@@ -61,11 +65,12 @@ export function generateMetadata({ params }: PageProps) {
   }
 
   return {
-    title: titles[params.locale as keyof typeof titles] || titles.ro,
-    description: descriptions[params.locale as keyof typeof descriptions] || descriptions.ro,
+    title: titles[locale as keyof typeof titles] || titles.ro,
+    description: descriptions[locale as keyof typeof descriptions] || descriptions.ro,
   }
 }
 
+// generateStaticParams doesn't need to be changed
 export function generateStaticParams() {
   return [{ locale: 'ro' }, { locale: 'en' }, { locale: 'he' }]
 }

@@ -6,9 +6,9 @@ import CookieConsent from '@/components/CookieConsent'
 import { Suspense } from 'react'
 import type { Homepage as HomepageType } from '@/payload-types'
 
-// ADD THIS TYPE AT THE TOP
+// FIXED: Updated PageProps for Next.js 15
 type PageProps = {
-  params: { locale: string }
+  params: Promise<{ locale: string }>
 }
 
 // Complete loading skeleton for entire homepage
@@ -512,9 +512,10 @@ async function HomepageContent() {
   }
 }
 
-// CHANGE THIS FUNCTION SIGNATURE - ADD PARAMS
-export default function HomePage({ params: { locale } }: PageProps) {
-  // Your existing component code remains exactly the same
+// FIXED: Updated to handle Promise params
+export default async function HomePage({ params }: PageProps) {
+  const { locale } = await params // Await the params Promise
+
   return (
     <Suspense fallback={<HomepageSkeleton />}>
       <HomepageContent />
@@ -522,8 +523,10 @@ export default function HomePage({ params: { locale } }: PageProps) {
   )
 }
 
-// REPLACE THE OLD METADATA EXPORT WITH THIS:
-export function generateMetadata({ params }: PageProps) {
+// FIXED: Updated generateMetadata to handle Promise params
+export async function generateMetadata({ params }: PageProps) {
+  const { locale } = await params // Await the params Promise
+
   const titles = {
     ro: 'Briza4Seasons - Ansamblul de Vile Premium',
     en: 'Briza4Seasons - Premium Villa Complex',
@@ -543,18 +546,18 @@ export function generateMetadata({ params }: PageProps) {
   }
 
   return {
-    title: titles[params.locale as keyof typeof titles] || titles.ro,
-    description: descriptions[params.locale as keyof typeof descriptions] || descriptions.ro,
-    keywords: keywords[params.locale as keyof typeof keywords] || keywords.ro,
+    title: titles[locale as keyof typeof titles] || titles.ro,
+    description: descriptions[locale as keyof typeof descriptions] || descriptions.ro,
+    keywords: keywords[locale as keyof typeof keywords] || keywords.ro,
     openGraph: {
-      title: titles[params.locale as keyof typeof titles] || titles.ro,
-      description: descriptions[params.locale as keyof typeof descriptions] || descriptions.ro,
+      title: titles[locale as keyof typeof titles] || titles.ro,
+      description: descriptions[locale as keyof typeof descriptions] || descriptions.ro,
       type: 'website',
     },
   }
 }
 
-// ADD THIS NEW FUNCTION
+// generateStaticParams doesn't need to be changed
 export function generateStaticParams() {
   return [{ locale: 'ro' }, { locale: 'en' }, { locale: 'he' }]
 }

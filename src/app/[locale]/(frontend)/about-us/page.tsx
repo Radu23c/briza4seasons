@@ -5,9 +5,9 @@ import AboutUsContent from '@/components/AboutUs/AboutUsContent'
 import { Suspense } from 'react'
 import { Media } from '@/payload-types'
 
-// ADD THIS TYPE AT THE TOP
+// FIXED: Updated PageProps for Next.js 15
 type PageProps = {
-  params: { locale: string }
+  params: Promise<{ locale: string }>
 }
 
 // Type definitions for better type safety
@@ -301,8 +301,10 @@ async function AboutUsPageContent({ locale }: { locale: string }) {
   }
 }
 
-// CHANGE THIS FUNCTION SIGNATURE - ADD PARAMS AND PASS LOCALE
-export default function AboutUsPage({ params: { locale } }: PageProps) {
+// FIXED: Updated main component to handle Promise params
+export default async function AboutUsPage({ params }: PageProps) {
+  const { locale } = await params // Await the params Promise
+
   return (
     <Suspense fallback={<AboutUsPageSkeleton />}>
       <AboutUsPageContent locale={locale} />
@@ -310,8 +312,10 @@ export default function AboutUsPage({ params: { locale } }: PageProps) {
   )
 }
 
-// REPLACE THE OLD METADATA EXPORT WITH THIS:
-export function generateMetadata({ params }: PageProps) {
+// FIXED: Updated generateMetadata to handle Promise params
+export async function generateMetadata({ params }: PageProps) {
+  const { locale } = await params // Await the params Promise
+
   const titles = {
     ro: 'Despre Noi - Bliss Imobiliare',
     en: 'About Us - Bliss Real Estate',
@@ -325,19 +329,12 @@ export function generateMetadata({ params }: PageProps) {
   }
 
   return {
-    title: titles[params.locale as keyof typeof titles] || titles.ro,
-    description: descriptions[params.locale as keyof typeof descriptions] || descriptions.ro,
+    title: titles[locale as keyof typeof titles] || titles.ro,
+    description: descriptions[locale as keyof typeof descriptions] || descriptions.ro,
   }
 }
 
-// ADD THIS NEW FUNCTION
+// FIXED: Updated generateStaticParams (this one doesn't need await)
 export function generateStaticParams() {
-  return [
-    // Romanian
-    { locale: 'ro' },
-    // English
-    { locale: 'en' },
-    // Hebrew
-    { locale: 'he' },
-  ]
+  return [{ locale: 'ro' }, { locale: 'en' }, { locale: 'he' }]
 }
