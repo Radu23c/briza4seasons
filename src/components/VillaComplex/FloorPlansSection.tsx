@@ -245,7 +245,7 @@ const FloorPlansSection: React.FC<FloorPlansSectionProps> = ({
             </div>
 
             {/* Direction Arrow - Same width as buttons grid */}
-            <div className="flex items-center justify-center">
+            <div className="flex items-center justify-center hidden md:block">
               <div className="flex items-center space-x-4 w-full">
                 <span className="text-sm font-semibold text-gray-700 tracking-wider">
                   {t({
