@@ -19,7 +19,7 @@ const LanguageToggle: React.FC = () => {
 
   const currentLang = languages.find((lang) => lang.code === currentLanguage) || languages[0]
 
-  // Route translations mapping
+  // FIXED: More comprehensive route mapping with proper decoding
   const routeMap = {
     // Romanian to other languages
     'despre-noi': { en: 'about-us', he: 'אודותינו' },
@@ -82,16 +82,26 @@ const LanguageToggle: React.FC = () => {
         // Home page - just change locale
         router.push(`/${langCode}`)
       } else {
-        // Try to find the route translation
-        const routeTranslation = routeMap[routePart as keyof typeof routeMap]
+        // FIXED: Decode the route part first to handle Hebrew characters
+        const decodedRoutePart = decodeURIComponent(routePart)
+
+        console.log('Original route part:', routePart)
+        console.log('Decoded route part:', decodedRoutePart)
+
+        // Try to find the route translation using both encoded and decoded versions
+        const routeTranslation =
+          routeMap[routePart as keyof typeof routeMap] ||
+          routeMap[decodedRoutePart as keyof typeof routeMap]
 
         if (routeTranslation && routeTranslation[langCode]) {
           // Use translated route
           const newRoute = routeTranslation[langCode]
+          console.log('Translating to:', newRoute)
           router.push(`/${langCode}/${newRoute}`)
         } else {
-          // Fallback: keep the same route
-          router.push(`/${langCode}/${routePart}`)
+          // FIXED: Better fallback - if we can't translate, go to home
+          console.log('No translation found, going to home')
+          router.push(`/${langCode}`)
         }
       }
     } else {

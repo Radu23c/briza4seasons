@@ -332,5 +332,12 @@ export function generateMetadata({ params }: PageProps) {
 
 // ADD THIS NEW FUNCTION
 export function generateStaticParams() {
-  return [{ locale: 'ro' }, { locale: 'en' }, { locale: 'he' }]
+  return [
+    // Romanian
+    { locale: 'ro' },
+    // English
+    { locale: 'en' },
+    // Hebrew
+    { locale: 'he' },
+  ]
 }
