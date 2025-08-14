@@ -804,7 +804,7 @@ export const Homepage: GlobalConfig = {
         },
       ],
     },
-    // FIRST GALLERY SECTION (Full Width) - UPDATED WITH DATE GROUPING
+    // FIRST GALLERY SECTION (Full Width) - UPDATED WITH DATE INFO BOXES
     {
       name: 'gallerySection',
       type: 'group',
@@ -856,7 +856,7 @@ export const Homepage: GlobalConfig = {
           required: false,
           defaultValue: 'מתחם',
         },
-        // Gallery Images - UPDATED WITH DATE FIELD
+        // Gallery Images
         {
           name: 'galleryImages',
           type: 'array',
@@ -930,6 +930,86 @@ export const Homepage: GlobalConfig = {
           ],
           defaultValue: [],
         },
+        // NEW: Date Info Boxes for Gallery Section
+        {
+          name: 'dateInfoBoxes',
+          type: 'array',
+          label: 'Date Information Boxes',
+          admin: {
+            description:
+              'Add informative text boxes for specific dates in the gallery section. These appear below date headings but above images.',
+          },
+          fields: [
+            {
+              name: 'date',
+              type: 'date',
+              label: 'Date',
+              required: true,
+              admin: {
+                description:
+                  'Must exactly match the upload date of images to appear for that date group',
+              },
+            },
+            {
+              name: 'order',
+              type: 'number',
+              label: 'Display Order',
+              defaultValue: 1,
+              admin: {
+                description:
+                  'If multiple info boxes exist for the same date, they will be ordered by this field',
+              },
+            },
+            {
+              name: 'titleRo',
+              type: 'text',
+              label: 'Title (Romanian)',
+              admin: {
+                description: 'Optional title for the info box',
+              },
+            },
+            {
+              name: 'titleEn',
+              type: 'text',
+              label: 'Title (English)',
+              admin: {
+                description: 'Optional title for the info box',
+              },
+            },
+            {
+              name: 'titleHe',
+              type: 'text',
+              label: 'Title (Hebrew)',
+              admin: {
+                description: 'Optional title for the info box',
+              },
+            },
+            {
+              name: 'descriptionRo',
+              type: 'textarea',
+              label: 'Description (Romanian)',
+              admin: {
+                description: 'Main informative text about the photos from this date',
+              },
+            },
+            {
+              name: 'descriptionEn',
+              type: 'textarea',
+              label: 'Description (English)',
+              admin: {
+                description: 'Main informative text about the photos from this date',
+              },
+            },
+            {
+              name: 'descriptionHe',
+              type: 'textarea',
+              label: 'Description (Hebrew)',
+              admin: {
+                description: 'Main informative text about the photos from this date',
+              },
+            },
+          ],
+        },
         // Layout Options
         {
           name: 'enableLightbox',
@@ -939,7 +1019,7 @@ export const Homepage: GlobalConfig = {
             description: 'Enable lightbox/modal view when clicking images',
           },
         },
-        // Date Display Options - NEW FIELD
+        // Date Display Options
         {
           name: 'dateDisplayFormat',
           type: 'select',
@@ -956,7 +1036,7 @@ export const Homepage: GlobalConfig = {
         },
       ],
     },
-    // SECOND GALLERY SECTION (Container Width) - UPDATED WITH DATE GROUPING
+    // SECOND GALLERY SECTION (Container Width) - UPDATED WITH DATE INFO BOXES
     {
       name: 'imageGallerySection',
       type: 'group',
@@ -1056,7 +1136,7 @@ export const Homepage: GlobalConfig = {
             description: 'Description text in Hebrew',
           },
         },
-        // Gallery Images - UPDATED WITH DATE FIELD
+        // Gallery Images
         {
           name: 'images',
           type: 'array',
@@ -1131,6 +1211,86 @@ export const Homepage: GlobalConfig = {
           ],
           defaultValue: [],
         },
+        // NEW: Date Info Boxes for Image Gallery Section
+        {
+          name: 'dateInfoBoxes',
+          type: 'array',
+          label: 'Date Information Boxes',
+          admin: {
+            description:
+              'Add informative text boxes for specific dates in the image gallery section. These appear below date headings but above images.',
+          },
+          fields: [
+            {
+              name: 'date',
+              type: 'date',
+              label: 'Date',
+              required: true,
+              admin: {
+                description:
+                  'Must exactly match the upload date of images to appear for that date group',
+              },
+            },
+            {
+              name: 'order',
+              type: 'number',
+              label: 'Display Order',
+              defaultValue: 1,
+              admin: {
+                description:
+                  'If multiple info boxes exist for the same date, they will be ordered by this field',
+              },
+            },
+            {
+              name: 'titleRo',
+              type: 'text',
+              label: 'Title (Romanian)',
+              admin: {
+                description: 'Optional title for the info box',
+              },
+            },
+            {
+              name: 'titleEn',
+              type: 'text',
+              label: 'Title (English)',
+              admin: {
+                description: 'Optional title for the info box',
+              },
+            },
+            {
+              name: 'titleHe',
+              type: 'text',
+              label: 'Title (Hebrew)',
+              admin: {
+                description: 'Optional title for the info box',
+              },
+            },
+            {
+              name: 'descriptionRo',
+              type: 'textarea',
+              label: 'Description (Romanian)',
+              admin: {
+                description: 'Main informative text about the photos from this date',
+              },
+            },
+            {
+              name: 'descriptionEn',
+              type: 'textarea',
+              label: 'Description (English)',
+              admin: {
+                description: 'Main informative text about the photos from this date',
+              },
+            },
+            {
+              name: 'descriptionHe',
+              type: 'textarea',
+              label: 'Description (Hebrew)',
+              admin: {
+                description: 'Main informative text about the photos from this date',
+              },
+            },
+          ],
+        },
         // Layout Options
         {
           name: 'enableLightbox',
@@ -1140,7 +1300,7 @@ export const Homepage: GlobalConfig = {
             description: 'Enable lightbox/modal view when clicking images',
           },
         },
-        // Date Display Options - NEW FIELD
+        // Date Display Options
         {
           name: 'dateDisplayFormat',
           type: 'select',

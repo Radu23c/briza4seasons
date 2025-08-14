@@ -10,6 +10,17 @@ import ContactSection from './ContactSection'
 import GallerySection from './GallerySection'
 import ImageGallerySection from './ImageGallerySection'
 
+interface DateInfo {
+  date: string
+  titleRo?: string
+  titleEn?: string
+  titleHe?: string
+  descriptionRo?: string
+  descriptionEn?: string
+  descriptionHe?: string
+  order?: number
+}
+
 interface HomepageData {
   heroSection: {
     isActive: boolean
@@ -171,6 +182,7 @@ interface HomepageData {
       }
       order?: number
     }>
+    dateInfoBoxes?: DateInfo[] // ADDED
     enableLightbox?: boolean
     dateDisplayFormat?: 'full' | 'short' | 'numeric' | 'iso'
   }
@@ -198,6 +210,7 @@ interface HomepageData {
       }
       order?: number
     }>
+    dateInfoBoxes?: DateInfo[] // ADDED
     enableLightbox?: boolean
     dateDisplayFormat?: 'full' | 'short' | 'numeric' | 'iso'
   }
@@ -339,6 +352,7 @@ const Homepage: React.FC<HomepageProps> = ({ data }) => {
           sectionSubtitleEn={data.gallerySection.sectionSubtitleEn}
           sectionSubtitleHe={data.gallerySection.sectionSubtitleHe}
           galleryImages={data.gallerySection.galleryImages}
+          dateInfoBoxes={data.gallerySection.dateInfoBoxes} // ADDED
           enableLightbox={data.gallerySection.enableLightbox}
           dateDisplayFormat={data.gallerySection.dateDisplayFormat}
         />
@@ -357,6 +371,7 @@ const Homepage: React.FC<HomepageProps> = ({ data }) => {
           descriptionEn={data.imageGallerySection.descriptionEn}
           descriptionHe={data.imageGallerySection.descriptionHe}
           images={data.imageGallerySection.images}
+          dateInfoBoxes={data.imageGallerySection.dateInfoBoxes} // ADDED
           enableLightbox={data.imageGallerySection.enableLightbox}
         />
       )}

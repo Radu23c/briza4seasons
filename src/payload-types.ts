@@ -1828,6 +1828,46 @@ export interface Homepage {
         }[]
       | null;
     /**
+     * Add informative text boxes for specific dates in the gallery section. These appear below date headings but above images.
+     */
+    dateInfoBoxes?:
+      | {
+          /**
+           * Must exactly match the upload date of images to appear for that date group
+           */
+          date: string;
+          /**
+           * If multiple info boxes exist for the same date, they will be ordered by this field
+           */
+          order?: number | null;
+          /**
+           * Optional title for the info box
+           */
+          titleRo?: string | null;
+          /**
+           * Optional title for the info box
+           */
+          titleEn?: string | null;
+          /**
+           * Optional title for the info box
+           */
+          titleHe?: string | null;
+          /**
+           * Main informative text about the photos from this date
+           */
+          descriptionRo?: string | null;
+          /**
+           * Main informative text about the photos from this date
+           */
+          descriptionEn?: string | null;
+          /**
+           * Main informative text about the photos from this date
+           */
+          descriptionHe?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    /**
      * Enable lightbox/modal view when clicking images
      */
     enableLightbox?: boolean | null;
@@ -1908,6 +1948,46 @@ export interface Homepage {
            * Order within the same date group
            */
           order?: number | null;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * Add informative text boxes for specific dates in the image gallery section. These appear below date headings but above images.
+     */
+    dateInfoBoxes?:
+      | {
+          /**
+           * Must exactly match the upload date of images to appear for that date group
+           */
+          date: string;
+          /**
+           * If multiple info boxes exist for the same date, they will be ordered by this field
+           */
+          order?: number | null;
+          /**
+           * Optional title for the info box
+           */
+          titleRo?: string | null;
+          /**
+           * Optional title for the info box
+           */
+          titleEn?: string | null;
+          /**
+           * Optional title for the info box
+           */
+          titleHe?: string | null;
+          /**
+           * Main informative text about the photos from this date
+           */
+          descriptionRo?: string | null;
+          /**
+           * Main informative text about the photos from this date
+           */
+          descriptionEn?: string | null;
+          /**
+           * Main informative text about the photos from this date
+           */
+          descriptionHe?: string | null;
           id?: string | null;
         }[]
       | null;
@@ -2973,6 +3053,19 @@ export interface HomepageSelect<T extends boolean = true> {
               order?: T;
               id?: T;
             };
+        dateInfoBoxes?:
+          | T
+          | {
+              date?: T;
+              order?: T;
+              titleRo?: T;
+              titleEn?: T;
+              titleHe?: T;
+              descriptionRo?: T;
+              descriptionEn?: T;
+              descriptionHe?: T;
+              id?: T;
+            };
         enableLightbox?: T;
         dateDisplayFormat?: T;
       };
@@ -3002,6 +3095,19 @@ export interface HomepageSelect<T extends boolean = true> {
                     captionHe?: T;
                   };
               order?: T;
+              id?: T;
+            };
+        dateInfoBoxes?:
+          | T
+          | {
+              date?: T;
+              order?: T;
+              titleRo?: T;
+              titleEn?: T;
+              titleHe?: T;
+              descriptionRo?: T;
+              descriptionEn?: T;
+              descriptionHe?: T;
               id?: T;
             };
         enableLightbox?: T;

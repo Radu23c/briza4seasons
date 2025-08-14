@@ -9,12 +9,25 @@ import type { Media as PayloadMedia, Homepage } from '@/payload-types'
 // Types for CMS data - matching Payload's exact structure
 interface RawGalleryImage {
   image: string | PayloadMedia
-  uploadDate?: string | null // Add uploadDate to the interface
+  uploadDate?: string | null
   caption?: {
     captionRo?: string | null
     captionEn?: string | null
     captionHe?: string | null
   }
+  order?: number | null
+  id?: string | null
+}
+
+// NEW: Date Info interface
+interface RawDateInfo {
+  date: string | null
+  titleRo?: string | null
+  titleEn?: string | null
+  titleHe?: string | null
+  descriptionRo?: string | null
+  descriptionEn?: string | null
+  descriptionHe?: string | null
   order?: number | null
   id?: string | null
 }
@@ -72,7 +85,7 @@ function transformBreadcrumbs(breadcrumbs: any[] | null | undefined): any[] {
   }))
 }
 
-// FIXED: Helper function to convert raw gallery images to the expected format with uploadDate
+// Helper function to convert raw gallery images to the expected format with uploadDate
 function convertGalleryImages(rawImages: any[] | null | undefined) {
   if (!rawImages || !Array.isArray(rawImages)) return []
 
@@ -89,12 +102,30 @@ function convertGalleryImages(rawImages: any[] | null | undefined) {
 
     return {
       image: imageObject,
-      uploadDate: nullToUndefined(rawImage.uploadDate), // ← ADD THIS LINE
+      uploadDate: nullToUndefined(rawImage.uploadDate),
       caption,
       order: nullToUndefined(rawImage.order),
       id: nullToUndefined(rawImage.id),
     }
   })
+}
+
+// NEW: Helper function to convert raw date info boxes
+function convertDateInfoBoxes(rawDateInfoBoxes: any[] | null | undefined) {
+  if (!rawDateInfoBoxes || !Array.isArray(rawDateInfoBoxes)) return []
+
+  return rawDateInfoBoxes
+    .map((rawInfo) => ({
+      date: ensureString(rawInfo.date),
+      titleRo: ensureString(rawInfo.titleRo),
+      titleEn: ensureString(rawInfo.titleEn),
+      titleHe: ensureString(rawInfo.titleHe),
+      descriptionRo: ensureString(rawInfo.descriptionRo),
+      descriptionEn: ensureString(rawInfo.descriptionEn),
+      descriptionHe: ensureString(rawInfo.descriptionHe),
+      order: nullToUndefined(rawInfo.order),
+    }))
+    .filter((info) => info.date) // Only include items with valid dates
 }
 
 function GalleryPageSkeleton() {
@@ -209,8 +240,9 @@ async function GalleryPageContent() {
               sectionSubtitleEn={ensureString(homepageData.gallerySection.sectionSubtitleEn)}
               sectionSubtitleHe={ensureString(homepageData.gallerySection.sectionSubtitleHe)}
               galleryImages={convertGalleryImages(homepageData.gallerySection.galleryImages)}
+              dateInfoBoxes={convertDateInfoBoxes(homepageData.gallerySection.dateInfoBoxes)} // ADDED
               enableLightbox={nullToUndefined(homepageData.gallerySection.enableLightbox)}
-              dateDisplayFormat={nullToUndefined(homepageData.gallerySection.dateDisplayFormat)} // ← ADD THIS LINE
+              dateDisplayFormat={nullToUndefined(homepageData.gallerySection.dateDisplayFormat)}
             />
           )}
 
@@ -228,6 +260,7 @@ async function GalleryPageContent() {
               descriptionEn={ensureString(homepageData.imageGallerySection.descriptionEn)}
               descriptionHe={ensureString(homepageData.imageGallerySection.descriptionHe)}
               images={convertGalleryImages(homepageData.imageGallerySection.images)}
+              dateInfoBoxes={convertDateInfoBoxes(homepageData.imageGallerySection.dateInfoBoxes)} // ADDED
               enableLightbox={nullToUndefined(homepageData.imageGallerySection.enableLightbox)}
             />
           )}
