@@ -65,6 +65,16 @@ const FeaturesOverview: React.FC<FeaturesOverviewProps> = ({
     he: backgroundImageAltHe || 'Development overview',
   })
 
+  // Sort feature items based on language direction
+  const sortedFeatureItems = [...featureItems].sort((a, b) => {
+    if (currentLanguage === 'he') {
+      // For Hebrew, reverse the order (right to left)
+      return b.order - a.order
+    }
+    // For other languages, normal order (left to right)
+    return a.order - b.order
+  })
+
   return (
     <section className="py-16 lg:py-24 bg-gray-50">
       <div className="container mx-auto px-4">
@@ -77,7 +87,7 @@ const FeaturesOverview: React.FC<FeaturesOverviewProps> = ({
 
         {/* Feature items grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 mb-16">
-          {featureItems.map((item, index) => (
+          {sortedFeatureItems.map((item, index) => (
             <FeatureItem
               key={index}
               order={item.order}
