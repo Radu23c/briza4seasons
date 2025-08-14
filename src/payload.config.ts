@@ -1,3 +1,4 @@
+// payload.config.ts - UPDATED WITH CONTACT PAGE
 // Add this import at the top
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
@@ -17,7 +18,8 @@ import { Homepage } from './globals/Homepage'
 import { AboutUsPage } from './globals/AboutUsPage'
 import { VillaComplexPage } from './globals/VillaComplexPage'
 import { LocationPage } from './globals/LocationPage'
-import { GalleryPage } from './globals/GalleryPage' // Add this import
+import { GalleryPage } from './globals/GalleryPage'
+import { ContactPage } from './globals/ContactPage' // Add this import
 import { plugins } from './plugins'
 import { defaultLexical } from '@/fields/defaultLexical'
 import { getServerSideURL } from './utilities/getURL'
@@ -64,7 +66,16 @@ export default buildConfig({
   }),
   collections: [Pages, Posts, Media, Categories, Users],
   cors: [getServerSideURL()].filter(Boolean),
-  globals: [Header, Footer, Homepage, AboutUsPage, VillaComplexPage, LocationPage, GalleryPage], // Add GalleryPage here
+  globals: [
+    Header,
+    Footer,
+    Homepage,
+    AboutUsPage,
+    VillaComplexPage,
+    LocationPage,
+    GalleryPage,
+    ContactPage,
+  ], // Add ContactPage here
   plugins: [
     ...plugins,
     // Add Vercel Blob storage plugin

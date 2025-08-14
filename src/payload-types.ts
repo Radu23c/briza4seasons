@@ -108,6 +108,7 @@ export interface Config {
     'villa-complex-page': VillaComplexPage;
     'location-page': LocationPage;
     'gallery-page': GalleryPage;
+    'contact-page': ContactPage;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
@@ -117,6 +118,7 @@ export interface Config {
     'villa-complex-page': VillaComplexPageSelect<false> | VillaComplexPageSelect<true>;
     'location-page': LocationPageSelect<false> | LocationPageSelect<true>;
     'gallery-page': GalleryPageSelect<false> | GalleryPageSelect<true>;
+    'contact-page': ContactPageSelect<false> | ContactPageSelect<true>;
   };
   locale: null;
   user: User & {
@@ -2553,6 +2555,103 @@ export interface GalleryPage {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-page".
+ */
+export interface ContactPage {
+  id: string;
+  heroSection: {
+    isActive?: boolean | null;
+    mainTitleRo?: string | null;
+    mainTitleEn?: string | null;
+    mainTitleHe?: string | null;
+    subtitleRo?: string | null;
+    subtitleEn?: string | null;
+    subtitleHe?: string | null;
+    backgroundImage: string | Media;
+    breadcrumbs?:
+      | {
+          labelRo: string;
+          labelEn: string;
+          labelHe: string;
+          href: string;
+          isActive?: boolean | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  contactInfoSection?: {
+    isActive?: boolean | null;
+    addressTitleRo?: string | null;
+    addressTitleEn?: string | null;
+    addressTitleHe?: string | null;
+    phoneTitleRo?: string | null;
+    phoneTitleEn?: string | null;
+    phoneTitleHe?: string | null;
+    emailTitleRo?: string | null;
+    emailTitleEn?: string | null;
+    emailTitleHe?: string | null;
+    fullAddressRo?: string | null;
+    fullAddressEn?: string | null;
+    fullAddressHe?: string | null;
+    cityRegionRo?: string | null;
+    cityRegionEn?: string | null;
+    cityRegionHe?: string | null;
+    postalCode?: string | null;
+    phoneNumber?: string | null;
+    email?: string | null;
+  };
+  contactFormSection?: {
+    isActive?: boolean | null;
+    formTitleRo?: string | null;
+    formTitleEn?: string | null;
+    formTitleHe?: string | null;
+    formDescriptionRo?: string | null;
+    formDescriptionEn?: string | null;
+    formDescriptionHe?: string | null;
+    namePlaceholderRo?: string | null;
+    namePlaceholderEn?: string | null;
+    namePlaceholderHe?: string | null;
+    emailPlaceholderRo?: string | null;
+    emailPlaceholderEn?: string | null;
+    emailPlaceholderHe?: string | null;
+    phonePlaceholderRo?: string | null;
+    phonePlaceholderEn?: string | null;
+    phonePlaceholderHe?: string | null;
+    messagePlaceholderRo?: string | null;
+    messagePlaceholderEn?: string | null;
+    messagePlaceholderHe?: string | null;
+    submitButtonRo?: string | null;
+    submitButtonEn?: string | null;
+    submitButtonHe?: string | null;
+    sendingButtonRo?: string | null;
+    sendingButtonEn?: string | null;
+    sendingButtonHe?: string | null;
+    successMessageRo?: string | null;
+    successMessageEn?: string | null;
+    successMessageHe?: string | null;
+    errorMessageRo?: string | null;
+    errorMessageEn?: string | null;
+    errorMessageHe?: string | null;
+    connectionErrorRo?: string | null;
+    connectionErrorEn?: string | null;
+    connectionErrorHe?: string | null;
+  };
+  representativeSection?: {
+    isActive?: boolean | null;
+    sectionTitleRo?: string | null;
+    sectionTitleEn?: string | null;
+    sectionTitleHe?: string | null;
+    showLargerMapRo?: string | null;
+    showLargerMapEn?: string | null;
+    showLargerMapHe?: string | null;
+    mapEmbedUrl?: string | null;
+    mapTitle?: string | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
@@ -3106,6 +3205,111 @@ export interface GalleryPageSelect<T extends boolean = true> {
               isActive?: T;
               id?: T;
             };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-page_select".
+ */
+export interface ContactPageSelect<T extends boolean = true> {
+  heroSection?:
+    | T
+    | {
+        isActive?: T;
+        mainTitleRo?: T;
+        mainTitleEn?: T;
+        mainTitleHe?: T;
+        subtitleRo?: T;
+        subtitleEn?: T;
+        subtitleHe?: T;
+        backgroundImage?: T;
+        breadcrumbs?:
+          | T
+          | {
+              labelRo?: T;
+              labelEn?: T;
+              labelHe?: T;
+              href?: T;
+              isActive?: T;
+              id?: T;
+            };
+      };
+  contactInfoSection?:
+    | T
+    | {
+        isActive?: T;
+        addressTitleRo?: T;
+        addressTitleEn?: T;
+        addressTitleHe?: T;
+        phoneTitleRo?: T;
+        phoneTitleEn?: T;
+        phoneTitleHe?: T;
+        emailTitleRo?: T;
+        emailTitleEn?: T;
+        emailTitleHe?: T;
+        fullAddressRo?: T;
+        fullAddressEn?: T;
+        fullAddressHe?: T;
+        cityRegionRo?: T;
+        cityRegionEn?: T;
+        cityRegionHe?: T;
+        postalCode?: T;
+        phoneNumber?: T;
+        email?: T;
+      };
+  contactFormSection?:
+    | T
+    | {
+        isActive?: T;
+        formTitleRo?: T;
+        formTitleEn?: T;
+        formTitleHe?: T;
+        formDescriptionRo?: T;
+        formDescriptionEn?: T;
+        formDescriptionHe?: T;
+        namePlaceholderRo?: T;
+        namePlaceholderEn?: T;
+        namePlaceholderHe?: T;
+        emailPlaceholderRo?: T;
+        emailPlaceholderEn?: T;
+        emailPlaceholderHe?: T;
+        phonePlaceholderRo?: T;
+        phonePlaceholderEn?: T;
+        phonePlaceholderHe?: T;
+        messagePlaceholderRo?: T;
+        messagePlaceholderEn?: T;
+        messagePlaceholderHe?: T;
+        submitButtonRo?: T;
+        submitButtonEn?: T;
+        submitButtonHe?: T;
+        sendingButtonRo?: T;
+        sendingButtonEn?: T;
+        sendingButtonHe?: T;
+        successMessageRo?: T;
+        successMessageEn?: T;
+        successMessageHe?: T;
+        errorMessageRo?: T;
+        errorMessageEn?: T;
+        errorMessageHe?: T;
+        connectionErrorRo?: T;
+        connectionErrorEn?: T;
+        connectionErrorHe?: T;
+      };
+  representativeSection?:
+    | T
+    | {
+        isActive?: T;
+        sectionTitleRo?: T;
+        sectionTitleEn?: T;
+        sectionTitleHe?: T;
+        showLargerMapRo?: T;
+        showLargerMapEn?: T;
+        showLargerMapHe?: T;
+        mapEmbedUrl?: T;
+        mapTitle?: T;
       };
   updatedAt?: T;
   createdAt?: T;

@@ -19,50 +19,53 @@ const LanguageToggle: React.FC = () => {
 
   const currentLang = languages.find((lang) => lang.code === currentLanguage) || languages[0]
 
-  // FIXED: Proper typing for route translations
-  type RouteTranslations = {
-    ro?: string
-    en?: string
-    he?: string
-  }
+  // FIXED: Updated route mapping to match your middleware exactly
+  // This should map from display routes (what users see) to what route should be used for each language
+  const routeMap = {
+    // Routes that are different across languages (display route -> actual routes)
+    'despre-noi': { ro: 'despre-noi', en: 'about-us', he: 'אודותינו' },
+    'about-us': { ro: 'despre-noi', en: 'about-us', he: 'אודותינו' },
+    אודותינו: { ro: 'despre-noi', en: 'about-us', he: 'אודותינו' },
 
-  type RouteMap = {
-    [key: string]: RouteTranslations
-  }
+    'politica-cookie': { ro: 'politica-cookie', en: 'cookie-policy', he: 'מדיניות-עוגיות' },
+    'cookie-policy': { ro: 'politica-cookie', en: 'cookie-policy', he: 'מדיניות-עוגיות' },
+    'מדיניות-עוגיות': { ro: 'politica-cookie', en: 'cookie-policy', he: 'מדיניות-עוגיות' },
 
-  // FIXED: More comprehensive route mapping with consistent structure
-  const routeMap: RouteMap = {
-    // Romanian to other languages
-    'despre-noi': { en: 'about-us', he: 'אודותינו' },
-    contact: { en: 'contact', he: 'צור-קשר' },
-    'politica-cookie': { en: 'cookie-policy', he: 'מדיניות-עוגיות' },
-    galerie: { en: 'gallery', he: 'גלריה' },
-    locatie: { en: 'location', he: 'מיקום' },
-    articole: { en: 'posts', he: 'פוסטים' },
-    cautare: { en: 'search', he: 'חיפוש' },
-    'termeni-si-conditii': { en: 'terms-and-conditions', he: 'תנאים-והגבלות' },
-    vile: { en: 'villas', he: 'וילות' },
+    galerie: { ro: 'galerie', en: 'gallery', he: 'גלריה' },
+    gallery: { ro: 'galerie', en: 'gallery', he: 'גלריה' },
+    גלריה: { ro: 'galerie', en: 'gallery', he: 'גלריה' },
 
-    // English to other languages
-    'about-us': { ro: 'despre-noi', he: 'אודותינו' },
-    'cookie-policy': { ro: 'politica-cookie', he: 'מדיניות-עוגיות' },
-    gallery: { ro: 'galerie', he: 'גלריה' },
-    location: { ro: 'locatie', he: 'מיקום' },
-    posts: { ro: 'articole', he: 'פוסטים' },
-    search: { ro: 'cautare', he: 'חיפוש' },
-    'terms-and-conditions': { ro: 'termeni-si-conditii', he: 'תנאים-והגבלות' },
-    villas: { ro: 'vile', he: 'וילות' },
+    locatie: { ro: 'locatie', en: 'location', he: 'מיקום' },
+    location: { ro: 'locatie', en: 'location', he: 'מיקום' },
+    מיקום: { ro: 'locatie', en: 'location', he: 'מיקום' },
 
-    // Hebrew to other languages
-    אודותינו: { ro: 'despre-noi', en: 'about-us' },
-    'צור-קשר': { ro: 'contact', en: 'contact' },
-    'מדיניות-עוגיות': { ro: 'politica-cookie', en: 'cookie-policy' },
-    גלריה: { ro: 'galerie', en: 'gallery' },
-    מיקום: { ro: 'locatie', en: 'location' },
-    פוסטים: { ro: 'articole', en: 'posts' },
-    חיפוש: { ro: 'cautare', en: 'search' },
-    'תנאים-והגבלות': { ro: 'termeni-si-conditii', en: 'terms-and-conditions' },
-    וילות: { ro: 'vile', en: 'villas' },
+    articole: { ro: 'articole', en: 'posts', he: 'פוסטים' },
+    posts: { ro: 'articole', en: 'posts', he: 'פוסטים' },
+    פוסטים: { ro: 'articole', en: 'posts', he: 'פוסטים' },
+
+    cautare: { ro: 'cautare', en: 'search', he: 'חיפוש' },
+    search: { ro: 'cautare', en: 'search', he: 'חיפוש' },
+    חיפוש: { ro: 'cautare', en: 'search', he: 'חיפוש' },
+
+    'termeni-si-conditii': {
+      ro: 'termeni-si-conditii',
+      en: 'terms-and-conditions',
+      he: 'תנאים-והגבלות',
+    },
+    'terms-and-conditions': {
+      ro: 'termeni-si-conditii',
+      en: 'terms-and-conditions',
+      he: 'תנאים-והגבלות',
+    },
+    'תנאים-והגבלות': { ro: 'termeni-si-conditii', en: 'terms-and-conditions', he: 'תנאים-והגבלות' },
+
+    vile: { ro: 'vile', en: 'villas', he: 'וילות' },
+    villas: { ro: 'vile', en: 'villas', he: 'וילות' },
+    וילות: { ro: 'vile', en: 'villas', he: 'וילות' },
+
+    // FIXED: Contact and routes that are the same across languages
+    contact: { ro: 'contact', en: 'contact', he: 'צור-קשר' },
+    'צור-קשר': { ro: 'contact', en: 'contact', he: 'צור-קשר' },
   }
 
   // Close dropdown when clicking outside
@@ -96,27 +99,46 @@ const LanguageToggle: React.FC = () => {
         // FIXED: Decode the route part first to handle Hebrew characters
         const decodedRoutePart = decodeURIComponent(routePart)
 
-        console.log('Original route part:', routePart)
+        console.log('Current route part:', routePart)
         console.log('Decoded route part:', decodedRoutePart)
+        console.log('Switching from', currentLocale, 'to', langCode)
 
         // Try to find the route translation using both encoded and decoded versions
-        const routeTranslation = routeMap[routePart] || routeMap[decodedRoutePart]
+        const routeTranslation =
+          routeMap[routePart as keyof typeof routeMap] ||
+          routeMap[decodedRoutePart as keyof typeof routeMap]
 
-        // FIXED: Type-safe access with optional chaining
         if (routeTranslation && routeTranslation[langCode]) {
           // Use translated route
-          const newRoute = routeTranslation[langCode]!
+          const newRoute = routeTranslation[langCode]
           console.log('Translating to:', newRoute)
           router.push(`/${langCode}/${newRoute}`)
         } else {
-          // FIXED: Better fallback - if we can't translate, go to home
-          console.log('No translation found, going to home')
-          router.push(`/${langCode}`)
+          // FIXED: If no mapping found, assume the route is the same across languages
+          // This handles cases where routes don't need translation
+          console.log('No translation mapping found, using same route:', routePart)
+          router.push(`/${langCode}/${routePart}`)
         }
       }
     } else {
       // Path doesn't have locale, add it
-      router.push(`/${langCode}${pathname === '/' ? '' : pathname}`)
+      if (pathname === '/') {
+        router.push(`/${langCode}`)
+      } else {
+        // Try to translate the current path
+        const currentRoute = pathname.substring(1) // remove leading slash
+        const decodedRoute = decodeURIComponent(currentRoute)
+
+        const routeTranslation =
+          routeMap[currentRoute as keyof typeof routeMap] ||
+          routeMap[decodedRoute as keyof typeof routeMap]
+
+        if (routeTranslation && routeTranslation[langCode]) {
+          router.push(`/${langCode}/${routeTranslation[langCode]}`)
+        } else {
+          router.push(`/${langCode}${pathname}`)
+        }
+      }
     }
 
     setIsDropdownOpen(false)

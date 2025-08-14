@@ -107,6 +107,15 @@ const Header: React.FC = () => {
     },
   ]
 
+  // Get navigation items in the correct order for the current language
+  const getOrderedNavigationItems = () => {
+    if (currentLanguage === 'he') {
+      // For Hebrew, reverse the order to show from right to left
+      return [...navigationItems].reverse()
+    }
+    return navigationItems
+  }
+
   // Contact information with multi-language support
   const contactInfo = {
     address: {
@@ -225,7 +234,7 @@ const Header: React.FC = () => {
             {/* Desktop Navigation */}
             <div className="hidden lg:block">
               <div className="flex items-center justify-center space-x-6 xl:space-x-12">
-                {navigationItems.map((item, index) => {
+                {getOrderedNavigationItems().map((item, index) => {
                   const label = t({
                     ro: item.labelRo,
                     en: item.labelEn,
@@ -236,7 +245,7 @@ const Header: React.FC = () => {
 
                   return (
                     <Link
-                      key={index}
+                      key={`${item.routeKey}-${index}`}
                       href={href}
                       className={`nav-link text-sm font-medium tracking-wider uppercase transition-all duration-300 relative group px-3 py-2 rounded ${
                         isActive
@@ -291,7 +300,7 @@ const Header: React.FC = () => {
                 }`}
               >
                 <div className="space-y-2 py-2">
-                  {navigationItems.map((item, index) => {
+                  {getOrderedNavigationItems().map((item, index) => {
                     const label = t({
                       ro: item.labelRo,
                       en: item.labelEn,
@@ -302,7 +311,7 @@ const Header: React.FC = () => {
 
                     return (
                       <Link
-                        key={index}
+                        key={`mobile-${item.routeKey}-${index}`}
                         href={href}
                         onClick={() => setIsMobileMenuOpen(false)}
                         className={`block px-4 py-3 text-sm font-medium tracking-wider uppercase transition-all duration-300 rounded ${
@@ -321,7 +330,7 @@ const Header: React.FC = () => {
             {/* Tablet Navigation */}
             <div className="hidden md:block lg:hidden">
               <div className="flex items-center justify-center flex-wrap gap-x-4 gap-y-2">
-                {navigationItems.map((item, index) => {
+                {getOrderedNavigationItems().map((item, index) => {
                   const label = t({
                     ro: item.labelRo,
                     en: item.labelEn,
@@ -332,7 +341,7 @@ const Header: React.FC = () => {
 
                   return (
                     <Link
-                      key={index}
+                      key={`tablet-${item.routeKey}-${index}`}
                       href={href}
                       className={`nav-link text-xs font-medium tracking-wider uppercase transition-all duration-300 relative group px-2 py-2 rounded ${
                         isActive
