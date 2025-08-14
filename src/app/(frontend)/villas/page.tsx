@@ -288,6 +288,7 @@ import React from 'react'
 function DOMCleanup() {
   React.useEffect(() => {
     const parent = document.querySelector('.fixed-0')
+    console.log('parent:   ', parent)
     if (parent && parent.childNodes.length > 1) {
       parent.childNodes[1].nodeValue = '' // remove the "0" text node
     }
