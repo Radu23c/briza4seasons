@@ -65,15 +65,26 @@ const FeaturesOverview: React.FC<FeaturesOverviewProps> = ({
     he: backgroundImageAltHe || 'Development overview',
   })
 
-  // Sort feature items based on language direction
-  const sortedFeatureItems = [...featureItems].sort((a, b) => {
-    if (currentLanguage === 'he') {
-      // For Hebrew, reverse the order (right to left)
-      return b.order - a.order
+  // Sort and arrange feature items based on language direction
+  const arrangedFeatureItems = [...featureItems].sort((a, b) => a.order - b.order)
+
+  // For Hebrew, we need to rearrange items to flow right-to-left, top-to-bottom
+  let displayItems = arrangedFeatureItems
+  if (currentLanguage === 'he') {
+    const itemsPerRow = 3 // Based on lg:grid-cols-3
+    const rows: FeatureItemData[][] = []
+
+    // Group items into rows
+    for (let i = 0; i < arrangedFeatureItems.length; i += itemsPerRow) {
+      rows.push(arrangedFeatureItems.slice(i, i + itemsPerRow))
     }
-    // For other languages, normal order (left to right)
-    return a.order - b.order
-  })
+
+    // Reverse each row for RTL display
+    const reversedRows = rows.map((row) => [...row].reverse())
+
+    // Flatten back to single array
+    displayItems = reversedRows.flat()
+  }
 
   return (
     <section className="py-16 lg:py-24 bg-gray-50">
@@ -87,7 +98,7 @@ const FeaturesOverview: React.FC<FeaturesOverviewProps> = ({
 
         {/* Feature items grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 mb-16">
-          {sortedFeatureItems.map((item, index) => (
+          {displayItems.map((item, index) => (
             <FeatureItem
               key={index}
               order={item.order}
