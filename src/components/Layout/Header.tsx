@@ -138,13 +138,9 @@ const Header: React.FC = () => {
           max-lg:max-h-32 max-lg:opacity-100 max-lg:translate-y-0`}
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
-          <div
-            className={`flex items-center justify-between ${
-              currentLanguage === 'he' ? 'flex-row-reverse' : 'flex-row'
-            }`}
-          >
+          <div className="flex items-center justify-between">
             {/* Logo */}
-            <div className={`${currentLanguage === 'he' ? 'order-2' : 'order-1'}`}>
+            <div className="order-1">
               <Link
                 href={buildLocalizedUrl('home')}
                 className="inline-block hover:opacity-80 transition-opacity duration-300"
@@ -160,17 +156,9 @@ const Header: React.FC = () => {
               </Link>
             </div>
             {/* Contact Information - Hidden on mobile */}
-            <div
-              className={`hidden md:flex items-center space-x-4 lg:space-x-8 xl:space-x-12 ${
-                currentLanguage === 'he' ? 'order-1 space-x-reverse' : 'order-2'
-              }`}
-            >
+            <div className="hidden md:flex items-center space-x-4 lg:space-x-8 xl:space-x-12 order-2">
               {/* Address */}
-              <div
-                className={`flex items-center space-x-2 lg:space-x-3 ${
-                  currentLanguage === 'he' ? 'space-x-reverse text-right' : 'text-left'
-                }`}
-              >
+              <div className="flex items-center space-x-2 lg:space-x-3 text-left">
                 <div className="text-[#D4B896] flex-shrink-0">
                   <svg className="w-4 h-4 lg:w-5 lg:h-5" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
@@ -194,11 +182,7 @@ const Header: React.FC = () => {
                 </div>
               </div>
               {/* Phone */}
-              <div
-                className={`flex items-center space-x-2 lg:space-x-3 ${
-                  currentLanguage === 'he' ? 'space-x-reverse text-right' : 'text-left'
-                }`}
-              >
+              <div className="flex items-center space-x-2 lg:space-x-3 text-left">
                 <div className="text-[#D4B896] flex-shrink-0">
                   <svg className="w-4 h-4 lg:w-5 lg:h-5" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
@@ -224,7 +208,7 @@ const Header: React.FC = () => {
               </div>
             </div>
             {/* Language Toggle - Always visible with highest z-index */}
-            <div className={`relative z-[110] ${currentLanguage === 'he' ? 'order-3' : 'order-3'}`}>
+            <div className="relative z-[110] order-3">
               <LanguageToggle />
             </div>
           </div>
@@ -240,11 +224,7 @@ const Header: React.FC = () => {
           <div className="px-4 sm:px-6 lg:px-8 py-4 lg:py-6">
             {/* Desktop Navigation */}
             <div className="hidden lg:block">
-              <div
-                className={`flex items-center justify-center space-x-6 xl:space-x-12 ${
-                  currentLanguage === 'he' ? 'space-x-reverse' : ''
-                }`}
-              >
+              <div className="flex items-center justify-center space-x-6 xl:space-x-12">
                 {navigationItems.map((item, index) => {
                   const label = t({
                     ro: item.labelRo,
@@ -340,11 +320,7 @@ const Header: React.FC = () => {
             </div>
             {/* Tablet Navigation */}
             <div className="hidden md:block lg:hidden">
-              <div
-                className={`flex items-center justify-center flex-wrap gap-x-4 gap-y-2 ${
-                  currentLanguage === 'he' ? 'space-x-reverse' : ''
-                }`}
-              >
+              <div className="flex items-center justify-center flex-wrap gap-x-4 gap-y-2">
                 {navigationItems.map((item, index) => {
                   const label = t({
                     ro: item.labelRo,
