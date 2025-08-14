@@ -8,7 +8,7 @@ import LanguageToggle from '../LanguageToggle'
 import Image from 'next/image'
 
 const Header: React.FC = () => {
-  const { t, currentLanguage, setLanguage } = useLanguage()
+  const { t, currentLanguage } = useLanguage()
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const pathname = usePathname()
@@ -46,43 +46,64 @@ const Header: React.FC = () => {
     }
   }, [])
 
+  // Helper function to build localized URLs
+  const buildLocalizedUrl = (routeKey: string) => {
+    const routeMap = {
+      home: { ro: '', en: '', he: '' },
+      'about-us': { ro: 'despre-noi', en: 'about-us', he: 'אודותינו' },
+      villas: { ro: 'vile', en: 'villas', he: 'וילות' },
+      location: { ro: 'locatie', en: 'location', he: 'מיקום' },
+      gallery: { ro: 'galerie', en: 'gallery', he: 'גלריה' },
+      contact: { ro: 'contact', en: 'contact', he: 'צור-קשר' },
+    }
+
+    const route = routeMap[routeKey as keyof typeof routeMap]?.[currentLanguage] || ''
+    return `/${currentLanguage}${route ? `/${route}` : ''}`
+  }
+
+  // Helper function to check if a link is active
+  const isLinkActive = (routeKey: string) => {
+    const expectedUrl = buildLocalizedUrl(routeKey)
+    return pathname === expectedUrl
+  }
+
   // Navigation items with multi-language support
   const navigationItems = [
     {
       labelRo: 'ACASĂ',
       labelEn: 'HOME',
       labelHe: 'בית',
-      href: '/',
+      routeKey: 'home',
     },
     {
       labelRo: 'DESPRE NOI',
       labelEn: 'ABOUT US',
       labelHe: 'אודותינו',
-      href: '/about-us',
+      routeKey: 'about-us',
     },
     {
       labelRo: 'VILE',
       labelEn: 'VILLAS',
       labelHe: 'וילות',
-      href: '/villas',
+      routeKey: 'villas',
     },
     {
       labelRo: 'LOCALIZARE',
       labelEn: 'LOCATION',
       labelHe: 'מיקום',
-      href: '/location',
+      routeKey: 'location',
     },
     {
       labelRo: 'GALERIE',
       labelEn: 'GALLERY',
       labelHe: 'גלריה',
-      href: '/gallery',
+      routeKey: 'gallery',
     },
     {
       labelRo: 'CONTACT',
       labelEn: 'CONTACT',
       labelHe: 'צור קשר',
-      href: '/contact',
+      routeKey: 'contact',
     },
   ]
 
@@ -125,7 +146,7 @@ const Header: React.FC = () => {
             {/* Logo */}
             <div className={`${currentLanguage === 'he' ? 'order-2' : 'order-1'}`}>
               <Link
-                href="/"
+                href={buildLocalizedUrl('home')}
                 className="inline-block hover:opacity-80 transition-opacity duration-300"
               >
                 <Image
@@ -230,11 +251,13 @@ const Header: React.FC = () => {
                     en: item.labelEn,
                     he: item.labelHe,
                   })
-                  const isActive = pathname === item.href || (pathname === '/' && item.href === '/')
+                  const href = buildLocalizedUrl(item.routeKey)
+                  const isActive = isLinkActive(item.routeKey)
+
                   return (
                     <Link
                       key={index}
-                      href={item.href}
+                      href={href}
                       className={`nav-link text-sm font-medium tracking-wider uppercase transition-all duration-300 relative group px-3 py-2 rounded ${
                         isActive
                           ? 'text-[#D4B896] bg-[#D4B896]/10'
@@ -294,12 +317,13 @@ const Header: React.FC = () => {
                       en: item.labelEn,
                       he: item.labelHe,
                     })
-                    const isActive =
-                      pathname === item.href || (pathname === '/' && item.href === '/')
+                    const href = buildLocalizedUrl(item.routeKey)
+                    const isActive = isLinkActive(item.routeKey)
+
                     return (
                       <Link
                         key={index}
-                        href={item.href}
+                        href={href}
                         onClick={() => setIsMobileMenuOpen(false)}
                         className={`block px-4 py-3 text-sm font-medium tracking-wider uppercase transition-all duration-300 rounded ${
                           isActive
@@ -327,11 +351,13 @@ const Header: React.FC = () => {
                     en: item.labelEn,
                     he: item.labelHe,
                   })
-                  const isActive = pathname === item.href || (pathname === '/' && item.href === '/')
+                  const href = buildLocalizedUrl(item.routeKey)
+                  const isActive = isLinkActive(item.routeKey)
+
                   return (
                     <Link
                       key={index}
-                      href={item.href}
+                      href={href}
                       className={`nav-link text-xs font-medium tracking-wider uppercase transition-all duration-300 relative group px-2 py-2 rounded ${
                         isActive
                           ? 'text-[#D4B896] bg-[#D4B896]/10'

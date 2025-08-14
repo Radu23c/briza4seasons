@@ -1,10 +1,15 @@
-// app/page.tsx - Complete Homepage Implementation
+// app/[locale]/page.tsx - Complete Homepage Implementation with i18n
 import { getPayloadHMR } from '@payloadcms/next/utilities'
 import configPromise from '@payload-config'
 import Homepage from '@/components/Home/Homepage'
 import CookieConsent from '@/components/CookieConsent'
 import { Suspense } from 'react'
 import type { Homepage as HomepageType } from '@/payload-types'
+
+// ADD THIS TYPE AT THE TOP
+type PageProps = {
+  params: { locale: string }
+}
 
 // Complete loading skeleton for entire homepage
 function HomepageSkeleton() {
@@ -507,8 +512,9 @@ async function HomepageContent() {
   }
 }
 
-// Main page component with Suspense wrapper
-export default function HomePage() {
+// CHANGE THIS FUNCTION SIGNATURE - ADD PARAMS
+export default function HomePage({ params: { locale } }: PageProps) {
+  // Your existing component code remains exactly the same
   return (
     <Suspense fallback={<HomepageSkeleton />}>
       <HomepageContent />
@@ -516,15 +522,39 @@ export default function HomePage() {
   )
 }
 
-// Metadata for SEO
-export const metadata = {
-  title: 'Briza4Seasons - Ansamblul de Vile Premium',
-  description:
-    'Descoperă ansamblul de vile Briza4Seasons - locuințe premium în mijlocul naturii. Programează o vizită astăzi!',
-  keywords: 'vile, Briza4Seasons, complex rezidențial, premium, natură',
-  openGraph: {
-    title: 'Briza4Seasons Villa Complex',
-    description: 'Premium residential complex in the heart of nature',
-    type: 'website',
-  },
+// REPLACE THE OLD METADATA EXPORT WITH THIS:
+export function generateMetadata({ params }: PageProps) {
+  const titles = {
+    ro: 'Briza4Seasons - Ansamblul de Vile Premium',
+    en: 'Briza4Seasons - Premium Villa Complex',
+    he: 'בריזה4עונות - מתחם וילות פרימיום',
+  }
+
+  const descriptions = {
+    ro: 'Descoperă ansamblul de vile Briza4Seasons - locuințe premium în mijlocul naturii. Programează o vizită astăzi!',
+    en: 'Discover Briza4Seasons villa complex - premium homes in the heart of nature. Schedule a visit today!',
+    he: 'גלו את מתחם הוילות בריזה4עונות - בתים פרימיום בלב הטבע. קבעו ביקור היום!',
+  }
+
+  const keywords = {
+    ro: 'vile, Briza4Seasons, complex rezidențial, premium, natură',
+    en: 'villas, Briza4Seasons, residential complex, premium, nature',
+    he: 'וילות, בריזה4עונות, מתחם מגורים, פרימיום, טבע',
+  }
+
+  return {
+    title: titles[params.locale as keyof typeof titles] || titles.ro,
+    description: descriptions[params.locale as keyof typeof descriptions] || descriptions.ro,
+    keywords: keywords[params.locale as keyof typeof keywords] || keywords.ro,
+    openGraph: {
+      title: titles[params.locale as keyof typeof titles] || titles.ro,
+      description: descriptions[params.locale as keyof typeof descriptions] || descriptions.ro,
+      type: 'website',
+    },
+  }
+}
+
+// ADD THIS NEW FUNCTION
+export function generateStaticParams() {
+  return [{ locale: 'ro' }, { locale: 'en' }, { locale: 'he' }]
 }

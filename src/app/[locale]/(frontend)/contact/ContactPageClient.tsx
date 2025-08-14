@@ -1,6 +1,7 @@
+// src/app/[locale]/(frontend)/contact/ContactPageClient.tsx - CLIENT COMPONENT
 'use client'
 
-import { Suspense, useState } from 'react'
+import { useState } from 'react'
 import { useLanguage } from '@/app/contexts/LanguageContext'
 
 // Translations object
@@ -117,36 +118,6 @@ const translations = {
     cityRegion: 'בוקרשט / איילפוב',
     postalCode: '075100',
   },
-}
-
-// Loading skeleton for Contact page
-function ContactPageSkeleton() {
-  return (
-    <div>
-      {/* Hero Skeleton */}
-      <section className="relative min-h-[70vh] flex items-center justify-center bg-gray-200 animate-pulse">
-        <div className="relative z-10 container mx-auto px-4">
-          <div className="text-center">
-            <div className="h-16 bg-gray-300 rounded mb-4 max-w-4xl mx-auto"></div>
-            <div className="h-8 bg-gray-300 rounded max-w-md mx-auto mb-16"></div>
-          </div>
-
-          {/* Contact Cards Skeleton */}
-          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            {[1, 2, 3].map((i) => (
-              <div
-                key={i}
-                className="bg-white/90 rounded-full px-8 py-12 text-center animate-pulse"
-              >
-                <div className="w-12 h-12 bg-gray-300 rounded-full mx-auto mb-4"></div>
-                <div className="h-4 bg-gray-300 rounded mx-auto max-w-24"></div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-    </div>
-  )
 }
 
 // Contact Form Component
@@ -534,7 +505,7 @@ function ContactHero() {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={2}
-                  d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 002 2v10a2 2 0 002 2z"
+                  d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                 />
               </svg>
             </div>
@@ -552,20 +523,13 @@ function ContactHero() {
   )
 }
 
-async function ContactPageContent() {
+// Main client component that combines everything
+export default function ContactPageClient() {
   return (
     <div>
       <ContactHero />
       <ContactForm />
       {/* Additional contact sections can be added here */}
     </div>
-  )
-}
-
-export default function ContactPage() {
-  return (
-    <Suspense fallback={<ContactPageSkeleton />}>
-      <ContactPageContent />
-    </Suspense>
   )
 }

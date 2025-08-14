@@ -1,10 +1,13 @@
 'use client'
 import type React from 'react'
 import { useState, useEffect, useRef } from 'react'
+import { useRouter, usePathname } from 'next/navigation'
 import { useLanguage } from '@/app/contexts/LanguageContext'
 
 const LanguageToggle: React.FC = () => {
-  const { currentLanguage, setLanguage } = useLanguage()
+  const { currentLanguage } = useLanguage()
+  const router = useRouter()
+  const pathname = usePathname()
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
 
@@ -15,6 +18,41 @@ const LanguageToggle: React.FC = () => {
   ]
 
   const currentLang = languages.find((lang) => lang.code === currentLanguage) || languages[0]
+
+  // FIXED: More comprehensive route mapping with proper decoding
+  const routeMap = {
+    // Romanian to other languages
+    'despre-noi': { en: 'about-us', he: 'אודותינו' },
+    contact: { en: 'contact', he: 'צור-קשר' },
+    'politica-cookie': { en: 'cookie-policy', he: 'מדיניות-עוגיות' },
+    galerie: { en: 'gallery', he: 'גלריה' },
+    locatie: { en: 'location', he: 'מיקום' },
+    articole: { en: 'posts', he: 'פוסטים' },
+    cautare: { en: 'search', he: 'חיפוש' },
+    'termeni-si-conditii': { en: 'terms-and-conditions', he: 'תנאים-והגבלות' },
+    vile: { en: 'villas', he: 'וילות' },
+
+    // English to other languages
+    'about-us': { ro: 'despre-noi', he: 'אודותינו' },
+    'cookie-policy': { ro: 'politica-cookie', he: 'מדיניות-עוגיות' },
+    gallery: { ro: 'galerie', he: 'גלריה' },
+    location: { ro: 'locatie', he: 'מיקום' },
+    posts: { ro: 'articole', he: 'פוסטים' },
+    search: { ro: 'cautare', he: 'חיפוש' },
+    'terms-and-conditions': { ro: 'termeni-si-conditii', he: 'תנאים-והגבלות' },
+    villas: { ro: 'vile', he: 'וילות' },
+
+    // Hebrew to other languages
+    אודותינו: { ro: 'despre-noi', en: 'about-us' },
+    'צור-קשר': { ro: 'contact', en: 'contact' },
+    'מדיניות-עוגיות': { ro: 'politica-cookie', en: 'cookie-policy' },
+    גלריה: { ro: 'galerie', en: 'gallery' },
+    מיקום: { ro: 'locatie', en: 'location' },
+    פוסטים: { ro: 'articole', en: 'posts' },
+    חיפוש: { ro: 'cautare', en: 'search' },
+    'תנאים-והגבלות': { ro: 'termeni-si-conditii', en: 'terms-and-conditions' },
+    וילות: { ro: 'vile', en: 'villas' },
+  }
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -31,7 +69,46 @@ const LanguageToggle: React.FC = () => {
   }, [])
 
   const handleLanguageSelect = (langCode: 'ro' | 'en' | 'he') => {
-    setLanguage(langCode)
+    const pathSegments = pathname.split('/').filter(Boolean)
+
+    // Check if current path has a locale
+    const currentLocale = ['ro', 'en', 'he'].includes(pathSegments[0]) ? pathSegments[0] : null
+
+    if (currentLocale) {
+      // Get the route part (after locale)
+      const routePart = pathSegments[1]
+
+      if (!routePart) {
+        // Home page - just change locale
+        router.push(`/${langCode}`)
+      } else {
+        // FIXED: Decode the route part first to handle Hebrew characters
+        const decodedRoutePart = decodeURIComponent(routePart)
+
+        console.log('Original route part:', routePart)
+        console.log('Decoded route part:', decodedRoutePart)
+
+        // Try to find the route translation using both encoded and decoded versions
+        const routeTranslation =
+          routeMap[routePart as keyof typeof routeMap] ||
+          routeMap[decodedRoutePart as keyof typeof routeMap]
+
+        if (routeTranslation && routeTranslation[langCode]) {
+          // Use translated route
+          const newRoute = routeTranslation[langCode]
+          console.log('Translating to:', newRoute)
+          router.push(`/${langCode}/${newRoute}`)
+        } else {
+          // FIXED: Better fallback - if we can't translate, go to home
+          console.log('No translation found, going to home')
+          router.push(`/${langCode}`)
+        }
+      }
+    } else {
+      // Path doesn't have locale, add it
+      router.push(`/${langCode}${pathname === '/' ? '' : pathname}`)
+    }
+
     setIsDropdownOpen(false)
   }
 
@@ -42,7 +119,7 @@ const LanguageToggle: React.FC = () => {
         {languages.map((lang) => (
           <button
             key={lang.code}
-            onClick={() => setLanguage(lang.code)}
+            onClick={() => handleLanguageSelect(lang.code)}
             className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 flex items-center space-x-1 ${
               currentLanguage === lang.code
                 ? 'bg-[#D4B896] text-white'
