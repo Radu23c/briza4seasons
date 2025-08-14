@@ -5,6 +5,11 @@ import AboutUsContent from '@/components/AboutUs/AboutUsContent'
 import { Suspense } from 'react'
 import { Media } from '@/payload-types'
 
+// ADD THIS TYPE AT THE TOP
+type PageProps = {
+  params: { locale: string }
+}
+
 // Type definitions for better type safety
 interface MediaObject {
   url: string
@@ -51,18 +56,58 @@ function ensureString(value: string | null | undefined, fallback: string = ''): 
   return value || fallback
 }
 
-// Helper function to transform breadcrumbs - FIXED VERSION
-function transformBreadcrumbs(breadcrumbs: any[] | null | undefined): any[] {
-  if (!breadcrumbs || !Array.isArray(breadcrumbs)) return []
+// Helper function to build localized URLs
+function buildLocalizedUrl(routeKey: string, locale: string) {
+  const routeMap = {
+    home: { ro: '', en: '', he: '' },
+    'about-us': { ro: 'despre-noi', en: 'about-us', he: 'אודותינו' },
+  }
 
-  return breadcrumbs.map((crumb) => ({
-    ...crumb,
-    labelRo: ensureString(crumb.labelRo),
-    labelEn: ensureString(crumb.labelEn),
-    labelHe: ensureString(crumb.labelHe),
-    href: ensureString(crumb.href),
-    id: nullToUndefined(crumb.id),
-  }))
+  const route =
+    routeMap[routeKey as keyof typeof routeMap]?.[
+      locale as keyof (typeof routeMap)[keyof typeof routeMap]
+    ] || ''
+  return `/${locale}${route ? `/${route}` : ''}`
+}
+
+// Helper function to transform breadcrumbs with localized URLs
+function transformBreadcrumbs(breadcrumbs: any[] | null | undefined, locale: string): any[] {
+  if (!breadcrumbs || !Array.isArray(breadcrumbs)) {
+    // Return default breadcrumbs with localized URLs
+    return [
+      {
+        labelRo: 'ACASĂ',
+        labelEn: 'HOME',
+        labelHe: 'בית',
+        href: buildLocalizedUrl('home', locale),
+        isActive: false,
+      },
+      {
+        labelRo: 'DESPRE NOI',
+        labelEn: 'ABOUT US',
+        labelHe: 'אודותינו',
+        href: buildLocalizedUrl('about-us', locale),
+        isActive: true,
+      },
+    ]
+  }
+
+  return breadcrumbs.map((crumb) => {
+    // Determine the route key based on the original href
+    let routeKey = 'home'
+    if (crumb.href === '/about-us' || crumb.href?.includes('about')) {
+      routeKey = 'about-us'
+    }
+
+    return {
+      ...crumb,
+      labelRo: ensureString(crumb.labelRo),
+      labelEn: ensureString(crumb.labelEn),
+      labelHe: ensureString(crumb.labelHe),
+      href: buildLocalizedUrl(routeKey, locale),
+      id: nullToUndefined(crumb.id),
+    }
+  })
 }
 
 // Helper function to transform content paragraphs
@@ -120,7 +165,8 @@ function AboutUsPageSkeleton() {
   )
 }
 
-async function AboutUsPageContent() {
+// Updated AboutUsPageContent to accept locale parameter
+async function AboutUsPageContent({ locale }: { locale: string }) {
   try {
     const payload = await getPayloadHMR({ config: configPromise })
 
@@ -129,7 +175,7 @@ async function AboutUsPageContent() {
     })
 
     if (!aboutUsData) {
-      // Return default data structure if no data found
+      // Return default data structure with localized URLs
       const defaultData = {
         heroSection: {
           isActive: true,
@@ -140,22 +186,7 @@ async function AboutUsPageContent() {
           subtitleEn: 'WHO ARE WE?',
           subtitleHe: 'מי אנחנו?',
           backgroundImage: { url: '/images/about-hero-bg.jpg' },
-          breadcrumbs: [
-            {
-              labelRo: 'ACASĂ',
-              labelEn: 'HOME',
-              labelHe: 'בית',
-              href: '/',
-              isActive: false,
-            },
-            {
-              labelRo: 'DESPRE NOI',
-              labelEn: 'ABOUT US',
-              labelHe: 'אודותינו',
-              href: '/about-us',
-              isActive: true,
-            },
-          ],
+          breadcrumbs: transformBreadcrumbs(null, locale), // Use localized breadcrumbs
         },
         aboutContentSection: {
           isActive: false,
@@ -210,7 +241,7 @@ async function AboutUsPageContent() {
             subtitleEn={ensureString(aboutUsData.heroSection.subtitleEn)}
             subtitleHe={ensureString(aboutUsData.heroSection.subtitleHe)}
             backgroundImage={transformMediaToObject(aboutUsData.heroSection.backgroundImage)!}
-            breadcrumbs={transformBreadcrumbs(aboutUsData.heroSection.breadcrumbs)}
+            breadcrumbs={transformBreadcrumbs(aboutUsData.heroSection.breadcrumbs, locale)}
           />
         )}
 
@@ -238,7 +269,7 @@ async function AboutUsPageContent() {
   } catch (error) {
     console.error('Error fetching about us data:', error)
 
-    // Return safe fallback on error
+    // Return safe fallback on error with localized URLs
     const fallbackData = {
       heroSection: {
         isActive: true,
@@ -249,22 +280,7 @@ async function AboutUsPageContent() {
         subtitleEn: 'WHO ARE WE?',
         subtitleHe: 'מי אנחנו?',
         backgroundImage: { url: '/images/about-hero-bg.jpg' },
-        breadcrumbs: [
-          {
-            labelRo: 'ACASĂ',
-            labelEn: 'HOME',
-            labelHe: 'בית',
-            href: '/',
-            isActive: false,
-          },
-          {
-            labelRo: 'DESPRE NOI',
-            labelEn: 'ABOUT US',
-            labelHe: 'אודותינו',
-            href: '/about-us',
-            isActive: true,
-          },
-        ],
+        breadcrumbs: transformBreadcrumbs(null, locale), // Use localized breadcrumbs
       },
     }
 
@@ -285,15 +301,36 @@ async function AboutUsPageContent() {
   }
 }
 
-export default function AboutUsPage() {
+// CHANGE THIS FUNCTION SIGNATURE - ADD PARAMS AND PASS LOCALE
+export default function AboutUsPage({ params: { locale } }: PageProps) {
   return (
     <Suspense fallback={<AboutUsPageSkeleton />}>
-      <AboutUsPageContent />
+      <AboutUsPageContent locale={locale} />
     </Suspense>
   )
 }
 
-export const metadata = {
-  title: 'About Us - Briza4Seasons',
-  description: "Learn more about Briza4Seasons residential complex and our project's story.",
+// REPLACE THE OLD METADATA EXPORT WITH THIS:
+export function generateMetadata({ params }: PageProps) {
+  const titles = {
+    ro: 'Despre Noi - Bliss Imobiliare',
+    en: 'About Us - Bliss Real Estate',
+    he: 'אודותינו - בליס נדלן',
+  }
+
+  const descriptions = {
+    ro: 'Aflați mai multe despre complexul rezidențial Briza4Seasons și povestea proiectului nostru.',
+    en: "Learn more about Briza4Seasons residential complex and our project's story.",
+    he: 'למדו עוד על מתחם המגורים בריזה4סיזונס והסיפור של הפרויקט שלנו.',
+  }
+
+  return {
+    title: titles[params.locale as keyof typeof titles] || titles.ro,
+    description: descriptions[params.locale as keyof typeof descriptions] || descriptions.ro,
+  }
+}
+
+// ADD THIS NEW FUNCTION
+export function generateStaticParams() {
+  return [{ locale: 'ro' }, { locale: 'en' }, { locale: 'he' }]
 }
