@@ -88,7 +88,7 @@ const Header: React.FC = () => {
       routeKey: 'villas',
     },
     {
-      labelRo: 'LOCALIZARE',
+      labelRo: 'LOCAȚIE',
       labelEn: 'LOCATION',
       labelHe: 'מיקום',
       routeKey: 'location',
