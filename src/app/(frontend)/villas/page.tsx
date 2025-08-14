@@ -339,7 +339,7 @@ async function VillaComplexPageContent() {
     }
 
     return (
-      <div>
+      <div className="fixed-0">
         {/* Hero Section */}
         {villaComplexData?.heroSection?.isActive &&
           villaComplexData.heroSection.backgroundImage && (
