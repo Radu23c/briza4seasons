@@ -281,6 +281,14 @@ function VillaComplexPageSkeleton() {
   )
 }
 
+document.addEventListener('DOMContentLoaded', function () {
+  const parent = document.querySelector('.fixed-0')
+
+  if (parent && parent.childNodes.length > 1) {
+    parent.childNodes[1].nodeValue = '' // remove the "0" text node
+  }
+})
+
 async function VillaComplexPageContent() {
   try {
     const payload = await getPayloadHMR({ config: configPromise })
