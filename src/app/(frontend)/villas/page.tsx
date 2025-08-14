@@ -4,6 +4,7 @@ import AboutUsHero from '@/components/AboutUs/AboutUsHero'
 import AboutUsContent from '@/components/AboutUs/AboutUsContent'
 import FloorPlansSection from '@/components/VillaComplex/FloorPlansSection'
 import FacilitiesSection from '@/components/AboutUs/FacilitiesSection'
+import DOMCleanup from '@/components/DOMCleanUp' // Removed due to local declaration conflict
 import { Suspense } from 'react'
 import type { Media } from '@/payload-types'
 
@@ -281,6 +282,21 @@ function VillaComplexPageSkeleton() {
   )
 }
 
+// Client component for DOM manipulation
+import React from 'react'
+
+// function DOMCleanup() {
+//   React.useEffect(() => {
+//     const parent = document.querySelector('.fixed-0')
+//     console.log('parent:   ', parent)
+//     if (parent && parent.childNodes.length > 1) {
+//       parent.childNodes[1].nodeValue = '' // remove the "0" text node
+//     }
+//   }, [])
+
+//   return null
+// }
+
 async function VillaComplexPageContent() {
   try {
     const payload = await getPayloadHMR({ config: configPromise })
@@ -334,12 +350,14 @@ async function VillaComplexPageContent() {
       return (
         <div>
           <AboutUsHero {...defaultData.heroSection} />
+          <DOMCleanup />
         </div>
       )
     }
 
     return (
       <div className="fixed-0">
+        <DOMCleanup />
         {/* Hero Section */}
         {villaComplexData?.heroSection?.isActive &&
           villaComplexData.heroSection.backgroundImage && (
@@ -471,6 +489,7 @@ async function VillaComplexPageContent() {
     return (
       <div>
         <AboutUsHero {...fallbackData.heroSection} />
+        <DOMCleanup />
       </div>
     )
   }
