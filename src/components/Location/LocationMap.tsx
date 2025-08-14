@@ -92,7 +92,7 @@ const LocationMap: React.FC<LocationMapProps> = ({
       <div className="container mx-auto px-4">
         {/* Section Title */}
         <div
-          className={`text-center mb-16 ${currentLanguage === 'he' ? 'text-right' : 'text-left'} md:text-center`}
+          className={`text-left mb-16 ${currentLanguage === 'he' ? 'text-right' : 'text-left'} md:text-center`}
         >
           <h2 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 mb-4">
             {sectionTitle}{' '}
