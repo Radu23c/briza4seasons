@@ -190,7 +190,7 @@ const FeaturesSection: React.FC<FeaturesSectionProps> = ({
             {/* Details link */}
             {detailsLink && detailsText && (
               <div className="mt-12">
-                <Link
+                {/* <Link
                   href={detailsLink}
                   className="inline-flex items-center text-gray-900 font-semibold text-sm tracking-wider hover:text-[#D4B896] transition-colors duration-300"
                 >
@@ -209,7 +209,7 @@ const FeaturesSection: React.FC<FeaturesSectionProps> = ({
                       d="M9 5l7 7-7 7"
                     />
                   </svg>
-                </Link>
+                </Link> */}
               </div>
             )}
           </div>
