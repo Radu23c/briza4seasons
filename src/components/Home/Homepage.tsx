@@ -371,7 +371,6 @@ const Homepage: React.FC<HomepageProps> = ({ data }) => {
           descriptionEn={data.imageGallerySection.descriptionEn}
           descriptionHe={data.imageGallerySection.descriptionHe}
           images={data.imageGallerySection.images}
-          dateInfoBoxes={data.imageGallerySection.dateInfoBoxes} // ADDED
           enableLightbox={data.imageGallerySection.enableLightbox}
         />
       )}

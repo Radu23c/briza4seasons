@@ -240,7 +240,7 @@ async function GalleryPageContent() {
               sectionSubtitleEn={ensureString(homepageData.gallerySection.sectionSubtitleEn)}
               sectionSubtitleHe={ensureString(homepageData.gallerySection.sectionSubtitleHe)}
               galleryImages={convertGalleryImages(homepageData.gallerySection.galleryImages)}
-              dateInfoBoxes={convertDateInfoBoxes(homepageData.gallerySection.dateInfoBoxes)} // ADDED
+              dateInfoBoxes={convertDateInfoBoxes(homepageData.gallerySection.dateInfoBoxes)}
               enableLightbox={nullToUndefined(homepageData.gallerySection.enableLightbox)}
               dateDisplayFormat={nullToUndefined(homepageData.gallerySection.dateDisplayFormat)}
             />
@@ -260,7 +260,6 @@ async function GalleryPageContent() {
               descriptionEn={ensureString(homepageData.imageGallerySection.descriptionEn)}
               descriptionHe={ensureString(homepageData.imageGallerySection.descriptionHe)}
               images={convertGalleryImages(homepageData.imageGallerySection.images)}
-              dateInfoBoxes={convertDateInfoBoxes(homepageData.imageGallerySection.dateInfoBoxes)} // ADDED
               enableLightbox={nullToUndefined(homepageData.imageGallerySection.enableLightbox)}
             />
           )}
