@@ -241,25 +241,6 @@ export const Homepage: GlobalConfig = {
           required: false,
           defaultValue: 'והנוחות של חיים מודרניים',
         },
-        // Details Text
-        {
-          name: 'detailsTextRo',
-          type: 'text',
-          required: false,
-          defaultValue: 'MAI MULTE DETALII?',
-        },
-        {
-          name: 'detailsTextEn',
-          type: 'text',
-          required: false,
-          defaultValue: 'MORE DETAILS?',
-        },
-        {
-          name: 'detailsTextHe',
-          type: 'text',
-          required: false,
-          defaultValue: 'פרטים נוספים?',
-        },
         {
           name: 'exteriorImage',
           type: 'upload',

@@ -1674,9 +1674,6 @@ export interface Homepage {
     subHeadingRo?: string | null;
     subHeadingEn?: string | null;
     subHeadingHe?: string | null;
-    detailsTextRo?: string | null;
-    detailsTextEn?: string | null;
-    detailsTextHe?: string | null;
     exteriorImage?: (string | null) | Media;
     interiorImage?: (string | null) | Media;
     detailsLink?: string | null;
@@ -2930,9 +2927,6 @@ export interface HomepageSelect<T extends boolean = true> {
         subHeadingRo?: T;
         subHeadingEn?: T;
         subHeadingHe?: T;
-        detailsTextRo?: T;
-        detailsTextEn?: T;
-        detailsTextHe?: T;
         exteriorImage?: T;
         interiorImage?: T;
         detailsLink?: T;
