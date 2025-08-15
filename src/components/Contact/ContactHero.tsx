@@ -187,6 +187,8 @@ export default function ContactHero({
             <a
               href={`tel:${phoneNumber.replace(/\s/g, '')}`}
               className="text-gray-600 hover:text-amber-600 transition-colors duration-200"
+              dir="ltr"
+              style={{ unicodeBidi: 'embed' }}
             >
               {phoneNumber}
             </a>
@@ -213,6 +215,8 @@ export default function ContactHero({
             <a
               href={`mailto:${email}`}
               className="text-gray-600 hover:text-amber-600 transition-colors duration-200 break-all text-sm sm:text-base inline-block"
+              dir="ltr"
+              style={{ unicodeBidi: 'embed' }}
             >
               {email}
             </a>

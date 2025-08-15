@@ -440,7 +440,7 @@ export default function ContactForm({
                 </div>
               </div>
 
-              {/* Contact Info */}
+              {/* Contact Info - FIXED: Added dir="ltr" for phone and email */}
               <div className="space-y-4">
                 <div
                   className={`flex items-center space-x-3 ${isRTL ? 'flex-row-reverse space-x-reverse' : ''}`}
@@ -463,6 +463,8 @@ export default function ContactForm({
                   <a
                     href={`tel:${phoneNumber.replace(/\s/g, '')}`}
                     className="text-gray-700 hover:text-amber-600 transition-colors duration-200"
+                    dir="ltr"
+                    style={{ unicodeBidi: 'embed' }}
                   >
                     {phoneNumber}
                   </a>
@@ -489,6 +491,8 @@ export default function ContactForm({
                   <a
                     href={`mailto:${email}`}
                     className="text-gray-700 hover:text-amber-600 transition-colors duration-200"
+                    dir="ltr"
+                    style={{ unicodeBidi: 'embed' }}
                   >
                     {email}
                   </a>

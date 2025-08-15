@@ -107,6 +107,32 @@ const Footer: React.FC = () => {
     }
   }
 
+  // Helper function to get localized Terms & Conditions URL
+  const getTermsUrl = () => {
+    switch (currentLanguage) {
+      case 'he':
+        return '/he/תנאים-והגבלות'
+      case 'en':
+        return '/en/terms-and-conditions'
+      case 'ro':
+      default:
+        return '/ro/termeni-si-conditii'
+    }
+  }
+
+  // Helper function to get localized Cookie Policy URL
+  const getCookiePolicyUrl = () => {
+    switch (currentLanguage) {
+      case 'he':
+        return '/he/מדיניות-עוגיות'
+      case 'en':
+        return '/en/cookie-policy'
+      case 'ro':
+      default:
+        return '/ro/politica-cookie'
+    }
+  }
+
   return (
     <footer className="bg-gray-900 text-white relative">
       {/* Call to Action Section - Floating Card - Hidden on contact pages */}
@@ -290,7 +316,7 @@ const Footer: React.FC = () => {
             >
               <div className={`flex gap-6 ${currentLanguage === 'he' ? 'flex-row-reverse' : ''}`}>
                 <Link
-                  href="/terms-and-conditions"
+                  href={getTermsUrl()}
                   className="text-[#D4B896] hover:text-white transition-all duration-300 text-sm font-medium uppercase tracking-wider border-b border-transparent hover:border-[#D4B896] pb-1"
                 >
                   {t({
@@ -301,7 +327,7 @@ const Footer: React.FC = () => {
                 </Link>
                 <span className="text-gray-600">•</span>
                 <Link
-                  href="/cookie-policy"
+                  href={getCookiePolicyUrl()}
                   className="text-[#D4B896] hover:text-white transition-all duration-300 text-sm font-medium uppercase tracking-wider border-b border-transparent hover:border-[#D4B896] pb-1"
                 >
                   {t({

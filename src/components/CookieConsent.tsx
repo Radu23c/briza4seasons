@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useLanguage } from '@/app/contexts/LanguageContext'
-import LanguageToggle from '../components/LanguageToggle'
+import LanguageToggle from '../components/LanguageToggle' // Keep original LanguageToggle
 
 const cookieTexts = {
   ro: {
@@ -39,12 +39,6 @@ const cookieTexts = {
     cookiePolicy: 'מדיניות עוגיות',
   },
 }
-
-const languageOptions = [
-  { code: 'ro', name: 'RO', flag: '🇷🇴' },
-  { code: 'en', name: 'EN', flag: '🇬🇧' },
-  { code: 'he', name: 'עב', flag: '🇮🇱' },
-]
 
 export default function CookieConsent() {
   const [showConsent, setShowConsent] = useState(false)
@@ -100,14 +94,40 @@ export default function CookieConsent() {
     setShowDeclineWarning(false)
   }
 
+  // ADDED: Helper function to get localized Terms & Conditions URL
+  const getTermsUrl = () => {
+    switch (currentLanguage) {
+      case 'he':
+        return '/he/תנאים-והגבלות'
+      case 'en':
+        return '/en/terms-and-conditions'
+      case 'ro':
+      default:
+        return '/ro/termeni-si-conditii'
+    }
+  }
+
+  // ADDED: Helper function to get localized Cookie Policy URL
+  const getCookiePolicyUrl = () => {
+    switch (currentLanguage) {
+      case 'he':
+        return '/he/מדיניות-עוגיות'
+      case 'en':
+        return '/en/cookie-policy'
+      case 'ro':
+      default:
+        return '/ro/politica-cookie'
+    }
+  }
+
   const handleTermsClick = () => {
-    // Open terms and conditions in new tab
-    window.open('/terms-and-conditions', '_blank')
+    // UPDATED: Open terms and conditions with localized URL
+    window.open(getTermsUrl(), '_blank')
   }
 
   const handleCookiePolicyClick = () => {
-    // Open cookie policy in new tab
-    window.open('/cookie-policy', '_blank')
+    // UPDATED: Open cookie policy with localized URL
+    window.open(getCookiePolicyUrl(), '_blank')
   }
 
   if (!showConsent) return null
