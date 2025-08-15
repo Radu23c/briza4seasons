@@ -295,7 +295,6 @@ export default function TermsAndConditionsClient() {
               {content.title}
             </h1>
             <div className="w-24 h-1 bg-[#D4B896] mx-auto mb-6"></div>
-            <p className="text-lg text-gray-600">{content.subtitle}</p>
           </div>
         </div>
       </div>
