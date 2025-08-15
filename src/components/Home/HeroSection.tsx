@@ -120,7 +120,7 @@ const ContactPopup: React.FC<{
 
   const translations = {
     ro: {
-      title: 'Contactează-ne',
+      title: 'Programează o vizită',
       name: 'NUME',
       email: 'EMAIL',
       phone: 'TELEFON',
@@ -133,7 +133,7 @@ const ContactPopup: React.FC<{
       close: 'Închide',
     },
     en: {
-      title: 'Contact Us',
+      title: 'Schedule a visit',
       name: 'NAME',
       email: 'EMAIL',
       phone: 'PHONE',
@@ -146,7 +146,7 @@ const ContactPopup: React.FC<{
       close: 'Close',
     },
     he: {
-      title: 'צור קשר',
+      title: 'תזמן ביקור',
       name: 'שם',
       email: 'אימייל',
       phone: 'טלפון',
