@@ -3,7 +3,7 @@ import { redirect } from 'next/navigation'
 
 export default function RootPage() {
   // Redirect to default language (you can change 'en' to 'ro' if you prefer Romanian as default)
-  redirect('/en')
+  redirect('/ro')
 }
 
 // Optional: Add metadata for the root
