@@ -526,9 +526,9 @@ export async function generateMetadata({ params }: PageProps) {
   const { locale } = await params // Await the params Promise
 
   const titles = {
-    ro: 'Briza4Seasons - Ansamblul de Vile Premium',
-    en: 'Briza4Seasons - Premium Villa Complex',
-    he: 'בריזה4עונות - מתחם וילות פרימיום',
+    ro: 'Briza4Seasons - Ansamblul de Vile Premium Otopeni',
+    en: 'Briza4Seasons - Premium Villa Complex Otopeni',
+    he: 'בריזה4עונות - מתחם וילות פרימיום אוטופני',
   }
 
   const descriptions = {

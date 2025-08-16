@@ -9,5 +9,5 @@ export default function RootPage() {
 // Optional: Add metadata for the root
 export const metadata = {
   title: 'Briza4Seasons',
-  description: 'Premium Villa Complex',
+  description: 'Premium Villa Complex ',
 }

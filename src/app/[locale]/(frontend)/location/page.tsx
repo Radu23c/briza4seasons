@@ -24,6 +24,11 @@ interface LocationPoint {
   id?: string | null
 }
 
+// FIXED: Updated PageProps for Next.js 15
+type PageProps = {
+  params: Promise<{ locale: string }>
+}
+
 // General helper function to transform any Media field to MediaObject
 function transformMediaToObject(media: string | Media | null | undefined): MediaObject | undefined {
   if (!media) return undefined
@@ -133,7 +138,7 @@ async function LocationPageContent() {
       const defaultData = {
         heroSection: {
           isActive: true,
-          mainTitleRo: 'Locație Strategicăss',
+          mainTitleRo: 'Locație Strategică',
           mainTitleEn: 'Strategic Location',
           mainTitleHe: 'מיקום אסטרטגי',
           subtitleRo: 'Tunari, Ilfov',
@@ -273,7 +278,9 @@ async function LocationPageContent() {
   }
 }
 
-export default function LocationPage() {
+export default async function LocationPage({ params }: PageProps) {
+  const { locale } = await params // Await the params Promise
+
   return (
     <main className="min-h-screen">
       <Suspense fallback={<LocationPageSkeleton />}>
@@ -283,9 +290,36 @@ export default function LocationPage() {
   )
 }
 
-export const metadata: Metadata = {
-  title: 'Location | Briza4Seasons Villa Complex',
-  description:
-    'Discover the strategic location of Briza4Seasons villa complex in Tunari, just 15 minutes from downtown Bucharest.',
-  keywords: 'location, Tunari, Bucharest, villa complex, strategic position',
+// FIXED: Updated generateMetadata to handle Promise params and add multilingual support
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { locale } = await params // Await the params Promise
+
+  const titles = {
+    ro: 'Locație - Briza4Seasons',
+    en: 'Location - Briza4Seasons',
+    he: 'מיקום - בריזה4עונות',
+  }
+
+  const descriptions = {
+    ro: 'Descoperă locația strategică a complexului de vile Briza4Seasons în Tunari, la doar 15 minute de centrul Bucureștiului.',
+    en: 'Discover the strategic location of Briza4Seasons villa complex in Tunari, just 15 minutes from downtown Bucharest.',
+    he: 'גלו את המיקום האסטרטגי של מתחם הוילות בריזה4סיזונס בטונארי, רק 15 דקות ממרכז בוקרשט.',
+  }
+
+  const keywords = {
+    ro: 'locație, Tunari, București, complex vile, poziție strategică',
+    en: 'location, Tunari, Bucharest, villa complex, strategic position',
+    he: 'מיקום, טונארי, בוקרשט, מתחם וילות, עמדה אסטרטגית',
+  }
+
+  return {
+    title: titles[locale as keyof typeof titles] || titles.ro,
+    description: descriptions[locale as keyof typeof descriptions] || descriptions.ro,
+    keywords: keywords[locale as keyof typeof keywords] || keywords.en,
+  }
+}
+
+// generateStaticParams for the three supported locales
+export function generateStaticParams() {
+  return [{ locale: 'ro' }, { locale: 'en' }, { locale: 'he' }]
 }

@@ -317,9 +317,9 @@ export async function generateMetadata({ params }: PageProps) {
   const { locale } = await params // Await the params Promise
 
   const titles = {
-    ro: 'Despre Noi - Bliss Imobiliare',
-    en: 'About Us - Bliss Real Estate',
-    he: 'אודותינו - בליס נדלן',
+    ro: 'Despre Noi - Briza4Seasons',
+    en: 'About Us - Briza4Seasons',
+    he: 'אודותינו - בריזה4עונות',
   }
 
   const descriptions = {

@@ -7,6 +7,7 @@ import FacilitiesSection from '@/components/AboutUs/FacilitiesSection'
 import DOMCleanup from '@/components/DOMCleanUp' // Removed due to local declaration conflict
 import { Suspense } from 'react'
 import type { Media } from '@/payload-types'
+import type { Metadata } from 'next'
 
 // Type for the expected AboutImage format
 interface AboutImage {
@@ -21,6 +22,11 @@ interface AboutImage {
   altTextHe?: string | null
   order: number
   id?: string | null
+}
+
+// FIXED: Updated PageProps for Next.js 15
+type PageProps = {
+  params: Promise<{ locale: string }>
 }
 
 // General helper function to transform any Media field to MediaObject
@@ -495,16 +501,41 @@ async function VillaComplexPageContent() {
   }
 }
 
-export default function VillaComplexPage() {
+export default async function VillaComplexPage({ params }: PageProps) {
+  const { locale } = await params // Await the params Promise
+
   return (
-    <Suspense fallback={<VillaComplexPageSkeleton />}>
-      <VillaComplexPageContent />
-    </Suspense>
+    <main className="min-h-screen">
+      <Suspense fallback={<VillaComplexPageSkeleton />}>
+        <VillaComplexPageContent />
+      </Suspense>
+    </main>
   )
 }
 
-export const metadata = {
-  title: 'Villa Complex - Briza4Seasons Residence',
-  description:
-    'Discover more about Briza4Seasons residential complex - division, areas, and plans.',
+// FIXED: Updated generateMetadata to handle Promise params and add multilingual support
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { locale } = await params // Await the params Promise
+
+  const titles = {
+    ro: 'Vile Premium Otopeni - Briza4Seasons',
+    en: 'Premium Villas Otopeni - Briza4Seasons',
+    he: 'וילות פרימיום אוטופני - בריזה4עונות',
+  }
+
+  const descriptions = {
+    ro: 'Descoperă mai multe despre ansamblul rezidențial Briza4Seasons - împărțire, suprafețe și planuri ale vilelor premium din Otopeni.',
+    en: 'Discover more about Briza4Seasons residential complex - division, areas, and plans of premium villas in Otopeni.',
+    he: 'גלו עוד על מתחם המגורים בריזה4סיזונס - חלוקה, שטחים ותוכניות של וילות פרימיום באוטופני.',
+  }
+
+  return {
+    title: titles[locale as keyof typeof titles] || titles.ro,
+    description: descriptions[locale as keyof typeof descriptions] || descriptions.ro,
+  }
+}
+
+// generateStaticParams for the three supported locales
+export function generateStaticParams() {
+  return [{ locale: 'ro' }, { locale: 'en' }, { locale: 'he' }]
 }
