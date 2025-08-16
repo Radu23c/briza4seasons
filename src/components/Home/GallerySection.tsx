@@ -254,9 +254,11 @@ const GallerySection: React.FC<GallerySectionProps> = ({
           className={`text-center mb-16 px-4 ${isRTL ? 'text-right' : 'text-left'} md:text-center`}
         >
           <h2 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 mb-4">
-            {sectionTitle}{' '}
-            <span className="font-elegant text-[#D4B896] italic">{sectionSubtitle}</span>
+            {sectionTitle}
           </h2>
+          <p className="font-elegant text-[#D4B896] italic text-2xl lg:text-3xl xl:text-4xl">
+            {sectionSubtitle}
+          </p>
         </div>
 
         {/* Date-Grouped Gallery */}
