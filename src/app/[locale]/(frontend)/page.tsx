@@ -201,9 +201,6 @@ function convertHomepageData(payloadData: HomepageType): any {
       subHeadingRo: 'În mijlocul naturii',
       subHeadingEn: 'In the heart of nature',
       subHeadingHe: 'בלב הטבע',
-      detailsTextRo: 'Detalii complete',
-      detailsTextEn: 'Complete details',
-      detailsTextHe: 'פרטים מלאים',
       exteriorImage: '/images/default-exterior.jpg',
       interiorImage: '/images/default-interior.jpg',
       detailsLink: '/villas',
@@ -272,7 +269,7 @@ function convertHomepageData(payloadData: HomepageType): any {
       sectionSubtitleHe: 'תמונות',
       galleryImages: [],
       enableLightbox: true,
-      dateDisplayFormat: 'full', // ADD DEFAULT
+      dateDisplayFormat: 'full',
     },
     imageGallerySection: {
       isActive: false,
@@ -330,7 +327,6 @@ function convertHomepageData(payloadData: HomepageType): any {
       isActive: payloadData.gallerySection?.isActive ?? defaults.gallerySection.isActive,
       enableLightbox:
         payloadData.gallerySection?.enableLightbox ?? defaults.gallerySection.enableLightbox,
-      // FIXED: Add dateDisplayFormat with fallback
       dateDisplayFormat:
         payloadData.gallerySection?.dateDisplayFormat ?? defaults.gallerySection.dateDisplayFormat,
     },
@@ -386,9 +382,6 @@ function createDefaultHomepageData(): HomepageType {
       subHeadingRo: 'În mijlocul naturii',
       subHeadingEn: 'In the heart of nature',
       subHeadingHe: 'בלב הטבע',
-      detailsTextRo: 'Detalii complete',
-      detailsTextEn: 'Complete details',
-      detailsTextHe: 'פרטים מלאים',
       exteriorImage: '/images/default-exterior.jpg',
       interiorImage: '/images/default-interior.jpg',
       detailsLink: '/villas',
@@ -457,7 +450,7 @@ function createDefaultHomepageData(): HomepageType {
       sectionSubtitleHe: 'תמונות',
       galleryImages: [],
       enableLightbox: true,
-      dateDisplayFormat: 'full', // ADD DEFAULT
+      dateDisplayFormat: 'full',
     },
     imageGallerySection: {
       isActive: false,
