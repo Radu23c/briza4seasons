@@ -245,24 +245,6 @@ async function GalleryPageContent() {
               dateDisplayFormat={nullToUndefined(homepageData.gallerySection.dateDisplayFormat)}
             />
           )}
-
-        {homepageData?.imageGallerySection?.isActive &&
-          homepageData.imageGallerySection.images?.length &&
-          homepageData.imageGallerySection.images.length > 0 && (
-            <ImageGallerySection
-              mainTitleRo={ensureString(homepageData.imageGallerySection.mainTitleRo)}
-              mainTitleEn={ensureString(homepageData.imageGallerySection.mainTitleEn)}
-              mainTitleHe={ensureString(homepageData.imageGallerySection.mainTitleHe)}
-              subtitleRo={ensureString(homepageData.imageGallerySection.subtitleRo)}
-              subtitleEn={ensureString(homepageData.imageGallerySection.subtitleEn)}
-              subtitleHe={ensureString(homepageData.imageGallerySection.subtitleHe)}
-              descriptionRo={ensureString(homepageData.imageGallerySection.descriptionRo)}
-              descriptionEn={ensureString(homepageData.imageGallerySection.descriptionEn)}
-              descriptionHe={ensureString(homepageData.imageGallerySection.descriptionHe)}
-              images={convertGalleryImages(homepageData.imageGallerySection.images)}
-              enableLightbox={nullToUndefined(homepageData.imageGallerySection.enableLightbox)}
-            />
-          )}
       </div>
     )
   } catch (error) {

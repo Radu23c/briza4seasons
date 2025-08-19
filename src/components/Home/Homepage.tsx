@@ -357,23 +357,6 @@ const Homepage: React.FC<HomepageProps> = ({ data }) => {
           dateDisplayFormat={data.gallerySection.dateDisplayFormat}
         />
       )}
-
-      {/* Second Gallery Section - Container Width (after first gallery) */}
-      {data?.imageGallerySection?.isActive && data.imageGallerySection.images?.length > 0 && (
-        <ImageGallerySection
-          mainTitleRo={data.imageGallerySection.mainTitleRo}
-          mainTitleEn={data.imageGallerySection.mainTitleEn}
-          mainTitleHe={data.imageGallerySection.mainTitleHe}
-          subtitleRo={data.imageGallerySection.subtitleRo}
-          subtitleEn={data.imageGallerySection.subtitleEn}
-          subtitleHe={data.imageGallerySection.subtitleHe}
-          descriptionRo={data.imageGallerySection.descriptionRo}
-          descriptionEn={data.imageGallerySection.descriptionEn}
-          descriptionHe={data.imageGallerySection.descriptionHe}
-          images={data.imageGallerySection.images}
-          enableLightbox={data.imageGallerySection.enableLightbox}
-        />
-      )}
     </div>
   )
 }
