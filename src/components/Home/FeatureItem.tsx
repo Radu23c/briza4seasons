@@ -39,7 +39,7 @@ const FeatureItem: React.FC<FeatureItemProps> = ({
       </div>
 
       {/* Title */}
-      <h3 className="text-xl font-bold text-gray-900 uppercase tracking-wider">{title}</h3>
+      <h3 className="text-xl font-bold text-gray-900 tracking-wider">{title}</h3>
 
       {/* Description */}
       <p className="text-gray-600 leading-relaxed text-sm">{description}</p>

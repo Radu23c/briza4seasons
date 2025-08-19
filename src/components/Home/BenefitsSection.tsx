@@ -68,10 +68,7 @@ const BenefitsSection: React.FC<BenefitsSectionProps> = ({
                   className={`h-px flex-1 ${isHebrew ? 'ml-4' : 'mr-4'}`}
                   style={{ backgroundColor: textColor }}
                 ></div>
-                <h2
-                  className="text-sm font-light tracking-[0.2em] uppercase"
-                  style={{ color: textColor }}
-                >
+                <h2 className="text-sm font-light tracking-[0.2em]" style={{ color: textColor }}>
                   {sectionTitle}
                 </h2>
               </div>
@@ -102,7 +99,7 @@ const BenefitsSection: React.FC<BenefitsSectionProps> = ({
 
                   {/* Benefit Text */}
                   <h3
-                    className={`text-xl lg:text-2xl font-bold tracking-wider uppercase transition-all duration-300 ${
+                    className={`text-xl lg:text-2xl font-bold tracking-wider transition-all duration-300 ${
                       isHebrew ? 'group-hover:-translate-x-2' : 'group-hover:translate-x-2'
                     }`}
                     style={{ color: textColor }}

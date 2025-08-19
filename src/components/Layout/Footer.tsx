@@ -160,7 +160,7 @@ const Footer: React.FC = () => {
                 <div className="flex-shrink-0">
                   <Link
                     href={getContactUrl()}
-                    className="inline-block bg-gray-900 text-white px-8 lg:px-10 py-4 lg:py-5 text-sm font-semibold tracking-wider uppercase hover:bg-gray-800 transition-all duration-300 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                    className="inline-block bg-gray-900 text-white px-8 lg:px-10 py-4 lg:py-5 text-sm font-semibold tracking-wider hover:bg-gray-800 transition-all duration-300 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                   >
                     {t({
                       ro: footerContent.cta.buttonRo,
@@ -317,7 +317,7 @@ const Footer: React.FC = () => {
               <div className={`flex gap-6 ${currentLanguage === 'he' ? 'flex-row-reverse' : ''}`}>
                 <Link
                   href={getTermsUrl()}
-                  className="text-[#D4B896] hover:text-white transition-all duration-300 text-sm font-medium uppercase tracking-wider border-b border-transparent hover:border-[#D4B896] pb-1"
+                  className="text-[#D4B896] hover:text-white transition-all duration-300 text-sm font-medium tracking-wider border-b border-transparent hover:border-[#D4B896] pb-1"
                 >
                   {t({
                     ro: footerContent.legal.terms.ro,
@@ -328,7 +328,7 @@ const Footer: React.FC = () => {
                 <span className="text-gray-600">•</span>
                 <Link
                   href={getCookiePolicyUrl()}
-                  className="text-[#D4B896] hover:text-white transition-all duration-300 text-sm font-medium uppercase tracking-wider border-b border-transparent hover:border-[#D4B896] pb-1"
+                  className="text-[#D4B896] hover:text-white transition-all duration-300 text-sm font-medium tracking-wider border-b border-transparent hover:border-[#D4B896] pb-1"
                 >
                   {t({
                     ro: footerContent.legal.cookies.ro,

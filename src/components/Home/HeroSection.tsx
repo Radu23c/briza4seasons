@@ -264,7 +264,7 @@ const ContactPopup: React.FC<{
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="flex-1 bg-amber-500 hover:bg-amber-600 disabled:bg-amber-300 disabled:cursor-not-allowed text-white px-8 py-4 rounded-lg transition-all duration-300 text-lg font-semibold tracking-wider uppercase transform hover:scale-105 disabled:transform-none shadow-lg hover:shadow-xl flex items-center justify-center min-w-[180px]"
+                className="flex-1 bg-amber-500 hover:bg-amber-600 disabled:bg-amber-300 disabled:cursor-not-allowed text-white px-8 py-4 rounded-lg transition-all duration-300 text-lg font-semibold tracking-wider transform hover:scale-105 disabled:transform-none shadow-lg hover:shadow-xl flex items-center justify-center min-w-[180px]"
               >
                 {isSubmitting ? (
                   <>

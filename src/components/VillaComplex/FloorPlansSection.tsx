@@ -222,7 +222,7 @@ const FloorPlansSection: React.FC<FloorPlansSectionProps> = ({
                   <button
                     key={villa.key}
                     onClick={() => handleVillaChange(index)}
-                    className={`relative px-6 py-4 rounded-xl font-semibold text-sm tracking-wider uppercase transition-all duration-300 overflow-hidden group w-full ${
+                    className={`relative px-6 py-4 rounded-xl font-semibold text-sm tracking-wider transition-all duration-300 overflow-hidden group w-full ${
                       activeVilla === index
                         ? 'text-white shadow-lg transform scale-105'
                         : 'text-gray-700 bg-white hover:text-white shadow-md hover:shadow-lg hover:transform hover:scale-105'
@@ -333,7 +333,7 @@ const FloorPlansSection: React.FC<FloorPlansSectionProps> = ({
                 <button
                   key={index}
                   onClick={() => handleFloorChange(index)}
-                  className={`px-8 py-3 rounded-lg font-semibold text-sm tracking-wider uppercase transition-all duration-300 ${
+                  className={`px-8 py-3 rounded-lg font-semibold text-sm tracking-wider transition-all duration-300 ${
                     activeFloor === index
                       ? 'bg-[#D4B896] text-white shadow-lg'
                       : 'text-gray-600 hover:text-gray-900 hover:bg-white'
@@ -468,7 +468,7 @@ const FloorPlansSection: React.FC<FloorPlansSectionProps> = ({
                         index % 2 === 0 ? 'bg-gray-50' : 'bg-white'
                       } px-4 rounded-lg`}
                     >
-                      <span className="text-[#D4B896] font-medium text-sm tracking-wider uppercase">
+                      <span className="text-[#D4B896] font-medium text-sm tracking-wider">
                         {roomName}
                       </span>
                       <span className="text-gray-900 font-semibold">
@@ -491,7 +491,7 @@ const FloorPlansSection: React.FC<FloorPlansSectionProps> = ({
                       href={currentFloorPlan.pdfDownload.pdfFile.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-block bg-[#D4B896] hover:bg-[#c9a87d] text-white px-12 py-6 rounded-lg transition-all duration-300 text-lg font-semibold tracking-wider uppercase btn-elegant transform hover:scale-105 shadow-lg hover:shadow-xl"
+                      className="inline-block bg-[#D4B896] hover:bg-[#c9a87d] text-white px-12 py-6 rounded-lg transition-all duration-300 text-lg font-semibold tracking-wider btn-elegant transform hover:scale-105 shadow-lg hover:shadow-xl"
                     >
                       {pdfButtonText}
                     </a>
@@ -507,7 +507,7 @@ const FloorPlansSection: React.FC<FloorPlansSectionProps> = ({
                   <>
                     <button
                       disabled
-                      className="inline-block bg-gray-300 text-gray-500 px-12 py-6 rounded-lg text-lg font-semibold tracking-wider uppercase cursor-not-allowed"
+                      className="inline-block bg-gray-300 text-gray-500 px-12 py-6 rounded-lg text-lg font-semibold tracking-wider cursor-not-allowed"
                     >
                       {pdfButtonText ||
                         t({

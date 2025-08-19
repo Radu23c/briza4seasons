@@ -96,14 +96,12 @@
   font-family: var(--font-elegant);
   font-weight: 400;
   letter-spacing: 0.05em;
-  text-transform: uppercase;
 }
 
 .hero-cta {
   font-family: var(--font-primary);
   font-weight: 600;
   letter-spacing: 0.1em;
-  text-transform: uppercase;
 }
 
 /* Button styles */

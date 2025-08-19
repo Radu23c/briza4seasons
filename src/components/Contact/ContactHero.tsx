@@ -154,7 +154,7 @@ export default function ContactHero({
           <div className={`flex-shrink-0 lg:ml-8 ${isRTL ? 'lg:mr-8 lg:ml-0' : ''}`}>
             <div className="bg-[#D4B896]/90 backdrop-blur-sm px-4 sm:px-6 py-3 sm:py-4 rounded-lg inline-block">
               <nav
-                className={`flex flex-wrap items-center gap-x-2 gap-y-1 text-xs sm:text-sm font-medium tracking-wider uppercase ${
+                className={`flex flex-wrap items-center gap-x-2 gap-y-1 text-xs sm:text-sm font-medium tracking-wider ${
                   isRTL ? 'justify-end' : 'justify-start'
                 }`}
               >

@@ -247,7 +247,7 @@ const Header: React.FC = () => {
                     <Link
                       key={`${item.routeKey}-${index}`}
                       href={href}
-                      className={`nav-link text-sm font-medium tracking-wider uppercase transition-all duration-300 relative group px-3 py-2 rounded ${
+                      className={`nav-link text-sm font-medium tracking-wider transition-all duration-300 relative group px-3 py-2 rounded ${
                         isActive
                           ? 'text-[#D4B896] bg-[#D4B896]/10'
                           : 'text-white hover:text-[#D4B896]'
@@ -314,7 +314,7 @@ const Header: React.FC = () => {
                         key={`mobile-${item.routeKey}-${index}`}
                         href={href}
                         onClick={() => setIsMobileMenuOpen(false)}
-                        className={`block px-4 py-3 text-sm font-medium tracking-wider uppercase transition-all duration-300 rounded ${
+                        className={`block px-4 py-3 text-sm font-medium tracking-wider transition-all duration-300 rounded ${
                           isActive
                             ? 'text-[#D4B896] bg-[#D4B896]/10'
                             : 'text-white hover:text-[#D4B896] hover:bg-gray-700'
@@ -343,7 +343,7 @@ const Header: React.FC = () => {
                     <Link
                       key={`tablet-${item.routeKey}-${index}`}
                       href={href}
-                      className={`nav-link text-xs font-medium tracking-wider uppercase transition-all duration-300 relative group px-2 py-2 rounded ${
+                      className={`nav-link text-xs font-medium tracking-wider transition-all duration-300 relative group px-2 py-2 rounded ${
                         isActive
                           ? 'text-[#D4B896] bg-[#D4B896]/10'
                           : 'text-white hover:text-[#D4B896]'
