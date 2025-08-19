@@ -584,7 +584,6 @@ export const Homepage: GlobalConfig = {
           type: 'array',
           required: false,
           minRows: 1,
-          maxRows: 10,
           fields: [
             {
               name: 'questionRo',

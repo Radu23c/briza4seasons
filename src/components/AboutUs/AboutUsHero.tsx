@@ -47,7 +47,7 @@ const AboutUsHero: React.FC<AboutUsHeroProps> = ({
     en: subtitleEn,
     he: subtitleHe,
   })
-  console.log("breadcrumbss: ", isGallery)
+  console.log('breadcrumbss: ', isGallery)
 
   // Dynamic breadcrumbs based on props
   const getBreadcrumbs = () => {
@@ -69,7 +69,7 @@ const AboutUsHero: React.FC<AboutUsHeroProps> = ({
         },
       ]
     }
-    
+
     if (isVillas) {
       return [
         {
@@ -88,7 +88,7 @@ const AboutUsHero: React.FC<AboutUsHeroProps> = ({
         },
       ]
     }
-    
+
     // Default to About Us breadcrumbs
     return [
       {
@@ -141,7 +141,7 @@ const AboutUsHero: React.FC<AboutUsHeroProps> = ({
             </h1>
 
             {/* Subtitle */}
-            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/90 font-light tracking-wider uppercase mb-6 lg:mb-0">
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/90 font-light tracking-wider mb-6 lg:mb-0">
               {subtitle}
             </p>
           </div>
@@ -152,7 +152,7 @@ const AboutUsHero: React.FC<AboutUsHeroProps> = ({
           >
             <div className="bg-[#D4B896]/90 backdrop-blur-sm px-4 sm:px-6 py-3 sm:py-4 rounded-lg inline-block">
               <nav
-                className={`flex flex-wrap items-center gap-x-2 gap-y-1 text-xs sm:text-sm font-medium tracking-wider uppercase ${
+                className={`flex flex-wrap items-center gap-x-2 gap-y-1 text-xs sm:text-sm font-medium tracking-wider ${
                   currentLanguage === 'he' ? 'justify-end' : 'justify-start'
                 }`}
               >

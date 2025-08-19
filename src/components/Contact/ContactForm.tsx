@@ -368,7 +368,7 @@ export default function ContactForm({
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="bg-amber-500 hover:bg-amber-600 disabled:bg-amber-300 disabled:cursor-not-allowed text-white px-12 py-4 rounded-lg transition-all duration-300 text-lg font-semibold tracking-wider uppercase transform hover:scale-105 disabled:transform-none shadow-lg hover:shadow-xl flex items-center justify-center min-w-[200px]"
+                    className="bg-amber-500 hover:bg-amber-600 disabled:bg-amber-300 disabled:cursor-not-allowed text-white px-12 py-4 rounded-lg transition-all duration-300 text-lg font-semibold tracking-wider transform hover:scale-105 disabled:transform-none shadow-lg hover:shadow-xl flex items-center justify-center min-w-[200px]"
                   >
                     {isSubmitting ? (
                       <>

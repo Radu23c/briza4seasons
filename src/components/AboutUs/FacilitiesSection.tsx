@@ -78,7 +78,7 @@ const FacilitiesSection: React.FC<FacilitiesSectionProps> = ({
         <div
           className={`text-center mb-16 ${currentLanguage === 'he' ? 'text-right' : 'text-left'} md:text-center`}
         >
-          <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 tracking-wider uppercase">
+          <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 tracking-wider">
             {sectionTitle}
           </h2>
         </div>
@@ -129,7 +129,7 @@ const FacilitiesSection: React.FC<FacilitiesSectionProps> = ({
                 </div>
 
                 {/* Title */}
-                <h3 className="text-xl lg:text-2xl font-bold text-gray-900 uppercase tracking-wider leading-tight">
+                <h3 className="text-xl lg:text-2xl font-bold text-gray-900 tracking-wider leading-tight">
                   {title}
                 </h3>
 
