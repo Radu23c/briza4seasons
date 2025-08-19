@@ -41,12 +41,12 @@ const Footer: React.FC = () => {
   // Footer content with multi-language support
   const footerContent = {
     cta: {
-      titleRo: 'Sunteți interesat de una din proprietățile noastre?',
-      titleEn: 'Are you interested in one of our properties?',
-      titleHe: 'האם אתם מעוניינים באחד מהנכסים שלנו?',
-      buttonRo: 'VREAU INFORMAȚII',
-      buttonEn: 'I WANT INFORMATION',
-      buttonHe: 'אני רוצה מידע',
+      titleRo: 'Contactați-ne și haideți să facem acest lucru posibil împreună.',
+      titleEn: 'Get in touch with us and let’s make it happen together.',
+      titleHe: 'צרו קשר איתנו ובואו נגשים את זה ביחד.',
+      buttonRo: 'Află mai mult',
+      buttonEn: 'Discover More',
+      buttonHe: 'גלו עוד',
     },
     contact: {
       titleRo: 'Contact',
