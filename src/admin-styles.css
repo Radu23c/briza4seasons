@@ -1,13 +1,12 @@
-/* Add this to your existing custom.scss file */
-/* Custom Payload Admin Panel Styles - RED BORDERS */
+/* Custom Payload Admin Panel Styles */
 
-/* Light mode: Red borders */
+/* Light mode: Black borders */
 [data-theme='light'] {
   /* Override CSS variables for borders */
-  --theme-border-color-input: #000000 !important;
-  --theme-border-color: #000000 !important;
-  --theme-elevation-border-color: #000000 !important;
-  --border: 1px solid #000000 !important;
+  --theme-border-color-input: #000000;
+  --theme-border-color: #000000;
+  --theme-elevation-border-color: #000000;
+  --border: 1px solid #000000;
 }
 
 /* Form fields and inputs */
@@ -79,31 +78,31 @@
   border-color: #000000 !important;
 }
 
-/* Focus states - keep borders red even when focused */
+/* Focus states - keep borders black even when focused */
 [data-theme='light'] input:focus,
 [data-theme='light'] textarea:focus,
 [data-theme='light'] select:focus,
 [data-theme='light'] .react-select__control--is-focused {
   border-color: #000000 !important;
-  box-shadow: 0 0 0 2px rgba(255, 0, 0, 0.1) !important;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1) !important;
 }
 
-/* Collection list items */
-[data-theme='light'] .collection-list__item,
-[data-theme='light'] .list-drawer__content {
-  border-color: #000000 !important;
-}
+/* Additional customizations - you can modify these as needed */
 
-/* Document tabs */
-[data-theme='light'] .doc-tabs,
-[data-theme='light'] .doc-tab {
-  border-color: #000000 !important;
+/* Change background colors if desired */
+/*
+[data-theme="light"] {
+  --theme-bg: #ffffff;
+  --theme-elevation-0: #ffffff;
+  --theme-elevation-50: #fafafa;
+  --theme-elevation-100: #f5f5f5;
 }
+*/
 
-/* Field groups and sections */
-[data-theme='light'] .field-group,
-[data-theme='light'] .collapsible,
-[data-theme='light'] .array-field,
-[data-theme='light'] .blocks-field {
-  border-color: #000000 !important;
+/* Change text colors if desired */
+/*
+[data-theme="light"] {
+  --theme-text: #000000;
+  --theme-text-dim: #666666;
 }
+*/

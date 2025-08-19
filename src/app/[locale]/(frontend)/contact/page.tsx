@@ -194,7 +194,6 @@ async function ContactPageContent() {
             subtitleEn={defaultData.heroSection.subtitleEn}
             subtitleHe={defaultData.heroSection.subtitleHe}
             backgroundImage={defaultData.heroSection.backgroundImage}
-            breadcrumbs={defaultData.heroSection.breadcrumbs}
             addressTitleRo={defaultData.contactInfoSection.addressTitleRo}
             addressTitleEn={defaultData.contactInfoSection.addressTitleEn}
             addressTitleHe={defaultData.contactInfoSection.addressTitleHe}
@@ -229,7 +228,6 @@ async function ContactPageContent() {
             subtitleEn={ensureString(contactData.heroSection.subtitleEn)}
             subtitleHe={ensureString(contactData.heroSection.subtitleHe)}
             backgroundImage={transformMediaToObject(contactData.heroSection.backgroundImage)!}
-            breadcrumbs={transformBreadcrumbs(contactData.heroSection.breadcrumbs)}
             addressTitleRo={ensureString(contactData.contactInfoSection?.addressTitleRo)}
             addressTitleEn={ensureString(contactData.contactInfoSection?.addressTitleEn)}
             addressTitleHe={ensureString(contactData.contactInfoSection?.addressTitleHe)}
@@ -375,7 +373,6 @@ async function ContactPageContent() {
           subtitleEn={fallbackData.heroSection.subtitleEn}
           subtitleHe={fallbackData.heroSection.subtitleHe}
           backgroundImage={fallbackData.heroSection.backgroundImage}
-          breadcrumbs={fallbackData.heroSection.breadcrumbs}
           addressTitleRo={fallbackData.contactInfoSection.addressTitleRo}
           addressTitleEn={fallbackData.contactInfoSection.addressTitleEn}
           addressTitleHe={fallbackData.contactInfoSection.addressTitleHe}

@@ -375,7 +375,7 @@ async function VillaComplexPageContent() {
               subtitleEn={ensureString(villaComplexData.heroSection.subtitleEn)}
               subtitleHe={ensureString(villaComplexData.heroSection.subtitleHe)}
               backgroundImage={transformMediaToObject(villaComplexData.heroSection.backgroundImage)}
-              breadcrumbs={transformBreadcrumbs(villaComplexData.heroSection.breadcrumbs)}
+              isVillas={true}
             />
           )}
 
@@ -403,9 +403,6 @@ async function VillaComplexPageContent() {
               )}
               mainHeadingHe={ensureString(
                 villaComplexData.villaComplexContentSection.mainHeadingHe,
-              )}
-              contentParagraphs={transformContentParagraphs(
-                villaComplexData.villaComplexContentSection.contentParagraphs,
               )}
               images={transformPayloadImages(villaComplexData.villaComplexContentSection.images)}
             />

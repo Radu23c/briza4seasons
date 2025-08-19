@@ -2,21 +2,14 @@
 'use client'
 
 import { useLanguage } from '@/app/contexts/LanguageContext'
+import Link from 'next/link'
+import React from 'react'
 
 interface MediaObject {
   url: string
   alt?: string
   width?: number
   height?: number
-}
-
-interface BreadcrumbItem {
-  labelRo: string
-  labelEn: string
-  labelHe: string
-  href: string
-  isActive: boolean
-  id?: string
 }
 
 interface ContactHeroProps {
@@ -27,7 +20,6 @@ interface ContactHeroProps {
   subtitleEn: string
   subtitleHe: string
   backgroundImage: MediaObject
-  breadcrumbs: BreadcrumbItem[]
   // Contact info props
   addressTitleRo: string
   addressTitleEn: string
@@ -56,7 +48,6 @@ export default function ContactHero({
   subtitleEn,
   subtitleHe,
   backgroundImage,
-  breadcrumbs,
   addressTitleRo,
   addressTitleEn,
   addressTitleHe,
@@ -77,6 +68,24 @@ export default function ContactHero({
 }: ContactHeroProps) {
   const { currentLanguage } = useLanguage()
   const isRTL = currentLanguage === 'he'
+
+  // Hardcoded breadcrumbs
+  const breadcrumbs = [
+    {
+      labelRo: 'ACASĂ',
+      labelEn: 'HOME',
+      labelHe: 'בית',
+      href: '/',
+      isActive: false,
+    },
+    {
+      labelRo: 'CONTACT',
+      labelEn: 'CONTACT',
+      labelHe: 'צור קשר',
+      href: '/contact',
+      isActive: true,
+    },
+  ]
 
   // Get translated content based on current language
   const mainTitle = {
@@ -123,7 +132,7 @@ export default function ContactHero({
 
   return (
     <section
-      className={`relative min-h-[80vh] flex items-center justify-center bg-cover bg-center bg-no-repeat ${isRTL ? 'rtl' : 'ltr'}`}
+      className={`relative min-h-[80vh] flex flex-col items-center justify-center bg-cover bg-center bg-no-repeat ${isRTL ? 'rtl' : 'ltr'}`}
       dir={isRTL ? 'rtl' : 'ltr'}
       style={{
         backgroundImage: `url('${backgroundImage.url}')`,
@@ -132,11 +141,52 @@ export default function ContactHero({
       {/* Background Overlay */}
       <div className="absolute inset-0 bg-black/40"></div>
 
-      <div className="relative z-10 container mx-auto px-4">
-        {/* Hero Content */}
-        <div className="text-center text-white mb-16 pt-36">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mt-24 mb-4">{mainTitle}</h1>
-          <p className="text-xl md:text-2xl font-light opacity-90">{subtitle}</p>
+      <div className="relative z-10 container mx-auto px-4 w-full">
+        {/* Breadcrumbs and Hero Content Container */}
+        <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between mb-16 pt-36">
+          {/* Hero Content */}
+          <div className={`text-white mb-8 lg:mb-0 ${isRTL ? 'text-right' : 'text-left'}`}>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mt-24 mb-4">{mainTitle}</h1>
+            <p className="text-xl md:text-2xl font-light opacity-90">{subtitle}</p>
+          </div>
+
+          {/* Breadcrumbs */}
+          <div className={`flex-shrink-0 lg:ml-8 ${isRTL ? 'lg:mr-8 lg:ml-0' : ''}`}>
+            <div className="bg-[#D4B896]/90 backdrop-blur-sm px-4 sm:px-6 py-3 sm:py-4 rounded-lg inline-block">
+              <nav
+                className={`flex flex-wrap items-center gap-x-2 gap-y-1 text-xs sm:text-sm font-medium tracking-wider uppercase ${
+                  isRTL ? 'justify-end' : 'justify-start'
+                }`}
+              >
+                {breadcrumbs.map((item, index) => {
+                  const label = {
+                    ro: item.labelRo,
+                    en: item.labelEn,
+                    he: item.labelHe,
+                  }[currentLanguage]
+
+                  return (
+                    <React.Fragment key={index}>
+                      {item.isActive ? (
+                        <span className="text-gray-900 font-semibold whitespace-nowrap">
+                          {label}
+                        </span>
+                      ) : (
+                        <Link
+                          href={item.href}
+                          className="text-gray-700 hover:text-gray-900 transition-colors duration-300 whitespace-nowrap"
+                        >
+                          {label}
+                        </Link>
+                      )}
+                      {/* Separator */}
+                      {index < breadcrumbs.length - 1 && <span className="text-gray-600">/</span>}
+                    </React.Fragment>
+                  )
+                })}
+              </nav>
+            </div>
+          </div>
         </div>
 
         {/* Contact Cards */}

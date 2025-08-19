@@ -11,15 +11,6 @@ interface MediaObject {
   height?: number
 }
 
-interface Breadcrumb {
-  labelRo: string
-  labelEn: string
-  labelHe: string
-  href: string
-  isActive: boolean
-  id?: string
-}
-
 interface LocationHeroProps {
   mainTitleRo: string
   mainTitleEn: string
@@ -28,7 +19,6 @@ interface LocationHeroProps {
   subtitleEn: string
   subtitleHe: string
   backgroundImage: MediaObject
-  breadcrumbs: Breadcrumb[]
 }
 
 const LocationHero: React.FC<LocationHeroProps> = ({
@@ -39,7 +29,6 @@ const LocationHero: React.FC<LocationHeroProps> = ({
   subtitleEn,
   subtitleHe,
   backgroundImage,
-  breadcrumbs,
 }) => {
   const { t, currentLanguage } = useLanguage()
 
@@ -54,6 +43,24 @@ const LocationHero: React.FC<LocationHeroProps> = ({
     en: subtitleEn,
     he: subtitleHe,
   })
+
+  // Hardcoded breadcrumbs
+  const breadcrumbs = [
+    {
+      labelRo: 'ACASĂ',
+      labelEn: 'HOME',
+      labelHe: 'בית',
+      href: '/',
+      isActive: false,
+    },
+    {
+      labelRo: 'LOCAȚIE',
+      labelEn: 'LOCATION',
+      labelHe: 'מיקום',
+      href: '/location',
+      isActive: true,
+    },
+  ]
 
   return (
     <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">

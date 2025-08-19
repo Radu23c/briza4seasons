@@ -87,60 +87,6 @@ export const GalleryPage: GlobalConfig = {
             description: 'Hero background image',
           },
         },
-        // Breadcrumbs
-        {
-          name: 'breadcrumbs',
-          type: 'array',
-          required: false,
-          minRows: 1,
-          maxRows: 5,
-          fields: [
-            {
-              name: 'labelRo',
-              type: 'text',
-              required: false,
-            },
-            {
-              name: 'labelEn',
-              type: 'text',
-              required: false,
-            },
-            {
-              name: 'labelHe',
-              type: 'text',
-              required: false,
-            },
-            {
-              name: 'href',
-              type: 'text',
-              required: false,
-            },
-            {
-              name: 'isActive',
-              type: 'checkbox',
-              defaultValue: false,
-              admin: {
-                description: 'Is this the current page?',
-              },
-            },
-          ],
-          defaultValue: [
-            {
-              labelRo: 'ACASĂ',
-              labelEn: 'HOME',
-              labelHe: 'בית',
-              href: '/',
-              isActive: false,
-            },
-            {
-              labelRo: 'GALERIE',
-              labelEn: 'GALLERY',
-              labelHe: 'גלריה',
-              href: '/gallery',
-              isActive: true,
-            },
-          ],
-        },
       ],
     },
 

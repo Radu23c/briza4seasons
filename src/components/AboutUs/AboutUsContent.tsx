@@ -3,6 +3,7 @@
 import type React from 'react'
 import Image from 'next/image'
 import { useLanguage } from '@/app/contexts/LanguageContext'
+import { RichText } from '@payloadcms/richtext-lexical/react'
 
 interface MediaObject {
   url: string
@@ -11,16 +12,10 @@ interface MediaObject {
 
 interface AboutImage {
   image: MediaObject
-  altTextRo?: string | null // Allow null values
-  altTextEn?: string | null // Allow null values
-  altTextHe?: string | null // Allow null values
+  altTextRo?: string | null
+  altTextEn?: string | null
+  altTextHe?: string | null
   order: number
-}
-
-interface ContentParagraph {
-  paragraphRo: string
-  paragraphEn: string
-  paragraphHe: string
 }
 
 interface AboutUsContentProps {
@@ -30,7 +25,9 @@ interface AboutUsContentProps {
   mainHeadingRo: string
   mainHeadingEn: string
   mainHeadingHe: string
-  contentParagraphs: ContentParagraph[]
+  contentRo?: any // Rich text content in Romanian
+  contentEn?: any // Rich text content in English
+  contentHe?: any // Rich text content in Hebrew
   images: AboutImage[]
 }
 
@@ -41,7 +38,9 @@ const AboutUsContent: React.FC<AboutUsContentProps> = ({
   mainHeadingRo,
   mainHeadingEn,
   mainHeadingHe,
-  contentParagraphs,
+  contentRo,
+  contentEn,
+  contentHe,
   images,
 }) => {
   const { t, currentLanguage } = useLanguage()
@@ -57,6 +56,22 @@ const AboutUsContent: React.FC<AboutUsContentProps> = ({
     en: mainHeadingEn,
     he: mainHeadingHe,
   })
+
+  // Get the appropriate rich text content based on current language
+  const getRichTextContent = () => {
+    switch (currentLanguage) {
+      case 'ro':
+        return contentRo
+      case 'en':
+        return contentEn
+      case 'he':
+        return contentHe
+      default:
+        return contentEn || contentRo || contentHe
+    }
+  }
+
+  const richTextContent = getRichTextContent()
 
   // Sort images by order
   const sortedImages = [...images].sort((a, b) => a.order - b.order)
@@ -129,21 +144,9 @@ const AboutUsContent: React.FC<AboutUsContentProps> = ({
               {mainHeading}
             </h2>
 
-            {/* Content Paragraphs */}
-            <div className="space-y-6">
-              {contentParagraphs.map((paragraph, index) => {
-                const content = t({
-                  ro: paragraph.paragraphRo,
-                  en: paragraph.paragraphEn,
-                  he: paragraph.paragraphHe,
-                })
-
-                return (
-                  <p key={index} className="text-gray-600 leading-relaxed text-lg">
-                    {content}
-                  </p>
-                )
-              })}
+            {/* Rich Text Content */}
+            <div className="prose prose-lg max-w-none prose-gray prose-p:text-gray-600 prose-p:leading-relaxed prose-p:text-lg prose-headings:text-gray-900 prose-strong:text-gray-900 prose-em:text-gray-700">
+              {richTextContent && <RichText data={richTextContent} />}
             </div>
           </div>
         </div>

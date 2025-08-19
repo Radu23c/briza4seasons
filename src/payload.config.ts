@@ -1,7 +1,8 @@
-// payload.config.ts - UPDATED WITH CONTACT PAGE
+// payload.config.ts - UPDATED WITH RICH TEXT EDITOR AND CONTACT PAGE
 // Add this import at the top
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
+import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import sharp from 'sharp' // sharp-import
 import path from 'path'
 import { buildConfig, type PayloadRequest } from 'payload'
@@ -19,9 +20,8 @@ import { AboutUsPage } from './globals/AboutUsPage'
 import { VillaComplexPage } from './globals/VillaComplexPage'
 import { LocationPage } from './globals/LocationPage'
 import { GalleryPage } from './globals/GalleryPage'
-import { ContactPage } from './globals/ContactPage' // Add this import
+import { ContactPage } from './globals/ContactPage'
 import { plugins } from './plugins'
-import { defaultLexical } from '@/fields/defaultLexical'
 import { getServerSideURL } from './utilities/getURL'
 
 const filename = fileURLToPath(import.meta.url)
@@ -60,7 +60,8 @@ export default buildConfig({
       ],
     },
   },
-  editor: defaultLexical,
+  // Configure Lexical Rich Text Editor (global default)
+  editor: lexicalEditor({}),
   db: mongooseAdapter({
     url: process.env.DATABASE_URI || '',
   }),
@@ -75,7 +76,7 @@ export default buildConfig({
     LocationPage,
     GalleryPage,
     ContactPage,
-  ], // Add ContactPage here
+  ],
   plugins: [
     ...plugins,
     // Add Vercel Blob storage plugin

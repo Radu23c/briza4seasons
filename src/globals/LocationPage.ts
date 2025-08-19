@@ -67,61 +67,6 @@ export const LocationPage: GlobalConfig = {
           label: 'Background Image',
           required: true,
         },
-        {
-          name: 'breadcrumbs',
-          type: 'array',
-          label: 'Breadcrumbs',
-          minRows: 1,
-          maxRows: 5,
-          fields: [
-            {
-              name: 'labelRo',
-              type: 'text',
-              label: 'Label (Romanian)',
-              required: true,
-            },
-            {
-              name: 'labelEn',
-              type: 'text',
-              label: 'Label (English)',
-              required: true,
-            },
-            {
-              name: 'labelHe',
-              type: 'text',
-              label: 'Label (Hebrew)',
-              required: true,
-            },
-            {
-              name: 'href',
-              type: 'text',
-              label: 'Link URL',
-              required: true,
-            },
-            {
-              name: 'isActive',
-              type: 'checkbox',
-              label: 'Is Active Page',
-              defaultValue: false,
-            },
-          ],
-          defaultValue: [
-            {
-              labelRo: 'Acasă',
-              labelEn: 'Home',
-              labelHe: 'בית',
-              href: '/',
-              isActive: false,
-            },
-            {
-              labelRo: 'Locație',
-              labelEn: 'Location',
-              labelHe: 'מיקום',
-              href: '/location',
-              isActive: true,
-            },
-          ],
-        },
       ],
     },
     {
@@ -271,7 +216,7 @@ export const LocationPage: GlobalConfig = {
             {
               nameRo: 'Aeroportul International Henri Coandă',
               nameEn: 'Henri Coandă International Airport',
-              nameHe: 'נמל התעופה הבינלאומי אנרי קואנדה',
+              nameHe: 'נמל התעופה הבינלאומי אנרי קואנדא',
               distance: '5 km',
               category: 'transport',
               order: 1,

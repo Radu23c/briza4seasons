@@ -63,60 +63,6 @@ export const ContactPage: GlobalConfig = {
           label: 'Background Image',
           required: true,
         },
-        {
-          name: 'breadcrumbs',
-          type: 'array',
-          label: 'Breadcrumbs',
-          maxRows: 5,
-          fields: [
-            {
-              name: 'labelRo',
-              type: 'text',
-              label: 'Label (Romanian)',
-              required: true,
-            },
-            {
-              name: 'labelEn',
-              type: 'text',
-              label: 'Label (English)',
-              required: true,
-            },
-            {
-              name: 'labelHe',
-              type: 'text',
-              label: 'Label (Hebrew)',
-              required: true,
-            },
-            {
-              name: 'href',
-              type: 'text',
-              label: 'Link',
-              required: true,
-            },
-            {
-              name: 'isActive',
-              type: 'checkbox',
-              label: 'Is Current Page',
-              defaultValue: false,
-            },
-          ],
-          defaultValue: [
-            {
-              labelRo: 'Acasă',
-              labelEn: 'Home',
-              labelHe: 'בית',
-              href: '/',
-              isActive: false,
-            },
-            {
-              labelRo: 'Contact',
-              labelEn: 'Contact',
-              labelHe: 'צור קשר',
-              href: '/contact',
-              isActive: true,
-            },
-          ],
-        },
       ],
     },
 

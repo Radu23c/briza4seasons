@@ -110,19 +110,6 @@ function transformBreadcrumbs(breadcrumbs: any[] | null | undefined, locale: str
   })
 }
 
-// Helper function to transform content paragraphs
-function transformContentParagraphs(paragraphs: any[] | undefined): any[] {
-  if (!paragraphs) return []
-
-  return paragraphs.map((paragraph) => ({
-    ...paragraph,
-    textRo: nullToUndefined(paragraph.textRo),
-    textEn: nullToUndefined(paragraph.textEn),
-    textHe: nullToUndefined(paragraph.textHe),
-    id: nullToUndefined(paragraph.id),
-  }))
-}
-
 // Loading skeleton for About Us page
 function AboutUsPageSkeleton() {
   return (
@@ -173,6 +160,7 @@ async function AboutUsPageContent({ locale }: { locale: string }) {
     const aboutUsData = await payload.findGlobal({
       slug: 'about-us-page',
     })
+    console.log('aboutUsData', aboutUsData)
 
     if (!aboutUsData) {
       // Return default data structure with localized URLs
@@ -191,7 +179,6 @@ async function AboutUsPageContent({ locale }: { locale: string }) {
         aboutContentSection: {
           isActive: false,
           images: [],
-          contentParagraphs: [],
         },
       }
       return (
@@ -204,7 +191,6 @@ async function AboutUsPageContent({ locale }: { locale: string }) {
             subtitleEn={defaultData.heroSection.subtitleEn}
             subtitleHe={defaultData.heroSection.subtitleHe}
             backgroundImage={defaultData.heroSection.backgroundImage}
-            breadcrumbs={defaultData.heroSection.breadcrumbs}
           />
         </div>
       )
@@ -241,16 +227,13 @@ async function AboutUsPageContent({ locale }: { locale: string }) {
             subtitleEn={ensureString(aboutUsData.heroSection.subtitleEn)}
             subtitleHe={ensureString(aboutUsData.heroSection.subtitleHe)}
             backgroundImage={transformMediaToObject(aboutUsData.heroSection.backgroundImage)!}
-            breadcrumbs={transformBreadcrumbs(aboutUsData.heroSection.breadcrumbs, locale)}
           />
         )}
 
-        {/* About Content Section */}
+        {/* About Content Section - Updated for Rich Text */}
         {aboutUsData?.aboutContentSection?.isActive &&
           aboutUsData.aboutContentSection.images?.length &&
-          aboutUsData.aboutContentSection.images.length > 0 &&
-          aboutUsData.aboutContentSection.contentParagraphs?.length &&
-          aboutUsData.aboutContentSection.contentParagraphs.length > 0 && (
+          aboutUsData.aboutContentSection.images.length > 0 && (
             <AboutUsContent
               sectionTitleRo={ensureString(aboutUsData.aboutContentSection.sectionTitleRo)}
               sectionTitleEn={ensureString(aboutUsData.aboutContentSection.sectionTitleEn)}
@@ -258,9 +241,9 @@ async function AboutUsPageContent({ locale }: { locale: string }) {
               mainHeadingRo={ensureString(aboutUsData.aboutContentSection.mainHeadingRo)}
               mainHeadingEn={ensureString(aboutUsData.aboutContentSection.mainHeadingEn)}
               mainHeadingHe={ensureString(aboutUsData.aboutContentSection.mainHeadingHe)}
-              contentParagraphs={transformContentParagraphs(
-                aboutUsData.aboutContentSection.contentParagraphs,
-              )}
+              contentRo={aboutUsData.aboutContentSection.contentRo}
+              contentEn={aboutUsData.aboutContentSection.contentEn}
+              contentHe={aboutUsData.aboutContentSection.contentHe}
               images={transformImages(aboutUsData.aboutContentSection.images)}
             />
           )}
@@ -294,7 +277,6 @@ async function AboutUsPageContent({ locale }: { locale: string }) {
           subtitleEn={fallbackData.heroSection.subtitleEn}
           subtitleHe={fallbackData.heroSection.subtitleHe}
           backgroundImage={fallbackData.heroSection.backgroundImage}
-          breadcrumbs={fallbackData.heroSection.breadcrumbs}
         />
       </div>
     )

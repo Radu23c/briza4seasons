@@ -2,7 +2,7 @@ import type { GlobalConfig } from 'payload'
 
 export const VillaComplexPage: GlobalConfig = {
   slug: 'villa-complex-page',
-  label: 'Villa Complex Page',
+  label: 'Villas Page',
   access: {
     read: () => true,
   },
@@ -86,60 +86,6 @@ export const VillaComplexPage: GlobalConfig = {
           admin: {
             description: 'Hero background image',
           },
-        },
-        // Breadcrumbs
-        {
-          name: 'breadcrumbs',
-          type: 'array',
-          required: false,
-          minRows: 1,
-          maxRows: 5,
-          fields: [
-            {
-              name: 'labelRo',
-              type: 'text',
-              required: false,
-            },
-            {
-              name: 'labelEn',
-              type: 'text',
-              required: false,
-            },
-            {
-              name: 'labelHe',
-              type: 'text',
-              required: false,
-            },
-            {
-              name: 'href',
-              type: 'text',
-              required: false,
-            },
-            {
-              name: 'isActive',
-              type: 'checkbox',
-              defaultValue: false,
-              admin: {
-                description: 'Is this the current page?',
-              },
-            },
-          ],
-          defaultValue: [
-            {
-              labelRo: 'ACASĂ',
-              labelEn: 'HOME',
-              labelHe: 'בית',
-              href: '/',
-              isActive: false,
-            },
-            {
-              labelRo: 'PROPRIETATEA TA',
-              labelEn: 'YOUR PROPERTY',
-              labelHe: 'הנכס שלך',
-              href: '/villas',
-              isActive: true,
-            },
-          ],
         },
       ],
     },

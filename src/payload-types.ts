@@ -2039,19 +2039,6 @@ export interface AboutUsPage {
      * Hero background image
      */
     backgroundImage?: (string | null) | Media;
-    breadcrumbs?:
-      | {
-          labelRo?: string | null;
-          labelEn?: string | null;
-          labelHe?: string | null;
-          href?: string | null;
-          /**
-           * Is this the current page?
-           */
-          isActive?: boolean | null;
-          id?: string | null;
-        }[]
-      | null;
   };
   aboutContentSection?: {
     /**
@@ -2082,23 +2069,60 @@ export interface AboutUsPage {
      * Main heading in Hebrew
      */
     mainHeadingHe?: string | null;
-    contentParagraphs?:
-      | {
-          /**
-           * Paragraph content in Romanian
-           */
-          paragraphRo?: string | null;
-          /**
-           * Paragraph content in English
-           */
-          paragraphEn?: string | null;
-          /**
-           * Paragraph content in Hebrew
-           */
-          paragraphHe?: string | null;
-          id?: string | null;
-        }[]
-      | null;
+    /**
+     * Main content in Romanian - use rich text formatting for styling
+     */
+    contentRo?: {
+      root: {
+        type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    /**
+     * Main content in English - use rich text formatting for styling
+     */
+    contentEn?: {
+      root: {
+        type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    /**
+     * Main content in Hebrew - use rich text formatting for styling
+     */
+    contentHe?: {
+      root: {
+        type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
     /**
      * Images for the overlapping layout (2-4 images recommended)
      */
@@ -2167,19 +2191,6 @@ export interface VillaComplexPage {
      * Hero background image
      */
     backgroundImage?: (string | null) | Media;
-    breadcrumbs?:
-      | {
-          labelRo?: string | null;
-          labelEn?: string | null;
-          labelHe?: string | null;
-          href?: string | null;
-          /**
-           * Is this the current page?
-           */
-          isActive?: boolean | null;
-          id?: string | null;
-        }[]
-      | null;
   };
   villaComplexContentSection?: {
     /**
@@ -2529,16 +2540,6 @@ export interface LocationPage {
     subtitleEn: string;
     subtitleHe: string;
     backgroundImage: string | Media;
-    breadcrumbs?:
-      | {
-          labelRo: string;
-          labelEn: string;
-          labelHe: string;
-          href: string;
-          isActive?: boolean | null;
-          id?: string | null;
-        }[]
-      | null;
   };
   locationMapSection: {
     isActive?: boolean | null;
@@ -2613,19 +2614,6 @@ export interface GalleryPage {
      * Hero background image
      */
     backgroundImage?: (string | null) | Media;
-    breadcrumbs?:
-      | {
-          labelRo?: string | null;
-          labelEn?: string | null;
-          labelHe?: string | null;
-          href?: string | null;
-          /**
-           * Is this the current page?
-           */
-          isActive?: boolean | null;
-          id?: string | null;
-        }[]
-      | null;
   };
   gallerySection?: {
     /**
@@ -2751,16 +2739,6 @@ export interface ContactPage {
     subtitleEn?: string | null;
     subtitleHe?: string | null;
     backgroundImage: string | Media;
-    breadcrumbs?:
-      | {
-          labelRo: string;
-          labelEn: string;
-          labelHe: string;
-          href: string;
-          isActive?: boolean | null;
-          id?: string | null;
-        }[]
-      | null;
   };
   contactInfoSection?: {
     isActive?: boolean | null;
@@ -3127,16 +3105,6 @@ export interface AboutUsPageSelect<T extends boolean = true> {
         subtitleEn?: T;
         subtitleHe?: T;
         backgroundImage?: T;
-        breadcrumbs?:
-          | T
-          | {
-              labelRo?: T;
-              labelEn?: T;
-              labelHe?: T;
-              href?: T;
-              isActive?: T;
-              id?: T;
-            };
       };
   aboutContentSection?:
     | T
@@ -3148,14 +3116,9 @@ export interface AboutUsPageSelect<T extends boolean = true> {
         mainHeadingRo?: T;
         mainHeadingEn?: T;
         mainHeadingHe?: T;
-        contentParagraphs?:
-          | T
-          | {
-              paragraphRo?: T;
-              paragraphEn?: T;
-              paragraphHe?: T;
-              id?: T;
-            };
+        contentRo?: T;
+        contentEn?: T;
+        contentHe?: T;
         images?:
           | T
           | {
@@ -3187,16 +3150,6 @@ export interface VillaComplexPageSelect<T extends boolean = true> {
         subtitleEn?: T;
         subtitleHe?: T;
         backgroundImage?: T;
-        breadcrumbs?:
-          | T
-          | {
-              labelRo?: T;
-              labelEn?: T;
-              labelHe?: T;
-              href?: T;
-              isActive?: T;
-              id?: T;
-            };
       };
   villaComplexContentSection?:
     | T
@@ -3337,16 +3290,6 @@ export interface LocationPageSelect<T extends boolean = true> {
         subtitleEn?: T;
         subtitleHe?: T;
         backgroundImage?: T;
-        breadcrumbs?:
-          | T
-          | {
-              labelRo?: T;
-              labelEn?: T;
-              labelHe?: T;
-              href?: T;
-              isActive?: T;
-              id?: T;
-            };
       };
   locationMapSection?:
     | T
@@ -3401,16 +3344,6 @@ export interface GalleryPageSelect<T extends boolean = true> {
         subtitleEn?: T;
         subtitleHe?: T;
         backgroundImage?: T;
-        breadcrumbs?:
-          | T
-          | {
-              labelRo?: T;
-              labelEn?: T;
-              labelHe?: T;
-              href?: T;
-              isActive?: T;
-              id?: T;
-            };
       };
   gallerySection?:
     | T
@@ -3473,16 +3406,6 @@ export interface ContactPageSelect<T extends boolean = true> {
         subtitleEn?: T;
         subtitleHe?: T;
         backgroundImage?: T;
-        breadcrumbs?:
-          | T
-          | {
-              labelRo?: T;
-              labelEn?: T;
-              labelHe?: T;
-              href?: T;
-              isActive?: T;
-              id?: T;
-            };
       };
   contactInfoSection?:
     | T

@@ -225,7 +225,7 @@ async function GalleryPageContent() {
             subtitleEn={ensureString(heroData.subtitleEn)}
             subtitleHe={ensureString(heroData.subtitleHe)}
             backgroundImage={transformMediaToObject(heroData.backgroundImage)!}
-            breadcrumbs={transformBreadcrumbs(heroData.breadcrumbs)}
+            isGallery={true}
           />
         )}
 
@@ -301,7 +301,7 @@ async function GalleryPageContent() {
           subtitleEn={fallbackData.heroSection.subtitleEn}
           subtitleHe={fallbackData.heroSection.subtitleHe}
           backgroundImage={fallbackData.heroSection.backgroundImage}
-          breadcrumbs={fallbackData.heroSection.breadcrumbs}
+          isGallery={true}
         />
       </div>
     )

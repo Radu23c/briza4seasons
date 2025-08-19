@@ -11,14 +11,6 @@ interface MediaObject {
   alt?: string
 }
 
-interface BreadcrumbItem {
-  labelRo: string
-  labelEn: string
-  labelHe: string
-  href: string
-  isActive: boolean
-}
-
 interface AboutUsHeroProps {
   mainTitleRo: string
   mainTitleEn: string
@@ -27,7 +19,8 @@ interface AboutUsHeroProps {
   subtitleEn: string
   subtitleHe: string
   backgroundImage: MediaObject
-  breadcrumbs: BreadcrumbItem[]
+  isGallery?: boolean
+  isVillas?: boolean
 }
 
 const AboutUsHero: React.FC<AboutUsHeroProps> = ({
@@ -38,7 +31,8 @@ const AboutUsHero: React.FC<AboutUsHeroProps> = ({
   subtitleEn,
   subtitleHe,
   backgroundImage,
-  breadcrumbs,
+  isGallery = false,
+  isVillas = false,
 }) => {
   const { t, currentLanguage } = useLanguage()
 
@@ -53,6 +47,68 @@ const AboutUsHero: React.FC<AboutUsHeroProps> = ({
     en: subtitleEn,
     he: subtitleHe,
   })
+  console.log("breadcrumbss: ", isGallery)
+
+  // Dynamic breadcrumbs based on props
+  const getBreadcrumbs = () => {
+    if (isGallery) {
+      return [
+        {
+          labelRo: 'ACASĂ',
+          labelEn: 'HOME',
+          labelHe: 'בית',
+          href: '/',
+          isActive: false,
+        },
+        {
+          labelRo: 'GALERIE',
+          labelEn: 'GALLERY',
+          labelHe: 'גלריה',
+          href: '/gallery',
+          isActive: true,
+        },
+      ]
+    }
+    
+    if (isVillas) {
+      return [
+        {
+          labelRo: 'ACASĂ',
+          labelEn: 'HOME',
+          labelHe: 'בית',
+          href: '/',
+          isActive: false,
+        },
+        {
+          labelRo: 'VILE',
+          labelEn: 'VILLAS',
+          labelHe: 'וילות',
+          href: '/villas',
+          isActive: true,
+        },
+      ]
+    }
+    
+    // Default to About Us breadcrumbs
+    return [
+      {
+        labelRo: 'ACASĂ',
+        labelEn: 'HOME',
+        labelHe: 'בית',
+        href: '/',
+        isActive: false,
+      },
+      {
+        labelRo: 'DESPRE NOI',
+        labelEn: 'ABOUT US',
+        labelHe: 'אודותינו',
+        href: '/despre-noi',
+        isActive: true,
+      },
+    ]
+  }
+
+  const breadcrumbs = getBreadcrumbs()
 
   return (
     <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">

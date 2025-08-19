@@ -177,7 +177,6 @@ async function LocationPageContent() {
             subtitleEn={defaultData.heroSection.subtitleEn}
             subtitleHe={defaultData.heroSection.subtitleHe}
             backgroundImage={defaultData.heroSection.backgroundImage}
-            breadcrumbs={defaultData.heroSection.breadcrumbs}
           />
         </div>
       )
@@ -195,7 +194,6 @@ async function LocationPageContent() {
             subtitleEn={ensureString(locationData.heroSection.subtitleEn)}
             subtitleHe={ensureString(locationData.heroSection.subtitleHe)}
             backgroundImage={transformMediaToObject(locationData.heroSection.backgroundImage)!}
-            breadcrumbs={transformBreadcrumbs(locationData.heroSection.breadcrumbs)}
           />
         )}
 
@@ -271,7 +269,6 @@ async function LocationPageContent() {
           subtitleEn={fallbackData.heroSection.subtitleEn}
           subtitleHe={fallbackData.heroSection.subtitleHe}
           backgroundImage={fallbackData.heroSection.backgroundImage}
-          breadcrumbs={fallbackData.heroSection.breadcrumbs}
         />
       </div>
     )
