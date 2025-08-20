@@ -271,20 +271,6 @@ function convertHomepageData(payloadData: HomepageType): any {
       enableLightbox: true,
       dateDisplayFormat: 'full',
     },
-    imageGallerySection: {
-      isActive: false,
-      mainTitleRo: 'Galerie Imagini',
-      mainTitleEn: 'Image Gallery',
-      mainTitleHe: 'גלריית תמונות',
-      subtitleRo: 'Colecție',
-      subtitleEn: 'Collection',
-      subtitleHe: 'אוסף',
-      descriptionRo: 'Descriere galerie',
-      descriptionEn: 'Gallery description',
-      descriptionHe: 'תיאור הגלריה',
-      images: [],
-      enableLightbox: true,
-    },
   }
 
   return {
@@ -329,14 +315,6 @@ function convertHomepageData(payloadData: HomepageType): any {
         payloadData.gallerySection?.enableLightbox ?? defaults.gallerySection.enableLightbox,
       dateDisplayFormat:
         payloadData.gallerySection?.dateDisplayFormat ?? defaults.gallerySection.dateDisplayFormat,
-    },
-    imageGallerySection: {
-      ...defaults.imageGallerySection,
-      ...payloadData.imageGallerySection,
-      isActive: payloadData.imageGallerySection?.isActive ?? defaults.imageGallerySection.isActive,
-      enableLightbox:
-        payloadData.imageGallerySection?.enableLightbox ??
-        defaults.imageGallerySection.enableLightbox,
     },
   }
 }
@@ -451,20 +429,6 @@ function createDefaultHomepageData(): HomepageType {
       galleryImages: [],
       enableLightbox: true,
       dateDisplayFormat: 'full',
-    },
-    imageGallerySection: {
-      isActive: false,
-      mainTitleRo: 'Galerie Imagini',
-      mainTitleEn: 'Image Gallery',
-      mainTitleHe: 'גלריית תמונות',
-      subtitleRo: 'Colecție',
-      subtitleEn: 'Collection',
-      subtitleHe: 'אוסף',
-      descriptionRo: 'Descriere galerie',
-      descriptionEn: 'Gallery description',
-      descriptionHe: 'תיאור הגלריה',
-      images: [],
-      enableLightbox: true,
     },
     updatedAt: null,
     createdAt: null,
