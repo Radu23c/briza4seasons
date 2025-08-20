@@ -199,10 +199,12 @@ const FloorPlansSection: React.FC<FloorPlansSectionProps> = ({
         <div
           className={`text-center mb-16 ${currentLanguage === 'he' ? 'text-right' : 'text-left'} md:text-center`}
         >
-          <h2 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 mb-4">
-            {sectionTitle}{' '}
-            <span className="font-elegant text-[#D4B896] italic">{sectionSubtitle}</span>
+          <h2 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 mb-2">
+            {sectionTitle}
           </h2>
+          <div className="font-elegant text-[#D4B896] italic text-3xl lg:text-4xl xl:text-5xl mb-4">
+            {sectionSubtitle}
+          </div>
           <p className="text-gray-600 text-lg">{sectionDescription}</p>
         </div>
 
