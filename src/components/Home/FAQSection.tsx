@@ -145,7 +145,7 @@ const FAQSection: React.FC<FAQSectionProps> = ({
                 if (!questionContent) return null
 
                 return (
-                  <div key={index} className="border-b border-gray-200 pb-0">
+                  <div key={index} className="border-b border-gray-200 pb-2">
                     {/* Question */}
                     <button
                       onClick={() => toggleItem(index)}
