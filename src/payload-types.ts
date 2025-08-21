@@ -1741,17 +1741,125 @@ export interface Homepage {
     mainHeadingRo?: string | null;
     mainHeadingEn?: string | null;
     mainHeadingHe?: string | null;
+    /**
+     * FAQ items with rich text questions and answers
+     */
     faqItems?:
       | {
-          questionRo?: string | null;
-          questionEn?: string | null;
-          questionHe?: string | null;
-          answerRo?: string | null;
-          answerEn?: string | null;
-          answerHe?: string | null;
+          /**
+           * Question in Romanian - use rich text formatting for styling
+           */
+          questionRo?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+          /**
+           * Question in English - use rich text formatting for styling
+           */
+          questionEn?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+          /**
+           * Question in Hebrew - use rich text formatting for styling
+           */
+          questionHe?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+          /**
+           * Answer in Romanian - use rich text formatting for styling
+           */
+          answerRo?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+          /**
+           * Answer in English - use rich text formatting for styling
+           */
+          answerEn?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+          /**
+           * Answer in Hebrew - use rich text formatting for styling
+           */
+          answerHe?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
           id?: string | null;
         }[]
       | null;
+    /**
+     * Background image for the FAQ section
+     */
     backgroundImage?: (string | null) | Media;
   };
   contactSection?: {
