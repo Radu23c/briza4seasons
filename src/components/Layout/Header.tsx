@@ -106,7 +106,7 @@ const Header: React.FC = () => {
       <div className="bg-white w-full border-b border-gray-100 relative z-[100]">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
           <div className="flex items-center justify-between">
-            {/* Logo */}
+            {/* Logo - Smaller on mobile */}
             <div className="order-1">
               <Link
                 href={buildLocalizedUrl('home')}
@@ -117,11 +117,29 @@ const Header: React.FC = () => {
                   alt="Briza Logo"
                   width={120}
                   height={60}
-                  className="h-auto w-auto max-h-12 sm:max-h-14 lg:max-h-16"
+                  className="h-auto w-auto max-h-8 sm:max-h-10 md:max-h-12 lg:max-h-14 xl:max-h-16"
                   priority
                 />
               </Link>
             </div>
+
+            {/* Phone number - Mobile only, centered */}
+            <div className="flex md:hidden items-center space-x-1 order-2">
+              <div className="text-[#D4B896] flex-shrink-0">
+                <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+                </svg>
+              </div>
+              <div className="text-[#D4B896] text-xs sm:text-sm">
+                <a
+                  href={`tel:${contactInfo.phone.value}`}
+                  className="hover:text-[#c9a87d] transition-colors duration-300"
+                >
+                  {contactInfo.phone.value}
+                </a>
+              </div>
+            </div>
+
             {/* Contact Information - Hidden on mobile */}
             <div className="hidden md:flex items-center space-x-4 lg:space-x-8 xl:space-x-12 order-2">
               {/* Address */}
@@ -221,11 +239,11 @@ const Header: React.FC = () => {
             </div>
             {/* Mobile Navigation */}
             <div className="lg:hidden">
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-end">
                 {/* Mobile menu button */}
                 <button
                   onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                  className="text-white hover:text-[#D4B896] transition-colors duration-300 ml-auto"
+                  className="text-white hover:text-[#D4B896] transition-colors duration-300"
                   aria-label="Toggle mobile menu"
                 >
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
