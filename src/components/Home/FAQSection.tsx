@@ -4,6 +4,7 @@ import type React from 'react'
 import { useState } from 'react'
 import Image from 'next/image'
 import { useLanguage } from '@/app/contexts/LanguageContext'
+import { RichText } from '@payloadcms/richtext-lexical/react'
 
 interface MediaObject {
   url: string
@@ -11,12 +12,12 @@ interface MediaObject {
 }
 
 interface FAQItem {
-  questionRo: string
-  questionEn: string
-  questionHe: string
-  answerRo: string
-  answerEn: string
-  answerHe: string
+  questionRo?: any // Rich text content in Romanian
+  questionEn?: any // Rich text content in English
+  questionHe?: any // Rich text content in Hebrew
+  answerRo?: any // Rich text content in Romanian
+  answerEn?: any // Rich text content in English
+  answerHe?: any // Rich text content in Hebrew
 }
 
 interface FAQSectionProps {
@@ -60,6 +61,33 @@ const FAQSection: React.FC<FAQSectionProps> = ({
     en: mainHeadingEn || '',
     he: mainHeadingHe || '',
   })
+
+  // Get the appropriate rich text content based on current language
+  const getRichTextQuestion = (item: FAQItem) => {
+    switch (currentLanguage) {
+      case 'ro':
+        return item.questionRo
+      case 'en':
+        return item.questionEn
+      case 'he':
+        return item.questionHe
+      default:
+        return item.questionEn || item.questionRo || item.questionHe
+    }
+  }
+
+  const getRichTextAnswer = (item: FAQItem) => {
+    switch (currentLanguage) {
+      case 'ro':
+        return item.answerRo
+      case 'en':
+        return item.answerEn
+      case 'he':
+        return item.answerHe
+      default:
+        return item.answerEn || item.answerRo || item.answerHe
+    }
+  }
 
   const toggleItem = (index: number) => {
     setOpenItems((prev) =>
@@ -109,37 +137,31 @@ const FAQSection: React.FC<FAQSectionProps> = ({
             {/* FAQ Items */}
             <div className="space-y-6">
               {faqItems.map((item, index) => {
-                const question = t({
-                  ro: item.questionRo || '',
-                  en: item.questionEn || '',
-                  he: item.questionHe || '',
-                })
-
-                const answer = t({
-                  ro: item.answerRo || '',
-                  en: item.answerEn || '',
-                  he: item.answerHe || '',
-                })
-
+                const questionContent = getRichTextQuestion(item)
+                const answerContent = getRichTextAnswer(item)
                 const isOpen = openItems.includes(index)
 
-                if (!question) return null
+                // Skip items without question content
+                if (!questionContent) return null
 
                 return (
-                  <div key={index} className="border-b border-gray-200 pb-6">
+                  <div key={index} className="border-b border-gray-200 pb-0">
                     {/* Question */}
                     <button
                       onClick={() => toggleItem(index)}
-                      className={`w-full flex items-center justify-between text-left group hover:text-[#D4B896] transition-colors duration-300 ${
+                      className={`w-full flex items-start justify-between text-left group hover:text-[#D4B896] transition-colors duration-300 ${
                         currentLanguage === 'he' ? 'text-right' : ''
                       }`}
                     >
-                      <h3 className="text-lg lg:text-xl font-semibold text-gray-900 group-hover:text-[#D4B896] transition-colors duration-300 flex-1 pr-4">
-                        {question}
-                      </h3>
+                      <div className="flex-1 pr-4">
+                        {/* Rich Text Question */}
+                        <div className="prose prose-lg max-w-none prose-gray prose-p:text-gray-900 prose-p:font-semibold prose-p:leading-tight prose-p:text-lg prose-p:lg:text-xl prose-p:m-0 prose-headings:text-gray-900 prose-strong:text-gray-900 prose-em:text-gray-700 group-hover:prose-p:text-[#D4B896] transition-colors duration-300 [&>p]:m-0">
+                          <RichText data={questionContent} />
+                        </div>
+                      </div>
 
                       {/* Plus/Minus Icon */}
-                      <div className="flex-shrink-0 w-8 h-8 flex items-center justify-center">
+                      <div className="flex-shrink-0 w-8 h-8 flex items-center justify-center mt-1">
                         <div className="relative w-6 h-6">
                           {/* Horizontal line */}
                           <div className="absolute top-1/2 left-0 w-full h-0.5 bg-[#D4B896] transform -translate-y-1/2 transition-all duration-300"></div>
@@ -159,14 +181,15 @@ const FAQSection: React.FC<FAQSectionProps> = ({
                         isOpen ? 'max-h-96 opacity-100 mt-4' : 'max-h-0 opacity-0'
                       }`}
                     >
-                      {answer && (
-                        <p
-                          className={`text-gray-600 leading-relaxed ${
+                      {answerContent && (
+                        <div
+                          className={`prose prose-lg max-w-none prose-gray prose-p:text-gray-600 prose-p:leading-relaxed prose-headings:text-gray-900 prose-strong:text-gray-900 prose-em:text-gray-700 ${
                             currentLanguage === 'he' ? 'text-right' : 'text-left'
                           }`}
                         >
-                          {answer}
-                        </p>
+                          {/* Rich Text Answer */}
+                          <RichText data={answerContent} />
+                        </div>
                       )}
                     </div>
                   </div>
