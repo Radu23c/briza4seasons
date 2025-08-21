@@ -224,6 +224,19 @@ const FloorPlansSection: React.FC<FloorPlansSectionProps> = ({
 
                 return (
                   <div key={villa.key} className="relative">
+                    {/* Best Deal Label - Only for Autumn */}
+                    {isAutumn && (
+                      <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 z-10">
+                        <div className="bg-gradient-to-r from-red-500 to-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg animate-pulse">
+                          {t({
+                            ro: 'Cea mai bună ofertă',
+                            en: 'Best Deal',
+                            he: 'העסקה הטובה ביותר',
+                          })}
+                        </div>
+                      </div>
+                    )}
+
                     <button
                       onClick={() => handleVillaChange(index)}
                       className={`relative px-6 py-4 rounded-xl font-semibold text-sm tracking-wider transition-all duration-300 overflow-hidden group w-full ${
@@ -232,30 +245,16 @@ const FloorPlansSection: React.FC<FloorPlansSectionProps> = ({
                           : 'text-gray-700 bg-white hover:text-white shadow-md hover:shadow-lg hover:transform hover:scale-105'
                       } ${isAutumn ? 'ring-2 ring-orange-300 ring-opacity-50' : ''}`}
                     >
-                      {/* Best Deal Label - Above on desktop, below overlapping on mobile */}
-                      {isAutumn && (
-                        <div className="absolute left-1/2 transform -translate-x-1/2 z-20 -top-8 md:-top-8 top-full md:top-auto -translate-y-2 md:translate-y-0">
-                          <div className="bg-gradient-to-r from-red-500 to-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg animate-pulse whitespace-nowrap">
-                            {t({
-                              ro: 'Cea mai bună ofertă',
-                              en: 'Best Deal',
-                              he: 'העסקה הטובה ביותר',
-                            })}
-                          </div>
-                        </div>
-                      )}
-
                       {/* Background gradient */}
                       <div
                         className={`absolute inset-0 bg-gradient-to-r ${villaColors[villa.key]} transition-opacity duration-300 ${
                           activeVilla === index ? 'opacity-100' : 'opacity-0 group-hover:opacity-90'
                         }`}
                       />
-
                       {/* Content */}
                       <div className="relative flex items-center justify-center space-x-2">
                         <span className="text-lg">{villaIcons[villa.key]}</span>
-                        <span className="whitespace-nowrap">{villaName}</span>
+                        <span>{villaName}</span>
                       </div>
 
                       {/* Special glow effect for autumn */}
