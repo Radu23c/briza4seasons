@@ -1,5 +1,4 @@
 import type { GlobalConfig } from 'payload'
-import { lexicalEditor } from '@payloadcms/richtext-lexical'
 
 export const Homepage: GlobalConfig = {
   slug: 'homepage',
@@ -579,86 +578,68 @@ export const Homepage: GlobalConfig = {
           required: false,
           defaultValue: 'מידע שימושי על הנכסים שלנו',
         },
-        // FAQ Items with Rich Text
+        // FAQ Items
         {
           name: 'faqItems',
           type: 'array',
           required: false,
           minRows: 1,
-          admin: {
-            description: 'FAQ items with rich text questions and answers',
-          },
           fields: [
-            // Rich Text Questions
             {
               name: 'questionRo',
-              type: 'richText',
+              type: 'text',
               required: false,
-              admin: {
-                description: 'Question in Romanian - use rich text formatting for styling',
-              },
-              editor: lexicalEditor({
-                features: ({ defaultFeatures }) => [...defaultFeatures],
-              }),
             },
             {
               name: 'questionEn',
-              type: 'richText',
+              type: 'text',
               required: false,
-              admin: {
-                description: 'Question in English - use rich text formatting for styling',
-              },
-              editor: lexicalEditor({
-                features: ({ defaultFeatures }) => [...defaultFeatures],
-              }),
             },
             {
               name: 'questionHe',
-              type: 'richText',
+              type: 'text',
               required: false,
-              admin: {
-                description: 'Question in Hebrew - use rich text formatting for styling',
-              },
-              editor: lexicalEditor({
-                features: ({ defaultFeatures }) => [...defaultFeatures],
-              }),
             },
-            // Rich Text Answers
             {
               name: 'answerRo',
-              type: 'richText',
+              type: 'textarea',
               required: false,
-              admin: {
-                description: 'Answer in Romanian - use rich text formatting for styling',
-              },
-              editor: lexicalEditor({
-                features: ({ defaultFeatures }) => [...defaultFeatures],
-              }),
             },
             {
               name: 'answerEn',
-              type: 'richText',
+              type: 'textarea',
               required: false,
-              admin: {
-                description: 'Answer in English - use rich text formatting for styling',
-              },
-              editor: lexicalEditor({
-                features: ({ defaultFeatures }) => [...defaultFeatures],
-              }),
             },
             {
               name: 'answerHe',
-              type: 'richText',
+              type: 'textarea',
               required: false,
-              admin: {
-                description: 'Answer in Hebrew - use rich text formatting for styling',
-              },
-              editor: lexicalEditor({
-                features: ({ defaultFeatures }) => [...defaultFeatures],
-              }),
             },
           ],
-          defaultValue: [],
+          defaultValue: [
+            {
+              questionRo: 'CARE SUNT PUNCTELE DE REPER APROPIATE DE ANSAMBLUL NOSTRU ?',
+              questionEn: 'WHAT ARE THE LANDMARKS NEAR OUR DEVELOPMENT?',
+              questionHe: 'מהם נקודות הציון הקרובות לפיתוח שלנו?',
+              answerRo:
+                'Ansamblul nostru se află în apropierea mai multor puncte de reper importante, inclusiv centre comerciale, școli, spitale și stații de transport public. Distanța până în centrul Bucureștiului este de aproximativ 15 minute cu mașina.',
+              answerEn:
+                'Our development is located near several important landmarks, including shopping centers, schools, hospitals, and public transport stations. The distance to downtown Bucharest is approximately 15 minutes by car.',
+              answerHe:
+                'הפיתוח שלנו ממוקם ליד כמה נקודות ציון חשובות, כולל מרכזי קניות, בתי ספר, בתי חולים ותחנות תחבורה ציבורית. המרחק למרכז בוקרשט הוא כ-15 דקות נסיעה ברכב.',
+            },
+            {
+              questionRo: 'CARE SUNT COSTURILE ASOCIATE CU LOCUIREA ÎN ACEST ANSAMBLU REZIDENȚIAL?',
+              questionEn: 'WHAT ARE THE COSTS ASSOCIATED WITH LIVING IN THIS RESIDENTIAL COMPLEX?',
+              questionHe: 'מהם העלויות הקשורות למגורים במתחם המגורים הזה?',
+              answerRo:
+                'Costurile includ taxa de întreținere lunară pentru spațiile comune, utilitățile (apă, gaz, electricitate), securitatea 24/7 și întreținerea zonelor verzi. De asemenea, există costuri pentru parcarea suplimentară și serviciile premium.',
+              answerEn:
+                'Costs include monthly maintenance fee for common areas, utilities (water, gas, electricity), 24/7 security, and green area maintenance. There are also costs for additional parking and premium services.',
+              answerHe:
+                'העלויות כוללות דמי תחזוקה חודשיים לאזורים משותפים, שירותים (מים, גז, חשמל), אבטחה 24/7 ותחזוקת אזורים ירוקים. יש גם עלויות לחניה נוספת ושירותים פרימיום.',
+            },
+          ],
         },
         // Background Image
         {
@@ -666,9 +647,6 @@ export const Homepage: GlobalConfig = {
           type: 'upload',
           relationTo: 'media',
           required: false,
-          admin: {
-            description: 'Background image for the FAQ section',
-          },
         },
       ],
     },
