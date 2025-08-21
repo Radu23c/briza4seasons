@@ -226,8 +226,8 @@ const FloorPlansSection: React.FC<FloorPlansSectionProps> = ({
                   <div key={villa.key} className="relative">
                     {/* Best Deal Label - Only for Autumn */}
                     {isAutumn && (
-                      <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 z-10">
-                        <div className="bg-gradient-to-r from-red-500 to-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg animate-pulse">
+                      <div className="absolute md:-top-8 -top-3 left-1/2 transform -translate-x-1/2 z-10">
+                        <div className="bg-gradient-to-r from-red-500 to-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg animate-pulse whitespace-nowrap">
                           {t({
                             ro: 'Cea mai bună ofertă',
                             en: 'Best Deal',
