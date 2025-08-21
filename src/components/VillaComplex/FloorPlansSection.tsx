@@ -232,10 +232,10 @@ const FloorPlansSection: React.FC<FloorPlansSectionProps> = ({
                           : 'text-gray-700 bg-white hover:text-white shadow-md hover:shadow-lg hover:transform hover:scale-105'
                       } ${isAutumn ? 'ring-2 ring-orange-300 ring-opacity-50' : ''}`}
                     >
-                      {/* Best Deal Label - Inside the button */}
+                      {/* Best Deal Label - Above on desktop, below overlapping on mobile */}
                       {isAutumn && (
-                        <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 z-20">
-                          <div className="bg-gradient-to-r from-red-500 to-orange-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg animate-pulse whitespace-nowrap">
+                        <div className="absolute left-1/2 transform -translate-x-1/2 z-20 -top-8 md:-top-8 top-full md:top-auto -translate-y-2 md:translate-y-0">
+                          <div className="bg-gradient-to-r from-red-500 to-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg animate-pulse whitespace-nowrap">
                             {t({
                               ro: 'Cea mai bună ofertă',
                               en: 'Best Deal',
